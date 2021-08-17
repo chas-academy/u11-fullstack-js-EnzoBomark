@@ -21,7 +21,8 @@
   "homepage": "https://github.com/chas-academy/u11-fullstack-js-EnzoBomark#readme",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.13.7"
   },
   "devDependencies": {
     "eslint": "^7.2.0",

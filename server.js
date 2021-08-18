@@ -1,6 +1,10 @@
 require('dotenv').config({ path: './config.env' });
 
 const express = require('express');
+const connectDB = require('./config/db');
+
+// Connect DB
+connectDB();
 
 const app = express();
 
@@ -10,4 +14,11 @@ app.use('/api/auth', require('./routes/auth'));
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Server Running On Port ${PORT}`));
+const server = app.listen(PORT, () =>
+  console.log(`Server Running On Port ${PORT}`)
+);
+
+process.on('unhandledRejection', (err, promise) => {
+  console.error(`Logged Error ${err}`);
+  server.close(() => process.exit(1));
+});

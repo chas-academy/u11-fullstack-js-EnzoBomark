@@ -1,6 +1,7 @@
-import { Mongoose } from 'mongoose';
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
-const UserSchema = new Mongoose.UserSchema({
+const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: [true, 'Please provide a username'],
@@ -24,6 +25,22 @@ const UserSchema = new Mongoose.UserSchema({
   resetPasswordToken: Date,
 });
 
-const User = Mongoose.model('User', UserSchema);
+// Hash Password In Mongoose
+UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+//Compare User Model Password To Sent Password
+UserSchema.methods.matchPasswords = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

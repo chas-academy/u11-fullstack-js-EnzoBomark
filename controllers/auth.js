@@ -28,13 +28,13 @@ exports.login = async (req, res, next) => {
     const user = await User.findOne({ email }).select('+password');
 
     if (!user) {
-      return next(new ErrorResponse('invalid credentials', 401));
+      return next(new ErrorResponse('Invalid credentials', 401));
     }
 
     const isPasswordMatch = await user.matchPasswords(password);
 
     if (!isPasswordMatch) {
-      return next(new ErrorResponse('invalid credentials', 401));
+      return next(new ErrorResponse('Invalid credentials', 401));
     }
 
     sendToken(user, 200, res);
@@ -44,7 +44,7 @@ exports.login = async (req, res, next) => {
 };
 
 exports.forgotpassword = (req, res, next) => {
-  res.send('forgot Password Route');
+  res.send('Forgot Password Route');
 };
 
 exports.resetpassword = (req, res, next) => {

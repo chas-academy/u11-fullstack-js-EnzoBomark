@@ -43,6 +43,7 @@
     "@types/mongoose": "^5.11.97",
     "@types/nanoid": "^3.0.0",
     "@types/node": "^16.6.1",
+    "@types/nodemailer": "^6.4.4",
     "@types/pino": "^6.3.11",
     "@types/yup": "^0.29.13",
     "config": "^3.3.6",

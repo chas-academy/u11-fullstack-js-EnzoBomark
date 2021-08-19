@@ -1,11 +1,12 @@
-import Session, { SessionDocument } from '../model/session.model';
-import { UserDocument } from '../model/user.model';
-import { LeanDocument } from 'mongoose';
-import { sign } from '../utils/jwt.utils';
+import { FilterQuery, LeanDocument, UpdateQuery } from 'mongoose';
+import { get } from 'lodash';
 import config from 'config';
+import * as MODEL from '../model';
+import * as UTIL from '../utils';
+import * as SERVICE from '../service';
 
 export const createSession = async (userId: string, userAgent: string) => {
-  const session = await Session.create({ user: userId, userAgent });
+  const session = await MODEL.Session.create({ user: userId, userAgent });
 
   return session.toJSON();
 };
@@ -15,17 +16,49 @@ export const createAccessToken = ({
   session,
 }: {
   user:
-    | Omit<UserDocument, 'password'>
-    | LeanDocument<Omit<UserDocument, 'password'>>;
+    | Omit<MODEL.UserDocument, 'password'>
+    | LeanDocument<Omit<MODEL.UserDocument, 'password'>>;
   session:
-    | Omit<SessionDocument, 'password'>
-    | LeanDocument<Omit<SessionDocument, 'password'>>;
+    | Omit<MODEL.SessionDocument, 'password'>
+    | LeanDocument<Omit<MODEL.SessionDocument, 'password'>>;
 }) => {
   //Build and return the new access token
-  const accessToken = sign(
+  const accessToken = UTIL.sign(
     { ...user, session: session._id },
     { expiresIn: config.get('ACCESS_TOKEN_TTL') } // 15 min
   );
 
   return accessToken;
+};
+
+export const reIssueAccessToken = async ({
+  refreshToken,
+}: {
+  refreshToken: string;
+}) => {
+  // Decode the refresh token
+  const { decoded } = UTIL.decode(refreshToken);
+
+  if (!decoded || !get(decoded, '_id')) return false;
+
+  // Get the session
+  const session = await MODEL.Session.findById(get(decoded, '_id'));
+
+  // Make sure the session is still valid
+  if (!session || !session?.valid) return false;
+
+  const user = await SERVICE.findUser({ _id: session.user });
+
+  if (!user) return false;
+
+  const accessToken = createAccessToken({ user, session });
+
+  return accessToken;
+};
+
+export const updateSession = async (
+  query: FilterQuery<MODEL.SessionDocument>,
+  update: UpdateQuery<MODEL.SessionDocument>
+) => {
+  return MODEL.Session.updateOne(query, update);
 };

@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import { UserDocument } from './user.model';
+import * as MODEL from './';
 
 export interface SessionDocument extends mongoose.Document {
-  user: UserDocument['_id'];
+  user: MODEL.UserDocument['_id'];
   valid: boolean;
   userAgent: string;
   createdAt: Date;
@@ -18,6 +18,7 @@ const SessionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Session = mongoose.model<SessionDocument>('Session', SessionSchema);
-
-export default Session;
+export const Session = mongoose.model<SessionDocument>(
+  'Session',
+  SessionSchema
+);

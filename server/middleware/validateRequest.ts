@@ -2,7 +2,7 @@ import { AnySchema } from 'yup';
 import { Request, Response, NextFunction } from 'express';
 import log from '../logger';
 
-const validate =
+export const validateRequest =
   (schema: AnySchema) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -18,5 +18,3 @@ const validate =
       return res.status(400).send(error.errors);
     }
   };
-
-export default validate;

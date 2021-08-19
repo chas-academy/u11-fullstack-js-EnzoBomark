@@ -6,6 +6,10 @@ import { findSessions } from './session.service';
 import { createUser } from './user.service';
 import { findUser } from './user.service';
 import { validatePassword } from './user.service';
+import { createPost } from './post.service';
+import { findPost } from './post.service';
+import { findAndUpdate } from './post.service';
+import { deletePost } from './post.service';
 
 export {
   createSession,
@@ -16,4 +20,8 @@ export {
   createUser,
   findUser,
   validatePassword,
+  createPost,
+  findPost,
+  findAndUpdate,
+  deletePost,
 };

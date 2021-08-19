@@ -62,3 +62,9 @@ export const updateSession = async (
 ) => {
   return MODEL.Session.updateOne(query, update);
 };
+
+export const findSessions = async (
+  query: FilterQuery<MODEL.SessionDocument>
+) => {
+  return MODEL.Session.find(query).lean();
+};

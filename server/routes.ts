@@ -21,6 +21,7 @@ const routes = (app: Express) => {
   );
 
   //Get the user session
+  app.get('/api/sessions', MW.requireUser, CONT.getUserSessionHandler);
 
   //Logout
   app.delete(

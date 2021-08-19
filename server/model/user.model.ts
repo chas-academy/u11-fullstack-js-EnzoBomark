@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import bcrypt, { genSalt } from 'bcrypt';
+import bcrypt from 'bcrypt';
 import config from 'config';
 
 export interface UserDocument extends mongoose.Document {
@@ -45,7 +45,9 @@ UserSchema.methods.comparePassword = async function (
 ) {
   const user = this as UserDocument;
 
-  return bcrypt.compare(candidatePassword, user.password).catch((e) => false);
+  return bcrypt
+    .compare(candidatePassword, user.password)
+    .catch((error) => false);
 };
 
 export const User = mongoose.model<UserDocument>('User', UserSchema);

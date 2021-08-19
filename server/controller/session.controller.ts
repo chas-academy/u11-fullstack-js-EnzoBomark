@@ -14,7 +14,7 @@ export const createUserSessionHandler = async (req: Request, res: Response) => {
 
   // Create a sassion
   const session = await SERVICE.createSession(
-    user.id,
+    user._id,
     req.get('user-agent') || ''
   );
 
@@ -42,4 +42,12 @@ export const invalidateUserSessionHandler = async (
   await SERVICE.updateSession({ _id: sessionId }, { valid: false });
 
   return res.sendStatus(200);
+};
+
+export const getUserSessionHandler = async (req: Request, res: Response) => {
+  const userId = get(req, 'user._id');
+
+  const sessions = await SERVICE.findSessions({ user: userId, valid: true });
+
+  return res.send({ sessions, userId });
 };

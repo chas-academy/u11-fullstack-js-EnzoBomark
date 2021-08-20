@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const RegisterStyle = styled.div`
+export const LoginStyle = styled.div`
   form {
     padding-top: 10rem;
     div {

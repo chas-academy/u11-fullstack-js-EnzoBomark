@@ -4,6 +4,7 @@ import { RegisterStyle } from './Register.style';
 import { object, string, number, InferType, ref } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { POST } from '../../helpers/Rest.helper';
 
 const schema = object({
   name: string().required('Name is required'),
@@ -15,8 +16,10 @@ const schema = object({
   passwordConfirmation: string().oneOf([ref('password'), null], 'Passwords must match'),
 });
 
-const formSubmitHandler = (values: Props) => {
-  console.log(values);
+const formSubmitHandler = async (values: Props) => {
+  const response = await POST('auth/register', values);
+
+  console.log(response);
 };
 
 type Props = InferType<typeof schema>;

@@ -3,9 +3,17 @@ import express from 'express';
 import config from 'config';
 import log from './logger';
 import routes from './routes';
+import cors from 'cors';
 import * as MW from './middleware';
 
 const app = express();
+
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+  })
+);
+
 app.use(MW.deserializeUser);
 
 app.use(express.json());

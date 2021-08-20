@@ -9,24 +9,30 @@ const routes = (app: Express) => {
   // #region AUTH
   //Register
   app.post(
-    '/api/users',
+    '/api/auth/register',
     MW.validateRequest(SCHEMA.createUserSchema),
     CONT.createUserHandler
   );
 
   //Login
   app.post(
-    '/api/sessions',
+    '/api/auth/login',
     MW.validateRequest(SCHEMA.createUserSessionSchema),
     CONT.createUserSessionHandler
   );
 
+  //Forgot password
+  app.post('/api/auth/forgotpassword', CONT.forgotUserPasswordHandler);
+
+  //Reset password
+  app.put('/api/auth/resetpassword/:resetToken', CONT.resetUserPasswordHandler);
+
   //Get the user session
-  app.get('/api/sessions', MW.requireUser, CONT.getUserSessionHandler);
+  app.get('/api/auth/sessions', MW.requireUser, CONT.getUserSessionHandler);
 
   //Logout
   app.delete(
-    '/api/sessions',
+    '/api/auth/logout',
     MW.requireUser,
     CONT.invalidateUserSessionHandler
   );

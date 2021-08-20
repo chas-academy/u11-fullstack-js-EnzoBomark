@@ -1,7 +1,7 @@
-import type { AppProps } from 'next/app'
-import GlobalStyle from '../styles/Global.style'
-import Head from 'next/head'
-import Main from '../components/Layout/Main'
+import type { AppProps } from 'next/app';
+import GlobalStyle from '../styles/Global.style';
+import Head from 'next/head';
+import Main from '../components/Layout/Main';
 
 const METADATA = () => {
   return (
@@ -9,8 +9,8 @@ const METADATA = () => {
       <title>TITLE</title>
       <meta name="description" content="description" />
     </Head>
-  )
-}
+  );
+};
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
@@ -22,7 +22,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <Component {...pageProps} />
       </Main>
     </>
-  )
-}
+  );
+};
 
-export default MyApp
+export default MyApp;

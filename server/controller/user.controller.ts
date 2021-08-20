@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { omit } from 'lodash';
+import crypto from 'crypto';
 import log from '../logger';
 import * as SERVICE from '../service';
 import * as MODEL from '../model';
@@ -70,4 +71,34 @@ export const resetUserPasswordHandler = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {};
+) => {
+  // Compare token in URL params to hashed token
+  const resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(req.params.resetToken)
+    .digest('hex');
+
+  try {
+    const user = await MODEL.User.findOne({
+      resetPasswordToken,
+      resetPasswordExpire: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return next(res.status(400).send('Invalid token'));
+    }
+
+    user.password = req.body.password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save();
+
+    res.status(201).json({
+      success: true,
+      data: 'Password reset succsess',
+    });
+  } catch (error) {
+    next(error);
+  }
+};

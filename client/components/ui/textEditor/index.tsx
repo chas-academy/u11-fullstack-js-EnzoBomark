@@ -1,3 +1,4 @@
+import { TextEditorStyle } from './TextEditor.style';
 import React, { useCallback, useMemo, useState } from 'react';
 import isHotkey from 'is-hotkey';
 import { Editable, withReact, useSlate, Slate, ReactEditor } from 'slate-react';
@@ -27,48 +28,51 @@ const RichTextExample = () => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
   return (
-    <Slate
-      editor={editor}
-      value={value}
-      onChange={(value) => {
-        setValue(value);
+    <TextEditorStyle>
+      <Slate
+        editor={editor}
+        value={value}
+        onChange={(value) => {
+          setValue(value);
 
-        // Save the value to Local Storage.
-        const content = JSON.stringify(value);
-        console.log(value);
-      }}
-    >
-      <div>
-        <MarkButton format="bold" icon="format_bold" />
-        <MarkButton format="italic" icon="format_italic" />
-        <MarkButton format="underline" icon="format_underlined" />
-        <MarkButton format="code" icon="code" />
-        <BlockButton format="heading-one" icon="looks_one" />
-        <BlockButton format="heading-two" icon="looks_two" />
-        <BlockButton format="block-quote" icon="format_quote" />
-        <BlockButton format="numbered-list" icon="format_list_numbered" />
-        <BlockButton format="bulleted-list" icon="format_list_bulleted" />
-      </div>
-
-      <Editable
-        autoCapitalize="false"
-        autoCorrect="false"
-        spellCheck="false"
-        title="Editor"
-        renderElement={renderElement}
-        renderLeaf={renderLeaf}
-        placeholder="Enter some rich text…"
-        onKeyDown={(event) => {
-          for (const hotkey in HOTKEYS) {
-            if (isHotkey(hotkey, event as any)) {
-              event.preventDefault();
-              const mark = HOTKEYS[hotkey];
-              toggleMark(editor, mark);
-            }
-          }
+          // Save the value to Local Storage.
+          const content = JSON.stringify(value);
+          console.log(value);
         }}
-      />
-    </Slate>
+      >
+        <div className="task-bar">
+          <MarkButton format="bold" icon="B" />
+          <MarkButton format="italic" icon="I" />
+          <MarkButton format="underline" icon="U" />
+          <MarkButton format="code" icon="Code" />
+          <BlockButton format="heading-one" icon="H1" />
+          <BlockButton format="heading-two" icon="H2" />
+          <BlockButton format="block-quote" icon="Quote" />
+          <BlockButton format="numbered-list" icon="Num-List" />
+          <BlockButton format="bulleted-list" icon="Bull-List" />
+        </div>
+
+        <Editable
+          className="text-field"
+          autoCapitalize="false"
+          autoCorrect="false"
+          spellCheck="false"
+          title="Editor"
+          renderElement={renderElement}
+          renderLeaf={renderLeaf}
+          placeholder="Enter some rich text…"
+          onKeyDown={(event) => {
+            for (const hotkey in HOTKEYS) {
+              if (isHotkey(hotkey, event as any)) {
+                event.preventDefault();
+                const mark = HOTKEYS[hotkey];
+                toggleMark(editor, mark);
+              }
+            }
+          }}
+        />
+      </Slate>
+    </TextEditorStyle>
   );
 };
 

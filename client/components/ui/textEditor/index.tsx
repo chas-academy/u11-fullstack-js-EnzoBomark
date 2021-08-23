@@ -161,7 +161,8 @@ const BlockButton = ({ format, icon }: { format: string; icon: string }) => {
         toggleBlock(editor, format);
       }}
     >
-      <div>{icon}</div>
+      {isBlockActive(editor, format) && <div> A{icon}</div>}
+      {!isBlockActive(editor, format) && <div> B{icon}</div>}
     </button>
   );
 };
@@ -176,7 +177,8 @@ const MarkButton = ({ format, icon }: { format: string; icon: string }) => {
         toggleMark(editor, format);
       }}
     >
-      <div>{icon}</div>
+      {isMarkActive(editor, format) && <div> A{icon}</div>}
+      {!isMarkActive(editor, format) && <div> B{icon}</div>}
     </button>
   );
 };

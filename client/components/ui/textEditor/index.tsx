@@ -27,7 +27,17 @@ const RichTextExample = () => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
   return (
-    <Slate editor={editor} value={value} onChange={(value) => setValue(value)}>
+    <Slate
+      editor={editor}
+      value={value}
+      onChange={(value) => {
+        setValue(value);
+
+        // Save the value to Local Storage.
+        const content = JSON.stringify(value);
+        console.log(value);
+      }}
+    >
       <div>
         <MarkButton format="bold" icon="format_bold" />
         <MarkButton format="italic" icon="format_italic" />
@@ -41,6 +51,10 @@ const RichTextExample = () => {
       </div>
 
       <Editable
+        autoCapitalize="false"
+        autoCorrect="false"
+        spellCheck="false"
+        title="Editor"
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         placeholder="Enter some rich text…"
@@ -63,10 +77,11 @@ const toggleBlock = (editor: ReactEditor & HistoryEditor, format: string) => {
   const isList = LIST_TYPES.includes(format);
 
   Transforms.unwrapNodes(editor, {
+    // @ts-ignore
     match: (n) => LIST_TYPES.includes(!Editor.isEditor(n) && SlateElement.isElement(n) && n.type),
     split: true,
   });
-  const newProperties: Partial<SlateElement> = {
+  const newProperties: any = {
     type: isActive ? 'paragraph' : isList ? 'list-item' : format,
   };
   Transforms.setNodes(editor, newProperties);
@@ -89,6 +104,7 @@ const toggleMark = (editor: ReactEditor & HistoryEditor, format: string) => {
 
 const isBlockActive = (editor: ReactEditor & HistoryEditor, format: string) => {
   const [match] = Editor.nodes(editor, {
+    // @ts-ignore
     match: (n) => !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === format,
   });
 
@@ -161,10 +177,10 @@ const MarkButton = ({ format, icon }: { format: string; icon: string }) => {
   );
 };
 
-const initialValue: Descendant[] = [
+const initialValue: any = [
   {
     type: 'paragraph',
-    children: [{ text: 'Try it out for yourself!' }],
+    children: [{ text: 'Write something!' }],
   },
 ];
 

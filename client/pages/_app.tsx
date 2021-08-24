@@ -2,7 +2,7 @@ import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import GlobalStyle from '../styles/Global.style';
 import Head from 'next/head';
-import Main from '../components/Layout/Main';
+import Main from '../components/layout/Main';
 
 const METADATA = () => {
   return (

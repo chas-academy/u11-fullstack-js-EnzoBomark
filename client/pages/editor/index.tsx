@@ -1,4 +1,4 @@
-import TextEditor from '../../components/ui/textEditor';
+import TextEditor from '../../components/ui/TextEditor';
 
 const Editor = () => {
   return (

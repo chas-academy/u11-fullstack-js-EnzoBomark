@@ -1,5 +1,4 @@
-import { InputStyle } from '../../../styles/ui/form-elements/Input.style';
-import { DarkFormButton } from '../../../styles/ui/buttons/dark-form-button.style';
+import { S } from '../../../styles/form-elements';
 import { ResetPasswordStyle } from './ResetPassword.style';
 import { object, string, number, InferType, ref } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -31,41 +30,34 @@ const ResetPassword = () => {
     resolver: yupResolver(schema),
   });
 
-  return (
-    <ResetPasswordStyle>
-      <form onSubmit={handleSubmit(formSubmitHandler)}>
-        <div>
-          <InputStyle>
-            <label htmlFor="password">
-              <span>Password</span>
-              <input
-                type="password"
-                placeholder="Password"
-                id="password"
-                {...register('password')}
-              />
-            </label>
-            <span>{errors?.password?.message}</span>
-          </InputStyle>
+  const passwordError = errors?.password?.message,
+    passwordConfError = errors?.passwordConfirmation?.message;
 
-          <InputStyle>
-            <label htmlFor="password-confirmation">
-              <span>Password Confirmation</span>
-              <input
-                type="password"
-                placeholder="Password Confirmation"
-                id="password-onfirmation"
-                {...register('passwordConfirmation')}
-              />
-            </label>
-            <span>{errors?.passwordConfirmation?.message}</span>
-          </InputStyle>
-        </div>
-        <div>
-          <DarkFormButton>Submit</DarkFormButton>
-        </div>
-      </form>
-    </ResetPasswordStyle>
+  return (
+    <>
+      <S.Form onSubmit={handleSubmit(formSubmitHandler)}>
+        <S.Label htmlFor="password">Password</S.Label>
+        <S.Input
+          className={passwordError && 'error'}
+          type="password"
+          placeholder="Password"
+          id="password"
+          {...register('password')}
+        />
+        {passwordError && <S.Error>{passwordError}</S.Error>}
+
+        <S.Label htmlFor="password-confirmation">Password confirmation</S.Label>
+        <S.Input
+          className={passwordConfError && 'error'}
+          type="password"
+          placeholder="Password Confirmation"
+          id="password-onfirmation"
+          {...register('passwordConfirmation')}
+        />
+        {passwordConfError && <S.Error>{passwordConfError}</S.Error>}
+        <S.Submit>Reset</S.Submit>
+      </S.Form>
+    </>
   );
 };
 

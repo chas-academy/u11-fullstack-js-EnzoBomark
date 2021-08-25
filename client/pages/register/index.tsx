@@ -1,5 +1,4 @@
-import { InputStyle } from '../../styles/ui/form-elements/Input.style';
-import { DarkFormButton } from '../../styles/ui/buttons/dark-form-button.style';
+import { S } from '../../styles/form-elements';
 import { RegisterStyle } from './Register.style';
 import { object, string, number, InferType, ref } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -33,57 +32,54 @@ const Register = () => {
     resolver: yupResolver(schema),
   });
 
+  const nameError = errors?.name?.message,
+    emailError = errors?.email?.message,
+    passwordError = errors?.password?.message,
+    passwordConfError = errors?.passwordConfirmation?.message;
+
   return (
-    <RegisterStyle>
-      <form onSubmit={handleSubmit(formSubmitHandler)}>
-        <div>
-          <InputStyle>
-            <label htmlFor="name">
-              <span>Name</span>
-              <input placeholder="Jane Doe" id="name" {...register('name')} />
-            </label>
-            <span>{errors?.name?.message}</span>
-          </InputStyle>
+    <>
+      <S.Form onSubmit={handleSubmit(formSubmitHandler)}>
+        <S.Label htmlFor="name">Name</S.Label>
+        <S.Input
+          className={nameError && 'error'}
+          placeholder="Jane Doe"
+          id="name"
+          {...register('name')}
+        />
+        {nameError && <S.Error>{nameError}</S.Error>}
 
-          <InputStyle>
-            <label htmlFor="email">
-              <span>Email</span>
-              <input placeholder="jane.doe@email.com" id="email" {...register('email')} />
-            </label>
-            <span>{errors?.email?.message}</span>
-          </InputStyle>
+        <S.Label htmlFor="email">Email</S.Label>
+        <S.Input
+          className={emailError && 'error'}
+          placeholder="jane.doe@email.com"
+          id="email"
+          {...register('email')}
+        />
+        {emailError && <S.Error>{emailError}</S.Error>}
 
-          <InputStyle>
-            <label htmlFor="password">
-              <span>Password</span>
-              <input
-                type="password"
-                placeholder="Password"
-                id="password"
-                {...register('password')}
-              />
-            </label>
-            <span>{errors?.password?.message}</span>
-          </InputStyle>
+        <S.Label htmlFor="password">Password</S.Label>
+        <S.Input
+          className={passwordError && 'error'}
+          type="password"
+          placeholder="Password"
+          id="password"
+          {...register('password')}
+        />
+        {passwordError && <S.Error>{passwordError}</S.Error>}
 
-          <InputStyle>
-            <label htmlFor="password-confirmation">
-              <span>Password Confirmation</span>
-              <input
-                type="password"
-                placeholder="Password Confirmation"
-                id="password-onfirmation"
-                {...register('passwordConfirmation')}
-              />
-            </label>
-            <span>{errors?.passwordConfirmation?.message}</span>
-          </InputStyle>
-        </div>
-        <div>
-          <DarkFormButton>Submit</DarkFormButton>
-        </div>
-      </form>
-    </RegisterStyle>
+        <S.Label htmlFor="password-confirmation">Password confirmation</S.Label>
+        <S.Input
+          className={passwordConfError && 'error'}
+          type="password"
+          placeholder="Password Confirmation"
+          id="password-onfirmation"
+          {...register('passwordConfirmation')}
+        />
+        {passwordConfError && <S.Error>{passwordConfError}</S.Error>}
+        <S.Submit>Register</S.Submit>
+      </S.Form>
+    </>
   );
 };
 

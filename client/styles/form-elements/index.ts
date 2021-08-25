@@ -29,7 +29,7 @@ const Input = styled.input`
   height: 3.75rem;
   width: 75%;
   max-width: 25rem;
-  border: solid 0.0625rem #ffffff1f;
+  border: solid 0.0625rem #ffffff2f;
   border-radius: 1.0625rem;
   font-size: 0.875rem;
   font-weight: 400;

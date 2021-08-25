@@ -39,6 +39,7 @@ const Login = () => {
         <S.Input
           className={emailError && 'error'}
           placeholder="jane.doe@email.com"
+          id="email"
           {...register('email')}
         />
         {emailError && <S.Error>{emailError}</S.Error>}
@@ -52,7 +53,7 @@ const Login = () => {
           {...register('password')}
         />
         {passwordError && <S.Error>{passwordError}</S.Error>}
-        <S.Submit>Submit</S.Submit>
+        <S.Submit>Login</S.Submit>
       </S.Form>
     </>
   );

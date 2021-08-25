@@ -33,7 +33,7 @@ const ForgotPasswordForm = () => {
         <S.Label htmlFor="email">Email</S.Label>
         <S.Input
           className={emailError && 'error'}
-          placeholder="jane.doe@email.com"
+          placeholder="Email"
           id="email"
           {...register('email')}
         />

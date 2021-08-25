@@ -5,7 +5,7 @@ import LoginFrom from '../../components/auth/LoginForm';
 const Login = () => {
   return (
     <S.Login>
-      <S.H1>Log in Now</S.H1>
+      <S.H1>Log In Now</S.H1>
       <S.H2>Please login to continue</S.H2>
       <LoginFrom />
       <S.P>

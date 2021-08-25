@@ -39,7 +39,7 @@ const RegisterForm = () => {
       <S.Label htmlFor="name">Name</S.Label>
       <S.Input
         className={nameError && 'error'}
-        placeholder="Jane Doe"
+        placeholder="Name"
         id="name"
         {...register('name')}
       />
@@ -48,7 +48,7 @@ const RegisterForm = () => {
       <S.Label htmlFor="email">Email</S.Label>
       <S.Input
         className={emailError && 'error'}
-        placeholder="jane.doe@email.com"
+        placeholder="Email"
         id="email"
         {...register('email')}
       />

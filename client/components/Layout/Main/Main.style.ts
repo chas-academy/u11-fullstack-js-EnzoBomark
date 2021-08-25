@@ -1,3 +1,7 @@
 import styled from 'styled-components';
 
-export const MainStyle = styled.div``;
+const Main = styled.div``;
+
+export const S = {
+  Main,
+};

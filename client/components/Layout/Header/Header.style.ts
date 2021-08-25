@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
-export const HeaderStyle = styled.header`
-  background-color: red;
+const Header = styled.header`
+  display: flex;
+  justify-content: center;
 `;
+
+export const S = {
+  Header,
+};

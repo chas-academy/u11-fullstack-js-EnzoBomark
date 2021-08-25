@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
-const Form = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 
   & .error {
     border: 1px solid #e93e36;
   }
 `;
 
-const Label = styled.label`
+export const Label = styled.label`
   border: 0;
   clip: rect(0 0 0 0);
   height: 0.0625rem;
@@ -21,7 +22,7 @@ const Label = styled.label`
   width: 0.0625rem;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   position: relative;
   display: flex;
   background: #2f363d;
@@ -48,7 +49,7 @@ const Input = styled.input`
   }
 `;
 
-const Error = styled.span`
+export const Error = styled.span`
   color: #e93e36;
   margin-top: 1rem;
   text-align: center;
@@ -56,23 +57,17 @@ const Error = styled.span`
   text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.27);
 `;
 
-const Submit = styled.button`
+export const Submit = styled.button`
   background: #2f363d;
   color: #ffffff;
   width: 75%;
   height: 3.75rem;
   max-width: 20rem;
-  margin: 1.875rem 0;
+  margin-top: 6.25rem;
   border: none;
   border-radius: 1.0625rem;
   box-shadow: 0px 6px 15px -2px rgba(0, 0, 0, 0.2);
   text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.27);
-`;
 
-export const S = {
-  Form,
-  Label,
-  Input,
-  Error,
-  Submit,
-};
+  cursor: pointer;
+`;

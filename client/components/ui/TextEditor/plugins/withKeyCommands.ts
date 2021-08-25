@@ -8,7 +8,7 @@ const withKeyCommands = (editor) => {
   editor.deleteBackward = (...args) => {
     const [parentNode, parentPath] = Editor.parent(editor, editor.selection.focus.path);
 
-    if (isVoid(parentNode) || !Node.string(parentNode).length) {
+    if (isVoid(parentNode) && !Node.string(parentNode).length) {
       Transforms.removeNodes(editor, { at: parentPath });
     } else {
       deleteBackward(...args);

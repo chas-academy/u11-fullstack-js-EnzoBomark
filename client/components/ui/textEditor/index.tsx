@@ -34,7 +34,7 @@ const HOTKEYS = {
   'mod+u': 'underline',
 };
 
-const initialValue: any = [
+const initialValue = [
   {
     type: 'paragraph',
     children: [{ text: 'Write something!' }],

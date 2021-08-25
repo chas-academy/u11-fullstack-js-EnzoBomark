@@ -1,7 +1,7 @@
-import { HeaderStyle } from './Header.style'
+import { HeaderStyle } from './Header.style';
 
 const Header: React.FC = (props) => {
-  return <HeaderStyle>Header</HeaderStyle>
-}
+  return <HeaderStyle>Header</HeaderStyle>;
+};
 
-export default Header
+export default Header;

@@ -1,6 +1,6 @@
-import Footer from '../Footer'
-import Header from '../Header'
-import { MainStyle } from './Main.style'
+import Footer from '../Footer';
+import Header from '../Header';
+import { MainStyle } from './Main.style';
 
 const Main: React.FC = (props) => {
   return (
@@ -9,7 +9,7 @@ const Main: React.FC = (props) => {
       <main>{props.children}</main>
       <Footer />
     </MainStyle>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

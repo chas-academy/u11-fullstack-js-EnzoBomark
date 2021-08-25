@@ -1,5 +1,5 @@
 const Home: React.FC = (props) => {
-  return <>data</>
-}
+  return <>data</>;
+};
 
-export default Home
+export default Home;

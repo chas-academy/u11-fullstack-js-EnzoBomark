@@ -4,7 +4,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    background: #191720;
+    background: #24292E;
     box-sizing: border-box;
     font-family: Open-Sans, Helvetica, Sans-Serif;
     min-height: 100vh;

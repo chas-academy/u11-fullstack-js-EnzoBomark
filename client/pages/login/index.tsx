@@ -1,6 +1,4 @@
-import { InputStyle } from '../../styles/ui/form-elements/Input.style';
-import { DarkFormButton } from '../../styles/ui/buttons/dark-form-button.style';
-import { LoginStyle } from './Login.style';
+import { S } from '../../styles/form-elements';
 import { object, string, number, InferType, ref } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -31,36 +29,32 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  return (
-    <LoginStyle>
-      <form onSubmit={handleSubmit(formSubmitHandler)}>
-        <div>
-          <InputStyle>
-            <label htmlFor="email">
-              <span>Email</span>
-              <input placeholder="jane.doe@email.com" id="email" {...register('email')} />
-            </label>
-            <span>{errors?.email?.message}</span>
-          </InputStyle>
+  const emailError = errors?.email?.message,
+    passwordError = errors?.password?.message;
 
-          <InputStyle>
-            <label htmlFor="password">
-              <span>Password</span>
-              <input
-                type="password"
-                placeholder="Password"
-                id="password"
-                {...register('password')}
-              />
-            </label>
-            <span>{errors?.password?.message}</span>
-          </InputStyle>
-        </div>
-        <div>
-          <DarkFormButton>Submit</DarkFormButton>
-        </div>
-      </form>
-    </LoginStyle>
+  return (
+    <>
+      <S.Form onSubmit={handleSubmit(formSubmitHandler)}>
+        <S.Label htmlFor="email">Email</S.Label>
+        <S.Input
+          className={emailError && 'error'}
+          placeholder="jane.doe@email.com"
+          {...register('email')}
+        />
+        {emailError && <S.Error>{emailError}</S.Error>}
+
+        <S.Label htmlFor="password">Password</S.Label>
+        <S.Input
+          className={passwordError && 'error'}
+          type="password"
+          placeholder="Password"
+          id="password"
+          {...register('password')}
+        />
+        {passwordError && <S.Error>{passwordError}</S.Error>}
+        <S.Submit>Submit</S.Submit>
+      </S.Form>
+    </>
   );
 };
 

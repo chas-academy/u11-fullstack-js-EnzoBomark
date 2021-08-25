@@ -6,6 +6,7 @@ import pipe from 'lodash/fp/pipe';
 import isHotkey from 'is-hotkey';
 
 import Toolbar from './components/Toolbar';
+import Topbar from './components/Topbar';
 
 import Paragraph from './elements/Paragraph';
 import Image from './elements/Image';
@@ -77,6 +78,8 @@ const TextEditor = () => {
         }}
       >
         <Toolbar />
+        <Topbar />
+
         <Editable
           renderElement={renderElement}
           renderLeaf={renderLeaf}

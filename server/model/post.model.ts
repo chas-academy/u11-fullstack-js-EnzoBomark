@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 import { nanoid } from 'nanoid';
-import * as MODEL from './user.model';
+import { UserDocument } from './user.model';
 
 export interface PostDocument extends mongoose.Document {
-  user: MODEL.UserDocument['_id'];
+  user: UserDocument['_id'];
   title: string;
   body: string;
   createdAt: Date;

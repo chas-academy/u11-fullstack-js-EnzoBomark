@@ -1,9 +1,9 @@
 import { FilterQuery, LeanDocument, UpdateQuery } from 'mongoose';
 import { get } from 'lodash';
 import config from 'config';
-import * as MODEL from '../model';
-import * as UTIL from '../utils';
-import * as SERVICE from '../service';
+import { MODEL, UserDocument, SessionDocument } from '../model';
+import { UTILS } from '../utils';
+import { SERVICE } from '../service';
 
 export const createSession = async (userId: string, userAgent: string) => {
   const session = await MODEL.Session.create({ user: userId, userAgent });
@@ -16,14 +16,14 @@ export const createAccessToken = ({
   session,
 }: {
   user:
-    | Omit<MODEL.UserDocument, 'password'>
-    | LeanDocument<Omit<MODEL.UserDocument, 'password'>>;
+    | Omit<UserDocument, 'password'>
+    | LeanDocument<Omit<UserDocument, 'password'>>;
   session:
-    | Omit<MODEL.SessionDocument, 'password'>
-    | LeanDocument<Omit<MODEL.SessionDocument, 'password'>>;
+    | Omit<SessionDocument, 'password'>
+    | LeanDocument<Omit<SessionDocument, 'password'>>;
 }) => {
   //Build and return the new access token
-  const accessToken = UTIL.sign(
+  const accessToken = UTILS.sign(
     { ...user, session: session._id },
     { expiresIn: config.get('ACCESS_TOKEN_TTL') } // 15 min
   );
@@ -37,7 +37,7 @@ export const reIssueAccessToken = async ({
   refreshToken: string;
 }) => {
   // Decode the refresh token
-  const { decoded } = UTIL.decode(refreshToken);
+  const { decoded } = UTILS.decode(refreshToken);
 
   if (!decoded || !get(decoded, '_id')) return false;
 
@@ -57,14 +57,12 @@ export const reIssueAccessToken = async ({
 };
 
 export const updateSession = async (
-  query: FilterQuery<MODEL.SessionDocument>,
-  update: UpdateQuery<MODEL.SessionDocument>
+  query: FilterQuery<SessionDocument>,
+  update: UpdateQuery<SessionDocument>
 ) => {
   return MODEL.Session.updateOne(query, update);
 };
 
-export const findSessions = async (
-  query: FilterQuery<MODEL.SessionDocument>
-) => {
+export const findSessions = async (query: FilterQuery<SessionDocument>) => {
   return MODEL.Session.find(query).lean();
 };

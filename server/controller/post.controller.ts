@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { get } from 'lodash';
-import * as SERVICE from '../service';
+import { SERVICE } from '../service';
 
 export const createPostHandler = async (req: Request, res: Response) => {
   const userId = get(req, 'user._id');

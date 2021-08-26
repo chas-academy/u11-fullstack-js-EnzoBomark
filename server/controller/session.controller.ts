@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import config from 'config';
 import { get } from 'lodash';
-import * as SERVICE from '../service';
-import * as UTIL from '../utils';
+import { SERVICE } from '../service';
+import { UTILS } from '../utils';
 
 export const createUserSessionHandler = async (req: Request, res: Response) => {
   // Validate the email and password
@@ -25,7 +25,7 @@ export const createUserSessionHandler = async (req: Request, res: Response) => {
   });
 
   // Create refresh token
-  const refreshToken = UTIL.sign(session, {
+  const refreshToken = UTILS.sign(session, {
     expiresIn: config.get('REFRESH_TOKEN_TTL'), // 1 year
   });
 

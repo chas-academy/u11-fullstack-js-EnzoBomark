@@ -1,7 +1,7 @@
 import { Express, Request, Response } from 'express';
-import * as MW from './middleware/';
-import * as CONT from './controller/';
-import * as SCHEMA from './schema/';
+import { MW } from './middleware/';
+import { CONT } from './controller/';
+import { SCHEMA } from './schema/';
 
 const routes = (app: Express) => {
   app.get('/healthcheck', (req: Request, res: Response) => res.sendStatus(200));

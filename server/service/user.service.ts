@@ -1,10 +1,8 @@
 import { DocumentDefinition, FilterQuery } from 'mongoose';
 import { omit } from 'lodash';
-import * as MODEL from '../model';
+import { MODEL, UserDocument } from '../model';
 
-export const createUser = async (
-  input: DocumentDefinition<MODEL.UserDocument>
-) => {
+export const createUser = async (input: DocumentDefinition<UserDocument>) => {
   try {
     return await MODEL.User.create(input);
   } catch (error) {
@@ -12,7 +10,7 @@ export const createUser = async (
   }
 };
 
-export const findUser = async (query: FilterQuery<MODEL.UserDocument>) => {
+export const findUser = async (query: FilterQuery<UserDocument>) => {
   return MODEL.User.findOne(query).lean();
 };
 
@@ -20,7 +18,7 @@ export const validatePassword = async ({
   email,
   password,
 }: {
-  email: MODEL.UserDocument['email'];
+  email: UserDocument['email'];
   password: string;
 }) => {
   const user = await MODEL.User.findOne({ email });

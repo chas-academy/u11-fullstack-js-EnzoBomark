@@ -1,7 +1,7 @@
 import { get } from 'lodash';
 import { Request, Response, NextFunction } from 'express';
-import * as UTIL from '../utils';
-import * as SERVICE from '../service';
+import { UTILS } from '../utils';
+import { SERVICE } from '../service';
 
 export const deserializeUser = async (
   req: Request,
@@ -17,7 +17,7 @@ export const deserializeUser = async (
 
   if (!accessToken) return next();
 
-  const { decoded, expired } = UTIL.decode(accessToken);
+  const { decoded, expired } = UTILS.decode(accessToken);
 
   if (decoded) {
     // @ts-ignore
@@ -33,7 +33,7 @@ export const deserializeUser = async (
       // Add the new access token to the response header
       res.setHeader('x-access-token', newAccessToken);
 
-      const { decoded } = UTIL.decode(newAccessToken);
+      const { decoded } = UTILS.decode(newAccessToken);
 
       // @ts-ignore
       req.user = decoded;

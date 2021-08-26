@@ -5,4 +5,10 @@ import { UserDocument } from './user.model';
 import { Post } from './post.model';
 import { PostDocument } from './post.model';
 
-export { Session, SessionDocument, User, UserDocument, Post, PostDocument };
+export const MODEL = {
+  Session,
+  User,
+  Post,
+};
+
+export { SessionDocument, UserDocument, PostDocument };

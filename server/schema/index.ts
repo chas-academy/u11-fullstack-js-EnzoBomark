@@ -4,7 +4,7 @@ import { createPostSchema } from './post.schema';
 import { updatePostSchema } from './post.schema';
 import { deletePostSchema } from './post.schema';
 
-export {
+export const SCHEMA = {
   createUserSchema,
   createUserSessionSchema,
   createPostSchema,

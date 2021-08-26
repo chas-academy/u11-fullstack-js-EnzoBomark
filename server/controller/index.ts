@@ -9,7 +9,7 @@ import { updatePostHandler } from './post.controller';
 import { getPostHandler } from './post.controller';
 import { deletePostHandler } from './post.controller';
 
-export {
+export const CONT = {
   createUserSessionHandler,
   invalidateUserSessionHandler,
   getUserSessionHandler,

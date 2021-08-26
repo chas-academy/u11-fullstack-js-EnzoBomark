@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import * as MODEL from './';
+import { UserDocument } from './';
 
 export interface SessionDocument extends mongoose.Document {
-  user: MODEL.UserDocument['_id'];
+  user: UserDocument['_id'];
   valid: boolean;
   userAgent: string;
   createdAt: Date;

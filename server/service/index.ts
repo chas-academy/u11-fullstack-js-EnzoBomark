@@ -11,7 +11,7 @@ import { findPost } from './post.service';
 import { findAndUpdate } from './post.service';
 import { deletePost } from './post.service';
 
-export {
+export const SERVICE = {
   createSession,
   createAccessToken,
   reIssueAccessToken,

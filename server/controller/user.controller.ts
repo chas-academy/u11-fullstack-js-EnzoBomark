@@ -2,9 +2,9 @@ import { NextFunction, Request, Response } from 'express';
 import { omit } from 'lodash';
 import crypto from 'crypto';
 import log from '../logger';
-import * as SERVICE from '../service';
-import * as MODEL from '../model';
-import * as UTIL from '../utils';
+import { SERVICE } from '../service';
+import { MODEL } from '../model';
+import { UTILS } from '../utils';
 
 export const createUserHandler = async (req: Request, res: Response) => {
   try {
@@ -47,7 +47,7 @@ export const forgotUserPasswordHandler = async (
      `;
 
     try {
-      await UTIL.sendMail({
+      await UTILS.sendMail({
         to: user.email,
         subject: 'Password reset request',
         text: message,

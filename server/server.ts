@@ -4,7 +4,7 @@ import config from 'config';
 import log from './logger';
 import routes from './routes';
 import cors from 'cors';
-import * as MW from './middleware';
+import { MW } from './middleware';
 
 const app = express();
 

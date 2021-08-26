@@ -4,7 +4,7 @@ const Nav = styled.a`
   font-size: 0.875rem;
   color: #ffffff;
   opacity: 50%;
-  margin: 1.5rem 2rem;
+  margin: 1.5rem;
   padding: 0.625rem 0.9375rem;
   border-radius: 0.625rem;
   text-decoration: none;

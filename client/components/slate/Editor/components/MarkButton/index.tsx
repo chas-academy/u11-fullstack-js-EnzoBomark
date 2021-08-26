@@ -1,19 +1,23 @@
+import { S } from './MarkButton.style';
 import { useSlate } from 'slate-react';
 import { toggleMark, isMarkActive } from '../../utils/mark.util';
+import Image from 'next/image';
 
 const MarkButton = ({ format, icon }: { format: string; icon: string }) => {
   const editor = useSlate();
 
   return (
-    <button
+    <S.Button
       onMouseDown={(event) => {
         event.preventDefault();
         toggleMark(editor, format);
       }}
     >
-      <div className={isMarkActive(editor, format) ? 'active' : ''}> A{icon}</div>
-    </button>
+      <Image src={icon} />
+    </S.Button>
   );
 };
 
 export default MarkButton;
+
+// isMarkActive(editor, format)

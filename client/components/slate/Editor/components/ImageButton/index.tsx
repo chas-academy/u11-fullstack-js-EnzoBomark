@@ -1,5 +1,8 @@
+import { S } from './ImageButton.style';
 import { useSlateStatic } from 'slate-react';
 import { insertImage } from '../../utils/image';
+import { Icon } from '../../../../../assets/icons';
+import Image from 'next/image';
 
 const ImageButton = () => {
   const editor = useSlateStatic();
@@ -10,9 +13,9 @@ const ImageButton = () => {
   };
 
   return (
-    <button onClick={insertImageHander} aria-label="Insert Image" title="Image">
-      image
-    </button>
+    <S.Button onClick={insertImageHander} aria-label="Insert Image" title="Image">
+      <Image src={Icon.Image} />
+    </S.Button>
   );
 };
 

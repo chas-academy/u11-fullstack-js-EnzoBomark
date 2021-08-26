@@ -80,7 +80,7 @@ const TextEditor = () => {
         }}
       >
         <Toolbar />
-        <Topbar />
+        {/* <Topbar /> */}
 
         <S.TextField>
           <Editable

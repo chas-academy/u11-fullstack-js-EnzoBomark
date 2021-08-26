@@ -13,11 +13,19 @@ const MarkButton = ({ format, icon }: { format: string; icon: string }) => {
         toggleMark(editor, format);
       }}
     >
-      <Image src={icon} />
+      {isMarkActive(editor, format) && (
+        <S.IconActive>
+          <Image src={icon} />
+        </S.IconActive>
+      )}
+
+      {!isMarkActive(editor, format) && (
+        <S.IconInActive>
+          <Image src={icon} />
+        </S.IconInActive>
+      )}
     </S.Button>
   );
 };
 
 export default MarkButton;
-
-// isMarkActive(editor, format)

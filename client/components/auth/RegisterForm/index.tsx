@@ -16,6 +16,8 @@ const schema = object({
 
 const formSubmitHandler = async (values: Props) => {
   const response = await POST('auth/register', values);
+
+  console.log(response);
 };
 
 type Props = InferType<typeof schema>;

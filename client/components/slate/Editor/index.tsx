@@ -21,6 +21,8 @@ import { createImageNode } from './utils/image';
 import { createLinkNode } from './utils/link';
 import { toggleMark } from './utils/mark.util';
 
+import { S } from './TextEditor.style';
+
 const createEditorWithPlugins = pipe(
   withReact,
   withHistory,
@@ -65,7 +67,7 @@ const TextEditor = () => {
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
   return (
-    <div className="editor-wrapper">
+    <S.Editor>
       <Slate
         editor={editor}
         value={value}
@@ -80,25 +82,27 @@ const TextEditor = () => {
         <Toolbar />
         <Topbar />
 
-        <Editable
-          renderElement={renderElement}
-          renderLeaf={renderLeaf}
-          autoCapitalize="false"
-          autoCorrect="false"
-          spellCheck="false"
-          title="Editor"
-          placeholder="Enter some rich text…"
-          onKeyDown={(event) => {
-            for (const hotkey in HOTKEYS) {
-              if (isHotkey(hotkey, event as any)) {
-                event.preventDefault();
-                toggleMark(editor, HOTKEYS[hotkey]);
+        <S.TextField>
+          <Editable
+            renderElement={renderElement}
+            renderLeaf={renderLeaf}
+            autoCapitalize="false"
+            autoCorrect="false"
+            spellCheck="false"
+            title="Editor"
+            placeholder="Enter some rich text…"
+            onKeyDown={(event) => {
+              for (const hotkey in HOTKEYS) {
+                if (isHotkey(hotkey, event as any)) {
+                  event.preventDefault();
+                  toggleMark(editor, HOTKEYS[hotkey]);
+                }
               }
-            }
-          }}
-        />
+            }}
+          />
+        </S.TextField>
       </Slate>
-    </div>
+    </S.Editor>
   );
 };
 

@@ -1,29 +1,22 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-  height: 25px;
-  width: 25px;
-  border-radius: 5px;
-  background-color: #2f363d;
-  margin: 0 10px;
-  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.5625rem;
+  width: 1.5625rem;
+  border-radius: ${(props) => props.theme['rounded-sm']};
+  background-color: ${(props) => props.theme['color-light-gray']};
+  margin: 0 0.625rem;
+  border: ${(props) => props.theme['border-sm']};
   cursor: pointer;
-
-  & :first-child {
-    margin-left: 15px;
-  }
 `;
 
 const IconInActive = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   opacity: 50%;
 `;
 const IconActive = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   opacity: 100%;
 `;
 

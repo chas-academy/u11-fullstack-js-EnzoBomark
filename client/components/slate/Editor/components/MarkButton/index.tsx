@@ -8,6 +8,8 @@ const MarkButton = ({ format, icon }: { format: string; icon: string }) => {
 
   return (
     <S.Button
+      aria-label={format}
+      title={format}
       onMouseDown={(event) => {
         event.preventDefault();
         toggleMark(editor, format);

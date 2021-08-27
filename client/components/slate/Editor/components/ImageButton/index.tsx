@@ -13,7 +13,7 @@ const ImageButton = () => {
   };
 
   return (
-    <S.Button onClick={insertImageHander} aria-label="Insert Image" title="Image">
+    <S.Button onClick={insertImageHander} aria-label="Insert Image" title="image">
       <Image src={Icon.Image} />
     </S.Button>
   );

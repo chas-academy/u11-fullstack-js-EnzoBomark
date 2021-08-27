@@ -13,7 +13,7 @@ const LinkButton = () => {
   };
 
   return (
-    <S.Button onClick={insertLinkHandler} aria-label="Insert Link" title="Link">
+    <S.Button onClick={insertLinkHandler} aria-label="Insert Link" title="link">
       <Image src={Icon.Link} />
     </S.Button>
   );

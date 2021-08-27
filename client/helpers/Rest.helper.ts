@@ -1,24 +1,7 @@
+import { HttpResponse } from '../interface/HttpResponse.interface';
+import { http } from '../utils/http.utils';
+
 const API_BASE = 'http://localhost:5000/api/';
-
-interface HttpResponse<T> extends Response {
-  parsedBody?: T;
-}
-
-export const http = async <T>(request: RequestInfo): Promise<HttpResponse<T>> => {
-  const response: HttpResponse<T> = await fetch(request);
-
-  try {
-    // may error if there is no body
-    response.parsedBody = await response.json();
-  } catch (error) {
-    console.log(error);
-  }
-
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-  return response;
-};
 
 export const GET = async <T>(
   path: string,

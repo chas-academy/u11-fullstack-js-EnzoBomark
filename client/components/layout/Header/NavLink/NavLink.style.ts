@@ -1,18 +1,16 @@
 import styled from 'styled-components';
 
 const Nav = styled.a`
-  font-size: 0.875rem;
-  color: #ffffff;
+  font-size: ${(props) => props.theme['font-sm']};
+  color: ${(props) => props.theme['color-white']};
   opacity: 50%;
-  margin: 1.5rem;
+  margin: 0.5rem 1.25rem;
   padding: 0.625rem 0.9375rem;
-  border-radius: 0.625rem;
   text-decoration: none;
-  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.27);
+  text-shadow: ${(props) => props.theme['text-shadow']};
   cursor: pointer;
 
   &[aria-current] {
-    color: #ffffff;
     opacity: 100%;
   }
 `;

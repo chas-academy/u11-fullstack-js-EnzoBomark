@@ -10,8 +10,8 @@ const A = styled.a`
   display: flex;
   justify-content: flex-end;
   padding: 0 0.5rem;
-  color: #ffffffb7;
-  font-size: 14px;
+  color: ${(props) => props.theme['color-dark-white']};
+  font-size: ${(props) => props.theme['font-sm']};
   cursor: pointer;
 `;
 

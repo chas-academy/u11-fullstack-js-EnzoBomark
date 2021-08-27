@@ -8,28 +8,26 @@ const Login = styled.div`
 
 const H1 = styled.div`
   margin-top: 5rem;
-  font-size: 20px;
+  font-size: ${(props) => props.theme['font-lg']};
   font-weight: 600;
 `;
 
 const H2 = styled.div`
   margin-top: 0.5rem;
-  font-size: 14px;
-  font-weight: 400;
-  color: #ffffffb3;
+  font-size: ${(props) => props.theme['font-sm']};
+  color: ${(props) => props.theme['color-dark-white']};
 `;
 
 const P = styled.p`
-  color: #ffffffb3;
+  color: ${(props) => props.theme['color-dark-white']};
   margin-top: 1rem;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: ${(props) => props.theme['font-sm']};
 `;
 
 const A = styled.a`
-  color: #ffffff;
+  color: ${(props) => props.theme['color-white']};
   margin-left: 0.5rem;
-  font-size: 14px;
+  font-size: ${(props) => props.theme['font-sm']};
   cursor: pointer;
 `;
 

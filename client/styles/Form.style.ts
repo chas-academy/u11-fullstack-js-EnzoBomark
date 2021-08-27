@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { mainTheme, ThemeType } from './Themes';
 
 export const Form = styled.form`
   display: flex;
@@ -8,7 +7,7 @@ export const Form = styled.form`
   width: 100%;
 
   & .error {
-    border: 1px solid #e93e36;
+    border: ${(props) => props.theme['border-error']};
   }
 `;
 
@@ -31,18 +30,17 @@ export const Input = styled.input`
   height: 3.75rem;
   width: 75%;
   max-width: 25rem;
-  border: solid 0.0625rem #ffffff2f;
-  border-radius: 1.0625rem;
-  font-size: 0.875rem;
-  font-weight: 400;
+  border: ${(props) => props.theme['border-sm']};
+  border-radius: ${(props) => props.theme['rounded-sm']};
+  font-size: ${(props) => props.theme['font-sm']};
   cursor: text;
   margin-top: 1.875rem;
   padding: 0 1.25rem;
-  box-shadow: 0px 6px 15px -2px rgba(0, 0, 0, 0.2);
-  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.27);
+  box-shadow: ${(props) => props.theme['box-shadow']};
+  text-shadow: ${(props) => props.theme['text-shadow']};
 
   &:hover {
-    border: solid 1px #bdbdbd;
+    border: ${(props) => props.theme['border-hover']};
   }
 
   &:focus {
@@ -51,25 +49,23 @@ export const Input = styled.input`
 `;
 
 export const Error = styled.span`
-  color: #e93e36;
+  color: ${(props) => props.theme['color-error']};
   margin-top: 1rem;
   text-align: center;
   width: 70%;
-  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.27);
+  text-shadow: ${(props) => props.theme['text-shadow']};
 `;
 
 export const Submit = styled.button`
-  background: #2f363d;
-  color: #ffffff;
+  background: ${(props) => props.theme['color-dark-gray']};
+  color: ${(props) => props.theme['color-white']};
   width: 75%;
   height: 3.75rem;
   max-width: 20rem;
   margin-top: 6.25rem;
   border: none;
-  border-radius: 1.0625rem;
-  box-shadow: 0px 6px 15px -2px rgba(0, 0, 0, 0.2);
-
-  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.27);
-
+  border-radius: ${(props) => props.theme['rounded-md']};
+  text-shadow: ${(props) => props.theme['text-shadow']};
+  box-shadow: ${(props) => props.theme['box-shadow']};
   cursor: pointer;
 `;

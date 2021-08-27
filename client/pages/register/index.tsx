@@ -1,6 +1,6 @@
 import { S } from './Register.style';
 import Link from 'next/link';
-import RegisterForm from '../../components/auth/RegisterForm';
+import RegisterForm from '@/components/auth/RegisterForm';
 
 const Register = () => {
   return (

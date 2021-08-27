@@ -1,4 +1,4 @@
-import { HttpResponse } from '../interface/HttpResponse.interface';
+import { HttpResponse } from '@/interfaces/HttpResponse.interface';
 
 export const http = async <T>(request: RequestInfo): Promise<HttpResponse<T>> => {
   const response: HttpResponse<T> = await fetch(request);

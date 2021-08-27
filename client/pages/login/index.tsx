@@ -1,6 +1,6 @@
 import { S } from './Login.style';
 import Link from 'next/link';
-import LoginFrom from '../../components/auth/LoginForm';
+import LoginFrom from '@/components/auth/LoginForm';
 
 const Login = () => {
   return (

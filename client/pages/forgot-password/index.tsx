@@ -1,5 +1,5 @@
 import { S } from './ForgotPassword.style';
-import ForgotPasswordForm from '../../components/auth/ForgotPassword';
+import ForgotPasswordForm from '@/components/auth/ForgotPassword';
 
 const ForgotPassword = () => {
   return (

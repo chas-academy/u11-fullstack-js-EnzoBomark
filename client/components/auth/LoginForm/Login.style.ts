@@ -1,4 +1,4 @@
-import { Form, Label, Input, Error, Submit } from '../../../styles/Form.style';
+import { Form, Label, Input, Error, Submit } from '@/styles/Form.style';
 import styled from 'styled-components';
 
 const P = styled.p`

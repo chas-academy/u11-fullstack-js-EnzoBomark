@@ -1,9 +1,9 @@
-import type { AppProps } from 'next/app';
+import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
-import { mainTheme } from '../styles/Themes';
-import GlobalStyle from '../styles/Global.style';
+import { mainTheme } from '@/styles/Themes';
+import GlobalStyle from '@/styles/Global.style';
+import Main from '@/components/layout/Main';
 import Head from 'next/head';
-import Main from '../components/layout/Main';
 
 const METADATA = () => {
   return (

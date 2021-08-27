@@ -1,5 +1,5 @@
 import { S } from './ResetPassword.style';
-import ForgotPasswordForm from '../../../components/auth/ForgotPassword';
+import ForgotPasswordForm from '@/components/auth/ForgotPassword';
 
 const ResetPassword = () => {
   return (

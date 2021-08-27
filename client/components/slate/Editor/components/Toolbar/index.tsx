@@ -2,7 +2,7 @@ import { S } from './Toolbar.style';
 import LinkButton from '../LinkButton';
 import MarkButton from '../MarkButton';
 import ImageButton from '../ImageButton';
-import { Icon } from '../../../../../assets/icons';
+import { Icon } from '@/assets/icons';
 
 const Toolbar = () => {
   return (

@@ -23,5 +23,12 @@
     "ecmaFeatures": {
       "jsx": true
     }
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "paths": ["."]
+      }
+    }
   }
 }

@@ -1,5 +1,5 @@
-import { HttpResponse } from '../interface/HttpResponse.interface';
-import { http } from '../utils/http.utils';
+import { HttpResponse } from '@/interfaces/HttpResponse.interface';
+import { http } from '@/utils/http.utils';
 
 const API_BASE = 'http://localhost:5000/api/';
 

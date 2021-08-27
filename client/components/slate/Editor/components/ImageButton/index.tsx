@@ -1,7 +1,7 @@
 import { S } from './ImageButton.style';
 import { useSlateStatic } from 'slate-react';
 import { insertImage } from '../../utils/image';
-import { Icon } from '../../../../../assets/icons';
+import { Icon } from '@/assets/icons';
 import Image from 'next/image';
 
 const ImageButton = () => {

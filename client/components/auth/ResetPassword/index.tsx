@@ -1,8 +1,8 @@
 import { S } from './ResetPassword.style';
+import { useForm } from 'react-hook-form';
 import { object, string, number, InferType, ref } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import { POST } from '../../../helpers/Rest.helper';
+import { POST } from '@/helpers/Rest.helper';
 
 const schema = object({
   password: string()

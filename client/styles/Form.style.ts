@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mainTheme, ThemeType } from './Themes';
 
 export const Form = styled.form`
   display: flex;
@@ -25,7 +26,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   position: relative;
   display: flex;
-  background: #2f363d;
+  background: ${(props) => props.theme['color-dark-gray']};
   color: #ffffff;
   height: 3.75rem;
   width: 75%;

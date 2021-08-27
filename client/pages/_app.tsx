@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
-import { useEffect } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { mainTheme } from '../styles/Themes';
 import GlobalStyle from '../styles/Global.style';
 import Head from 'next/head';
 import Main from '../components/layout/Main';
@@ -17,16 +18,15 @@ const METADATA = () => {
 };
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  useEffect(() => {
-    document.documentElement.lang = 'en-us';
-  });
   return (
     <>
-      <GlobalStyle />
       <METADATA />
-      <Main>
-        <Component {...pageProps} />
-      </Main>
+      <ThemeProvider theme={mainTheme}>
+        <GlobalStyle />
+        <Main>
+          <Component {...pageProps} />
+        </Main>
+      </ThemeProvider>
     </>
   );
 };

@@ -1,23 +1,47 @@
 const API_BASE = 'http://localhost:5000/api/';
 
-export const POST = async (apiRoute: string, values: any) => {
-  const response = await fetch(`${API_BASE}${apiRoute}`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      // Authorization: `Bearer ${localStorage.get('token')}`,
-    },
-    body: JSON.stringify(values),
-  });
+interface HttpResponse<T> extends Response {
+  parsedBody?: T;
+}
+
+export const http = async <T>(request: RequestInfo): Promise<HttpResponse<T>> => {
+  const response: HttpResponse<T> = await fetch(request);
 
   try {
-    const user = await response.json();
-    return user;
+    // may error if there is no body
+    response.parsedBody = await response.json();
   } catch (error) {
     console.log(error);
   }
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  return response;
 };
-export const GET = () => {};
-export const PUT = () => {};
+
+export const GET = async <T>(
+  path: string,
+  body: any,
+  args: RequestInit = { method: 'GET', body: JSON.stringify(body) }
+): Promise<HttpResponse<T>> => {
+  return await http<T>(new Request(path, args));
+};
+
+export const POST = async <T>(
+  path: string,
+  body: any,
+  args: RequestInit = { method: 'POST', body: JSON.stringify(body) }
+): Promise<HttpResponse<T>> => {
+  return await http<T>(new Request(path, args));
+};
+
+export const PUT = async <T>(
+  path: string,
+  body: any,
+  args: RequestInit = { method: 'PUT', body: JSON.stringify(body) }
+): Promise<HttpResponse<T>> => {
+  return await http<T>(new Request(path, args));
+};
+
 export const DELETE = () => {};

@@ -16,12 +16,15 @@ import withImages from './plugins/withImages';
 import withKeyCommands from './plugins/withKeyCommands';
 import withLinks from './plugins/withLinks';
 
-import { createParagraphNode } from './utils/paragraph';
-import { createImageNode } from './utils/image';
-import { createLinkNode } from './utils/link';
-import { toggleMark } from './utils/mark.util';
+import { createParagraphNode } from './utils/paragraph.utils';
+import { createImageNode } from './utils/image.utils';
+import { createLinkNode } from './utils/link.utils';
+import { toggleMark } from './utils/mark.utils';
 
 import { S } from './TextEditor.style';
+import List from './elements/List';
+import Heading from './elements/Heading';
+import Subheading from './elements/Subheading';
 
 const createEditorWithPlugins = pipe(
   withReact,
@@ -48,6 +51,9 @@ const Element = (props) => {
   const type = props.element.type;
   if (type === 'image') return <Image {...props} />;
   if (type === 'link') return <Link {...props} />;
+  if (type === 'list') return <List {...props} />;
+  if (type === 'heading') return <Heading {...props} />;
+  if (type === 'subheading') return <Subheading {...props} />;
   return <Paragraph {...props} />;
 };
 
@@ -55,8 +61,6 @@ const Leaf = ({ attributes, children, leaf }) => {
   if (leaf.bold) children = <strong>{children}</strong>;
   if (leaf.italic) children = <em>{children}</em>;
   if (leaf.underline) children = <u>{children}</u>;
-  if (leaf.list) children = <ul>{children}</ul>;
-  if (leaf.heading) children = <h1>{children}</h1>;
   return <span {...attributes}>{children}</span>;
 };
 

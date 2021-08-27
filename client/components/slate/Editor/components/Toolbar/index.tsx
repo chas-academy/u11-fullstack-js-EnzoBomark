@@ -1,7 +1,8 @@
 import { S } from './Toolbar.style';
-import LinkButton from '../LinkButton';
-import MarkButton from '../MarkButton';
-import ImageButton from '../ImageButton';
+import LinkButton from './LinkButton';
+import MarkButton from './MarkButton';
+import ImageButton from './ImageButton';
+import BlockButton from './BlockButton';
 import { Icon } from '@/assets/icons';
 
 const Toolbar = () => {
@@ -10,8 +11,9 @@ const Toolbar = () => {
       <MarkButton format="bold" icon={Icon.Bold} />
       <MarkButton format="italic" icon={Icon.Italic} />
       <MarkButton format="underline" icon={Icon.Underline} />
-      <MarkButton format="list" icon={Icon.List} />
-      <MarkButton format="heading" icon={Icon.Heading} />
+      <BlockButton format="list" icon={Icon.List} />
+      <BlockButton format="heading" icon={Icon.Heading} />
+      <BlockButton format="subheading" icon={Icon.Heading} />
       <ImageButton />
       <LinkButton />
     </S.Toolbar>

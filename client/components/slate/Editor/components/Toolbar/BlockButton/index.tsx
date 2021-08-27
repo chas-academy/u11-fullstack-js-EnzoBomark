@@ -1,6 +1,6 @@
-import { S } from './MarkButton.style';
+import { S } from './BlockButton.style';
 import { useSlate } from 'slate-react';
-import { toggleMark, isMarkActive } from '../../utils/mark.util';
+import { toggleBlock, isBlockActive } from '../../../utils/block.utils';
 import Image from 'next/image';
 
 const MarkButton = ({ format, icon }: { format: string; icon: string }) => {
@@ -12,16 +12,16 @@ const MarkButton = ({ format, icon }: { format: string; icon: string }) => {
       title={format}
       onMouseDown={(event) => {
         event.preventDefault();
-        toggleMark(editor, format);
+        toggleBlock(editor, format);
       }}
     >
-      {isMarkActive(editor, format) && (
+      {isBlockActive(editor, format) && (
         <S.IconActive>
           <Image src={icon} />
         </S.IconActive>
       )}
 
-      {!isMarkActive(editor, format) && (
+      {!isBlockActive(editor, format) && (
         <S.IconInActive>
           <Image src={icon} />
         </S.IconInActive>

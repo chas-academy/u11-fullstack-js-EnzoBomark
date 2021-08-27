@@ -1,6 +1,6 @@
 import { S } from './LinkButton.style';
 import { useSlateStatic } from 'slate-react';
-import { insertLink } from '../../utils/link';
+import { insertLink } from '../../../utils/link.utils';
 import { Icon } from '@/assets/icons';
 import Image from 'next/image';
 

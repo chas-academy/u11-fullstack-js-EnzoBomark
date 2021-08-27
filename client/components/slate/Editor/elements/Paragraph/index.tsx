@@ -1,7 +1,3 @@
-const Paragraph = ({ attributes, children }) => (
-  <div {...attributes} className="element-paragraph">
-    {children}
-  </div>
-);
+const Paragraph = ({ attributes, children }) => <div {...attributes}>{children}</div>;
 
 export default Paragraph;

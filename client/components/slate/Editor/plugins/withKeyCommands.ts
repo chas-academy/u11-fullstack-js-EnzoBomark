@@ -1,6 +1,6 @@
 import { Editor, Node, Path, Transforms } from 'slate';
 
-import { createParagraphNode } from '../utils/paragraph';
+import { createParagraphNode } from '../utils/paragraph.utils';
 
 const withKeyCommands = (editor) => {
   const { deleteBackward, insertBreak, isVoid } = editor;

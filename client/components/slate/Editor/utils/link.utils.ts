@@ -1,7 +1,7 @@
 import { Editor, Transforms, Path, Range, Element } from 'slate';
 import { ReactEditor } from 'slate-react';
 
-import { createParagraphNode } from './paragraph';
+import { createParagraphNode } from './paragraph.utils';
 
 export const createLinkNode = (href, text) => ({
   type: 'link',

@@ -1,9 +1,9 @@
 import connectToDataBase from './db/connect';
 import express from 'express';
 import config from 'config';
+import cors from 'cors';
 import log from './logger';
 import routes from './routes';
-import cors from 'cors';
 import { MW } from './middleware';
 
 const app = express();

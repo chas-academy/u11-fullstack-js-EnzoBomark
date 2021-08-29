@@ -2,7 +2,7 @@ import { object, string, ref } from 'yup';
 
 const payload = {
   body: object({
-    title: string().required('Tiltle is required'),
+    title: string().required('Title is required'),
     body: string()
       .required('Body is required')
       .min(120, 'Body is too short - should be 120 chars minimum.'),

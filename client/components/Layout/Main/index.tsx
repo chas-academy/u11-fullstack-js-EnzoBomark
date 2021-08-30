@@ -1,14 +1,14 @@
 import Footer from '../Footer';
 import Header from '../Header';
-import { MainStyle } from './Main.style';
+import { S } from './Main.style';
 
 const Main: React.FC = (props) => {
   return (
-    <MainStyle>
+    <S.Main>
       <Header />
       <main>{props.children}</main>
       <Footer />
-    </MainStyle>
+    </S.Main>
   );
 };
 

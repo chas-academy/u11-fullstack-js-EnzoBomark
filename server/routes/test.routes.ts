@@ -4,7 +4,8 @@ import { CONT } from '../controller/';
 import { SCHEMA } from '../schema/';
 
 import multer from 'multer';
-const upload = multer({ dest: 'uploads/' });
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 export const Test = (app: Express) => {
   app.post(
@@ -29,4 +30,6 @@ export const Test = (app: Express) => {
     [MW.requireUser, MW.validateRequest(SCHEMA.deletePostSchema)],
     CONT.deletePostHandler
   );
+
+  app.post('/api/post/image', upload.single('image'), CONT.createImageHandler);
 };

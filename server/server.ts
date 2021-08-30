@@ -16,7 +16,10 @@ app.use(
 
 app.use(MW.deserializeUser);
 
+app.use(express.static('./uploads'));
+
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: false }));
 
 const port = config.get('PORT') as number;

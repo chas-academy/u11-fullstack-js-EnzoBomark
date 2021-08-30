@@ -6,7 +6,6 @@ export interface PostDocument extends mongoose.Document {
   user: UserDocument['_id'];
   title: string;
   body: string;
-  image: string;
   createdAt: Date;
   updatedAt: Date;
 }

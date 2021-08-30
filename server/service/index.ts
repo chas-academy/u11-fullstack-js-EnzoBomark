@@ -10,6 +10,7 @@ import { createPost } from './post.service';
 import { findPost } from './post.service';
 import { findAndUpdate } from './post.service';
 import { deletePost } from './post.service';
+import { uploadToS3 } from './s3.service';
 
 export const SERVICE = {
   createSession,
@@ -24,4 +25,5 @@ export const SERVICE = {
   findPost,
   findAndUpdate,
   deletePost,
+  uploadToS3,
 };

@@ -21,6 +21,7 @@ const PostSchema = new mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     title: { type: String, default: true },
     body: { type: String, default: true },
+    image: { type: String, default: true },
   },
   { timestamps: true }
 );

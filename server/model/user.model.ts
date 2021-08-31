@@ -8,6 +8,7 @@ export interface UserDocument extends mongoose.Document {
   email: string;
   name: string;
   password: string;
+  role: string | undefined;
   resetPasswordToken: string | undefined;
   resetPasswordExpire: number | undefined;
   createdAt: Date;
@@ -21,6 +22,7 @@ const UserSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     password: { type: String, required: true },
+    role: { type: String },
     resetPasswordToken: { type: String },
     resetPasswordExpire: { type: Number },
   },

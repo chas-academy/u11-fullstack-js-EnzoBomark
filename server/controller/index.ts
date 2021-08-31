@@ -4,6 +4,9 @@ import { getUserSessionHandler } from './session.controller';
 import { createUserHandler } from './user.controller';
 import { forgotUserPasswordHandler } from './user.controller';
 import { resetUserPasswordHandler } from './user.controller';
+import { createArticleHandler } from './article.controller';
+
+// test controller
 import { createPostHandler } from './post.controller';
 import { updatePostHandler } from './post.controller';
 import { getPostHandler } from './post.controller';
@@ -17,6 +20,7 @@ export const CONT = {
   createUserHandler,
   forgotUserPasswordHandler,
   resetUserPasswordHandler,
+  createArticleHandler,
   createPostHandler,
   updatePostHandler,
   getPostHandler,

@@ -6,11 +6,18 @@ import { findSessions } from './session.service';
 import { createUser } from './user.service';
 import { findUser } from './user.service';
 import { validatePassword } from './user.service';
+import { createArticle } from './article.service';
+import { findArticle } from './article.service';
+import { findAndUpdateArticle } from './article.service';
+import { deleteArticle } from './article.service';
+
+import { uploadToS3 } from './s3.service';
+
+//test sercice
 import { createPost } from './post.service';
 import { findPost } from './post.service';
 import { findAndUpdate } from './post.service';
 import { deletePost } from './post.service';
-import { uploadToS3 } from './s3.service';
 
 export const SERVICE = {
   createSession,
@@ -21,9 +28,13 @@ export const SERVICE = {
   createUser,
   findUser,
   validatePassword,
+  createArticle,
+  findArticle,
+  findAndUpdateArticle,
+  deleteArticle,
+  uploadToS3,
   createPost,
   findPost,
   findAndUpdate,
   deletePost,
-  uploadToS3,
 };

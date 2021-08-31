@@ -64,9 +64,7 @@ export const deletePostHandler = async (req: Request, res: Response) => {
   return res.sendStatus(200);
 };
 
-import sharp from 'sharp';
-import fs from 'fs';
-import S3 from 'aws-sdk/clients/s3';
+import log from '../logger';
 
 export const createImageHandler = async (req: Request, res: Response) => {
   const image = req.file!;
@@ -76,6 +74,8 @@ export const createImageHandler = async (req: Request, res: Response) => {
   }
 
   const uploadInfo = await SERVICE.uploadToS3(image);
+
+  log.info(uploadInfo);
 
   return res.sendStatus(200);
 };

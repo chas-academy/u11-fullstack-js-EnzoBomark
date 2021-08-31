@@ -4,32 +4,40 @@ import { CONT } from '../controller/';
 import { SCHEMA } from '../schema/';
 
 export const Auth = (app: Express) => {
+  // Register (create user in the db)
   app.post(
     '/api/auth/register',
     MW.validateRequest(SCHEMA.createUserSchema),
     CONT.createUserHandler
   );
 
-  //Login
+  //Login (create user session)
   app.post(
     '/api/auth/login',
     MW.validateRequest(SCHEMA.createUserSessionSchema),
     CONT.createUserSessionHandler
   );
 
-  //Forgot password
+  //Forgot password (send email to user)
   app.post('/api/auth/forgotpassword', CONT.forgotUserPasswordHandler);
 
-  //Reset password
+  //Reset password (update password on user)
   app.put('/api/auth/resetpassword/:resetToken', CONT.resetUserPasswordHandler);
 
-  //Get the user session
+  //Get the user session (get user sessions to inform about possible invalid devices)
   app.get('/api/auth/sessions', MW.requireUser, CONT.getUserSessionHandler);
 
-  //Logout
+  //Logout (Destroy user session)
   app.delete(
     '/api/auth/logout',
     MW.requireUser,
     CONT.invalidateUserSessionHandler
   );
+
+  //Delete user (remove user from the db)
+  // app.delete(
+  //   '/api/auth/delete/:userAccessKey',
+  //   MW.requireUser,
+  //   CONT.deleteUserHanlder
+  // );
 };

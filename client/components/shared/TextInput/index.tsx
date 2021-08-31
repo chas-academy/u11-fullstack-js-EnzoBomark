@@ -1,7 +1,7 @@
-import React from 'react';
+import { S } from './TextInput.style';
 
 const TextInput = () => {
-  return <div></div>;
+  return <S.TextInput placeholder="Title" />;
 };
 
 export default TextInput;

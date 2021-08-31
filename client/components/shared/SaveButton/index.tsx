@@ -1,7 +1,7 @@
 import { S } from './SaveButton.style';
 
 const SaveButton = () => {
-  return <S.SaveButton>Save</S.SaveButton>;
+  return <S.SaveButton>Post</S.SaveButton>;
 };
 
 export default SaveButton;

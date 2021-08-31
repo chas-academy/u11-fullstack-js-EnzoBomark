@@ -7,12 +7,12 @@ const TextInput = styled.input`
   color: #ffffff;
   height: 3.75rem;
   width: 100%;
-  max-width: 25rem;
+  max-width: 50rem;
   border: ${(props) => props.theme['border-sm']};
   border-radius: ${(props) => props.theme['rounded-sm']};
   font-size: ${(props) => props.theme['font-sm']};
   cursor: text;
-  margin-top: 1.875rem;
+  margin-top: 1.25rem;
   padding: 0 1.25rem;
   box-shadow: ${(props) => props.theme['box-shadow']};
   text-shadow: ${(props) => props.theme['text-shadow']};

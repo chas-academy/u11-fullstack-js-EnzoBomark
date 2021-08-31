@@ -1,8 +1,7 @@
 import { S } from './ImageImportButton.style';
-import { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
-const ImageImportButton = () => {
-  const hiddenFileInput = useRef(null);
+const ImageImportButton = React.forwardRef<HTMLInputElement>((props, ref) => {
   const [isImageSelected, setIsImageSelected] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,13 +14,7 @@ const ImageImportButton = () => {
 
   return (
     <>
-      <S.ImageImportButton
-        type="file"
-        id="upload"
-        hidden
-        ref={hiddenFileInput}
-        onChange={handleChange}
-      />
+      <S.ImageImportButton type="file" id="upload" hidden ref={ref} onChange={handleChange} />
 
       <S.Label htmlFor="upload">
         {isImageSelected && <S.Active>Image</S.Active>}
@@ -29,6 +22,6 @@ const ImageImportButton = () => {
       </S.Label>
     </>
   );
-};
+});
 
 export default ImageImportButton;

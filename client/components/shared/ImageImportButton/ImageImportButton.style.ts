@@ -16,7 +16,7 @@ const Label = styled.label`
   border-radius: ${(props) => props.theme['rounded-sm']};
   font-size: ${(props) => props.theme['font-sm']};
   cursor: pointer;
-  margin-top: 1.875rem;
+  margin-top: 1.25rem;
   padding: 0 1.25rem;
   box-shadow: ${(props) => props.theme['box-shadow']};
   text-shadow: ${(props) => props.theme['text-shadow']};

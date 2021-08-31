@@ -16,15 +16,15 @@ const MarkButton = ({ format, icon }: { format: string; icon: string }) => {
       }}
     >
       {isMarkActive(editor, format) && (
-        <S.IconActive>
+        <S.Active>
           <Image src={icon} />
-        </S.IconActive>
+        </S.Active>
       )}
 
       {!isMarkActive(editor, format) && (
-        <S.IconInActive>
+        <S.Inactive>
           <Image src={icon} />
-        </S.IconInActive>
+        </S.Inactive>
       )}
     </S.Button>
   );

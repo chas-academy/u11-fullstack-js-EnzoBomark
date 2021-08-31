@@ -13,15 +13,16 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const IconInActive = styled.div`
-  opacity: 50%;
-`;
-const IconActive = styled.div`
+const Active = styled.div`
   opacity: 100%;
+`;
+
+const Inactive = styled.div`
+  opacity: 50%;
 `;
 
 export const S = {
   Button,
-  IconInActive,
-  IconActive,
+  Inactive,
+  Active,
 };

@@ -3,6 +3,7 @@ import ImageImportButton from '@/components/shared/ImageImportButton';
 import SaveButton from '@/components/shared/SaveButton';
 import TextInput from '@/components/shared/TextInput';
 import { createRef } from 'react';
+import { POST } from '@/helpers/Rest.helper';
 
 const Topbar = () => {
   const textInputRef = createRef<HTMLInputElement>();
@@ -13,11 +14,11 @@ const Topbar = () => {
 
     const params = {
       title: textInputRef.current.value,
-      image: imageImportButtonRef.current.value,
-      body: localStorage.getItem('article'),
+      image: imageImportButtonRef.current.files[0],
+      body: JSON.parse(localStorage.getItem('article')),
     };
 
-    console.log(params);
+    POST('article', params);
   };
 
   return (

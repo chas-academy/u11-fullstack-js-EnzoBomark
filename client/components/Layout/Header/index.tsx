@@ -1,5 +1,5 @@
 import { S } from './Header.style';
-import NavLink from './NavLink';
+import NavLink from '@/components/shared/links/NavLink';
 
 const Header: React.FC = (props) => {
   return (

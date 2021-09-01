@@ -5,8 +5,7 @@ import { withHistory } from 'slate-history';
 import pipe from 'lodash/fp/pipe';
 import isHotkey from 'is-hotkey';
 
-import Toolbar from './components/Toolbar';
-import Topbar from './components/Topbar';
+import Toolbar from '../../shared/slate/Toolbar';
 
 import Paragraph from './elements/Paragraph';
 import Image from './elements/Image';
@@ -16,10 +15,10 @@ import withImages from './plugins/withImages';
 import withKeyCommands from './plugins/withKeyCommands';
 import withLinks from './plugins/withLinks';
 
-import { createParagraphNode } from './utils/paragraph.utils';
-import { createImageNode } from './utils/image.utils';
-import { createLinkNode } from './utils/link.utils';
-import { toggleMark } from './utils/mark.utils';
+import { createParagraphNode } from '@/utils/slate/paragraph.utils';
+import { createImageNode } from '@/utils/slate/image.utils';
+import { createLinkNode } from '@/utils/slate/link.utils';
+import { toggleMark } from '@/utils/slate/mark.utils';
 
 import { S } from './TextEditor.style';
 import List from './elements/List';
@@ -85,7 +84,6 @@ const TextEditor = () => {
         }}
       >
         <Toolbar />
-        <Topbar />
 
         <S.TextField>
           <Editable

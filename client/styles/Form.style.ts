@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mainTheme } from './Themes';
 
 export const Form = styled.form`
   display: flex;
@@ -30,17 +31,17 @@ export const Input = styled.input`
   height: 3.75rem;
   width: 75%;
   max-width: 25rem;
-  border: ${(props) => props.theme['border-sm']};
-  border-radius: ${(props) => props.theme['rounded-sm']};
-  font-size: ${(props) => props.theme['font-sm']};
+  border: ${mainTheme['border-sm']};
+  border-radius: ${mainTheme['rounded-sm']};
+  font-size: ${mainTheme['font-sm']};
   cursor: text;
   margin-top: 1.875rem;
   padding: 0 1.25rem;
-  box-shadow: ${(props) => props.theme['box-shadow']};
-  text-shadow: ${(props) => props.theme['text-shadow']};
+  box-shadow: ${mainTheme['box-shadow']};
+  text-shadow: ${mainTheme['text-shadow']};
 
   &:hover {
-    border: ${(props) => props.theme['border-hover']};
+    border: ${mainTheme['border-hover']};
   }
 
   &:focus {
@@ -53,7 +54,7 @@ export const Error = styled.span`
   margin-top: 1rem;
   text-align: center;
   width: 70%;
-  text-shadow: ${(props) => props.theme['text-shadow']};
+  text-shadow: ${mainTheme['text-shadow']};
 `;
 
 export const Submit = styled.button`
@@ -64,8 +65,8 @@ export const Submit = styled.button`
   max-width: 20rem;
   margin-top: 6.25rem;
   border: none;
-  border-radius: ${(props) => props.theme['rounded-md']};
-  text-shadow: ${(props) => props.theme['text-shadow']};
-  box-shadow: ${(props) => props.theme['box-shadow']};
+  border-radius: ${mainTheme['rounded-md']};
+  text-shadow: ${mainTheme['text-shadow']};
+  box-shadow: ${mainTheme['box-shadow']};
   cursor: pointer;
 `;

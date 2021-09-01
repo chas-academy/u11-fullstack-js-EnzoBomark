@@ -7,7 +7,7 @@ import multer from 'multer';
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-export const Test = (app: Express) => {
+export const Article = (app: Express) => {
   app.post(
     '/api/article',
     [
@@ -18,22 +18,3 @@ export const Test = (app: Express) => {
     CONT.createArticleHandler
   );
 };
-
-// //Update pos
-// app.put(
-//   '/api/post/:postId',
-//   [MW.requireUser, MW.validateRequest(SCHEMA.updatePostSchema)],
-//   CONT.updatePostHandler
-// );
-
-// //Get Post
-// app.get('/api/post/:postId', CONT.getPostHandler);
-
-// //Delete Post
-// app.delete(
-//   '/api/post/:postId',
-//   [MW.requireUser, MW.validateRequest(SCHEMA.deletePostSchema)],
-//   CONT.deletePostHandler
-// );
-
-// app.post('/api/post/image', upload.single('image'), CONT.createImageHandler);

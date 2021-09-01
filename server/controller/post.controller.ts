@@ -67,15 +67,11 @@ export const deletePostHandler = async (req: Request, res: Response) => {
 import log from '../logger';
 
 export const createImageHandler = async (req: Request, res: Response) => {
-  const image = req.file!;
-
-  if (!image) {
-    return res.sendStatus(404);
-  }
-
-  const uploadInfo = await SERVICE.uploadToS3(image);
-
-  log.info(uploadInfo);
-
-  return res.sendStatus(200);
+  // const image = req.file!;
+  // if (!image) {
+  //   return res.sendStatus(404);
+  // }
+  // const uploadInfo = await SERVICE.uploadToS3(image);
+  // log.info(uploadInfo);
+  // return res.sendStatus(200);
 };

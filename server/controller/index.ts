@@ -5,6 +5,7 @@ import { createUserHandler } from './user.controller';
 import { forgotUserPasswordHandler } from './user.controller';
 import { resetUserPasswordHandler } from './user.controller';
 import { createArticleHandler } from './article.controller';
+import { createSecureS3UrlHandler } from './s3.controller';
 
 // test controller
 import { createPostHandler } from './post.controller';
@@ -21,6 +22,7 @@ export const CONT = {
   forgotUserPasswordHandler,
   resetUserPasswordHandler,
   createArticleHandler,
+  createSecureS3UrlHandler,
   createPostHandler,
   updatePostHandler,
   getPostHandler,

@@ -78,6 +78,7 @@ const TextEditor = () => {
         onChange={(value) => {
           setValue(value);
 
+          console.log(value);
           // Save the value to Redux.
           const content = JSON.stringify(value);
           localStorage.setItem('article', content);

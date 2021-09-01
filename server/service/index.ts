@@ -11,7 +11,7 @@ import { findArticle } from './article.service';
 import { findAndUpdateArticle } from './article.service';
 import { deleteArticle } from './article.service';
 
-import { uploadToS3 } from './s3.service';
+import { generateUploadUrl } from './s3.service';
 
 //test sercice
 import { createPost } from './post.service';
@@ -32,7 +32,7 @@ export const SERVICE = {
   findArticle,
   findAndUpdateArticle,
   deleteArticle,
-  uploadToS3,
+  generateUploadUrl,
   createPost,
   findPost,
   findAndUpdate,

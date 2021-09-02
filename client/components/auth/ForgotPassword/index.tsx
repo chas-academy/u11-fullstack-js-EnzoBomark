@@ -1,38 +1,39 @@
 import { S } from './ForgotPassword.style';
-import { useForm } from 'react-hook-form';
-import { object, string, number, InferType, ref } from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { POST } from '@/utils/rest/http.utils';
-import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { ForgotPasswordSchema, Props } from '@/schemas/ForgorPassword.schema';
+import { FormResponse } from '@/interfaces/FormResponse.interface';
+import { resolver } from '@/utils/form/resolver.utils';
+import { post } from '@/utils/rest/http.utils';
 import Form from '@/components/shared/forms/Form';
-import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
 import Submit from '@/components/shared/buttons/Submit';
-
-const schema = object({
-  email: string().email('Email must be a valid email address').required('Email is required'),
-});
-
-type Props = InferType<typeof schema>;
+import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
 
 const ForgotPasswordForm = () => {
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const router = useRouter();
+
   const {
-    register,
     handleSubmit,
+    register,
     formState: { errors },
-  } = useForm<Props>({
-    resolver: yupResolver(schema),
-  });
+  } = resolver<Props>(ForgotPasswordSchema);
 
-  const formSubmitHandler = async (values: Props) => {
-    const response = await POST('auth/forgot-password', values);
+  const formValues = async (values) => {
+    const response = await post<FormResponse>('auth/forgot-password', values);
 
-    console.log(response);
+    if (!response.ok) {
+      return setError(response.parsedBody.error);
+    }
+
+    return setSuccess(response.parsedBody.success);
   };
 
-  const emailError = errors?.email?.message;
+  const emailError = errors.email?.message;
 
   return (
-    <Form submitHandler={handleSubmit(formSubmitHandler)}>
+    <Form submitHandler={handleSubmit(formValues)} error={error} success={success}>
       <VerifiedInput format="email" error={emailError} register={register('email')} />
       <Submit>Login</Submit>
     </Form>

@@ -14,7 +14,7 @@ export const http = async <T>(request: RequestInfo): Promise<HttpResponse<T>> =>
   return response;
 };
 
-export const GET = async <T>(
+export const get = async <T>(
   path: string,
   args: RequestInit = {
     method: 'GET',
@@ -27,7 +27,7 @@ export const GET = async <T>(
   return await http<T>(new Request(`${API_BASE}${path}`, args));
 };
 
-export const POST = async <T>(
+export const post = async <T>(
   path: string,
   body: any,
   args: RequestInit = {
@@ -42,7 +42,7 @@ export const POST = async <T>(
   return await http<T>(new Request(`${API_BASE}${path}`, args));
 };
 
-export const PUT = async <T>(
+export const put = async <T>(
   path: string,
   body: any,
   args: RequestInit = {
@@ -57,4 +57,4 @@ export const PUT = async <T>(
   return await http<T>(new Request(`${API_BASE}${path}`, args));
 };
 
-export const DELETE = () => {};
+export const destroy = () => {};

@@ -1,4 +1,6 @@
 import { S } from './Register.style';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { object, string, number, InferType, ref } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -15,12 +17,16 @@ const schema = object({
     .required('No password provided.')
     .min(8, 'Password is too short - should be 8 chars minimum.')
     .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
-  passwordConf: string().oneOf([ref('password'), null], 'Passwords must match'),
+  passwordConf: string()
+    .required('Password confirmation is required')
+    .oneOf([ref('password'), null], 'Passwords must match'),
 });
 
 type Props = InferType<typeof schema>;
 
 const RegisterForm = () => {
+  const [error, setError] = useState('');
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -30,22 +36,33 @@ const RegisterForm = () => {
   });
 
   const formSubmitHandler = async (values: Props) => {
-    const response = await POST('auth/register', values);
+    const response = await POST<{ accessToken: string; error: string }>('auth/register', values);
 
-    console.log(response);
+    if (!response.ok) {
+      return setError(response.parsedBody.error);
+    }
+
+    localStorage.setItem('token', response.parsedBody.accessToken);
+    router.push('/');
   };
 
-  const nameError = errors?.name?.message;
-  const emailError = errors?.email?.message;
-  const passwordError = errors?.password?.message;
-  const passwordConfError = errors?.passwordConf?.message;
+  const nameError = errors.name?.message;
+  const emailError = errors.email?.message;
+  const passwordError = errors.password?.message;
+  const passwordConfError = errors.passwordConf?.message;
 
   return (
-    <Form submitHandler={handleSubmit(formSubmitHandler)}>
+    <Form submitHandler={handleSubmit(formSubmitHandler)} error={error}>
       <VerifiedInput format="name" error={nameError} register={register('name')} />
       <VerifiedInput format="email" error={emailError} register={register('email')} />
-      <VerifiedInput format="password" error={passwordError} register={register('password')} />
       <VerifiedInput
+        type="password"
+        format="password"
+        error={passwordError}
+        register={register('password')}
+      />
+      <VerifiedInput
+        type="password"
         format="confirmation"
         error={passwordConfError}
         register={register('passwordConf')}

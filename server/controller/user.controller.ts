@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { omit } from 'lodash';
 import crypto from 'crypto';
 import log from '../logger';
+import config from 'config';
 import { SERVICE } from '../service';
 import { MODEL } from '../model';
 import { UTILS } from '../utils';
@@ -9,10 +10,32 @@ import { UTILS } from '../utils';
 export const createUserHandler = async (req: Request, res: Response) => {
   try {
     const user = await SERVICE.createUser(req.body);
-    return res.send(omit(user.toJSON(), 'password'));
+
+    // Create a sassion
+    const session = await SERVICE.createSession(
+      user._id,
+      req.get('user-agent') || ''
+    );
+
+    // Create access token
+    const accessToken = SERVICE.createAccessToken({
+      user,
+      session,
+    });
+
+    // Create refresh token
+    const refreshToken = UTILS.sign(session, {
+      expiresIn: config.get('REFRESH_TOKEN_TTL'), // 1 year
+    });
+
+    return res.send({
+      accessToken,
+      refreshToken,
+      user: omit(user.toJSON(), 'password'),
+    });
   } catch (error) {
     log.error(error);
-    res.status(409).send(error.message);
+    res.status(409).send({ error: 'Email already exist' });
   }
 };
 

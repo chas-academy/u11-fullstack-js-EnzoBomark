@@ -11,9 +11,6 @@ export const http = async <T>(request: RequestInfo): Promise<HttpResponse<T>> =>
     console.log(error);
   }
 
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
   return response;
 };
 

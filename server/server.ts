@@ -2,7 +2,6 @@ import connectToDataBase from './db/connect';
 import express from 'express';
 import config from 'config';
 import cors from 'cors';
-import log from './logger';
 import { ROUTES } from './routes';
 import { MW } from './middleware';
 

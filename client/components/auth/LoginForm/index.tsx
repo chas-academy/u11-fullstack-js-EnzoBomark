@@ -1,4 +1,6 @@
 import { S } from './Login.style';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { object, string, number, InferType, ref } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -19,6 +21,8 @@ const schema = object({
 type Props = InferType<typeof schema>;
 
 const LoginFrom = () => {
+  const [error, setError] = useState('');
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -28,16 +32,21 @@ const LoginFrom = () => {
   });
 
   const formSubmitHandler = async (values: Props) => {
-    const response = await POST('auth/login', values);
+    const response = await POST<{ accessToken: string; error: string }>('auth/login', values);
 
-    console.log(response.parsedBody);
+    if (!response.ok) {
+      return setError(response.parsedBody.error);
+    }
+
+    localStorage.setItem('user', response.parsedBody.accessToken);
+    router.push('/');
   };
 
   const emailError = errors?.email?.message;
   const passwordError = errors?.password?.message;
 
   return (
-    <Form submitHandler={handleSubmit(formSubmitHandler)}>
+    <Form submitHandler={handleSubmit(formSubmitHandler)} error={error}>
       <VerifiedInput format="email" error={emailError} register={register('email')} />
       <VerifiedInput format="password" error={passwordError} register={register('password')} />
       <S.P>

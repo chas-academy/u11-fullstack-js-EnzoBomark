@@ -12,7 +12,6 @@ import { createPostHandler } from './post.controller';
 import { updatePostHandler } from './post.controller';
 import { getPostHandler } from './post.controller';
 import { deletePostHandler } from './post.controller';
-import { createImageHandler } from './post.controller';
 
 export const CONT = {
   createUserSessionHandler,
@@ -27,5 +26,4 @@ export const CONT = {
   updatePostHandler,
   getPostHandler,
   deletePostHandler,
-  createImageHandler,
 };

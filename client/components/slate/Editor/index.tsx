@@ -25,6 +25,10 @@ import List from './elements/List';
 import Heading from './elements/Heading';
 import Subheading from './elements/Subheading';
 
+import ImageImport from '@/components/shared/buttons/ImageImport';
+import Post from '@/components/shared/buttons/Post';
+import UnverifiedInput from '@/components/shared/inputs/UnverifiedInput';
+
 const createEditorWithPlugins = pipe(
   withReact,
   withHistory,
@@ -84,6 +88,12 @@ const TextEditor = () => {
         }}
       >
         <Toolbar />
+
+        <S.Form>
+          <UnverifiedInput placeholder="Title" />
+          <ImageImport />
+          <Post />
+        </S.Form>
 
         <S.TextField>
           <Editable

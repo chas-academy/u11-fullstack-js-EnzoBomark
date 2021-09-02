@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { POST } from '@/utils/rest/http.utils';
 import Link from 'next/link';
 import Form from '@/components/shared/forms/Form';
-import Input from '@/components/shared/inputs/Input';
+import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
 import Submit from '@/components/shared/buttons/Submit';
 
 const schema = object({
@@ -38,8 +38,12 @@ const ResetPasswordForm = () => {
 
   return (
     <Form submitHandler={handleSubmit(formSubmitHandler)}>
-      <Input format="password" error={passwordError} register={register('password')} />
-      <Input format="confirmation" error={passwordConfError} register={register('passwordConf')} />
+      <VerifiedInput format="password" error={passwordError} register={register('password')} />
+      <VerifiedInput
+        format="confirmation"
+        error={passwordConfError}
+        register={register('passwordConf')}
+      />
       <Submit>Login</Submit>
     </Form>
   );

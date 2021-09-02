@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import { mainTheme } from './Themes';
 
-export const Submit = styled.button`
+export const Button = styled.button`
   background: ${(props) => props.theme['color-dark-gray']};
   color: ${(props) => props.theme['color-white']};
   width: 75%;
   height: 3.75rem;
   max-width: 20rem;
-  margin-top: 6.25rem;
-  border: none;
+  border: ${(props) => props.theme['border-sm']};
   border-radius: ${mainTheme['rounded-md']};
   text-shadow: ${mainTheme['text-shadow']};
   box-shadow: ${mainTheme['box-shadow']};

@@ -12,7 +12,15 @@ const TextField = styled.div`
   padding: 1.875rem;
 `;
 
+const Form = styled.form`
+  margin-top: 1.875rem;
+  display: flex;
+  max-width: 60rem;
+  width: 85%;
+`;
+
 export const S = {
   Editor,
   TextField,
+  Form,
 };

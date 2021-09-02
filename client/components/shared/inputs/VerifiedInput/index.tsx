@@ -1,4 +1,4 @@
-import { S } from './Input.style';
+import { S } from './VerifiedInput.style';
 import React from 'react';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
   register: any;
 }
 
-const Input: React.FC<Props> = (props: Props) => {
+const VerifiedInput: React.FC<Props> = (props: Props) => {
   const id = props.format;
   const placeholder = id.charAt(0).toUpperCase() + id.substring(1);
   const error = props.error;
@@ -22,4 +22,4 @@ const Input: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default Input;
+export default VerifiedInput;

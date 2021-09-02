@@ -12,7 +12,7 @@ export const Label = styled.label`
   width: 0.0625rem;
 `;
 
-export const Input = styled.input<{ error: boolean }>`
+export const Input = styled.input`
   position: relative;
   display: flex;
   background: ${(props) => props.theme['color-dark-gray']};
@@ -20,8 +20,7 @@ export const Input = styled.input<{ error: boolean }>`
   height: 3.75rem;
   width: 75%;
   max-width: 25rem;
-  border: ${(props) => (!props.error ? mainTheme['border-sm'] : mainTheme['border-error'])};
-
+  border: ${mainTheme['border-sm']};
   border-radius: ${mainTheme['rounded-sm']};
   font-size: ${mainTheme['font-sm']};
   cursor: text;

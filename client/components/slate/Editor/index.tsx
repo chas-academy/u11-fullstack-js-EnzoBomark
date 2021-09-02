@@ -46,7 +46,7 @@ const HOTKEYS = {
 const initialValue = [
   {
     type: 'paragraph',
-    children: [{ text: 'Write something!' }],
+    children: [{ text: '' }],
   },
 ];
 
@@ -67,11 +67,44 @@ const Leaf = ({ attributes, children, leaf }) => {
   return <span {...attributes}>{children}</span>;
 };
 
-const TextEditor = () => {
+interface Article {
+  title: string;
+  image: string;
+  body: Descendant[];
+}
+
+const TextEditor: React.FC = () => {
   const editor = useMemo(() => createEditorWithPlugins(createEditor()), []);
   const [value, setValue] = useState<Descendant[]>(initialValue);
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
+
+  const [article, setArticle] = useState<Article>({
+    title: undefined,
+    image: undefined,
+    body: undefined,
+  });
+
+  const addNewArticle = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (article.body === undefined) alert('No body');
+    if (article.title === undefined) alert('No title');
+    if (article.image === undefined) alert('No image');
+
+    const isVerified =
+      article.body !== undefined && article.title !== undefined && article.image !== undefined;
+
+    if (isVerified) {
+      console.log(article);
+
+      // POST Article
+    }
+  };
+
+  const getTitle = (e) => setArticle({ ...article, title: e });
+  const getImageKey = (e) => setArticle({ ...article, image: e });
+  const getBody = (e) => setArticle({ ...article, body: e });
 
   return (
     <S.Editor>
@@ -80,30 +113,27 @@ const TextEditor = () => {
         value={value}
         onChange={(value) => {
           setValue(value);
-
-          console.log(value);
-          // Save the value to Redux.
-          const content = JSON.stringify(value);
-          localStorage.setItem('article', content);
+          getBody(value);
         }}
       >
         <Toolbar />
 
-        <S.Form>
-          <UnverifiedInput placeholder="Title" />
-          <ImageImport />
+        <S.Form onSubmit={addNewArticle}>
+          <UnverifiedInput placeholder="Title" getState={getTitle} />
+          <ImageImport getState={getImageKey} id="image" />
           <Post />
         </S.Form>
 
         <S.TextField>
           <Editable
+            id="body"
             renderElement={renderElement}
             renderLeaf={renderLeaf}
             autoCapitalize="false"
             autoCorrect="false"
             spellCheck="false"
             title="Editor"
-            placeholder="Enter some rich text…"
+            placeholder="Write here..."
             onKeyDown={(event) => {
               for (const hotkey in HOTKEYS) {
                 if (isHotkey(hotkey, event as any)) {

@@ -1,11 +1,7 @@
 import TextEditor from '@/components/slate/Editor';
 
-const Editor = () => {
-  return (
-    <div>
-      <TextEditor />
-    </div>
-  );
+const Editor: React.FC = () => {
+  return <TextEditor />;
 };
 
 export default Editor;

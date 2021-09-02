@@ -2,28 +2,26 @@ import { S } from './ImageImport.style';
 import { s3UploadWithCompression } from '@/utils/rest/s3.utils';
 import { useState } from 'react';
 
-const ImageImport = () => {
-  const [isImageSelected, setIsImageSelected] = useState(false);
+interface Props {
+  id: string;
+  getState: any;
+}
+
+const ImageImport: React.FC<Props> = (props: Props) => {
+  const [isActive, setIsActive] = useState('');
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImage = event.target.files[0];
-    const imageUrl = await s3UploadWithCompression(selectedImage);
-
-    console.log(imageUrl);
-
-    if (selectedImage) {
-      setIsImageSelected(true);
-    }
+    const imageKey = await s3UploadWithCompression(selectedImage);
+    setIsActive(imageKey);
+    props.getState(imageKey);
   };
 
   return (
-    <>
-      <S.ImageImport type="file" id="upload" accept="image/*" hidden onChange={handleChange} />
-
-      <S.Label htmlFor="upload" active={isImageSelected}>
-        Image
-      </S.Label>
-    </>
+    <S.Label htmlFor={props.id} active={isActive}>
+      <S.ImageImport type="file" id={props.id} accept="image/*" hidden onChange={handleChange} />
+      Image
+    </S.Label>
   );
 };
 

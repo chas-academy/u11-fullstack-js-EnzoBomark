@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const ImageImport = styled.input``;
 
-const Label = styled.label<{ active: boolean }>`
+const Label = styled.label<{ active: string }>`
   height: 3.75rem;
   min-width: 3.75rem;
   font-size: ${mainTheme['font-sm']};
@@ -16,7 +16,7 @@ const Label = styled.label<{ active: boolean }>`
   margin: 0 0.625rem;
   border: ${(props) => props.theme['border-sm']};
   cursor: pointer;
-  opacity: ${(props) => (props.active ? '100%' : '50%')};
+  opacity: ${(props) => (props.active.length ? '100%' : '50%')};
   box-shadow: ${mainTheme['box-shadow']};
 `;
 

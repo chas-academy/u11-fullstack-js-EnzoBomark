@@ -1,5 +1,5 @@
 import Compress from 'react-image-file-resizer';
-import { GET } from '@/utils/rest/http.utils';
+import { get } from '@/utils/rest/http.utils';
 
 export const s3UploadWithCompression = async (
   image: File,
@@ -8,7 +8,7 @@ export const s3UploadWithCompression = async (
   format = 'JPEG',
   compression = 85
 ) => {
-  const response = await GET<{ url: string }>('secure/s3');
+  const response = await get<{ url: string }>('secure/s3');
   const secureUrl = response.parsedBody.url;
   const s3ObjectKey = secureUrl.split('?').shift().split('/').pop();
 

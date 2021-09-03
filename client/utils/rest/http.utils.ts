@@ -1,5 +1,6 @@
 import { HttpResponse } from '@/interfaces/HttpResponse.interface';
-const API_BASE = process.env.BASE_URL;
+
+const API_BASE = process.env.BASE_API;
 
 export const http = async <T>(request: RequestInfo): Promise<HttpResponse<T>> => {
   const response: HttpResponse<T> = await fetch(request);

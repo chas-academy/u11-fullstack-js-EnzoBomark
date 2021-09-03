@@ -78,13 +78,13 @@ const TextEditor = () => {
         onChange={(value) => {
           setValue(value);
 
-          // Save the value to Local Storage.
+          // Save the value to Redux.
           const content = JSON.stringify(value);
-          console.log(value);
+          localStorage.setItem('article', content);
         }}
       >
         <Toolbar />
-        {/* <Topbar /> */}
+        <Topbar />
 
         <S.TextField>
           <Editable

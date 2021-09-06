@@ -127,7 +127,7 @@ const TextEditor: React.FC = () => {
 
         <S.Form onSubmit={addNewArticle}>
           <UnverifiedInput placeholder="Title" getState={getTitle} />
-          <ImageImport getState={getImageKey} id="image" />
+          <ImageImport id="image" getState={getImageKey} />
           <Post />
         </S.Form>
 

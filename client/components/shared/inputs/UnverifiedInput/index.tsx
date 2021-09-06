@@ -7,16 +7,11 @@ interface Props {
 }
 
 const UnverifiedInput: React.FC<Props> = (props: Props) => {
-  const [value, setValue] = useState('');
-
   const changeHandler = (event: React.FormEvent<HTMLInputElement>) => {
-    setValue(event.currentTarget.value);
-    props.getState(value);
+    props.getState(event.currentTarget.value);
   };
 
-  return (
-    <S.UnverifiedInput placeholder={props.placeholder} value={value} onChange={changeHandler} />
-  );
+  return <S.UnverifiedInput placeholder={props.placeholder} onChange={changeHandler} />;
 };
 
 export default UnverifiedInput;

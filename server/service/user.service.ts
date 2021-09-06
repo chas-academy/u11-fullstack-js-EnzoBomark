@@ -14,6 +14,10 @@ export const findUser = async (query: FilterQuery<UserDocument>) => {
   return MODEL.User.findOne(query).lean();
 };
 
+export const deleteUser = async (query: FilterQuery<UserDocument>) => {
+  return MODEL.User.deleteOne(query);
+};
+
 export const validatePassword = async ({
   email,
   password,

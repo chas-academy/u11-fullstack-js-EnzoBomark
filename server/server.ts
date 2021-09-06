@@ -17,7 +17,6 @@ app.use(express.urlencoded({ extended: false }));
 
 const server = app.listen(port, () => {
   connectToDataBase();
-  ROUTES.Test(app);
   ROUTES.Auth(app);
   ROUTES.Article(app);
   ROUTES.S3(app);

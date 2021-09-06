@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { omit } from 'lodash';
+import { omit, get } from 'lodash';
 import crypto from 'crypto';
 import log from '../logger';
 import config from 'config';
@@ -17,22 +17,7 @@ export const createUserHandler = async (req: Request, res: Response) => {
       req.get('user-agent') || ''
     );
 
-    // Create access token
-    const accessToken = SERVICE.createAccessToken({
-      user,
-      session,
-    });
-
-    // Create refresh token
-    const refreshToken = UTILS.sign(session, {
-      expiresIn: config.get('REFRESH_TOKEN_TTL'), // 1 year
-    });
-
-    return res.send({
-      accessToken,
-      refreshToken,
-      user: omit(user.toJSON(), 'password'),
-    });
+    return res.send(201);
   } catch (error) {
     log.error(error);
     res.status(409).send({ error: 'Email already exist' });
@@ -123,5 +108,32 @@ export const resetUserPasswordHandler = async (
     });
   } catch (error) {
     next(error);
+  }
+};
+
+export const deleteUserHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = get(req, 'user._id');
+
+    const user = await SERVICE.findUser({ _id: userId });
+
+    if (!user) {
+      return res.sendStatus(404);
+    }
+
+    if (String(user._id) !== String(userId)) {
+      return res.sendStatus(401);
+    }
+
+    await SERVICE.deleteUser({ _id: userId });
+
+    return res.sendStatus(200);
+  } catch (error) {
+    log.error(error);
+    res.status(409).send({ error: error });
   }
 };

@@ -26,7 +26,7 @@ const RegisterForm = () => {
     }
 
     localStorage.setItem('user', JSON.stringify(response.parsedBody));
-    router.push('/');
+    router.push('/login');
   };
 
   const nameError = errors.name?.message;

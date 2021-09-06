@@ -4,14 +4,12 @@ import { getUserSessionHandler } from './session.controller';
 import { createUserHandler } from './user.controller';
 import { forgotUserPasswordHandler } from './user.controller';
 import { resetUserPasswordHandler } from './user.controller';
+import { deleteUserHandler } from './user.controller';
 import { createArticleHandler } from './article.controller';
+import { updateArticleHandler } from './article.controller';
+import { getArticleHandler } from './article.controller';
+import { deleteArticleHandler } from './article.controller';
 import { createSecureS3UrlHandler } from './s3.controller';
-
-// test controller
-import { createPostHandler } from './post.controller';
-import { updatePostHandler } from './post.controller';
-import { getPostHandler } from './post.controller';
-import { deletePostHandler } from './post.controller';
 
 export const CONT = {
   createUserSessionHandler,
@@ -20,10 +18,10 @@ export const CONT = {
   createUserHandler,
   forgotUserPasswordHandler,
   resetUserPasswordHandler,
+  deleteUserHandler,
   createArticleHandler,
+  updateArticleHandler,
+  getArticleHandler,
+  deleteArticleHandler,
   createSecureS3UrlHandler,
-  createPostHandler,
-  updatePostHandler,
-  getPostHandler,
-  deletePostHandler,
 };

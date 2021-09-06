@@ -35,9 +35,5 @@ export const Auth = (app: Express) => {
   );
 
   //Delete user (remove user from the db)
-  // app.delete(
-  //   '/api/auth/delete/:userAccessKey',
-  //   MW.requireUser,
-  //   CONT.deleteUserHanlder
-  // );
+  app.delete('/api/auth/delete', MW.requireUser, CONT.deleteUserHandler);
 };

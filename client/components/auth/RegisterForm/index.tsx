@@ -50,7 +50,7 @@ const RegisterForm = () => {
         error={passwordConfError}
         register={register('passwordConf')}
       />
-      <Submit>Login</Submit>
+      <Submit>Register</Submit>
     </Form>
   );
 };

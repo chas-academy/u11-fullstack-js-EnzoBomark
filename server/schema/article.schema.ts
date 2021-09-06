@@ -1,12 +1,13 @@
-import { object, string, ref } from 'yup';
+import { object, string, array } from 'yup';
 
 const payload = {
   body: object({
     title: string().required('Title is required'),
     image: string().required('Image is required'),
-    body: string()
-      .required('Body is required')
-      .min(10, 'Body is too short - should be 10 chars minimum.'),
+    body: array()
+      .of(object().nullable())
+      .nullable()
+      .required('Body is required'),
   }),
 };
 

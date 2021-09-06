@@ -7,6 +7,8 @@ import isHotkey from 'is-hotkey';
 
 import Toolbar from '../../shared/slate/Toolbar';
 
+import { FormResponse } from '@/interfaces/FormResponse.interface';
+
 import Paragraph from './elements/Paragraph';
 import Image from './elements/Image';
 import Link from './elements/Link';
@@ -19,6 +21,7 @@ import { createParagraphNode } from '@/utils/slate/paragraph.utils';
 import { createImageNode } from '@/utils/slate/image.utils';
 import { createLinkNode } from '@/utils/slate/link.utils';
 import { toggleMark } from '@/utils/slate/mark.utils';
+import { post } from '@/utils/rest/http.utils';
 
 import { S } from './TextEditor.style';
 import List from './elements/List';
@@ -85,7 +88,7 @@ const TextEditor: React.FC = () => {
     body: undefined,
   });
 
-  const addNewArticle = (event: React.FormEvent) => {
+  const addNewArticle = async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (article.body === undefined) alert('No body');
@@ -96,9 +99,13 @@ const TextEditor: React.FC = () => {
       article.body !== undefined && article.title !== undefined && article.image !== undefined;
 
     if (isVerified) {
-      console.log(article);
+      const response = await post<FormResponse>('article', article);
 
-      // POST Article
+      if (!response.ok) {
+        return console.log(response.parsedBody?.error);
+      }
+
+      console.log(response.parsedBody?.success);
     }
   };
 

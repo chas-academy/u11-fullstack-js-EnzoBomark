@@ -29,7 +29,7 @@ export const createUserSessionHandler = async (req: Request, res: Response) => {
     expiresIn: config.get('REFRESH_TOKEN_TTL'), // 1 year
   });
 
-  // Send refresh and access token back
+  // Send refresh and access token back with the user
   return res.send({ accessToken, refreshToken, user });
 };
 

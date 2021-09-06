@@ -36,6 +36,8 @@ export const post = async <T>(
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      authorization: `Bearer ${JSON.parse(localStorage.getItem('user'))?.accessToken || ''}`,
+      'x-refresh': JSON.parse(localStorage.getItem('user'))?.refreshToken || '',
     },
     body: JSON.stringify(body),
   }
@@ -51,6 +53,8 @@ export const put = async <T>(
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      authorization: `Bearer ${JSON.parse(localStorage.getItem('user'))?.accessToken || ''}`,
+      'x-refresh': JSON.parse(localStorage.getItem('user'))?.refreshToken || '',
     },
     body: JSON.stringify(body),
   }

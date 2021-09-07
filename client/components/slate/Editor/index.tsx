@@ -74,6 +74,7 @@ interface Article {
   title: string;
   image: string;
   body: Descendant[];
+  tags: string[];
 }
 
 const TextEditor: React.FC = () => {
@@ -86,11 +87,11 @@ const TextEditor: React.FC = () => {
     title: undefined,
     image: undefined,
     body: undefined,
+    tags: ['Bob', 'Jane', 'Doe'],
   });
 
   const addNewArticle = async (event: React.FormEvent) => {
     event.preventDefault();
-
     if (article.body === undefined) alert('No body');
     if (article.title === undefined) alert('No title');
     if (article.image === undefined) alert('No image');

@@ -3,6 +3,7 @@ import { object, string, array } from 'yup';
 const payload = {
   body: object({
     title: string().required('Title is required'),
+    tags: array().of(string()).required('One tag is required'),
     image: string().required('Image is required'),
     body: array()
       .of(object().nullable())

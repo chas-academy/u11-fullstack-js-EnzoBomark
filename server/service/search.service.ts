@@ -14,7 +14,7 @@ export const queryArticles = (
 
   return MODEL.Article.find().or([
     { title: { $regex: regexQuery } },
-    { image: { $regex: regexQuery } },
+    { tags: { $in: [regexQuery] } },
   ]);
 };
 

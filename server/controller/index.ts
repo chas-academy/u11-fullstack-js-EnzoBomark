@@ -10,6 +10,7 @@ import { updateArticleHandler } from './article.controller';
 import { getArticleHandler } from './article.controller';
 import { deleteArticleHandler } from './article.controller';
 import { createSecureS3UrlHandler } from './s3.controller';
+import { getSearchQueryHandler } from './search.controller';
 
 export const CONT = {
   createUserSessionHandler,
@@ -24,4 +25,5 @@ export const CONT = {
   getArticleHandler,
   deleteArticleHandler,
   createSecureS3UrlHandler,
+  getSearchQueryHandler,
 };

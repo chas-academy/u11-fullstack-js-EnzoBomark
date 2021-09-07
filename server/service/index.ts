@@ -12,6 +12,8 @@ import { findArticle } from './article.service';
 import { findAndUpdateArticle } from './article.service';
 import { deleteArticle } from './article.service';
 import { generateUploadUrl } from './s3.service';
+import { queryArticles } from './search.service';
+import { queryUsers } from './search.service';
 
 export const SERVICE = {
   createSession,
@@ -28,4 +30,6 @@ export const SERVICE = {
   findAndUpdateArticle,
   deleteArticle,
   generateUploadUrl,
+  queryArticles,
+  queryUsers,
 };

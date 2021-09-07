@@ -20,4 +20,5 @@ const server = app.listen(port, () => {
   ROUTES.Auth(app);
   ROUTES.Article(app);
   ROUTES.S3(app);
+  ROUTES.Search(app);
 });

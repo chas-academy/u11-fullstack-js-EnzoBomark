@@ -5,6 +5,9 @@ import { createUserHandler } from './user.controller';
 import { forgotUserPasswordHandler } from './user.controller';
 import { resetUserPasswordHandler } from './user.controller';
 import { deleteUserHandler } from './user.controller';
+import { addSavedArticleHandler } from './user.controller';
+import { getSavedArticlesHandler } from './user.controller';
+import { deleteSavedArticleHandler } from './user.controller';
 import { createArticleHandler } from './article.controller';
 import { updateArticleHandler } from './article.controller';
 import { getArticleHandler } from './article.controller';
@@ -20,6 +23,9 @@ export const CONT = {
   forgotUserPasswordHandler,
   resetUserPasswordHandler,
   deleteUserHandler,
+  addSavedArticleHandler,
+  getSavedArticlesHandler,
+  deleteSavedArticleHandler,
   createArticleHandler,
   updateArticleHandler,
   getArticleHandler,

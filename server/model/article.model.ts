@@ -6,6 +6,7 @@ export interface ArticleDocument extends mongoose.Document {
   user: UserDocument['_id'];
   author: UserDocument['name'];
   title: string;
+  tags: string[];
   image: string;
   body: object;
   createdAt: Date;
@@ -22,6 +23,7 @@ const ArticleSchema = new mongoose.Schema(
     },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     title: { type: String, default: true },
+    tags: { type: [String], default: true },
     image: { type: String, default: true },
     body: { type: Object, default: true },
   },

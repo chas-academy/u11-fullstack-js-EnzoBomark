@@ -137,3 +137,84 @@ export const deleteUserHandler = async (
     res.status(409).send({ error: error });
   }
 };
+
+export const addSavedArticleHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = get(req, 'user._id');
+
+    const user = await SERVICE.findUser({ _id: userId });
+
+    if (!user) {
+      return res.sendStatus(404);
+    }
+
+    if (String(user._id) !== String(userId)) {
+      return res.sendStatus(401);
+    }
+
+    //add logic
+
+    return res.sendStatus(200);
+  } catch (error) {
+    log.error(error);
+    res.status(409).send({ error: error });
+  }
+};
+
+export const getSavedArticlesHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = get(req, 'user._id');
+
+    const user = await SERVICE.findUser({ _id: userId });
+
+    if (!user) {
+      return res.sendStatus(404);
+    }
+
+    if (String(user._id) !== String(userId)) {
+      return res.sendStatus(401);
+    }
+
+    //add logic
+
+    return res.sendStatus(200);
+  } catch (error) {
+    log.error(error);
+    res.status(409).send({ error: error });
+  }
+};
+
+export const deleteSavedArticleHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = get(req, 'user._id');
+
+    const user = await SERVICE.findUser({ _id: userId });
+
+    if (!user) {
+      return res.sendStatus(404);
+    }
+
+    if (String(user._id) !== String(userId)) {
+      return res.sendStatus(401);
+    }
+
+    //add logic
+
+    return res.sendStatus(200);
+  } catch (error) {
+    log.error(error);
+    res.status(409).send({ error: error });
+  }
+};

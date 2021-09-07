@@ -1,3 +1,4 @@
+import mongooseFuzzySearching from 'mongoose-fuzzy-searching';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import config from 'config';
@@ -73,5 +74,7 @@ UserSchema.methods.getResetPasswordToken = function () {
 
   return resetToken;
 };
+
+UserSchema.plugin(mongooseFuzzySearching, { fields: ['name'] });
 
 export const User = mongoose.model<UserDocument>('User', UserSchema);

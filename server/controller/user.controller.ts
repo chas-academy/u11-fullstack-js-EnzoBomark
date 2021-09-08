@@ -17,9 +17,8 @@ export const createUserHandler = async (req: Request, res: Response) => {
       req.get('user-agent') || ''
     );
 
-    return res.send(201);
+    return res.sendStatus(201);
   } catch (error) {
-    log.error(error);
     res.status(409).send({ error: 'Email already exist' });
   }
 };
@@ -45,7 +44,6 @@ export const updateUserHandler = async (req: Request, res: Response) => {
 
     return res.send(updatedUser);
   } catch (error) {
-    log.error(error);
     res.status(409).send({ error: 'Email already exist' });
   }
 };
@@ -159,7 +157,6 @@ export const deleteUserHandler = async (
 
     return res.sendStatus(200);
   } catch (error) {
-    log.error(error);
     res.status(409).send({ error: error });
   }
 };
@@ -186,7 +183,6 @@ export const addSavedArticleHandler = async (
 
     return res.sendStatus(200);
   } catch (error) {
-    log.error(error);
     res.status(409).send({ error: error });
   }
 };
@@ -213,7 +209,6 @@ export const getSavedArticlesHandler = async (
 
     return res.sendStatus(200);
   } catch (error) {
-    log.error(error);
     res.status(409).send({ error: error });
   }
 };
@@ -240,7 +235,6 @@ export const deleteSavedArticleHandler = async (
 
     return res.sendStatus(200);
   } catch (error) {
-    log.error(error);
     res.status(409).send({ error: error });
   }
 };

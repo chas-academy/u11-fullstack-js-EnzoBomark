@@ -11,7 +11,6 @@ export const createArticleHandler = async (req: Request, res: Response) => {
 
     return res.send({ success: article });
   } catch (error) {
-    log.error(error);
     res.status(409).send({ error: error });
   }
 };

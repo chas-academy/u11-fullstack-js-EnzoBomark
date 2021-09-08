@@ -11,7 +11,7 @@ export const createUser = async (input: DocumentDefinition<UserDocument>) => {
   try {
     return await MODEL.User.create(input);
   } catch (error) {
-    throw new Error(error);
+    throw new Error((error as Error).message);
   }
 };
 

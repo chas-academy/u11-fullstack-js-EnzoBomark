@@ -21,7 +21,7 @@ export const updateArticleHandler = async (req: Request, res: Response) => {
   const articleId = get(req, 'params.articleId');
   const update = req.body;
 
-  const article = await SERVICE.findArticle({ articleId });
+  const article = await SERVICE.findArticle({ _id: articleId });
 
   if (!article) {
     return res.sendStatus(404);
@@ -32,7 +32,7 @@ export const updateArticleHandler = async (req: Request, res: Response) => {
   }
 
   const updatedArticle = await SERVICE.findAndUpdateArticle(
-    { articleId },
+    { _id: articleId },
     update,
     {
       new: true,
@@ -44,7 +44,7 @@ export const updateArticleHandler = async (req: Request, res: Response) => {
 
 export const getArticleHandler = async (req: Request, res: Response) => {
   const articleId = get(req, 'params.articleId');
-  const article = await SERVICE.findArticle({ articleId });
+  const article = await SERVICE.findArticle({ _id: articleId });
 
   if (!article) {
     return res.sendStatus(404);
@@ -57,7 +57,7 @@ export const deleteArticleHandler = async (req: Request, res: Response) => {
   const userId = get(req, 'user._id');
   const articleId = get(req, 'params.articleId');
 
-  const article = await SERVICE.findArticle({ articleId });
+  const article = await SERVICE.findArticle({ _id: articleId });
 
   if (!article) {
     return res.sendStatus(404);
@@ -67,7 +67,7 @@ export const deleteArticleHandler = async (req: Request, res: Response) => {
     return res.sendStatus(401);
   }
 
-  await SERVICE.deleteArticle({ articleId });
+  await SERVICE.deleteArticle({ _id: articleId });
 
   return res.sendStatus(200);
 };

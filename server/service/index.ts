@@ -6,6 +6,7 @@ import { findSessions } from './session.service';
 import { createUser } from './user.service';
 import { findUser } from './user.service';
 import { deleteUser } from './user.service';
+import { findAndUpdateUser } from './user.service';
 import { validatePassword } from './user.service';
 import { createArticle } from './article.service';
 import { findArticle } from './article.service';
@@ -14,6 +15,8 @@ import { deleteArticle } from './article.service';
 import { generateUploadUrl } from './s3.service';
 import { queryArticles } from './search.service';
 import { queryUsers } from './search.service';
+import { getArticles } from './admin.service';
+import { getUsers } from './admin.service';
 
 export const SERVICE = {
   createSession,
@@ -24,6 +27,7 @@ export const SERVICE = {
   createUser,
   findUser,
   deleteUser,
+  findAndUpdateUser,
   validatePassword,
   createArticle,
   findArticle,
@@ -32,4 +36,6 @@ export const SERVICE = {
   generateUploadUrl,
   queryArticles,
   queryUsers,
+  getArticles,
+  getUsers,
 };

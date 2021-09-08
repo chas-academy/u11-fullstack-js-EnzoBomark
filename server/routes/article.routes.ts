@@ -11,20 +11,20 @@ export const Article = (app: Express) => {
     CONT.createArticleHandler
   );
 
-  //Update artucle
+  //Update article
   app.put(
     '/api/article/:articleId',
     [MW.requireUser, MW.validateRequest(SCHEMA.createArticleSchema)],
     CONT.updateArticleHandler
   );
 
-  //Get artucle
+  //Get article
   app.get('/api/article/:articleId', CONT.getArticleHandler);
 
-  //Delete artucle
+  //Delete article
   app.delete(
     '/api/article/:articleId',
-    [MW.requireUser, MW.validateRequest(SCHEMA.deleteArticleSchema)],
+    MW.requireUser,
     CONT.deleteArticleHandler
   );
 };

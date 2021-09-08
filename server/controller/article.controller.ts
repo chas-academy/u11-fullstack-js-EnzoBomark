@@ -71,3 +71,13 @@ export const deleteArticleHandler = async (req: Request, res: Response) => {
 
   return res.sendStatus(200);
 };
+
+export const getAllArticlesHandler = async (req: Request, res: Response) => {
+  const article = await SERVICE.getArticles();
+
+  if (!article) {
+    return res.sendStatus(404);
+  }
+
+  return res.send(article);
+};

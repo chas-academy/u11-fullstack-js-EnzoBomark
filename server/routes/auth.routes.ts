@@ -18,6 +18,12 @@ export const Auth = (app: Express) => {
     CONT.createUserSessionHandler
   );
 
+  app.post(
+    '/api/auth/updatecreds',
+    [MW.requireUser, MW.validateRequest(SCHEMA.createUserSchema)],
+    CONT.updateUserHandler
+  );
+
   //Forgot password (send email to user)
   app.post('/api/auth/forgotpassword', CONT.forgotUserPasswordHandler);
 

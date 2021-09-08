@@ -21,7 +21,7 @@ export const Admin = (app: Express) => {
   //Delete user
   app.delete(
     '/api/admin/user/:UserId',
-    MW.requireAdmin,
+    [MW.requireAdmin, MW.validateRequest(SCHEMA.createUserSchema)],
     CONT.adminDeleteUserHandler
   );
 

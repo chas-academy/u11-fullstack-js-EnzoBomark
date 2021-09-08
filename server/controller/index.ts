@@ -2,6 +2,7 @@ import { createUserSessionHandler } from './session.controller';
 import { invalidateUserSessionHandler } from './session.controller';
 import { getUserSessionHandler } from './session.controller';
 import { createUserHandler } from './user.controller';
+import { updateUserHandler } from './user.controller';
 import { forgotUserPasswordHandler } from './user.controller';
 import { resetUserPasswordHandler } from './user.controller';
 import { deleteUserHandler } from './user.controller';
@@ -12,6 +13,7 @@ import { createArticleHandler } from './article.controller';
 import { updateArticleHandler } from './article.controller';
 import { getArticleHandler } from './article.controller';
 import { deleteArticleHandler } from './article.controller';
+import { getAllArticlesHandler } from './article.controller';
 import { createSecureS3UrlHandler } from './s3.controller';
 import { getSearchQueryHandler } from './search.controller';
 import { adminCreateUserHandler } from './admin.controller';
@@ -25,6 +27,7 @@ export const CONT = {
   invalidateUserSessionHandler,
   getUserSessionHandler,
   createUserHandler,
+  updateUserHandler,
   forgotUserPasswordHandler,
   resetUserPasswordHandler,
   deleteUserHandler,
@@ -35,6 +38,7 @@ export const CONT = {
   updateArticleHandler,
   getArticleHandler,
   deleteArticleHandler,
+  getAllArticlesHandler,
   createSecureS3UrlHandler,
   getSearchQueryHandler,
   adminCreateUserHandler,

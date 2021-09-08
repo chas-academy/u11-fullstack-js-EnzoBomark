@@ -28,3 +28,7 @@ export const findAndUpdateArticle = (
 export const deleteArticle = (query: FilterQuery<ArticleDocument>) => {
   return MODEL.Article.deleteOne(query);
 };
+
+export const getArticles = () => {
+  return MODEL.Article.find();
+};

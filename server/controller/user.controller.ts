@@ -24,6 +24,32 @@ export const createUserHandler = async (req: Request, res: Response) => {
   }
 };
 
+export const updateUserHandler = async (req: Request, res: Response) => {
+  try {
+    const userId = get(req, 'user._id');
+    const update = req.body;
+
+    const user = await SERVICE.findUser({ _id: userId });
+
+    if (!user) {
+      return res.sendStatus(404);
+    }
+
+    const updatedUser = await SERVICE.findAndUpdateUser(
+      { _id: userId },
+      update,
+      {
+        new: true,
+      }
+    );
+
+    return res.send(updatedUser);
+  } catch (error) {
+    log.error(error);
+    res.status(409).send({ error: 'Email already exist' });
+  }
+};
+
 export const forgotUserPasswordHandler = async (
   req: Request,
   res: Response,

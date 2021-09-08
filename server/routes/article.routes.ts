@@ -27,4 +27,7 @@ export const Article = (app: Express) => {
     MW.requireUser,
     CONT.deleteArticleHandler
   );
+
+  //Get all articles
+  app.get('/api/articles', CONT.getAllArticlesHandler);
 };

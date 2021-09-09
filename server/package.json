@@ -11,7 +11,7 @@
   },
   "scripts": {
     "server": "nodemon --config nodemon.json server.ts",
-    "test": "set NODE_ENV=development& jest --detectOpenHandles"
+    "test": "set NODE_ENV=development& jest --detectOpenHandles "
   },
   "repository": {
     "type": "git",
@@ -73,6 +73,7 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "jest": "^27.1.1",
+    "mocha": "^9.1.1",
     "nodemon": "^2.0.12",
     "prettier": "^2.3.2",
     "supertest": "^6.1.6",

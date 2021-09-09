@@ -23,6 +23,28 @@ export const createUserHandler = async (req: Request, res: Response) => {
   }
 };
 
+export const getUserHandler = async (req: Request, res: Response) => {
+  try {
+    const userId = get(req, 'user._id');
+
+    const user = await SERVICE.findUser({ _id: userId });
+
+    if (!user) {
+      return res.sendStatus(404);
+    }
+
+    return res.status(200).send({
+      user: omit(user, [
+        'password',
+        'resetPasswordToken',
+        'resetPasswordExpire',
+      ]),
+    });
+  } catch (error) {
+    res.status(404).send({ error: (error as Error).message });
+  }
+};
+
 export const updateUserHandler = async (req: Request, res: Response) => {
   try {
     const userId = get(req, 'user._id');
@@ -34,17 +56,17 @@ export const updateUserHandler = async (req: Request, res: Response) => {
       return res.sendStatus(404);
     }
 
-    const updatedUser = await SERVICE.findAndUpdateUser(
-      { _id: userId },
-      update,
-      {
-        new: true,
-      }
-    );
+    if (!user.name === req.body.name) user.name = req.body.name;
+    if (!user.email === req.body.email) user.email = req.body.email;
+    if (!user.password === req.body.password) user.password = req.body.password;
 
-    return res.send(updatedUser);
+    await user.save();
+
+    return res.status(200).send({
+      success: 'User updated',
+    });
   } catch (error) {
-    res.status(409).send({ error: 'Email already exist' });
+    res.status(404).send({ error: (error as Error).message });
   }
 };
 
@@ -85,7 +107,7 @@ export const forgotUserPasswordHandler = async (
         text: message,
       });
 
-      res.status(200).json({ success: true, data: 'Email sent' });
+      res.status(200).send({ success: 'Email sent' });
     } catch (error) {
       user.resetPasswordToken = undefined;
       user.resetPasswordExpire = undefined;
@@ -95,7 +117,7 @@ export const forgotUserPasswordHandler = async (
       return next(res.status(500).send('Email could not be sent'));
     }
   } catch (error) {
-    return error;
+    return error as Error;
   }
 };
 
@@ -126,9 +148,8 @@ export const resetUserPasswordHandler = async (
 
     await user.save();
 
-    res.status(201).json({
-      success: true,
-      data: 'Password reset succsess',
+    res.status(200).send({
+      success: 'Password reset succsess',
     });
   } catch (error) {
     next(error);

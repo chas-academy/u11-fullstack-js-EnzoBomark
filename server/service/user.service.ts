@@ -16,7 +16,7 @@ export const createUser = async (input: DocumentDefinition<UserDocument>) => {
 };
 
 export const findUser = async (query: FilterQuery<UserDocument>) => {
-  return MODEL.User.findOne(query).lean();
+  return MODEL.User.findOne(query);
 };
 
 export const deleteUser = async (query: FilterQuery<UserDocument>) => {

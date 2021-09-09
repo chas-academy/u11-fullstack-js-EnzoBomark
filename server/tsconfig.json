@@ -7,7 +7,8 @@
     "esModuleInterop": true,
     "declaration": true,
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "types": ["mocha", "jest", "node"]
   },
   "include": ["./**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

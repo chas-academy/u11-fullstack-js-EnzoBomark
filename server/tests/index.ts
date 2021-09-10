@@ -8,9 +8,9 @@ app.use(MW.deserializeUser);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const server = app.listen(5000, () => {
+  ROUTES.S3(app);
   ROUTES.Auth(app);
   ROUTES.Article(app);
-  ROUTES.S3(app);
   ROUTES.Search(app);
   ROUTES.User(app);
 });

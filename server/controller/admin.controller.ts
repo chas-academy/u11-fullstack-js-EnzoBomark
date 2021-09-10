@@ -19,7 +19,6 @@ export const adminCreateUserHandler = async (req: Request, res: Response) => {
 
     return res.send(201);
   } catch (error) {
-    log.error(error);
     res.status(409).send({ error: 'Email already exist' });
   }
 };

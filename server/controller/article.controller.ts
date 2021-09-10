@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { get } from 'lodash';
 import log from '../logger';
+import { updateArticleSchema } from '../schema/article.schema';
 import { SERVICE } from '../service';
 
 export const createArticleHandler = async (req: Request, res: Response) => {
@@ -9,9 +10,8 @@ export const createArticleHandler = async (req: Request, res: Response) => {
   try {
     const article = await SERVICE.createArticle({ ...body, user: userId });
 
-    return res.send({ success: article });
+    return res.status(201).send({ success: get(article, '_id') });
   } catch (error) {
-    log.error(error);
     res.status(409).send({ error: error });
   }
 };
@@ -39,7 +39,7 @@ export const updateArticleHandler = async (req: Request, res: Response) => {
     }
   );
 
-  return res.send(updatedArticle);
+  return res.status(200).send({ success: get(updatedArticle, '_id') });
 };
 
 export const getArticleHandler = async (req: Request, res: Response) => {
@@ -50,7 +50,7 @@ export const getArticleHandler = async (req: Request, res: Response) => {
     return res.sendStatus(404);
   }
 
-  return res.send(article);
+  return res.status(200).send({ success: article });
 };
 
 export const deleteArticleHandler = async (req: Request, res: Response) => {
@@ -69,15 +69,17 @@ export const deleteArticleHandler = async (req: Request, res: Response) => {
 
   await SERVICE.deleteArticle({ _id: articleId });
 
-  return res.sendStatus(200);
+  return res
+    .status(200)
+    .send({ success: `${articleId} was successfully deleted` });
 };
 
 export const getAllArticlesHandler = async (req: Request, res: Response) => {
-  const article = await SERVICE.getArticles();
+  const articles = await SERVICE.getArticles();
 
-  if (!article) {
+  if (!articles) {
     return res.sendStatus(404);
   }
 
-  return res.send(article);
+  return res.status(200).send({ success: articles });
 };

@@ -2,6 +2,7 @@ import { createUserSessionHandler } from './session.controller';
 import { invalidateUserSessionHandler } from './session.controller';
 import { getUserSessionHandler } from './session.controller';
 import { createUserHandler } from './user.controller';
+import { getUserHandler } from './user.controller';
 import { updateUserHandler } from './user.controller';
 import { forgotUserPasswordHandler } from './user.controller';
 import { resetUserPasswordHandler } from './user.controller';
@@ -27,6 +28,7 @@ export const CONT = {
   invalidateUserSessionHandler,
   getUserSessionHandler,
   createUserHandler,
+  getUserHandler,
   updateUserHandler,
   forgotUserPasswordHandler,
   resetUserPasswordHandler,

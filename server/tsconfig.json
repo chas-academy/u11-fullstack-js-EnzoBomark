@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es2015"],
+    "strict": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "types": ["mocha", "jest", "node"]
+  },
+  "include": ["./**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}

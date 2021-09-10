@@ -18,20 +18,28 @@ export const Auth = (app: Express) => {
     CONT.createUserSessionHandler
   );
 
-  app.post(
+  //Forgot password (send email to user)
+  app.post('/api/auth/forgotpassword', CONT.forgotUserPasswordHandler);
+
+  //Get the user session (get user sessions to inform about possible invalid devices)
+  app.get('/api/auth/sessions', MW.requireUser, CONT.getUserSessionHandler);
+
+  //Get the user session (get user sessions to inform about possible invalid devices)
+  app.get('/api/auth/user', MW.requireUser, CONT.getUserHandler);
+
+  //Update user creds
+  app.put(
     '/api/auth/updatecreds',
     [MW.requireUser, MW.validateRequest(SCHEMA.createUserSchema)],
     CONT.updateUserHandler
   );
 
-  //Forgot password (send email to user)
-  app.post('/api/auth/forgotpassword', CONT.forgotUserPasswordHandler);
-
   //Reset password (update password on user)
-  app.put('/api/auth/resetpassword/:resetToken', CONT.resetUserPasswordHandler);
-
-  //Get the user session (get user sessions to inform about possible invalid devices)
-  app.get('/api/auth/sessions', MW.requireUser, CONT.getUserSessionHandler);
+  app.put(
+    '/api/auth/resetpassword/:resetToken',
+    MW.validateRequest(SCHEMA.resetPasswordSchema),
+    CONT.resetUserPasswordHandler
+  );
 
   //Logout (Destroy user session)
   app.delete(

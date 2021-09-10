@@ -78,46 +78,42 @@ export const forgotUserPasswordHandler = async (
   // Send Email to email provided but first check if user exists
   const { email } = req.body;
 
-  try {
-    const user = await MODEL.User.findOne({ email });
+  const user = await MODEL.User.findOne({ email });
 
-    if (!user) {
-      return next(res.status(409).send('Email could not be sent'));
-    }
+  if (!user) {
+    return res.status(409).send('Email could not be sent');
+  }
 
-    // Get a reset token and add a hashed (private) version to the database
-    const resetToken = user.getResetPasswordToken();
+  // Get a reset token and add a hashed (private) version to the database
+  const resetToken = user.getResetPasswordToken();
 
-    await user.save();
+  await user.save();
 
-    // Reset url provided in the reset email
-    const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+  // Reset url provided in the reset email
+  const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
 
-    // HTML message in the mail
-    const message = `
+  // HTML message in the mail
+  const message = `
        <h1> You have requested a password reset</h1>
        <p>Please go to this link to reset your password</p>
        <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
      `;
 
-    try {
-      await UTILS.sendMail({
-        to: user.email,
-        subject: 'Password reset request',
-        text: message,
-      });
+  try {
+    await UTILS.sendMail({
+      to: user.email,
+      subject: 'Password reset request',
+      text: message,
+    });
 
-      res.status(200).send({ success: 'Email sent' });
-    } catch (error) {
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpire = undefined;
-
-      await user.save();
-
-      return next(res.status(500).send('Email could not be sent'));
-    }
+    res.status(200).send({ success: 'Email sent' });
   } catch (error) {
-    return error as Error;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save();
+
+    return next(res.status(500).send('Email could not be sent'));
   }
 };
 
@@ -139,7 +135,7 @@ export const resetUserPasswordHandler = async (
     });
 
     if (!user) {
-      return next(res.status(400).send('Invalid token'));
+      return res.status(400).send('Invalid token');
     }
 
     user.password = req.body.password;

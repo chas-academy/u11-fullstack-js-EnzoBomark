@@ -3,7 +3,7 @@ import { get } from 'lodash';
 import { SERVICE } from '../service';
 
 export const getSearchQueryHandler = async (req: Request, res: Response) => {
-  const query = get(req, 'params.query');
+  const { query } = req.body;
 
   const response = await SERVICE.queryArticles(query);
 

@@ -3,5 +3,5 @@ import { MW } from '../middleware/';
 import { CONT } from '../controller/';
 
 export const Search = (app: Express) => {
-  app.get('/api/search/articles/:query', CONT.getSearchQueryHandler);
+  app.post('/api/search/articles', CONT.getSearchQueryHandler);
 };

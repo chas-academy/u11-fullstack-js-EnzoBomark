@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import config from 'config';
 
-interface EmailDocument {
+export interface EmailDocument {
   from?: string;
   to: string;
   subject: string;

@@ -15,6 +15,7 @@ export interface UserDocument extends mongoose.Document {
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
   getResetPasswordToken(): string;
+  verifyPassword(password: string): boolean;
 }
 
 const UserSchema = new mongoose.Schema(
@@ -72,6 +73,12 @@ UserSchema.methods.getResetPasswordToken = function () {
   user.resetPasswordExpire = Date.now() + 10 * (60 * 1000);
 
   return resetToken;
+};
+
+UserSchema.methods.verifyPassword = function (password) {
+  const user = this as UserDocument;
+
+  return bcrypt.compareSync(password, user.password);
 };
 
 export const User = mongoose.model<UserDocument>('User', UserSchema);

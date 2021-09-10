@@ -21,13 +21,13 @@ export const Article = (app: Express) => {
   //Get article
   app.get('/api/article/:articleId', CONT.getArticleHandler);
 
+  //Get all articles
+  app.get('/api/articles', CONT.getAllArticlesHandler);
+
   //Delete article
   app.delete(
     '/api/article/:articleId',
     MW.requireUser,
     CONT.deleteArticleHandler
   );
-
-  //Get all articles
-  app.get('/api/articles', CONT.getAllArticlesHandler);
 };

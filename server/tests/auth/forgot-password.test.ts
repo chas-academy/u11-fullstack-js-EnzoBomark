@@ -26,7 +26,7 @@ describe('POST /api/auth/forgotpassword', () => {
       });
 
       // Ensures response status
-      expect(res.statusCode).toBe(409);
+      expect(res.statusCode).toBe(400);
     });
   });
 });

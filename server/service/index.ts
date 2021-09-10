@@ -7,7 +7,6 @@ import { createUser } from './user.service';
 import { findUser } from './user.service';
 import { deleteUser } from './user.service';
 import { getUsers } from './user.service';
-import { findAndUpdateUser } from './user.service';
 import { validatePassword } from './user.service';
 import { createArticle } from './article.service';
 import { findArticle } from './article.service';
@@ -27,7 +26,6 @@ export const SERVICE = {
   createUser,
   findUser,
   deleteUser,
-  findAndUpdateUser,
   validatePassword,
   createArticle,
   findArticle,

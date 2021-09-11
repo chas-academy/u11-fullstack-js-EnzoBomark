@@ -3,5 +3,6 @@ import { MW } from '../middleware/';
 import { CONT } from '../controller/';
 
 export const Search = (app: Express) => {
-  app.post('/api/search/articles', CONT.getSearchQueryHandler);
+  //take model, page and limit params
+  app.post('/api/search', CONT.getPaginatedDataHandler);
 };

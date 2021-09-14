@@ -4,12 +4,12 @@ import { mainTheme } from '@/styles/Themes';
 import GlobalStyle from '@/styles/Global.style';
 import Main from '@/components/layout/Main';
 import Head from 'next/head';
+import '@/styles/_font.css';
 
 import { createStore, applyMiddleware, Store } from 'redux';
 import { Provider as ReduxProvider } from 'react-redux';
-import thunk from 'redux-thunk';
-
 import reducer from '@/store/reducer';
+import thunk from 'redux-thunk';
 
 const METADATA = () => {
   return (

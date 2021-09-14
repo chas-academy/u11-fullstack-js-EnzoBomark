@@ -31,6 +31,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <ThemeProvider theme={mainTheme}>
         <METADATA />
         <GlobalStyle />
+        <div id="portal" />
         <Main>
           <Component {...pageProps} />
         </Main>

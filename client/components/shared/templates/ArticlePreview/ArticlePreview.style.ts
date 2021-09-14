@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Explorer = styled.div`
   display: flex;
   cursor: pointer;
-  margin: 1.25rem;
+  margin-top: 1.25rem;
 `;
 
 const Image = styled.img`

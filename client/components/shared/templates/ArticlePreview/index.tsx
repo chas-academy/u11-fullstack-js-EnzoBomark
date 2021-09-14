@@ -1,4 +1,4 @@
-import { S } from './Explorer.style';
+import { S } from './ArticlePreview.style';
 import { getReadTime } from '@/utils/slate/readTime.utils';
 import { useRouter } from 'next/router';
 
@@ -15,7 +15,7 @@ interface Props {
   };
 }
 
-const Explorer = (props: Props) => {
+const ArticlePreview = (props: Props) => {
   const router = useRouter();
 
   const clickHandler = () => {
@@ -43,4 +43,4 @@ const Explorer = (props: Props) => {
   );
 };
 
-export default Explorer;
+export default ArticlePreview;

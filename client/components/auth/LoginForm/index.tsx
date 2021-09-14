@@ -9,8 +9,12 @@ import Link from 'next/link';
 import Form from '@/components/shared/forms/Form';
 import Submit from '@/components/shared/buttons/Submit';
 import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
+import { useSelector, useDispatch } from 'react-redux';
+import { addUser } from '@/store/actionCreator';
+import { Dispatch } from 'redux';
 
 const LoginFrom = () => {
+  const dispatch: Dispatch<any> = useDispatch();
   const [error, setError] = useState('');
   const router = useRouter();
   const {
@@ -26,7 +30,19 @@ const LoginFrom = () => {
       return setError(response.parsedBody.error);
     }
 
-    localStorage.setItem('user', JSON.stringify(response.parsedBody));
+    const { accessToken, refreshToken, name, email, id } = response.parsedBody;
+
+    localStorage.setItem('accessToken', JSON.stringify(accessToken));
+    localStorage.setItem('refreshToken', JSON.stringify(refreshToken));
+
+    const user = {
+      id,
+      name,
+      email,
+    };
+
+    dispatch(addUser(user));
+
     router.push('/');
   };
 

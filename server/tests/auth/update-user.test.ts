@@ -27,7 +27,7 @@ describe('PUT /api/auth/updatecreds', () => {
 
   describe('No token provided', () => {
     it('should respond with a status code of 403', async () => {
-      const res = await await request.put('/api/auth/updatecreds').send({
+      const res = await request.put('/api/auth/updatecreds').send({
         name: 'R2-D2',
         email: 'testing@gmail.com',
         password: 'test123456',

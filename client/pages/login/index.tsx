@@ -2,7 +2,7 @@ import { S } from './Login.style';
 import Link from 'next/link';
 import LoginFrom from '@/components/auth/LoginForm';
 
-const Login = () => {
+const Login: React.FC = () => {
   return (
     <S.Login>
       <S.H1>Log In Now</S.H1>

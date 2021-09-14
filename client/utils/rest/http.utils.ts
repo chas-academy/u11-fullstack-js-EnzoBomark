@@ -23,6 +23,8 @@ export const get = async <T>(
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      authorization: getBearerToken(),
+      'x-refresh': getRefreshToken(),
     },
   }
 ): Promise<HttpResponse<T>> => {

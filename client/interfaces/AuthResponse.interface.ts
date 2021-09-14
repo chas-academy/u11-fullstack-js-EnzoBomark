@@ -1,8 +1,8 @@
 export interface AuthResponse {
   error?: string;
   accessToken?: string;
-  user?: {
-    name: string;
-    email: string;
-  };
+  refreshToken?: string;
+  id?: string;
+  name?: string;
+  email?: string;
 }

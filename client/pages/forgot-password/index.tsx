@@ -1,7 +1,7 @@
 import { S } from './ForgotPassword.style';
 import ForgotPasswordForm from '@/components/auth/ForgotPassword';
 
-const ForgotPassword = () => {
+const ForgotPassword: React.FC = () => {
   return (
     <S.ForgotPassword>
       <S.H1>Forgot Email</S.H1>

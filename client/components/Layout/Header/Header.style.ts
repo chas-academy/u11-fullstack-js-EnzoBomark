@@ -1,11 +1,7 @@
 import styled from 'styled-components';
+import { mainTheme } from '@/styles/Themes';
 
-const Header = styled.header`
-  display: flex;
-  justify-content: center;
-  height: 3.125rem;
-  background-color: ${(props) => props.theme['color-light-gray']};
-`;
+const Header = styled.header``;
 
 export const S = {
   Header,

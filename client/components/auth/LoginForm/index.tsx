@@ -7,7 +7,7 @@ import { resolver } from '@/utils/form/resolver.utils';
 import { post } from '@/utils/rest/http.utils';
 import Link from 'next/link';
 import Form from '@/components/shared/forms/Form';
-import Submit from '@/components/shared/buttons/Submit';
+import Submit from '@/components/shared/buttons/SubmitButton';
 import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
 import { useSelector, useDispatch } from 'react-redux';
 import { addUser } from '@/store/actionCreator';

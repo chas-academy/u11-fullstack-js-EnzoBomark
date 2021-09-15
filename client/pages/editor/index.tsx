@@ -1,7 +1,7 @@
-import TextEditor from '@/components/slate/Editor';
+import ArticeEditor from '@/components/article/ArticeEditor';
 
 const Editor: React.FC = () => {
-  return <TextEditor />;
+  return <ArticeEditor />;
 };
 
 export default Editor;

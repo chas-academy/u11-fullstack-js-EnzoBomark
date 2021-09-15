@@ -6,7 +6,7 @@ import { FormResponse } from '@/interfaces/FormResponse.interface';
 import { resolver } from '@/utils/form/resolver.utils';
 import { post } from '@/utils/rest/http.utils';
 import Form from '@/components/shared/forms/Form';
-import Submit from '@/components/shared/buttons/Submit';
+import Submit from '@/components/shared/buttons/SubmitButton';
 import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
 
 const ForgotPasswordForm = () => {

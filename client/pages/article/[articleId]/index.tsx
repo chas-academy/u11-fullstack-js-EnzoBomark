@@ -1,4 +1,4 @@
-import Reader from '@/components/slate/Reader';
+import ArticleShowcase from '@/components/article/ArticleShowcase';
 
 const initialValue = [
   {
@@ -10,7 +10,7 @@ const initialValue = [
 const Article = () => {
   return (
     <>
-      <Reader initialValue={initialValue} />
+      <ArticleShowcase initialValue={initialValue} />
     </>
   );
 };

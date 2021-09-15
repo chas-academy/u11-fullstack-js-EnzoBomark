@@ -25,4 +25,5 @@ export const RichButton = styled.button`
   margin: 0 0.625rem;
   border: ${(props) => props.theme['border-sm']};
   cursor: pointer;
+  padding: 0.3125rem;
 `;

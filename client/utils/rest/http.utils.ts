@@ -1,5 +1,5 @@
 import { HttpResponse } from '@/interfaces/HttpResponse.interface';
-import { getBearerToken, getRefreshToken } from './token.utils';
+import { getStorage } from '../storage/localStorage.utils';
 
 const API_BASE = process.env.BASE_API;
 
@@ -23,8 +23,8 @@ export const get = async <T>(
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      authorization: getBearerToken(),
-      'x-refresh': getRefreshToken(),
+      authorization: getStorage('accessToken'),
+      'x-refresh': getStorage('refreshToken'),
     },
   }
 ): Promise<HttpResponse<T>> => {
@@ -39,8 +39,8 @@ export const post = async <T>(
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      authorization: getBearerToken(),
-      'x-refresh': getRefreshToken(),
+      authorization: getStorage('accessToken'),
+      'x-refresh': getStorage('refreshToken'),
     },
     body: JSON.stringify(body),
   }
@@ -56,8 +56,8 @@ export const put = async <T>(
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      authorization: getBearerToken(),
-      'x-refresh': getRefreshToken(),
+      authorization: getStorage('accessToken'),
+      'x-refresh': getStorage('refreshToken'),
     },
     body: JSON.stringify(body),
   }

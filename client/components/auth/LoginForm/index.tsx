@@ -12,6 +12,7 @@ import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
 import { useSelector, useDispatch } from 'react-redux';
 import { addUser } from '@/store/actionCreator';
 import { Dispatch } from 'redux';
+import { setStorage } from '@/utils/storage/localStorage.utils';
 
 const LoginFrom = () => {
   const dispatch: Dispatch<any> = useDispatch();
@@ -30,18 +31,12 @@ const LoginFrom = () => {
       return setError(response.parsedBody.error);
     }
 
-    const { accessToken, refreshToken, name, email, id } = response.parsedBody;
+    const user = response.parsedBody;
 
-    localStorage.setItem('accessToken', JSON.stringify(accessToken));
-    localStorage.setItem('refreshToken', JSON.stringify(refreshToken));
+    setStorage('accessToken', user.accessToken);
+    setStorage('refreshToken', user.refreshToken);
 
-    const user = {
-      id,
-      name,
-      email,
-    };
-
-    dispatch(addUser(user));
+    dispatch(addUser({ id: user.id, name: user.name, email: user.email }));
 
     router.push('/');
   };

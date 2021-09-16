@@ -11,6 +11,10 @@ const SidebarBackground = styled.aside<{ isOpen: boolean }>`
   pointer-events: ${(props) => (props.isOpen ? 'all' : 'none')};
   opacity: ${(props) => (props.isOpen ? '40%' : '0')};
   cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const Sidebar = styled.aside<{ isOpen: boolean }>`
@@ -25,6 +29,10 @@ const Sidebar = styled.aside<{ isOpen: boolean }>`
   top: 0;
   left: ${(props) => (props.isOpen ? '30%' : '100%')};
   opacity: ${(props) => (props.isOpen ? '100%' : '0')};
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const SidebarBtn = styled.button`

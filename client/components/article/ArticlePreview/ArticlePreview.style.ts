@@ -16,7 +16,6 @@ const Image = styled.img`
   object-fit: cover;
   border-radius: ${mainTheme['rounded-md']};
   box-shadow: ${mainTheme['box-shadow']};
-  border: ${mainTheme['border-hover']};
 `;
 
 const Text = styled.div`

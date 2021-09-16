@@ -23,7 +23,7 @@ const Nav = styled.div`
   height: 3.125rem;
   z-index: 100;
   width: 100%;
-  padding: 0 1.25rem;
+  padding: 0 3.125rem;
   max-width: 70rem;
 
   @media screen and (max-width: 768px) {

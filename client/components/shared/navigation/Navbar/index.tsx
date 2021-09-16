@@ -26,7 +26,7 @@ const Navbar: React.FC<Props> = (props: Props) => {
 
           {user && (
             <>
-              <NavLink href="/editor">Editer</NavLink>
+              <NavLink href="/editor">Editor</NavLink>
               <NavLink href="/saved">Saved</NavLink>
               <NavLink href="/settings">Settings</NavLink>
             </>

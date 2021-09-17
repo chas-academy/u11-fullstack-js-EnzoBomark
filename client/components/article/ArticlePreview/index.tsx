@@ -6,12 +6,13 @@ interface Props {
   data: {
     _id: string;
     title: string;
-    date: string;
-    about: string;
-    author: string;
     image: string;
     tags: string[];
+    date: string;
     body: any;
+    about: string;
+    author: string;
+    readTime: number;
   };
 }
 
@@ -30,7 +31,7 @@ const ArticlePreview = (props: Props) => {
         <S.Span>
           <S.Data>{props.data.author}</S.Data>
           <S.Data>{props.data.date}</S.Data>
-          <S.Data>{getReadTime(props.data.body)} Min</S.Data>
+          <S.Data>{props.data.readTime} Min</S.Data>
         </S.Span>
         <S.About>{props.data.about}</S.About>
         <S.Span>

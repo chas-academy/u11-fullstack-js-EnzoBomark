@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
+import { CookiesProvider } from 'react-cookie';
 import { mainTheme } from '@/styles/Themes';
 import GlobalStyle from '@/styles/Global.style';
 import Main from '@/components/layout/Main';
@@ -10,6 +11,7 @@ import { createStore, applyMiddleware, Store } from 'redux';
 import { Provider as ReduxProvider } from 'react-redux';
 import reducer from '@/store/reducer';
 import thunk from 'redux-thunk';
+import { get } from '@/utils/rest/http.utils';
 
 const METADATA = () => {
   return (
@@ -27,16 +29,18 @@ const store = createStore(reducer, applyMiddleware(thunk));
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <ReduxProvider store={store}>
-      <ThemeProvider theme={mainTheme}>
-        <METADATA />
-        <GlobalStyle />
-        <div id="portal" />
-        <Main>
-          <Component {...pageProps} />
-        </Main>
-      </ThemeProvider>
-    </ReduxProvider>
+    <CookiesProvider>
+      <ReduxProvider store={store}>
+        <ThemeProvider theme={mainTheme}>
+          <METADATA />
+          <GlobalStyle />
+          <div id="portal" />
+          <Main>
+            <Component {...pageProps} />
+          </Main>
+        </ThemeProvider>
+      </ReduxProvider>
+    </CookiesProvider>
   );
 };
 

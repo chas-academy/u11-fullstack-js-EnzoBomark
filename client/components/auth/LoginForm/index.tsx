@@ -9,13 +9,10 @@ import Link from 'next/link';
 import Form from '@/components/shared/forms/Form';
 import Submit from '@/components/shared/buttons/SubmitButton';
 import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
-import { useSelector, useDispatch } from 'react-redux';
-import { addUser } from '@/store/actionCreator';
-import { Dispatch } from 'redux';
-import { setStorage } from '@/utils/storage/localStorage.utils';
+import { useCookies } from 'react-cookie';
 
 const LoginFrom = () => {
-  const dispatch: Dispatch<any> = useDispatch();
+  const [cookie, setCookie] = useCookies(['accessToken', 'refreshToken']);
   const [error, setError] = useState('');
   const router = useRouter();
   const {
@@ -33,10 +30,14 @@ const LoginFrom = () => {
 
     const user = response.parsedBody;
 
-    setStorage('accessToken', user.accessToken);
-    setStorage('refreshToken', user.refreshToken);
-
-    dispatch(addUser({ id: user.id, name: user.name, email: user.email }));
+    setCookie('accessToken', user.accessToken, {
+      path: '/',
+      sameSite: true,
+    });
+    setCookie('refreshToken', user.refreshToken, {
+      path: '/',
+      sameSite: true,
+    });
 
     router.push('/');
   };

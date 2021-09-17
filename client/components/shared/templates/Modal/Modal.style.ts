@@ -20,19 +20,19 @@ const Modal = styled.div`
   background-color: ${mainTheme['color-dark-gray']};
   border-radius: ${mainTheme['rounded-md']};
   border: ${mainTheme['border-sm']};
-  padding: 1.25rem 1.5rem;
   width: 90%;
   max-width: 30rem;
   min-height: 30rem;
   z-index: 1000;
+  padding: 2.5rem 0 3.75rem 0;
 `;
 
 const CloseModal = styled.div`
-  float: right;
-  padding: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 auto 1.875rem auto;
+  width: 70%;
   font-size: ${mainTheme['font-sm']};
-  background-color: ${mainTheme['color-black']};
-  border-radius: ${mainTheme['rounded-md']};
   cursor: pointer;
 `;
 

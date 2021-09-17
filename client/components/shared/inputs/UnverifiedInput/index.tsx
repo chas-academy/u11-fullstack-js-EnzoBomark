@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 interface Props {
   placeholder: string;
-  getState: any;
+  getState: (e) => void;
 }
 
 const UnverifiedInput: React.FC<Props> = (props: Props) => {

@@ -4,6 +4,7 @@ export const mockArticle = [
     author: 'Jane Doe',
     date: '06/09/2021',
     about: 'This is a test article, lorem ipsum and another lorem to',
+    readTime: 3,
     title: 'Test',
     image: '390dd60a893c565573c051eb3aa88101',
     tags: ['test', 'example'],
@@ -43,6 +44,7 @@ export const mockArticle = [
     author: 'Jane Doe',
     date: '06/09/2021',
     about: 'This is a test article, lorem ipsum and another lorem to',
+    readTime: 2,
     title: 'Test',
     image: '390dd60a893c565573c051eb3aa88101',
     tags: ['test', 'example'],
@@ -83,6 +85,7 @@ export const mockArticle = [
     date: '06/09/2021',
     about:
       'This is a test article, lorem ipsum and another lorem to. This is a test article, lorem ipsum and another lorem to. This is a test article, lorem ipsum and another lorem to. This is a test article, lorem ipsum and another lorem to. This is a test article, lorem ipsum and another lorem to. This is a test article, lorem ipsum and another lorem to',
+    readTime: 7,
     title: 'Test',
     image: '390dd60a893c565573c051eb3aa88101',
     tags: ['test', 'example'],

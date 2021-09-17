@@ -1,5 +1,5 @@
 import { HttpResponse } from '@/interfaces/HttpResponse.interface';
-import { getStorage } from '../storage/localStorage.utils';
+import { getCookie } from '../cookies/cookie.utils';
 
 const API_BASE = process.env.BASE_API;
 
@@ -18,13 +18,14 @@ export const http = async <T>(request: RequestInfo): Promise<HttpResponse<T>> =>
 
 export const get = async <T>(
   path: string,
+  res = null,
   args: RequestInit = {
     method: 'GET',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      authorization: getStorage('accessToken'),
-      'x-refresh': getStorage('refreshToken'),
+      authorization: getCookie('accessToken', res),
+      'x-refresh': getCookie('refreshToken', res),
     },
   }
 ): Promise<HttpResponse<T>> => {
@@ -34,13 +35,14 @@ export const get = async <T>(
 export const post = async <T>(
   path: string,
   body: any,
+  res = null,
   args: RequestInit = {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      authorization: getStorage('accessToken'),
-      'x-refresh': getStorage('refreshToken'),
+      authorization: getCookie('accessToken', res),
+      'x-refresh': getCookie('refreshToken', res),
     },
     body: JSON.stringify(body),
   }
@@ -51,13 +53,14 @@ export const post = async <T>(
 export const put = async <T>(
   path: string,
   body: any,
+  res = null,
   args: RequestInit = {
     method: 'PUT',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      authorization: getStorage('accessToken'),
-      'x-refresh': getStorage('refreshToken'),
+      authorization: getCookie('accessToken', res),
+      'x-refresh': getCookie('refreshToken', res),
     },
     body: JSON.stringify(body),
   }

@@ -18,7 +18,7 @@ export const Input = styled.input`
   background: ${(props) => props.theme['color-dark-gray']};
   color: #ffffff;
   height: 3.75rem;
-  width: 75%;
+  width: 100%;
   max-width: 25rem;
   border: ${mainTheme['border-sm']};
   border-radius: ${mainTheme['rounded-sm']};

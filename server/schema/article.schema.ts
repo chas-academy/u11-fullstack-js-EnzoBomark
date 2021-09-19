@@ -9,6 +9,7 @@ const payload = {
       .of(object().nullable())
       .nullable()
       .required('Body is required'),
+    about: string().required('About is required'),
   }),
 };
 

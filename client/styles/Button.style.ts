@@ -4,9 +4,9 @@ import { mainTheme } from './Themes';
 export const Button = styled.button`
   background: ${(props) => props.theme['color-dark-gray']};
   color: ${(props) => props.theme['color-white']};
-  width: 75%;
+  width: 100%;
   height: 3.75rem;
-  max-width: 20rem;
+  max-width: 25rem;
   border: ${(props) => props.theme['border-sm']};
   border-radius: ${mainTheme['rounded-md']};
   text-shadow: ${mainTheme['text-shadow']};

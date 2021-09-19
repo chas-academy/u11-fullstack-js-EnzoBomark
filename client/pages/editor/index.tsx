@@ -1,6 +1,7 @@
 import ArticeEditor from '@/components/article/ArticeEditor';
+import { NextPage } from 'next';
 
-const Editor: React.FC = () => {
+const Editor: NextPage = () => {
   return <ArticeEditor />;
 };
 

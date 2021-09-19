@@ -1,7 +1,7 @@
 import { S } from './Sidebar.style';
 import { useSelector } from 'react-redux';
 import NavLink from '@/components/shared/links/NavLink';
-import { UserState } from 'slices/user.slice';
+import { RootState } from '@/store/index';
 
 interface Props {
   isOpen: boolean;
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Sidebar: React.FC<Props> = (props: Props) => {
-  const user = useSelector((state: UserState) => state.user);
+  const user = useSelector((state: RootState) => state.user.user);
 
   return (
     <>

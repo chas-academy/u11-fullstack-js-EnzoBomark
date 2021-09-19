@@ -6,7 +6,7 @@ import { UTILS } from '../utils';
 
 export const adminCreateUserHandler = async (req: Request, res: Response) => {
   try {
-    const user = await SERVICE.createUser(req.body);
+    await SERVICE.createUser(req.body);
 
     return res.status(201).send({ success: 'User successfully created' });
   } catch (error) {
@@ -16,7 +16,6 @@ export const adminCreateUserHandler = async (req: Request, res: Response) => {
 
 export const adminUpdateUserHandler = async (req: Request, res: Response) => {
   const userId = get(req, 'params.userId');
-  const update = get(req, 'body');
 
   const user = await SERVICE.findUser({ _id: userId });
 
@@ -40,7 +39,7 @@ export const adminGetUsersHandler = async (req: Request, res: Response) => {
     return res.status(400).send({ error: 'No user found' });
   }
 
-  return res.status(200).send(users);
+  return res.status(200).send({ success: users });
 };
 
 export const adminDeleteUserHandler = async (req: Request, res: Response) => {

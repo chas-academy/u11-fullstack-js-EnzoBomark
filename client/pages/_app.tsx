@@ -1,6 +1,5 @@
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
-import { CookiesProvider } from 'react-cookie';
 import { mainTheme } from '@/styles/Themes';
 import GlobalStyle from '@/styles/Global.style';
 import Main from '@/components/layout/Main';
@@ -23,16 +22,14 @@ const METADATA = () => {
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <CookiesProvider>
-      <ThemeProvider theme={mainTheme}>
-        <METADATA />
-        <GlobalStyle />
-        <div id="portal" />
-        <Main>
-          <Component {...pageProps} />
-        </Main>
-      </ThemeProvider>
-    </CookiesProvider>
+    <ThemeProvider theme={mainTheme}>
+      <METADATA />
+      <GlobalStyle />
+      <div id="portal" />
+      <Main>
+        <Component {...pageProps} />
+      </Main>
+    </ThemeProvider>
   );
 };
 

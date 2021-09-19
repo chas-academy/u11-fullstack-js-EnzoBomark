@@ -1,4 +1,5 @@
 import ArticleShowcase from '@/components/article/ArticleShowcase';
+import { NextPage } from 'next';
 
 const initialValue = [
   {
@@ -7,7 +8,7 @@ const initialValue = [
   },
 ];
 
-const Article = () => {
+const Article: NextPage = () => {
   return (
     <>
       <ArticleShowcase initialValue={initialValue} />

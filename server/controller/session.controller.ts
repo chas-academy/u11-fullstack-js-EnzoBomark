@@ -5,14 +5,15 @@ import { SERVICE } from '../service';
 import { UTILS } from '../utils';
 
 export const createUserSessionHandler = async (req: Request, res: Response) => {
+  const { email, password } = get(req, 'body');
   // Validate the email and password
-  const user = await SERVICE.validatePassword(req.body);
+  const user = await SERVICE.validatePassword({ email, password });
 
   if (!user) {
     return res.status(401).send({ error: 'Invalid username or password' });
   }
 
-  // Create a sassion
+  // Create a session
   const session = await SERVICE.createSession(
     user._id,
     req.get('user-agent') || ''
@@ -30,7 +31,7 @@ export const createUserSessionHandler = async (req: Request, res: Response) => {
   });
 
   // Send refresh and access token back
-  return res.send({ accessToken, refreshToken });
+  return res.status(200).send({ accessToken, refreshToken });
 };
 
 export const invalidateUserSessionHandler = async (
@@ -39,15 +40,18 @@ export const invalidateUserSessionHandler = async (
 ) => {
   const sessionId = get(req, 'user.session');
 
+  // Unvalidate current session
   await SERVICE.updateSession({ _id: sessionId }, { valid: false });
 
-  return res.sendStatus(200);
+  return res.status(200).send({ success: 'Session logged out' });
 };
 
 export const getUserSessionHandler = async (req: Request, res: Response) => {
   const userId = get(req, 'user._id');
 
+  // Get all user sessions
   const sessions = await SERVICE.findSessions({ user: userId, valid: true });
 
-  return res.send({ sessions, userId });
+  // Send sessions and userId back
+  return res.status(200).send({ sessions, userId });
 };

@@ -5,8 +5,9 @@ import { withHistory } from 'slate-history';
 import pipe from 'lodash/fp/pipe';
 import isHotkey from 'is-hotkey';
 
-import Toolbar from './components/Toolbar';
-import Topbar from './components/Topbar';
+import Toolbar from '../../shared/slate/Toolbar';
+
+import { FormResponse } from '@/interfaces/FormResponse.interface';
 
 import Paragraph from './elements/Paragraph';
 import Image from './elements/Image';
@@ -16,15 +17,20 @@ import withImages from './plugins/withImages';
 import withKeyCommands from './plugins/withKeyCommands';
 import withLinks from './plugins/withLinks';
 
-import { createParagraphNode } from './utils/paragraph.utils';
-import { createImageNode } from './utils/image.utils';
-import { createLinkNode } from './utils/link.utils';
-import { toggleMark } from './utils/mark.utils';
+import { createParagraphNode } from '@/utils/slate/paragraph.utils';
+import { createImageNode } from '@/utils/slate/image.utils';
+import { createLinkNode } from '@/utils/slate/link.utils';
+import { toggleMark } from '@/utils/slate/mark.utils';
+import { post } from '@/utils/rest/http.utils';
 
 import { S } from './TextEditor.style';
 import List from './elements/List';
 import Heading from './elements/Heading';
 import Subheading from './elements/Subheading';
+
+import ImageImport from '@/components/shared/buttons/ImageImport';
+import Post from '@/components/shared/buttons/Post';
+import UnverifiedInput from '@/components/shared/inputs/UnverifiedInput';
 
 const createEditorWithPlugins = pipe(
   withReact,
@@ -43,7 +49,7 @@ const HOTKEYS = {
 const initialValue = [
   {
     type: 'paragraph',
-    children: [{ text: 'Write something!' }],
+    children: [{ text: '' }],
   },
 ];
 
@@ -64,11 +70,49 @@ const Leaf = ({ attributes, children, leaf }) => {
   return <span {...attributes}>{children}</span>;
 };
 
-const TextEditor = () => {
+interface Article {
+  title: string;
+  image: string;
+  body: Descendant[];
+  tags: string[];
+}
+
+const TextEditor: React.FC = () => {
   const editor = useMemo(() => createEditorWithPlugins(createEditor()), []);
   const [value, setValue] = useState<Descendant[]>(initialValue);
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
+
+  const [article, setArticle] = useState<Article>({
+    title: undefined,
+    image: undefined,
+    body: undefined,
+    tags: ['Bob', 'Jane', 'Doe'],
+  });
+
+  const addNewArticle = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (article.body === undefined) alert('No body');
+    if (article.title === undefined) alert('No title');
+    if (article.image === undefined) alert('No image');
+
+    const isVerified =
+      article.body !== undefined && article.title !== undefined && article.image !== undefined;
+
+    if (isVerified) {
+      const response = await post<FormResponse>('article', article);
+
+      if (!response.ok) {
+        return console.log(response.parsedBody?.error);
+      }
+
+      console.log(response.parsedBody?.success);
+    }
+  };
+
+  const getTitle = (e) => setArticle({ ...article, title: e });
+  const getImageKey = (e) => setArticle({ ...article, image: e });
+  const getBody = (e) => setArticle({ ...article, body: e });
 
   return (
     <S.Editor>
@@ -77,24 +121,27 @@ const TextEditor = () => {
         value={value}
         onChange={(value) => {
           setValue(value);
-
-          // Save the value to Redux.
-          const content = JSON.stringify(value);
-          localStorage.setItem('article', content);
+          getBody(value);
         }}
       >
         <Toolbar />
-        <Topbar />
+
+        <S.Form onSubmit={addNewArticle}>
+          <UnverifiedInput placeholder="Title" getState={getTitle} />
+          <ImageImport id="image" getState={getImageKey} />
+          <Post />
+        </S.Form>
 
         <S.TextField>
           <Editable
+            id="body"
             renderElement={renderElement}
             renderLeaf={renderLeaf}
             autoCapitalize="false"
             autoCorrect="false"
             spellCheck="false"
             title="Editor"
-            placeholder="Enter some rich text…"
+            placeholder="Write here..."
             onKeyDown={(event) => {
               for (const hotkey in HOTKEYS) {
                 if (isHotkey(hotkey, event as any)) {

@@ -1,7 +1,13 @@
 import { Auth } from './auth.routes';
-import { Test } from './test.routes';
+import { S3 } from './s3.routes';
+import { Article } from './article.routes';
+import { Search } from './search.routes';
+import { User } from './user.routes';
 
 export const ROUTES = {
   Auth,
-  Test,
+  Article,
+  S3,
+  Search,
+  User,
 };

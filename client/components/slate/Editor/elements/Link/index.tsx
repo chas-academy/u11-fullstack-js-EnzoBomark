@@ -1,5 +1,5 @@
 import { useSelected, useFocused, useSlateStatic } from 'slate-react';
-import { removeLink } from '../../utils/link.utils';
+import { removeLink } from '@/utils/slate/link.utils';
 
 const Link = ({ attributes, element, children }) => {
   const editor = useSlateStatic();

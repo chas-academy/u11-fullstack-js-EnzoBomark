@@ -8,12 +8,14 @@ export interface UserDocument extends mongoose.Document {
   email: string;
   name: string;
   password: string;
+  role: string | undefined;
   resetPasswordToken: string | undefined;
   resetPasswordExpire: number | undefined;
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
   getResetPasswordToken(): string;
+  verifyPassword(password: string): boolean;
 }
 
 const UserSchema = new mongoose.Schema(
@@ -21,6 +23,7 @@ const UserSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     password: { type: String, required: true },
+    role: { type: String },
     resetPasswordToken: { type: String },
     resetPasswordExpire: { type: Number },
   },
@@ -70,6 +73,12 @@ UserSchema.methods.getResetPasswordToken = function () {
   user.resetPasswordExpire = Date.now() + 10 * (60 * 1000);
 
   return resetToken;
+};
+
+UserSchema.methods.verifyPassword = function (password) {
+  const user = this as UserDocument;
+
+  return bcrypt.compareSync(password, user.password);
 };
 
 export const User = mongoose.model<UserDocument>('User', UserSchema);

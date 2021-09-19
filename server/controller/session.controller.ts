@@ -9,7 +9,7 @@ export const createUserSessionHandler = async (req: Request, res: Response) => {
   const user = await SERVICE.validatePassword(req.body);
 
   if (!user) {
-    return res.status(401).send('Invalid username or password');
+    return res.status(401).send({ error: 'Invalid username or password' });
   }
 
   // Create a sassion
@@ -30,7 +30,7 @@ export const createUserSessionHandler = async (req: Request, res: Response) => {
   });
 
   // Send refresh and access token back
-  return res.send({ accessToken, refreshToken, user });
+  return res.send({ accessToken, refreshToken });
 };
 
 export const invalidateUserSessionHandler = async (

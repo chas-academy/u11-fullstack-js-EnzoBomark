@@ -5,12 +5,18 @@ import { updateSession } from './session.service';
 import { findSessions } from './session.service';
 import { createUser } from './user.service';
 import { findUser } from './user.service';
+import { deleteUser } from './user.service';
+import { getUsers } from './user.service';
+import { findAndUpdateUser } from './user.service';
 import { validatePassword } from './user.service';
-import { createPost } from './post.service';
-import { findPost } from './post.service';
-import { findAndUpdate } from './post.service';
-import { deletePost } from './post.service';
-import { uploadToS3 } from './s3.service';
+import { createArticle } from './article.service';
+import { findArticle } from './article.service';
+import { findAndUpdateArticle } from './article.service';
+import { deleteArticle } from './article.service';
+import { getArticles } from './article.service';
+import { generateUploadUrl } from './s3.service';
+import { queryArticles } from './search.service';
+import { queryUsers } from './search.service';
 
 export const SERVICE = {
   createSession,
@@ -20,10 +26,16 @@ export const SERVICE = {
   findSessions,
   createUser,
   findUser,
+  deleteUser,
+  findAndUpdateUser,
   validatePassword,
-  createPost,
-  findPost,
-  findAndUpdate,
-  deletePost,
-  uploadToS3,
+  createArticle,
+  findArticle,
+  findAndUpdateArticle,
+  deleteArticle,
+  generateUploadUrl,
+  queryArticles,
+  queryUsers,
+  getArticles,
+  getUsers,
 };

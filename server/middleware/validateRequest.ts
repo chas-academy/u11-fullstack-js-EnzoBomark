@@ -14,7 +14,6 @@ export const validateRequest =
 
       return next();
     } catch (error) {
-      log.error(error);
-      return res.status(400).send(error.errors);
+      return res.status(400).send((error as Error).message);
     }
   };

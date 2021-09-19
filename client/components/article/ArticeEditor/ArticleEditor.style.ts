@@ -19,8 +19,18 @@ const Form = styled.form`
   width: 85%;
 `;
 
+const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 25rem;
+  width: 75%;
+  margin: auto;
+`;
+
 export const S = {
   ArticleEditor,
   TextField,
   Form,
+  ModalContent,
 };

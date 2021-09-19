@@ -17,7 +17,7 @@ describe('GET /api/auth/user', () => {
 
       // Ensures response status
       expect(res.statusCode).toBe(200);
-      expect(res.body.user).toBeDefined();
+      expect(res.body.success).toBeDefined();
     });
   });
 });

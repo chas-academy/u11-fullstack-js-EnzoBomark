@@ -23,14 +23,6 @@ export const deleteUser = async (query: FilterQuery<UserDocument>) => {
   return MODEL.User.deleteOne(query);
 };
 
-export const findAndUpdateUser = (
-  query: FilterQuery<UserDocument>,
-  update: UpdateQuery<UserDocument>,
-  options: QueryOptions
-) => {
-  return MODEL.User.findOneAndUpdate(query, update, options);
-};
-
 export const getUsers = () => {
   return MODEL.User.find();
 };

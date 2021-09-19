@@ -16,7 +16,7 @@ import { getArticleHandler } from './article.controller';
 import { deleteArticleHandler } from './article.controller';
 import { getAllArticlesHandler } from './article.controller';
 import { createSecureS3UrlHandler } from './s3.controller';
-import { getSearchQueryHandler } from './search.controller';
+import { getPaginatedDataHandler } from './search.controller';
 import { adminCreateUserHandler } from './admin.controller';
 import { adminUpdateUserHandler } from './admin.controller';
 import { adminGetUsersHandler } from './admin.controller';
@@ -42,7 +42,7 @@ export const CONT = {
   deleteArticleHandler,
   getAllArticlesHandler,
   createSecureS3UrlHandler,
-  getSearchQueryHandler,
+  getPaginatedDataHandler,
   adminCreateUserHandler,
   adminUpdateUserHandler,
   adminGetUsersHandler,

@@ -7,7 +7,6 @@ import { createUser } from './user.service';
 import { findUser } from './user.service';
 import { deleteUser } from './user.service';
 import { getUsers } from './user.service';
-import { findAndUpdateUser } from './user.service';
 import { validatePassword } from './user.service';
 import { createArticle } from './article.service';
 import { findArticle } from './article.service';
@@ -15,8 +14,7 @@ import { findAndUpdateArticle } from './article.service';
 import { deleteArticle } from './article.service';
 import { getArticles } from './article.service';
 import { generateUploadUrl } from './s3.service';
-import { queryArticles } from './search.service';
-import { queryUsers } from './search.service';
+import { paginate } from './paginate.service';
 
 export const SERVICE = {
   createSession,
@@ -27,15 +25,13 @@ export const SERVICE = {
   createUser,
   findUser,
   deleteUser,
-  findAndUpdateUser,
   validatePassword,
   createArticle,
   findArticle,
   findAndUpdateArticle,
   deleteArticle,
   generateUploadUrl,
-  queryArticles,
-  queryUsers,
+  paginate,
   getArticles,
   getUsers,
 };

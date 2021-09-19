@@ -6,10 +6,7 @@ import Main from '@/components/layout/Main';
 import Head from 'next/head';
 import '@/styles/_font.css';
 
-import { createStore, applyMiddleware, Store } from 'redux';
-import { Provider as ReduxProvider } from 'react-redux';
-import reducer from '@/store/reducer';
-import thunk from 'redux-thunk';
+import { wrapper } from '@/store/index';
 
 const METADATA = () => {
   return (
@@ -23,21 +20,17 @@ const METADATA = () => {
   );
 };
 
-const store = createStore(reducer, applyMiddleware(thunk));
-
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <ReduxProvider store={store}>
-      <ThemeProvider theme={mainTheme}>
-        <METADATA />
-        <GlobalStyle />
-        <div id="portal" />
-        <Main>
-          <Component {...pageProps} />
-        </Main>
-      </ThemeProvider>
-    </ReduxProvider>
+    <ThemeProvider theme={mainTheme}>
+      <METADATA />
+      <GlobalStyle />
+      <div id="portal" />
+      <Main>
+        <Component {...pageProps} />
+      </Main>
+    </ThemeProvider>
   );
 };
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

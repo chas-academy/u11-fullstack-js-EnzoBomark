@@ -1,46 +1,42 @@
 import { S } from './ForgotPassword.style';
-import { useForm } from 'react-hook-form';
-import { object, string, number, InferType, ref } from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { POST } from '@/helpers/Rest.helper';
-
-const schema = object({
-  email: string().email('Email must be a valid email address').required('Email is required'),
-});
-
-const formSubmitHandler = async (values: Props) => {
-  const response = await POST('auth/forgot-password', values);
-
-  console.log(response);
-};
-
-type Props = InferType<typeof schema>;
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { ForgotPasswordSchema, Props } from '@/schemas/ForgorPassword.schema';
+import { FormResponse } from '@/interfaces/FormResponse.interface';
+import { resolver } from '@/utils/form/resolver.utils';
+import { post } from '@/utils/rest/http.utils';
+import Form from '@/components/shared/forms/Form';
+import Submit from '@/components/shared/buttons/SubmitButton';
+import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
 
 const ForgotPasswordForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Props>({
-    resolver: yupResolver(schema),
-  });
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const router = useRouter();
 
-  const emailError = errors?.email?.message;
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = resolver<Props>(ForgotPasswordSchema);
+
+  const formValues = async (values) => {
+    const response = await post<FormResponse>('auth/forgot-password', values);
+
+    if (!response.ok) {
+      return setError(response.parsedBody.error);
+    }
+
+    return setSuccess(response.parsedBody.success);
+  };
+
+  const emailError = errors.email?.message;
 
   return (
-    <>
-      <S.Form onSubmit={handleSubmit(formSubmitHandler)}>
-        <S.Label htmlFor="email">Email</S.Label>
-        <S.Input
-          className={emailError && 'error'}
-          placeholder="Email"
-          id="email"
-          {...register('email')}
-        />
-        {emailError && <S.Error>{emailError}</S.Error>}
-        <S.Submit>Send Email</S.Submit>
-      </S.Form>
-    </>
+    <Form submitHandler={handleSubmit(formValues)} error={error} success={success}>
+      <VerifiedInput format="email" error={emailError} register={register('email')} />
+      <Submit>Login</Submit>
+    </Form>
   );
 };
 

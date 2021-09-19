@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mainTheme } from '@/styles/Themes';
 
 const Register = styled.div`
   display: flex;
@@ -8,26 +9,26 @@ const Register = styled.div`
 
 const H1 = styled.div`
   margin-top: 5rem;
-  font-size: ${(props) => props.theme['font-lg']};
+  font-size: ${mainTheme['font-lg']};
   font-weight: 600;
 `;
 
 const H2 = styled.div`
-  margin-top: 0.5rem;
-  font-size: ${(props) => props.theme['font-sm']};
   color: ${(props) => props.theme['color-dark-white']};
+  margin-top: 0.5rem;
+  font-size: ${mainTheme['font-sm']};
 `;
 
 const P = styled.p`
   color: ${(props) => props.theme['color-dark-white']};
   margin-top: 1rem;
-  font-size: ${(props) => props.theme['font-sm']};
+  font-size: ${mainTheme['font-sm']};
 `;
 
 const A = styled.a`
   color: ${(props) => props.theme['color-white']};
   margin-left: 0.5rem;
-  font-size: ${(props) => props.theme['font-sm']};
+  font-size: ${mainTheme['font-sm']};
   cursor: pointer;
 `;
 

@@ -1,13 +1,15 @@
+import Navbar from '@/components/shared/navigation/Navbar';
+import Sidebar from '@/components/shared/navigation/Sidebar';
+import { useToggle } from '@/hooks/useToggle.hooks';
 import { S } from './Header.style';
-import NavLink from './NavLink';
 
 const Header: React.FC = (props) => {
+  const [isOpen, setIsOpen] = useToggle(false);
+
   return (
     <S.Header>
-      <NavLink href="/">Home</NavLink>
-      <NavLink href="/login">Login</NavLink>
-      <NavLink href="/register">Register</NavLink>
-      <NavLink href="/search">Search</NavLink>
+      <Sidebar isOpen={isOpen} closeSidebar={() => setIsOpen(false)} />
+      <Navbar openSidebar={() => setIsOpen(true)} />
     </S.Header>
   );
 };

@@ -1,4 +1,5 @@
 export default {
+  CLIENT_URL: 'http://localhost:3000',
   PORT: 5000,
   MONGO_URI: 'mongodb://localhost:27017/node_auth',
   SALT_WORK_FACTOR: 10,

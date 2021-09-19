@@ -1,5 +1,11 @@
-const Home: React.FC = (props) => {
+const index = () => {
   return <></>;
 };
 
-export default Home;
+export const getStaticProps = async () => {
+  return {
+    redirect: { destination: '/home' },
+  };
+};
+
+export default index;

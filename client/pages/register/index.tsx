@@ -1,8 +1,9 @@
 import { S } from './Register.style';
 import Link from 'next/link';
 import RegisterForm from '@/components/auth/RegisterForm';
+import { NextPage } from 'next';
 
-const Register = () => {
+const Register: NextPage = () => {
   return (
     <S.Register>
       <S.H1>Sign Up Now</S.H1>

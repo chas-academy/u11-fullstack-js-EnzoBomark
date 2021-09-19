@@ -3,7 +3,8 @@ import { mainTheme } from '@/styles/Themes';
 
 const P = styled.p`
   max-width: 25rem;
-  width: 100%;
+  width: 75%;
+  margin-top: 1.25rem;
 `;
 
 const A = styled.a`

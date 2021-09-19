@@ -1,17 +1,16 @@
 import { S } from './Register.style';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import router from 'next/router';
 import { RegisterSchema, Props } from '@/schemas/Register.schema';
-import { AuthResponse } from '@/interfaces/AuthResponse.interface';
+import { Response } from '@/interfaces/AuthResponse.interface';
 import { resolver } from '@/utils/form/resolver.utils';
 import { post } from '@/utils/rest/http.utils';
 import Form from '@/components/shared/forms/Form';
-import Submit from '@/components/shared/buttons/Submit';
+import Submit from '@/components/shared/buttons/SubmitButton';
 import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
 
 const RegisterForm = () => {
   const [error, setError] = useState('');
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -19,7 +18,7 @@ const RegisterForm = () => {
   } = resolver<Props>(RegisterSchema);
 
   const formValues = async (values: Props) => {
-    const response = await post<AuthResponse>('auth/register', values);
+    const response = await post<Response>('auth/register', values);
 
     if (!response.ok) {
       return setError(response.parsedBody.error);

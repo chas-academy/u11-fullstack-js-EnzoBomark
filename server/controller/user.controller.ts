@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { omit, get } from 'lodash';
 import crypto from 'crypto';
-import log from '../logger';
-import config from 'config';
 import { SERVICE } from '../service';
 import { MODEL } from '../model';
 import { UTILS } from '../utils';
@@ -22,18 +20,17 @@ export const getUserHandler = async (req: Request, res: Response) => {
 
   const user = await SERVICE.findUser({ _id: userId });
 
-  if (!user) {
-    return res.status(400).send({ error: 'No user found' });
-  }
+    if (!user) {
+      return res.status(404).send({ error: 'No user found' });
+    }
 
-  // Send user back without sensitive information
-  return res.status(200).send({
-    success: omit(user, [
-      'password',
-      'resetPasswordToken',
-      'resetPasswordExpire',
-    ]),
-  });
+    return res.status(200).send({
+      success: omit(user, [
+        'password',
+        'resetPasswordToken',
+        'resetPasswordExpire',
+      ]),
+    });
 };
 
 export const updateUserHandler = async (req: Request, res: Response) => {

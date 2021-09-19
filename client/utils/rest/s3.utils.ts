@@ -8,8 +8,8 @@ export const s3UploadWithCompression = async (
   format = 'JPEG',
   compression = 85
 ) => {
-  const response = await get<{ url: string }>('secure/s3');
-  const secureUrl = response.parsedBody.url;
+  const response = await get<{ success: string }>('secure/s3');
+  const secureUrl = response.parsedBody.success;
   const s3ObjectKey = secureUrl.split('?').shift().split('/').pop();
 
   Compress.imageFileResizer(

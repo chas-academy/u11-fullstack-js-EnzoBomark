@@ -1,7 +1,6 @@
 import { app } from '../test-setup';
 import supertest from 'supertest';
 import { getToken } from './getToken.utils';
-import { MODEL } from '../../model';
 const request = supertest(app);
 
 export const getArticle = async () => {

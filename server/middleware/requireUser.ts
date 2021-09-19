@@ -9,7 +9,7 @@ export const requireUser = async (
   const user = get(req, 'user');
 
   if (!user) {
-    return res.sendStatus(403);
+    return res.status(403).send({ error: 'No user found' });
   }
 
   return next();

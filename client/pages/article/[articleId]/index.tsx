@@ -1,4 +1,5 @@
-import Reader from '@/components/slate/Reader';
+import ArticleShowcase from '@/components/article/ArticleShowcase';
+import { NextPage } from 'next';
 
 const initialValue = [
   {
@@ -7,10 +8,10 @@ const initialValue = [
   },
 ];
 
-const Article = () => {
+const Article: NextPage = () => {
   return (
     <>
-      <Reader initialValue={initialValue} />
+      <ArticleShowcase initialValue={initialValue} />
     </>
   );
 };

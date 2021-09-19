@@ -1,18 +1,18 @@
 import { S } from './Login.style';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import router from 'next/router';
 import { LoginSchema, Props } from '@/schemas/Login.schema';
-import { AuthResponse } from '@/interfaces/AuthResponse.interface';
+import { Response } from '@/interfaces/AuthResponse.interface';
 import { resolver } from '@/utils/form/resolver.utils';
 import { post } from '@/utils/rest/http.utils';
 import Link from 'next/link';
 import Form from '@/components/shared/forms/Form';
-import Submit from '@/components/shared/buttons/Submit';
+import Submit from '@/components/shared/buttons/SubmitButton';
 import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
+import { useCookies } from 'react-cookie';
 
 const LoginFrom = () => {
   const [error, setError] = useState('');
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -20,14 +20,15 @@ const LoginFrom = () => {
   } = resolver<Props>(LoginSchema);
 
   const formValues = async (values: Props) => {
-    const response = await post<AuthResponse>('auth/login', values);
+    const response = await post<Response>('auth/login', values);
 
     if (!response.ok) {
       return setError(response.parsedBody.error);
     }
 
-    localStorage.setItem('user', JSON.stringify(response.parsedBody));
-    router.push('/');
+    // const data = response.parsedBody.success;
+
+    router.push('/home');
   };
 
   const emailError = errors.email?.message;

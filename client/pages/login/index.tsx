@@ -1,8 +1,9 @@
 import { S } from './Login.style';
 import Link from 'next/link';
 import LoginFrom from '@/components/auth/LoginForm';
+import { NextPage } from 'next';
 
-const Login = () => {
+const Login: NextPage = () => {
   return (
     <S.Login>
       <S.H1>Log In Now</S.H1>

@@ -2,18 +2,23 @@ import connectToDataBase from './db/connect';
 import express from 'express';
 import config from 'config';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import { ROUTES } from './routes';
 import { MW } from './middleware';
 
 const port = config.get('PORT') as number;
-const origin = { origin: config.get('CLIENT_URL') as string };
+const origin = {
+  origin: config.get('CLIENT_URL') as string,
+  credentials: true,
+};
 
 const app = express();
 
 app.use(cors(origin));
-app.use(MW.deserializeUser);
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(MW.deserializeUser);
 
 const server = app.listen(port, () => {
   connectToDataBase();

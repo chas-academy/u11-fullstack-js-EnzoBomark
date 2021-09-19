@@ -1,7 +1,8 @@
-import TextEditor from '@/components/slate/Editor';
+import ArticeEditor from '@/components/article/ArticeEditor';
+import { NextPage } from 'next';
 
-const Editor: React.FC = () => {
-  return <TextEditor />;
+const Editor: NextPage = () => {
+  return <ArticeEditor />;
 };
 
 export default Editor;

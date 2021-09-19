@@ -1,8 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
-import { omit, get } from 'lodash';
-import crypto from 'crypto';
-import log from '../logger';
-import config from 'config';
+import { Request, Response } from 'express';
+import { get } from 'lodash';
 import { SERVICE } from '../service';
 import { MODEL } from '../model';
 import { UTILS } from '../utils';
@@ -11,13 +8,7 @@ export const adminCreateUserHandler = async (req: Request, res: Response) => {
   try {
     const user = await SERVICE.createUser(req.body);
 
-    // Create a sassion
-    const session = await SERVICE.createSession(
-      user._id,
-      req.get('user-agent') || ''
-    );
-
-    return res.send(201);
+    return res.status(201).send({ success: 'User successfully created' });
   } catch (error) {
     res.status(409).send({ error: 'Email already exist' });
   }
@@ -25,29 +16,31 @@ export const adminCreateUserHandler = async (req: Request, res: Response) => {
 
 export const adminUpdateUserHandler = async (req: Request, res: Response) => {
   const userId = get(req, 'params.userId');
-  const update = req.body;
+  const update = get(req, 'body');
 
   const user = await SERVICE.findUser({ _id: userId });
 
   if (!user) {
-    return res.sendStatus(404);
+    return res.status(400).send({ error: 'No user found' });
   }
 
-  const updatedUser = await SERVICE.findAndUpdateUser({ _id: userId }, update, {
-    new: true,
-  });
+  if (!user.name === req.body.name) user.name = req.body.name;
+  if (!user.email === req.body.email) user.email = req.body.email;
+  if (!user.password === req.body.password) user.password = req.body.password;
 
-  return res.send(updatedUser);
+  await user.save();
+
+  return res.status(200).send({ success: 'User successfully updated' });
 };
 
 export const adminGetUsersHandler = async (req: Request, res: Response) => {
   const users = await SERVICE.getUsers();
 
   if (!users) {
-    return res.sendStatus(404);
+    return res.status(400).send({ error: 'No user found' });
   }
 
-  return res.send(users);
+  return res.status(200).send(users);
 };
 
 export const adminDeleteUserHandler = async (req: Request, res: Response) => {
@@ -56,14 +49,16 @@ export const adminDeleteUserHandler = async (req: Request, res: Response) => {
   const user = await SERVICE.findUser({ _id: userId });
 
   if (!user) {
-    return res.sendStatus(404);
+    return res.status(400).send({ error: 'No user found' });
   }
 
   await SERVICE.deleteUser({ _id: user });
 
-  return res.sendStatus(200);
+  return res
+    .status(200)
+    .send({ success: `${userId} was successfully deleted` });
 };
 
 export const adminEmailUserHandler = async (req: Request, res: Response) => {
-  return res.sendStatus(200);
+  return res.status(200).send({ success: 'Email sent' });
 };

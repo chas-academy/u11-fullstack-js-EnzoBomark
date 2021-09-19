@@ -1,20 +1,21 @@
 import { S } from './Navbar.style';
 import { useSelector } from 'react-redux';
 import NavLink from '@/components/shared/links/NavLink';
+import { UserState } from 'slices/user.slice';
 
 interface Props {
   openSidebar: () => void;
 }
 
 const Navbar: React.FC<Props> = (props: Props) => {
-  const user: User = useSelector((state: UserState) => state.user);
+  const user = useSelector((state: UserState) => state.user);
 
   return (
     <S.Navbar>
       <S.Nav>
         <S.NavBtn onClick={props.openSidebar}>Menu</S.NavBtn>
         <S.NavMenu>
-          <NavLink href="/">Home</NavLink>
+          <NavLink href="/home">Home</NavLink>
           <NavLink href="/search">Search</NavLink>
 
           {!user && (

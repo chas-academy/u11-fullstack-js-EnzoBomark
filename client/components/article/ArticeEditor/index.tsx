@@ -122,10 +122,10 @@ const ArticleEditor: React.FC = () => {
       const response = await post<FormResponse>('article', article);
 
       if (!response.ok) {
-        return console.log(response.parsedBody?.error);
+        // return console.log(response.parsedBody?.error);
       }
 
-      console.log(response.parsedBody?.success);
+      // console.log(response.parsedBody?.success);
     }
   };
 

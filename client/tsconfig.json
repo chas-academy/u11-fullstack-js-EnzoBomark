@@ -25,7 +25,8 @@
       "@/assets/*": ["assets/*"],
       "@/schemas/*": ["schemas/*"],
       "@/store/*": ["store/*"],
-      "@/hooks/*": ["hooks/*"]
+      "@/hooks/*": ["hooks/*"],
+      "@/guards/*": ["guards/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

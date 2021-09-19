@@ -8,12 +8,11 @@ export const deserializeUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  const accessToken = get(req, 'headers.authorization', '').replace(
-    /^Bearer\s/,
-    ''
-  );
+  const refreshToken =
+    get(req, 'cookies.refresh_token') ?? get(req, 'headers.x-refresh');
 
-  const refreshToken = get(req, 'headers.x-refresh');
+  const accessToken =
+    get(req, 'cookies.access_token') ?? get(req, 'headers.authorization');
 
   if (!accessToken) return next();
 

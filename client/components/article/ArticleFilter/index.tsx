@@ -8,7 +8,7 @@ const ArticleFilter: React.FC = () => {
 
   return (
     <S.ArticleFilter>
-      <S.FilterButton onClick={() => setIsOpen()}>Filter</S.FilterButton>
+      <S.FilterButton onClick={() => setIsOpen(true)}>Filter</S.FilterButton>
 
       <Modal open={isOpen} close={() => setIsOpen(false)}>
         <S.FilterContent>

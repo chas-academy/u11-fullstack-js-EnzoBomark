@@ -1,8 +1,4 @@
-export interface AuthResponse {
+export interface Response {
   error?: string;
-  accessToken?: string;
-  refreshToken?: string;
-  id?: string;
-  name?: string;
-  email?: string;
+  success?: any;
 }

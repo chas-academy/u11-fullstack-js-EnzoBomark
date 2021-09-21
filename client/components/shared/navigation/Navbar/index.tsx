@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Navbar: React.FC<Props> = (props: Props) => {
-  const user = useSelector((state: RootState) => state.user);
+  const user = useSelector((state: RootState) => state.user.user);
 
   return (
     <S.Navbar>

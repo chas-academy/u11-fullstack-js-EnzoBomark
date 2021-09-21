@@ -8,13 +8,7 @@ import { useToggle } from '@/hooks/useToggle.hooks';
 import pipe from 'lodash/fp/pipe';
 import isHotkey from 'is-hotkey';
 
-import Toolbar from '../../shared/templates/Toolbar';
-
 import { FormResponse } from '@/interfaces/FormResponse.interface';
-
-import Paragraph from './elements/Paragraph';
-import Image from './elements/Image';
-import Link from './elements/Link';
 
 import withImages from './plugins/withImages';
 import withKeyCommands from './plugins/withKeyCommands';
@@ -27,10 +21,7 @@ import { getReadTime } from '@/utils/slate/readTime.utils';
 import { toggleMark } from '@/utils/slate/mark.utils';
 import { post } from '@/utils/rest/http.utils';
 
-import List from './elements/List';
-import Heading from './elements/Heading';
-import Subheading from './elements/Subheading';
-
+import Toolbar from '@/components/shared/templates/Toolbar';
 import ImageImport from '@/components/shared/buttons/ImageImportButton';
 import Post from '@/components/shared/buttons/PostButton';
 import UnverifiedInput from '@/components/shared/inputs/UnverifiedInput';
@@ -38,6 +29,8 @@ import Modal from '@/components/shared/templates/Modal';
 import SubmitButton from '@/components/shared/buttons/SubmitButton';
 import AboutInput from '@/components/shared/inputs/AboutInput';
 import TagsInput from '@/components/shared/inputs/TagsInput';
+import { Element } from '@/components/shared/misc/Element';
+import { Leaf } from '@/components/shared/misc/Leaf';
 
 const createEditorWithPlugins = pipe(
   withReact,
@@ -59,23 +52,6 @@ const initialValue = [
     children: [{ text: '' }],
   },
 ];
-
-const Element = (props) => {
-  const type = props.element.type;
-  if (type === 'image') return <Image {...props} />;
-  if (type === 'link') return <Link {...props} />;
-  if (type === 'list') return <List {...props} />;
-  if (type === 'heading') return <Heading {...props} />;
-  if (type === 'subheading') return <Subheading {...props} />;
-  return <Paragraph {...props} />;
-};
-
-const Leaf = ({ attributes, children, leaf }) => {
-  if (leaf.bold) children = <strong>{children}</strong>;
-  if (leaf.italic) children = <em>{children}</em>;
-  if (leaf.underline) children = <u>{children}</u>;
-  return <span {...attributes}>{children}</span>;
-};
 
 interface Article {
   title: string;

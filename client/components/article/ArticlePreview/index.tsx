@@ -1,22 +1,8 @@
 import { S } from './ArticlePreview.style';
-import { getReadTime } from '@/utils/slate/readTime.utils';
 import { useRouter } from 'next/router';
+import { IArticle } from '@/interfaces/Article.interface';
 
-interface Props {
-  data: {
-    _id: string;
-    title: string;
-    image: string;
-    tags: string[];
-    date: string;
-    body: any;
-    about: string;
-    author: string;
-    readTime: number;
-  };
-}
-
-const ArticlePreview = (props: Props) => {
+const ArticlePreview: React.FC<{ data: IArticle }> = (props: { data: IArticle }) => {
   const router = useRouter();
 
   const clickHandler = () => {

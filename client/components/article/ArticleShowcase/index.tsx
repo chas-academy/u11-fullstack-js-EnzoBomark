@@ -1,30 +1,16 @@
-import { useState, useMemo } from 'react';
-import { createEditor, Descendant } from 'slate';
-import { Slate, Editable, withReact } from 'slate-react';
-import { withHistory } from 'slate-history';
-import pipe from 'lodash/fp/pipe';
-
-import withImages from '../ArticeEditor/plugins/withImages';
-import withKeyCommands from '../ArticeEditor/plugins/withKeyCommands';
-import withLinks from '../ArticeEditor/plugins/withLinks';
-
 import { S } from './ArticleShowcase.style';
+import { useState, useMemo, useCallback } from 'react';
+import { createEditor, Descendant } from 'slate';
+import { Slate, Editable } from 'slate-react';
+import { Element } from '@/components/shared/misc/Element';
+import { Leaf } from '@/components/shared/misc/Leaf';
+import { IArticle } from '@/interfaces/Article.interface';
 
-const createEditorWithPlugins = pipe(
-  withReact,
-  withHistory,
-  withImages,
-  withLinks,
-  withKeyCommands
-);
-
-interface Props {
-  initialValue: any;
-}
-
-const TextEditor: React.FC<Props> = (props: Props) => {
+const TextEditor: React.FC<{ data: IArticle }> = (props: { data: IArticle }) => {
   const editor = useMemo(() => createEditor(), []);
-  const [value, setValue] = useState<Descendant[]>(props.initialValue);
+  const [value, setValue] = useState<Descendant[]>(props.data.body);
+  const renderElement = useCallback((props) => <Element {...props} />, []);
+  const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
   return (
     <S.ArticleShowcase>
@@ -33,6 +19,8 @@ const TextEditor: React.FC<Props> = (props: Props) => {
           <Editable
             readOnly
             id="body"
+            renderElement={renderElement}
+            renderLeaf={renderLeaf}
             autoCapitalize="false"
             autoCorrect="false"
             spellCheck="false"

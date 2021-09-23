@@ -24,7 +24,6 @@ export const useArticleSearch = (
   }, [query]);
 
   useDidMountEffect(() => {
-    console.log(data);
     setArticles((prevData) => {
       return [...new Set([...prevData, ...data.success.data])];
     });

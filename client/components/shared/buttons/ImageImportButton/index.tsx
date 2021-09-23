@@ -1,5 +1,5 @@
 import { S } from './ImageImportButton.style';
-import { s3UploadWithCompression } from '@/utils/rest/s3.utils';
+import { s3UploadWithCompression } from '@/utils/s3.utils';
 import { useState } from 'react';
 
 interface Props {

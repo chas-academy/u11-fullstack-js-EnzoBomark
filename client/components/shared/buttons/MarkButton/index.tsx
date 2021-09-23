@@ -1,5 +1,5 @@
 import { S } from './MarkButton.style';
-import { toggleMark, isMarkActive } from '@/utils/slate/mark.utils';
+import { toggleMark, isMarkActive } from '@/utils/mark.utils';
 import { useSlate } from 'slate-react';
 import { MouseEvent } from 'react';
 import Image from 'next/image';

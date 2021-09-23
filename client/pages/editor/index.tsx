@@ -1,4 +1,4 @@
-import ArticeEditor from '@/components/article/ArticeEditor';
+import ArticeEditor from '@/components/article/ArticleEditor';
 import { NextPage } from 'next';
 
 const Editor: NextPage = () => {

@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import PageHeader from '@/components/shared/templates/PageHeader';
 import ArticleFilter from '@/components/article/ArticleFilter';
 import ArticlePreview from '@/components/article/ArticlePreview';
+import { IArticle } from '@/interfaces/Article.interface';
 
 const Home: NextPage<{ data: [IArticle] }> = ({ data }) => {
   return (
@@ -20,8 +21,7 @@ const Home: NextPage<{ data: [IArticle] }> = ({ data }) => {
 
 import { auth } from '@/guards/auth.guard';
 import { Response } from '@/interfaces/AuthResponse.interface';
-import { get } from '@/utils/rest/http.utils';
-import { IArticle } from '@/interfaces/Article.interface';
+import { get } from '@/utils/http.utils';
 
 export const getServerSideProps = auth(async (context) => {
   const response = await get<Response>('articles');

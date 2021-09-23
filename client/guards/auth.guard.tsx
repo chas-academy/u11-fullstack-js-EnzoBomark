@@ -1,6 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { Response } from '@/interfaces/AuthResponse.interface';
-import { get } from '@/utils/rest/http.utils';
+import { get } from '@/utils/http.utils';
 import { wrapper } from '../store';
 import { addUser } from 'slices/user.slice';
 

@@ -2,7 +2,7 @@ import ArticleShowcase from '@/components/article/ArticleShowcase';
 import { NextPage } from 'next';
 import { auth } from '@/guards/auth.guard';
 import { Response } from '@/interfaces/AuthResponse.interface';
-import { get } from '@/utils/rest/http.utils';
+import { get } from '@/utils/http.utils';
 import { IArticle } from '@/interfaces/Article.interface';
 
 const Article: NextPage<{ data: IArticle }> = ({ data }) => {

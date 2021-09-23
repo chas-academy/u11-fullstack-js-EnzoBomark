@@ -14,6 +14,15 @@ const TextEditor: React.FC<{ data: IArticle }> = (props: { data: IArticle }) => 
 
   return (
     <S.ArticleShowcase>
+      <S.Title>{props.data.title}</S.Title>
+      <S.Info>
+        <S.P>{props.data.author}</S.P>
+        <S.P>{props.data.date}</S.P>
+        <S.P>{props.data.readTime} min</S.P>
+      </S.Info>
+
+      <S.Image src={`${process.env.BASE_S3}${props.data.image}`} alt="Header Image" />
+
       <Slate editor={editor} value={value} onChange={(value) => setValue(value)}>
         <S.TextField>
           <Editable

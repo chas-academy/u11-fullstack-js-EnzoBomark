@@ -17,9 +17,9 @@ import withLinks from './plugins/withLinks';
 // import { createParagraphNode } from '@/utils/slate/paragraph.utils';
 // import { createImageNode } from '@/utils/slate/image.utils';
 // import { createLinkNode } from '@/utils/slate/link.utils';
-import { getReadTime } from '@/utils/slate/readTime.utils';
-import { toggleMark } from '@/utils/slate/mark.utils';
-import { post } from '@/utils/rest/http.utils';
+import { getReadTime } from '@/utils/readTime.utils';
+import { toggleMark } from '@/utils/mark.utils';
+import { post } from '@/utils/http.utils';
 
 import Toolbar from '@/components/shared/templates/Toolbar';
 import ImageImport from '@/components/shared/buttons/ImageImportButton';

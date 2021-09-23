@@ -1,7 +1,8 @@
 import { S } from './Navbar.style';
-import { useSelector } from 'react-redux';
 import NavLink from '@/components/shared/links/NavLink';
+import { useSelector } from 'react-redux';
 import { RootState } from '@/store/index';
+import { toTitleCase } from '@/utils/toTitleCase.utils';
 
 interface Props {
   openSidebar: () => void;
@@ -29,7 +30,7 @@ const Navbar: React.FC<Props> = (props: Props) => {
             <>
               <NavLink href="/editor">Editor</NavLink>
               <NavLink href="/saved">Saved</NavLink>
-              <NavLink href="/settings">Settings</NavLink>
+              <NavLink href={`/user/${user.id}`}>{toTitleCase(user.name)}</NavLink>
             </>
           )}
         </S.NavMenu>

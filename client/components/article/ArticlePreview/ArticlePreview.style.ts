@@ -2,7 +2,7 @@ import { mainTheme } from '@/styles/Themes';
 import styled from 'styled-components';
 
 const ArticlePreview = styled.div`
-  width: 90%;
+  width: 90vw;
   display: flex;
   cursor: pointer;
   margin-top: 1.25rem;

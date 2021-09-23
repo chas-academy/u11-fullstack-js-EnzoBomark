@@ -1,8 +1,12 @@
 import { Express } from 'express';
 import { MW } from '../middleware/';
 import { CONT } from '../controller/';
+import { SCHEMA } from '../schema';
 
 export const Search = (app: Express) => {
-  //take model, page and limit params
-  app.post('/api/search', CONT.getPaginatedDataHandler);
+  app.post(
+    '/api/search',
+    MW.validateRequest(SCHEMA.searchSchema),
+    CONT.getPaginatedDataHandler
+  );
 };

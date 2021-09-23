@@ -1,5 +1,5 @@
 import { S } from './BlockButton.style';
-import { toggleBlock, isBlockActive } from '@/utils/slate/block.utils';
+import { toggleBlock, isBlockActive } from '@/utils/block.utils';
 import { useSlate } from 'slate-react';
 import { MouseEvent } from 'react';
 import Image from 'next/image';

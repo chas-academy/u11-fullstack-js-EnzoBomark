@@ -3,13 +3,12 @@ import { useState } from 'react';
 import router from 'next/router';
 import { LoginSchema, Props } from '@/schemas/Login.schema';
 import { Response } from '@/interfaces/AuthResponse.interface';
-import { resolver } from '@/utils/form/resolver.utils';
-import { post } from '@/utils/rest/http.utils';
+import { resolver } from '@/utils/resolver.utils';
+import { post } from '@/utils/http.utils';
 import Link from 'next/link';
 import Form from '@/components/shared/forms/Form';
 import Submit from '@/components/shared/buttons/SubmitButton';
 import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
-import { useCookies } from 'react-cookie';
 
 const LoginFrom = () => {
   const [error, setError] = useState('');

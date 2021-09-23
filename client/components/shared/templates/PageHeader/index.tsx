@@ -1,10 +1,10 @@
 import { S } from './PageHeader.style';
+import ArticleFilter from '@/components/article/ArticleFilter';
 import Breakline from '../../misc/Breakline';
 import React from 'react';
 
 interface Props {
   title: string;
-  children?: React.ReactNode;
 }
 
 const PageHeader: React.FC<Props> = (props: Props) => {
@@ -12,7 +12,7 @@ const PageHeader: React.FC<Props> = (props: Props) => {
     <>
       <S.PageHeader>
         <S.Title>{props.title}</S.Title>
-        {props.children}
+        <ArticleFilter />
       </S.PageHeader>
       <Breakline />
     </>

@@ -1,34 +1,30 @@
+import { object } from 'yup/lib/locale';
+
 export const paginate = async (
   model: any,
   page: number,
-  limit: number,
   query: string = ''
 ) => {
+  const limit = 1;
   const startIndex = (page - 1) * limit;
-  const endIndex = page * limit;
   const regexQuery = new RegExp(query, 'i');
 
   const res = await model
     .find()
-    .or([{ title: { $regex: regexQuery } }, { tags: { $in: [regexQuery] } }]);
+    .or([{ title: { $regex: regexQuery } }, { tags: { $in: [regexQuery] } }])
+    .skip(startIndex)
+    .limit(limit);
 
-  const results: { next?: {}; previous?: {}; data?: {} } = {};
+  const objectsFound = await model
+    .find()
+    .or([{ title: { $regex: regexQuery } }, { tags: { $in: [regexQuery] } }])
+    .skip(startIndex)
+    .countDocuments();
 
-  if (endIndex < res.length) {
-    results.next = {
-      page: page + 1,
-      limit: limit,
-    };
-  }
-
-  if (startIndex > 0) {
-    results.previous = {
-      page: page - 1,
-      limit: limit,
-    };
-  }
-
-  results.data = res.slice(startIndex, startIndex + limit);
+  const results = {
+    data: res,
+    objectsFound,
+  };
 
   return results;
 };

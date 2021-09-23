@@ -1,7 +1,6 @@
 import { S } from './Search.style';
 import { NextPage } from 'next';
 import PageHeader from '@/components/shared/templates/PageHeader';
-import ArticleFilter from '@/components/article/ArticleFilter';
 import ArticlePreview from '@/components/article/ArticlePreview';
 import { IPaginatedArticles } from '@/interfaces/Article.interface';
 import { useState, useRef, useCallback } from 'react';
@@ -12,22 +11,21 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [query, setQuery] = useState('');
 
-  const { loading, error, articles, hasMore } = useArticleSearch(query, pageNumber, data);
+  const { isLoading, hasError, articles, hasMore } = useArticleSearch(query, pageNumber, data);
 
   const observer = useRef<IntersectionObserver>();
   const lastArticleElementRef = useCallback(
     (node) => {
-      if (loading) return;
+      if (isLoading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          console.log(true);
           setPageNumber((prevPageNumber) => prevPageNumber + 1);
         }
       });
       if (node) observer.current.observe(node);
     },
-    [loading, hasMore]
+    [isLoading, hasMore]
   );
 
   const handleSearch = (e) => {
@@ -38,10 +36,7 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
   return (
     <S.Search>
       <S.Searchbar placeholder="e.g. Rain gear..." value={query} onChange={handleSearch} />
-
-      <PageHeader title="Search">
-        <ArticleFilter />
-      </PageHeader>
+      <PageHeader title="Search" />
 
       {articles.map((item, index) => {
         if (articles.length === index + 1) {
@@ -59,9 +54,9 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
         }
       })}
 
-      {!articles.length && !loading && <div>No match</div>}
-      {loading && <div>loading...</div>}
-      {error && <div>{error}</div>}
+      {!articles.length && !isLoading && <div>No match</div>}
+      {isLoading && <div>loading...</div>}
+      {hasError && <div>{hasError}</div>}
     </S.Search>
   );
 };

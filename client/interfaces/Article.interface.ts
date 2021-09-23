@@ -11,3 +11,8 @@ export interface IArticle {
   author?: string;
   readTime: number;
 }
+
+export interface IPaginatedArticles {
+  data: IArticle[];
+  objectsFound: number;
+}

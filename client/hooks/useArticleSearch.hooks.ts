@@ -30,5 +30,5 @@ export const useArticleSearch = (
     setHasMore(data.success.objectsFound > 1);
   }, [data]);
 
-  return { isLoading, hasError, articles, hasMore };
+  return { isLoading, hasError, articles };
 };

@@ -1,8 +1,13 @@
 import { S } from './ArticlePreview.style';
 import { useRouter } from 'next/router';
 import { IArticle } from '@/interfaces/Article.interface';
+import React from 'react';
 
-const ArticlePreview: React.FC<{ data: IArticle }> = (props: { data: IArticle }) => {
+interface Props {
+  data: IArticle;
+}
+
+const ArticlePreview = React.forwardRef((props: Props, ref?: any) => {
   const router = useRouter();
 
   const clickHandler = () => {
@@ -10,7 +15,7 @@ const ArticlePreview: React.FC<{ data: IArticle }> = (props: { data: IArticle })
   };
 
   return (
-    <S.ArticlePreview onClick={clickHandler}>
+    <S.ArticlePreview ref={ref} onClick={clickHandler}>
       <S.Image src={`${process.env.BASE_S3}${props.data.image}`} />
       <S.Text>
         <S.Title>{props.data.title}</S.Title>
@@ -28,6 +33,6 @@ const ArticlePreview: React.FC<{ data: IArticle }> = (props: { data: IArticle })
       </S.Text>
     </S.ArticlePreview>
   );
-};
+});
 
 export default ArticlePreview;

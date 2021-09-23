@@ -31,7 +31,7 @@ const Sidebar: React.FC<Props> = (props: Props) => {
             <>
               <NavLink href="/editor">Editor</NavLink>
               <NavLink href="/saved">Saved</NavLink>
-              <NavLink href={`/user/${user.id}`}>{toTitleCase(user.name)}</NavLink>
+              <NavLink href="/user">{toTitleCase(user.name)}</NavLink>
             </>
           )}
         </S.SidebarMenu>

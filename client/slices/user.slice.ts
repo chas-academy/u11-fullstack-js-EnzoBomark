@@ -29,7 +29,7 @@ const userSlice = createSlice({
         user,
       };
     },
-    removeUser: (state) => {
+    removeUser: () => {
       return {
         user: null,
       };

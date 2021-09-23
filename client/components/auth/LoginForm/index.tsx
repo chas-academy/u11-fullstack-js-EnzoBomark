@@ -36,7 +36,12 @@ const LoginFrom = () => {
   return (
     <Form submitHandler={handleSubmit(formValues)} error={error}>
       <VerifiedInput format="email" error={emailError} register={register('email')} />
-      <VerifiedInput format="password" error={passwordError} register={register('password')} />
+      <VerifiedInput
+        type="password"
+        format="password"
+        error={passwordError}
+        register={register('password')}
+      />
       <S.P>
         <Link href="/forgot-password">
           <S.A>Forgot password?</S.A>

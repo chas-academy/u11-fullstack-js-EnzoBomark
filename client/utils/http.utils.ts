@@ -64,4 +64,19 @@ export const put = async <T>(
   return await http<T>(new Request(`${API_BASE}${path}`, args));
 };
 
-export const destroy = () => {};
+export const destroy = async <T>(
+  path: string,
+  body?: any,
+  headers: { [key: string]: string } = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  args: RequestInit = {
+    credentials: 'include',
+    method: 'DELETE',
+    headers: headers,
+    body: JSON.stringify(body),
+  }
+): Promise<HttpResponse<T>> => {
+  return await http<T>(new Request(`${API_BASE}${path}`, args));
+};

@@ -5,7 +5,7 @@ export const paginate = async (
   page: number,
   query: string = ''
 ) => {
-  const limit = 1;
+  const limit = 25;
   const startIndex = (page - 1) * limit;
   const regexQuery = new RegExp(query, 'i');
 

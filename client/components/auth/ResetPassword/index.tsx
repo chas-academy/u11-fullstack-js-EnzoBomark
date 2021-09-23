@@ -35,8 +35,14 @@ const ResetPasswordForm = () => {
 
   return (
     <Form submitHandler={handleSubmit(formValues)} error={error} success={success}>
-      <VerifiedInput format="password" error={passwordError} register={register('password')} />
       <VerifiedInput
+        type="password"
+        format="password"
+        error={passwordError}
+        register={register('password')}
+      />
+      <VerifiedInput
+        type="password"
         format="confirmation"
         error={passwordConfError}
         register={register('passwordConf')}

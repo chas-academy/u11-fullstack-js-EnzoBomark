@@ -22,9 +22,14 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
     setPageNumber(1);
   };
 
+  const error = hasError && <div>{hasError}</div>;
+  const loading = isLoading && <div>Loading...</div>;
+  const noMatch = !articles.length && !isLoading && <div>No match</div>;
+
   return (
     <S.Search>
       <S.Searchbar placeholder="e.g. Rain gear..." value={query} onChange={handleSearch} />
+
       <PageHeader title="Search" />
 
       {articles.map((item, index, { length }) => {
@@ -35,9 +40,9 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
         );
       })}
 
-      {!articles.length && !isLoading && <div>No match</div>}
-      {isLoading && <div>loading...</div>}
-      {hasError && <div>{hasError}</div>}
+      {error}
+      {loading}
+      {noMatch}
     </S.Search>
   );
 };

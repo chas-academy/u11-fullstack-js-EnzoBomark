@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { HttpResponse } from '@/interfaces/HttpResponse.interface';
 import { Response } from '@/interfaces/AuthResponse.interface';
 import { useDebounce } from './useDebounce.hooks';
+import { useDidMountEffect } from './useDidMountEffect.hooks';
 
 export const useAsyncDebounce = <T extends Response>(
   FeatchFn: () => Promise<HttpResponse<T>>,
@@ -12,10 +13,13 @@ export const useAsyncDebounce = <T extends Response>(
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState('');
 
+  useDidMountEffect(() => {
+    setIsLoading(true);
+  }, [...args]);
+
   useDebounce(
     () => {
       const fetchData = async () => {
-        setIsLoading(true);
         setHasError('');
 
         const response: HttpResponse<T> = await FeatchFn();

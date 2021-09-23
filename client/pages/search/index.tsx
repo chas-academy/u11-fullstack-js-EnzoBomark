@@ -71,8 +71,6 @@ export const getServerSideProps = auth(async (context) => {
     model: 'article',
   });
 
-  console.log(response);
-
   if (!response.ok) {
     return { props: { data: 'error' } };
   }

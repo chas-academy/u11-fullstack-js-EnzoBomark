@@ -11,6 +11,10 @@
   },
   "scripts": {
     "server": "nodemon --config nodemon.json server.ts",
+    "install-client": "cd .. && cd client && npm install",
+    "build": "cd .. && cd client && npm run build",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start": "node server.ts",
     "test": "set NODE_ENV=development& jest --detectOpenHandles"
   },
   "repository": {

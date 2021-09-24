@@ -10,6 +10,6 @@
     "sourceMap": true,
     "types": ["mocha", "jest", "node"]
   },
-  "include": ["./**/*"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

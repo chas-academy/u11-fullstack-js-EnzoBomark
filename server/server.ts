@@ -20,6 +20,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(MW.deserializeUser);
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('../client/build'));
+}
+
 const server = app.listen(port, () => {
   connectToDataBase();
   ROUTES.Auth(app);

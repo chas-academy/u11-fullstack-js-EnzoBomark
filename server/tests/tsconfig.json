@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "types": ["mocha", "jest", "node"]
-  },
-  "include": ["**/*.ts"],
-  "exclude": ["tests/**/*.test.ts"]
-}

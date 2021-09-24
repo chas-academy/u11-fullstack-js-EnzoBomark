@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "skipLibCheck": true,
     "target": "es5",
     "module": "commonjs",
     "lib": ["es2015"],
@@ -11,5 +12,5 @@
     "types": ["mocha", "jest", "node"]
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts", "tests", "tests/**/*.test.ts"]
+  "exclude": ["node_modules", "**/*.spec.ts", "tests/**/*.test.ts"]
 }

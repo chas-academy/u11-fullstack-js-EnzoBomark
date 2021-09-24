@@ -2,32 +2,33 @@ import connectToDataBase from './db/connect';
 import express from 'express';
 import config from 'config';
 import cors from 'cors';
-import log from './logger';
-import routes from './routes';
+import cookieParser from 'cookie-parser';
+import { ROUTES } from './routes';
 import { MW } from './middleware';
+
+const port = config.get('PORT') as number;
+const origin = {
+  origin: config.get('CLIENT_URL') as string,
+  credentials: true,
+};
 
 const app = express();
 
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-  })
-);
-
+app.use(cors(origin));
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(MW.deserializeUser);
 
-app.use(express.static('./uploads'));
-
-app.use(express.json());
-
-app.use(express.urlencoded({ extended: false }));
-
-const port = config.get('PORT') as number;
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('../client/build'));
+}
 
 const server = app.listen(port, () => {
-  log.info(`Server Running On Port ${port}`);
-
   connectToDataBase();
-
-  routes(app);
+  ROUTES.Auth(app);
+  ROUTES.Article(app);
+  ROUTES.S3(app);
+  ROUTES.Search(app);
+  ROUTES.User(app);
 });

@@ -1,7 +1,8 @@
 import { S } from './ForgotPassword.style';
 import ForgotPasswordForm from '@/components/auth/ForgotPassword';
+import { NextPage } from 'next';
 
-const ForgotPassword = () => {
+const ForgotPassword: NextPage = () => {
   return (
     <S.ForgotPassword>
       <S.H1>Forgot Email</S.H1>

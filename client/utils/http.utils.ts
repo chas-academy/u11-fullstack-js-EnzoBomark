@@ -1,5 +1,7 @@
 import { HttpResponse } from '@/interfaces/HttpResponse.interface';
 
+const API_BASE = process.env.BASE_API;
+
 export const http = async <T>(request: RequestInfo): Promise<HttpResponse<T>> => {
   const response: HttpResponse<T> = await fetch(request);
 
@@ -10,8 +12,71 @@ export const http = async <T>(request: RequestInfo): Promise<HttpResponse<T>> =>
     console.log(error);
   }
 
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
   return response;
+};
+
+export const get = async <T>(
+  path: string,
+  headers: { [key: string]: string } = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  args: RequestInit = {
+    method: 'GET',
+    credentials: 'include',
+    headers: headers,
+  }
+): Promise<HttpResponse<T>> => {
+  return await http<T>(new Request(`${API_BASE}${path}`, args));
+};
+
+export const post = async <T>(
+  path: string,
+  body: any,
+  headers: { [key: string]: string } = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  args: RequestInit = {
+    credentials: 'include',
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(body),
+  }
+): Promise<HttpResponse<T>> => {
+  return await http<T>(new Request(`${API_BASE}${path}`, args));
+};
+
+export const put = async <T>(
+  path: string,
+  body: any,
+  headers: { [key: string]: string } = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  args: RequestInit = {
+    credentials: 'include',
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify(body),
+  }
+): Promise<HttpResponse<T>> => {
+  return await http<T>(new Request(`${API_BASE}${path}`, args));
+};
+
+export const destroy = async <T>(
+  path: string,
+  body?: any,
+  headers: { [key: string]: string } = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  args: RequestInit = {
+    credentials: 'include',
+    method: 'DELETE',
+    headers: headers,
+    body: JSON.stringify(body),
+  }
+): Promise<HttpResponse<T>> => {
+  return await http<T>(new Request(`${API_BASE}${path}`, args));
 };

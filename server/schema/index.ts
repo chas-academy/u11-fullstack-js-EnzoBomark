@@ -1,13 +1,17 @@
 import { createUserSchema } from './user.schema';
 import { createUserSessionSchema } from './user.schema';
-import { createPostSchema } from './post.schema';
-import { updatePostSchema } from './post.schema';
-import { deletePostSchema } from './post.schema';
+import { resetPasswordSchema } from './user.schema';
+import { createArticleSchema } from './article.schema';
+import { updateArticleSchema } from './article.schema';
+import { deleteArticleSchema } from './article.schema';
+import { searchSchema } from './search.schema';
 
 export const SCHEMA = {
   createUserSchema,
   createUserSessionSchema,
-  createPostSchema,
-  updatePostSchema,
-  deletePostSchema,
+  resetPasswordSchema,
+  createArticleSchema,
+  updateArticleSchema,
+  deleteArticleSchema,
+  searchSchema,
 };

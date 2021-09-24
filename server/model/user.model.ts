@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import config from 'config';
-import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 
 export interface UserDocument extends mongoose.Document {
@@ -38,7 +36,7 @@ UserSchema.pre('save', async function (next: mongoose.HookNextFunction) {
     return next();
   }
 
-  const saltWorkFactor = (config.get('SALT_WORK_FACTOR') as number) || 10;
+  const saltWorkFactor = parseInt(process.env.SALT_WORK_FACTOR as string);
 
   // Get salt facor
   const salt = await bcrypt.genSalt(saltWorkFactor);

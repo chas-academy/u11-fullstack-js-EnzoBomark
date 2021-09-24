@@ -1,14 +1,14 @@
+require('dotenv').config();
 import connectToDataBase from './db/connect';
 import express from 'express';
-import config from 'config';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { ROUTES } from './routes';
 import { MW } from './middleware';
 
-const port = config.get('PORT') as number;
+const port = process.env.PORT;
 const origin = {
-  origin: config.get('CLIENT_URL') as string,
+  origin: process.env.CLIENT_URL as string,
   credentials: true,
 };
 

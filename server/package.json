@@ -11,7 +11,7 @@
   },
   "scripts": {
     "server": "nodemon --config nodemon.json server.ts",
-    "start": "node -r dotenv/config dist/server.js",
+    "start": "node dist/server.js",
     "postinstall": "tsc",
     "test": "set NODE_ENV=development& jest --detectOpenHandles"
   },

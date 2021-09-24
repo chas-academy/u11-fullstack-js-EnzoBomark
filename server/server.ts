@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ silent: process.env.NODE_ENV === 'production' });
 import connectToDataBase from './db/connect';
 import express from 'express';
 import cors from 'cors';

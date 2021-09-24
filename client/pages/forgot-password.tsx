@@ -1,4 +1,4 @@
-import { S } from './ForgotPassword.style';
+import { S } from '@/styles/pages/ForgotPassword.style';
 import ForgotPasswordForm from '@/components/auth/ForgotPassword';
 import { NextPage } from 'next';
 

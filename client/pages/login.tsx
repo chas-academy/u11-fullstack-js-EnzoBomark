@@ -1,4 +1,4 @@
-import { S } from './Login.style';
+import { S } from '@/styles/pages/Login.style';
 import Link from 'next/link';
 import LoginFrom from '@/components/auth/LoginForm';
 import { NextPage } from 'next';

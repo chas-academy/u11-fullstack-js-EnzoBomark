@@ -27,7 +27,7 @@ const LoginFrom = () => {
 
     // const data = response.parsedBody.success;
 
-    router.push('/home');
+    router.push('/');
   };
 
   const emailError = errors.email?.message;

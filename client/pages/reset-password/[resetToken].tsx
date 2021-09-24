@@ -1,4 +1,4 @@
-import { S } from './ResetPassword.style';
+import { S } from '@/styles/pages/ResetPassword.style';
 import ForgotPasswordForm from '@/components/auth/ForgotPassword';
 import { NextPage } from 'next';
 

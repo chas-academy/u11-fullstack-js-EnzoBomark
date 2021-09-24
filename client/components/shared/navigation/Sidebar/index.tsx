@@ -18,7 +18,7 @@ const Sidebar: React.FC<Props> = (props: Props) => {
       <S.Sidebar isOpen={props.isOpen}>
         <S.SidebarBtn onClick={props.closeSidebar}>Close</S.SidebarBtn>
         <S.SidebarMenu>
-          <NavLink href="/home">Home</NavLink>
+          <NavLink href="/">Home</NavLink>
           <NavLink href="/search">Search</NavLink>
           {!user && (
             <>

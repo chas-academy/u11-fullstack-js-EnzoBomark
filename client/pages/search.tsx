@@ -1,4 +1,4 @@
-import { S } from './Search.style';
+import { S } from '@/styles/pages/Search.style';
 import { NextPage } from 'next';
 import { useState } from 'react';
 import { post } from '@/utils/http.utils';

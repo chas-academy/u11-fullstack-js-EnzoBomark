@@ -26,7 +26,7 @@ export const createAccessToken = ({
   const accessToken = UTILS.sign(
     { ...user, session: session._id },
     {
-      expiresIn: process.env.ACCESS_TOKEN_TTL || config.get('ACCESS_TOKEN_TTL'),
+      expiresIn: config.get('ACCESS_TOKEN_TTL'),
     } // 15 min
   );
 

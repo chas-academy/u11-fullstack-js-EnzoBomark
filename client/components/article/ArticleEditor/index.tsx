@@ -15,9 +15,6 @@ import withImages from './plugins/withImages';
 import withKeyCommands from './plugins/withKeyCommands';
 import withLinks from './plugins/withLinks';
 
-// import { createParagraphNode } from '@/utils/slate/paragraph.utils';
-// import { createImageNode } from '@/utils/slate/image.utils';
-// import { createLinkNode } from '@/utils/slate/link.utils';
 import { getReadTime } from '@/utils/readTime.utils';
 import { toggleMark } from '@/utils/mark.utils';
 import { post } from '@/utils/http.utils';

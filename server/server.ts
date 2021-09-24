@@ -6,9 +6,9 @@ import cookieParser from 'cookie-parser';
 import { ROUTES } from './routes';
 import { MW } from './middleware';
 
-const port = process.env.PORT || (config.get('PORT') as number);
+const port = config.get('PORT') as number;
 const origin = {
-  origin: process.env.CLIENT_URL || (config.get('CLIENT_URL') as string),
+  origin: config.get('CLIENT_URL') as string,
   credentials: true,
 };
 

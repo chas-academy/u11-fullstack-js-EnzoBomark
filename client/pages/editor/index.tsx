@@ -1,11 +1,8 @@
-import TextEditor from '@/components/slate/Editor';
+import ArticeEditor from '@/components/article/ArticleEditor';
+import { NextPage } from 'next';
 
-const Editor = () => {
-  return (
-    <div>
-      <TextEditor />
-    </div>
-  );
+const Editor: NextPage = () => {
+  return <ArticeEditor />;
 };
 
 export default Editor;

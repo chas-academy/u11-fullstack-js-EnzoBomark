@@ -1,7 +1,8 @@
 import { S } from './ResetPassword.style';
 import ForgotPasswordForm from '@/components/auth/ForgotPassword';
+import { NextPage } from 'next';
 
-const ResetPassword = () => {
+const ResetPassword: NextPage = () => {
   return (
     <S.ResetPassword>
       <S.H1>Reset Password</S.H1>

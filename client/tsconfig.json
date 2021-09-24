@@ -23,9 +23,12 @@
       "@/interfaces/*": ["interfaces/*"],
       "@/utils/*": ["utils/*"],
       "@/assets/*": ["assets/*"],
-      "@/redux/*": ["redux/*"]
+      "@/schemas/*": ["schemas/*"],
+      "@/store/*": ["store/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/guards/*": ["guards/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules, .env.local.example"]
 }

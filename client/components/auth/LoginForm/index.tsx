@@ -1,67 +1,54 @@
 import { S } from './Login.style';
+import { useState } from 'react';
+import router from 'next/router';
+import { LoginSchema, Props } from '@/schemas/Login.schema';
+import { Response } from '@/interfaces/AuthResponse.interface';
+import { resolver } from '@/utils/resolver.utils';
+import { post } from '@/utils/http.utils';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
-import { object, string, number, InferType, ref } from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { POST } from '@/helpers/Rest.helper';
-
-const schema = object({
-  email: string().email('Email must be a valid email address').required('Email is required'),
-  password: string()
-    .required('No password provided.')
-    .min(8, 'Password is too short - should be 8 chars minimum.')
-    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
-});
-
-const formSubmitHandler = async (values: Props) => {
-  const response = await POST('auth/login', values);
-
-  console.log(response);
-};
-
-type Props = InferType<typeof schema>;
+import Form from '@/components/shared/forms/Form';
+import Submit from '@/components/shared/buttons/SubmitButton';
+import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
 
 const LoginFrom = () => {
+  const [error, setError] = useState('');
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Props>({
-    resolver: yupResolver(schema),
-  });
+  } = resolver<Props>(LoginSchema);
 
-  const emailError = errors?.email?.message,
-    passwordError = errors?.password?.message;
+  const formValues = async (values: Props) => {
+    const response = await post<Response>('auth/login', values);
+
+    if (!response.ok) {
+      return setError(response.parsedBody.error);
+    }
+
+    // const data = response.parsedBody.success;
+
+    router.push('/home');
+  };
+
+  const emailError = errors.email?.message;
+  const passwordError = errors.password?.message;
 
   return (
-    <>
-      <S.Form onSubmit={handleSubmit(formSubmitHandler)}>
-        <S.Label htmlFor="email">Email</S.Label>
-        <S.Input
-          className={emailError && 'error'}
-          placeholder="Email"
-          id="email"
-          {...register('email')}
-        />
-        {emailError && <S.Error>{emailError}</S.Error>}
-
-        <S.Label htmlFor="password">Password</S.Label>
-        <S.Input
-          className={passwordError && 'error'}
-          type="password"
-          placeholder="Password"
-          id="password"
-          {...register('password')}
-        />
-        <S.P>
-          <Link href="/forgot-password">
-            <S.A>Forgot password?</S.A>
-          </Link>
-        </S.P>
-        {passwordError && <S.Error>{passwordError}</S.Error>}
-        <S.Submit>Login</S.Submit>
-      </S.Form>
-    </>
+    <Form submitHandler={handleSubmit(formValues)} error={error}>
+      <VerifiedInput format="email" error={emailError} register={register('email')} />
+      <VerifiedInput
+        type="password"
+        format="password"
+        error={passwordError}
+        register={register('password')}
+      />
+      <S.P>
+        <Link href="/forgot-password">
+          <S.A>Forgot password?</S.A>
+        </Link>
+      </S.P>
+      <Submit>Login</Submit>
+    </Form>
   );
 };
 

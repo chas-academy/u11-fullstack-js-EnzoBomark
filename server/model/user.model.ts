@@ -38,8 +38,10 @@ UserSchema.pre('save', async function (next: mongoose.HookNextFunction) {
     return next();
   }
 
+  const saltWorkFactor = (config.get('SALT_WORK_FACTOR') as number) || 10;
+
   // Get salt facor
-  const salt = await bcrypt.genSalt(config.get('SALT_WORK_FACTOR'));
+  const salt = await bcrypt.genSalt(saltWorkFactor);
 
   // Hash password with salt factor
   const hash = await bcrypt.hashSync(user.password, salt);

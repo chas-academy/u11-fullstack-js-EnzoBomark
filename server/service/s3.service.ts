@@ -3,10 +3,14 @@ import S3 from 'aws-sdk/clients/s3';
 import crypto, { randomBytes } from 'crypto';
 import { random } from 'lodash';
 
-const bucketName = config.get('AWS_BUCKET_NAME') as string;
-const region = config.get('AWS_BUCKET_REGION') as string;
-const accessKeyId = config.get('AWS_ACCESS_KEY') as string;
-const secretAccessKey = config.get('AWS_SECRET_KEY') as string;
+const bucketName =
+  process.env.AWS_BUCKET_NAME || (config.get('AWS_BUCKET_NAME') as string);
+const region =
+  process.env.AWS_BUCKET_REGION || (config.get('AWS_BUCKET_REGION') as string);
+const accessKeyId =
+  process.env.AWS_ACCESS_KEY || (config.get('AWS_ACCESS_KEY') as string);
+const secretAccessKey =
+  process.env.AWS_SECRET_KEY || (config.get('AWS_SECRET_KEY') as string);
 
 const s3 = new S3({
   region,

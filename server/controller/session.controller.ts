@@ -28,7 +28,7 @@ export const createUserSessionHandler = async (req: Request, res: Response) => {
 
   // Create refresh token
   const refreshToken = UTILS.sign(session, {
-    expiresIn: config.get('REFRESH_TOKEN_TTL'), // 1 year
+    expiresIn: process.env.REFRESH_TOKEN_TTL || config.get('REFRESH_TOKEN_TTL'), // 1 year
   });
 
   res.cookie('refresh_token', refreshToken, { httpOnly: true });
@@ -46,7 +46,6 @@ export const invalidateUserSessionHandler = async (
 
   // Unvalidate current session
   await SERVICE.updateSession({ _id: sessionId }, { valid: false });
-
 
   res.cookie('refresh_token', '', { httpOnly: true });
   res.cookie('access_token', '', { httpOnly: true });

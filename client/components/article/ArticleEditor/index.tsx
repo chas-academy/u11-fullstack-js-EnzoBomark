@@ -1,8 +1,9 @@
 import { S } from './ArticleEditor.style';
 import { useState, useMemo, useCallback } from 'react';
-import { createEditor, Descendant } from 'slate';
-import { Slate, Editable, withReact } from 'slate-react';
-import { withHistory } from 'slate-history';
+import { BaseEditor, createEditor, Descendant } from 'slate';
+import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
+import { withHistory, HistoryEditor } from 'slate-history';
+
 import { useToggle } from '@/hooks/useToggle.hooks';
 
 import pipe from 'lodash/fp/pipe';
@@ -31,6 +32,12 @@ import AboutInput from '@/components/shared/inputs/AboutInput';
 import TagsInput from '@/components/shared/inputs/TagsInput';
 import { Element } from '@/components/shared/misc/Element';
 import { Leaf } from '@/components/shared/misc/Leaf';
+
+declare module 'slate' {
+  interface CustomTypes {
+    Editor: BaseEditor & ReactEditor & HistoryEditor;
+  }
+}
 
 const createEditorWithPlugins = pipe(
   withReact,

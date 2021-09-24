@@ -12,5 +12,10 @@
     "types": ["mocha", "jest", "node"]
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts", "tests/**/*.test.ts"]
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "tests/**/*.test.ts",
+    "*/local.ts"
+  ]
 }

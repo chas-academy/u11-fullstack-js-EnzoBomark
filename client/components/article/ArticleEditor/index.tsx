@@ -71,6 +71,7 @@ interface Article {
 
 const ArticleEditor: React.FC = () => {
   const [isOpen, setIsOpen] = useToggle(false);
+  //@ts-ignore
   const editor = useMemo(() => createEditorWithPlugins(createEditor()), []);
   const [value, setValue] = useState<Descendant[]>(initialValue);
   const renderElement = useCallback((props) => <Element {...props} />, []);

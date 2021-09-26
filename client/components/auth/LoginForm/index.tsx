@@ -10,7 +10,11 @@ import Form from '@/components/shared/forms/Form';
 import Submit from '@/components/shared/buttons/SubmitButton';
 import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
 
+import { addUser } from 'slices/user.slice';
+import { useDispatch } from 'react-redux';
+
 const LoginFrom = () => {
+  const dispatch = useDispatch();
   const [error, setError] = useState('');
   const {
     register,
@@ -25,7 +29,7 @@ const LoginFrom = () => {
       return setError(response.parsedBody.error);
     }
 
-    // const data = response.parsedBody.success;
+    dispatch(addUser({ id: '1', name: 'test', email: 'test@test.com' }));
 
     router.push('/');
   };

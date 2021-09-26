@@ -10,6 +10,9 @@ import Form from '@/components/shared/forms/Form';
 import Submit from '@/components/shared/buttons/SubmitButton';
 import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
 
+import { addUser } from 'slices/user.slice';
+import { useDispatch } from 'react-redux';
+
 const LoginFrom = () => {
   const [error, setError] = useState('');
   const {
@@ -25,9 +28,7 @@ const LoginFrom = () => {
       return setError(response.parsedBody.error);
     }
 
-    // const data = response.parsedBody.success;
-
-    router.push('/home');
+    router.push('/');
   };
 
   const emailError = errors.email?.message;

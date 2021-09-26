@@ -16,7 +16,7 @@ const Navbar: React.FC<Props> = (props: Props) => {
       <S.Nav>
         <S.NavBtn onClick={props.openSidebar}>Menu</S.NavBtn>
         <S.NavMenu>
-          <NavLink href="/home">Home</NavLink>
+          <NavLink href="/">Home</NavLink>
           <NavLink href="/search">Search</NavLink>
 
           {!user && (

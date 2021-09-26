@@ -1,4 +1,4 @@
-import { S } from './Register.style';
+import { S } from '@/styles/pages/Register.style';
 import Link from 'next/link';
 import RegisterForm from '@/components/auth/RegisterForm';
 import { NextPage } from 'next';

@@ -10,7 +10,7 @@ const User: NextPage = () => {
   const router = useRouter();
 
   const logoutHandler = () => {
-    router.push('/user/logout');
+    console.log('logout');
   };
 
   return (

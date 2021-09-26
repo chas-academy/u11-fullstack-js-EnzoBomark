@@ -1,14 +1,14 @@
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 import connectToDataBase from './db/connect';
 import express from 'express';
-import config from 'config';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { ROUTES } from './routes';
 import { MW } from './middleware';
 
-const port = config.get('PORT') as number;
+const port = process.env.PORT;
 const origin = {
-  origin: config.get('CLIENT_URL') as string,
+  origin: process.env.CLIENT_URL as string,
   credentials: true,
 };
 
@@ -19,10 +19,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(MW.deserializeUser);
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('../client/build'));
-}
 
 const server = app.listen(port, () => {
   connectToDataBase();

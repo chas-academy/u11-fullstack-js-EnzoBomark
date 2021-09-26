@@ -1,8 +1,9 @@
 import { S } from './ArticleEditor.style';
 import { useState, useMemo, useCallback } from 'react';
-import { createEditor, Descendant } from 'slate';
-import { Slate, Editable, withReact } from 'slate-react';
-import { withHistory } from 'slate-history';
+import { BaseEditor, createEditor, Descendant } from 'slate';
+import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
+import { withHistory, HistoryEditor } from 'slate-history';
+
 import { useToggle } from '@/hooks/useToggle.hooks';
 
 import pipe from 'lodash/fp/pipe';
@@ -14,9 +15,6 @@ import withImages from './plugins/withImages';
 import withKeyCommands from './plugins/withKeyCommands';
 import withLinks from './plugins/withLinks';
 
-// import { createParagraphNode } from '@/utils/slate/paragraph.utils';
-// import { createImageNode } from '@/utils/slate/image.utils';
-// import { createLinkNode } from '@/utils/slate/link.utils';
 import { getReadTime } from '@/utils/readTime.utils';
 import { toggleMark } from '@/utils/mark.utils';
 import { post } from '@/utils/http.utils';
@@ -31,6 +29,12 @@ import AboutInput from '@/components/shared/inputs/AboutInput';
 import TagsInput from '@/components/shared/inputs/TagsInput';
 import { Element } from '@/components/shared/misc/Element';
 import { Leaf } from '@/components/shared/misc/Leaf';
+
+declare module 'slate' {
+  interface CustomTypes {
+    Editor: BaseEditor & ReactEditor & HistoryEditor;
+  }
+}
 
 const createEditorWithPlugins = pipe(
   withReact,

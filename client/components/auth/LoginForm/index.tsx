@@ -14,7 +14,6 @@ import { addUser } from 'slices/user.slice';
 import { useDispatch } from 'react-redux';
 
 const LoginFrom = () => {
-  const dispatch = useDispatch();
   const [error, setError] = useState('');
   const {
     register,
@@ -28,8 +27,6 @@ const LoginFrom = () => {
     if (!response.ok) {
       return setError(response.parsedBody.error);
     }
-
-    dispatch(addUser({ id: '1', name: 'test', email: 'test@test.com' }));
 
     router.push('/');
   };

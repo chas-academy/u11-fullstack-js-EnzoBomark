@@ -6,10 +6,9 @@ const Test: NextPage<{ data: string }> = ({ data }) => {
   return <div>{data}</div>;
 };
 
-import { auth } from '@/guards/auth.guard';
 import { get } from '@/utils/http.utils';
 import { Response } from '@/interfaces/AuthResponse.interface';
-export const getServerSideProps = auth(async (context) => {
+export const getServerSideProps = async (context) => {
   const { req } = context;
 
   const { access_token, refresh_token } = req.cookies;
@@ -38,6 +37,6 @@ export const getServerSideProps = auth(async (context) => {
       },
     };
   }
-}, false);
+};
 
 export default Test;

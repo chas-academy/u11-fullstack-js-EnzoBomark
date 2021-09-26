@@ -29,8 +29,15 @@ export const createUserSessionHandler = async (req: Request, res: Response) => {
     expiresIn: process.env.REFRESH_TOKEN_TTL, // 1 year
   });
 
-  res.cookie('refresh_token', refreshToken, { httpOnly: true });
-  res.cookie('access_token', accessToken, { httpOnly: true });
+  if (process.env.NODE_ENV === 'production') {
+    res.cookie('refresh_token', refreshToken, { httpOnly: true, domain: process.env.CLIENT_URL, sameSite: false });
+    res.cookie('access_token', accessToken, { httpOnly: true, domain: process.env.CLIENT_URL, sameSite: false });
+  } else {
+    res.cookie('refresh_token', refreshToken, { httpOnly: true });
+    res.cookie('access_token', accessToken, { httpOnly: true });
+  }
+
+  console.log(process.env.CLIENT_URL);
 
   // Send refresh and access token back
   return res.status(200).send({ success: 'Session Created' });
@@ -45,8 +52,14 @@ export const invalidateUserSessionHandler = async (
   // Unvalidate current session
   await SERVICE.updateSession({ _id: sessionId }, { valid: false });
 
-  res.cookie('refresh_token', '', { httpOnly: true });
-  res.cookie('access_token', '', { httpOnly: true });
+  
+  if (process.env.NODE_ENV === 'production') {
+    res.cookie('refresh_token', { httpOnly: true, domain: process.env.CLIENT_URL, sameSite: false });
+    res.cookie('access_token', { httpOnly: true, domain: process.env.CLIENT_URL, sameSite: false });
+  } else {
+    res.cookie('refresh_token', { httpOnly: true });
+    res.cookie('access_token', { httpOnly: true });
+  }
 
   return res.status(200).send({ success: 'Session logged out' });
 };

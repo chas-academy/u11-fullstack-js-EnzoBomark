@@ -27,4 +27,5 @@ const server = app.listen(port, () => {
   ROUTES.S3(app);
   ROUTES.Search(app);
   ROUTES.User(app);
+  ROUTES.Admin(app);
 });

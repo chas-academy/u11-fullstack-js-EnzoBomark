@@ -3,11 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { UTILS } from '../utils';
 import { SERVICE } from '../service';
 
-export const deserializeUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const deserializeUser = async (req: Request, res: Response, next: NextFunction) => {
   const refreshToken = get(req, 'headers.x-refresh');
 
   const accessToken = get(req, 'headers.authorization');

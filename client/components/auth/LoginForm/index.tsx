@@ -9,11 +9,9 @@ import Link from 'next/link';
 import Form from '@/components/shared/forms/Form';
 import Submit from '@/components/shared/buttons/SubmitButton';
 import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
-import { useCookies } from 'react-cookie';
-
+import Cookies from 'js-cookie';
 
 const LoginFrom = () => {
-  const [cookies, setCookie, removeCookies] = useCookies(['access_token', 'refresh_token']);
   const [error, setError] = useState('');
   const {
     register,
@@ -28,10 +26,10 @@ const LoginFrom = () => {
       return setError(response.parsedBody.error);
     }
 
-    const {accessToken, refreshToken} = response.parsedBody.success;
+    const { accessToken, refreshToken } = response.parsedBody.success;
 
-    setCookie('access_token', accessToken, {path: '/'});
-    setCookie('refresh_token', refreshToken, {path: '/'});
+    Cookies.set('access_token', accessToken);
+    Cookies.set('refresh_token', refreshToken);
 
     router.push('/');
   };

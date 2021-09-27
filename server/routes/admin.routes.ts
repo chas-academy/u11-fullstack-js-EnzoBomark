@@ -12,11 +12,7 @@ export const Admin = (app: Express) => {
   );
 
   //Update User
-  app.put(
-    '/api/admin/user/:userId',
-    MW.requireAdmin,
-    CONT.adminUpdateUserHandler
-  );
+  app.put('/api/admin/user/:userId', MW.requireAdmin, CONT.adminUpdateUserHandler);
 
   //Delete user
   app.delete(
@@ -28,10 +24,9 @@ export const Admin = (app: Express) => {
   //Get users
   app.get('/api/admin/users', MW.requireAdmin, CONT.adminGetUsersHandler);
 
+  //Get Admin
+  app.get('/api/admin/guard', MW.requireAdmin, CONT.getUserHandler);
+
   //Email user
-  app.post(
-    '/api/admin/user/:userId/email',
-    MW.requireAdmin,
-    CONT.adminEmailUserHandler
-  );
+  app.post('/api/admin/user/:userId/email', MW.requireAdmin, CONT.adminEmailUserHandler);
 };

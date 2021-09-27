@@ -4,19 +4,19 @@ import { get } from '@/utils/http.utils';
 import { wrapper } from '../store';
 import { addUser } from 'slices/user.slice';
 
-export const auth = (gssp: GetServerSideProps, secure = false) => {
+export const admin = (gssp: GetServerSideProps) => {
   //@ts-ignore
   return wrapper.getServerSideProps((store) => async (context) => {
     const { req } = context;
 
     const { access_token, refresh_token } = req.cookies;
 
-    const response = await get<Response>('auth/user', {
+    const response = await get<Response>('admin/guard', {
       authorization: access_token,
       'x-refresh': refresh_token,
     });
 
-    if (!response.ok && secure) {
+    if (!response.ok) {
       return {
         redirect: {
           destination: '/login',

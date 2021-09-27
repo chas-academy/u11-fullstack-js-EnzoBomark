@@ -53,9 +53,7 @@ export const adminDeleteUserHandler = async (req: Request, res: Response) => {
 
   await SERVICE.deleteUser({ _id: user });
 
-  return res
-    .status(200)
-    .send({ success: `${userId} was successfully deleted` });
+  return res.status(200).send({ success: `${userId} was successfully deleted` });
 };
 
 export const adminEmailUserHandler = async (req: Request, res: Response) => {

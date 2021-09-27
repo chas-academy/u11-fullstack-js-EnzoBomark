@@ -29,6 +29,7 @@ import AboutInput from '@/components/shared/inputs/AboutInput';
 import TagsInput from '@/components/shared/inputs/TagsInput';
 import { Element } from '@/components/shared/misc/Element';
 import { Leaf } from '@/components/shared/misc/Leaf';
+import Cookies from 'js-cookie';
 
 declare module 'slate' {
   interface CustomTypes {
@@ -99,7 +100,10 @@ const ArticleEditor: React.FC = () => {
 
     if (isVerified) {
       article.readTime = getReadTime(article.body);
-      const response = await post<FormResponse>('article', article);
+      const response = await post<FormResponse>('article', article, {
+        authorization: Cookies.get('access_token'),
+        'x-refresh': Cookies.get('refresh_token'),
+      });
 
       if (!response.ok) {
         // return console.log(response.parsedBody?.error);

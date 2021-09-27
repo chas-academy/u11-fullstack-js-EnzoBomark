@@ -1,4 +1,5 @@
 import { HttpResponse } from '@/interfaces/HttpResponse.interface';
+import Cookies from 'js-cookie';
 
 const API_BASE = process.env.BASE_API;
 
@@ -17,7 +18,10 @@ export const http = async <T>(request: RequestInfo): Promise<HttpResponse<T>> =>
 
 export const get = async <T>(
   path: string,
-  extraHeaders: { [key: string]: string } = {},
+  extraHeaders: { [key: string]: string } = {
+    authorization: Cookies.get('access_token'),
+    'x-refresh': Cookies.get('refresh_token'),
+  },
   args: RequestInit = {
     method: 'GET',
     credentials: 'include',
@@ -34,7 +38,10 @@ export const get = async <T>(
 export const post = async <T>(
   path: string,
   body: any,
-  extraHeaders: { [key: string]: string } = {},
+  extraHeaders: { [key: string]: string } = {
+    authorization: Cookies.get('access_token'),
+    'x-refresh': Cookies.get('refresh_token'),
+  },
   args: RequestInit = {
     credentials: 'include',
     method: 'POST',
@@ -52,7 +59,10 @@ export const post = async <T>(
 export const put = async <T>(
   path: string,
   body: any,
-  extraHeaders: { [key: string]: string } = {},
+  extraHeaders: { [key: string]: string } = {
+    authorization: Cookies.get('access_token'),
+    'x-refresh': Cookies.get('refresh_token'),
+  },
   args: RequestInit = {
     credentials: 'include',
     method: 'PUT',
@@ -70,7 +80,10 @@ export const put = async <T>(
 export const destroy = async <T>(
   path: string,
   body: any,
-  extraHeaders: { [key: string]: string } = {},
+  extraHeaders: { [key: string]: string } = {
+    authorization: Cookies.get('access_token'),
+    'x-refresh': Cookies.get('refresh_token'),
+  },
   args: RequestInit = {
     credentials: 'include',
     method: 'DELETE',

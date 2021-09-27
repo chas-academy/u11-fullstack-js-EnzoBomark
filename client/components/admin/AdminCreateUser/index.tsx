@@ -1,30 +1,30 @@
-import { S } from './Register.style';
+import { S } from './AdminCreateUser.style';
 import { useState } from 'react';
 import router from 'next/router';
-import { RegisterSchema, Props } from '@/schemas/Register.schema';
 import { Response } from '@/interfaces/AuthResponse.interface';
 import { resolver } from '@/utils/resolver.utils';
 import { post } from '@/utils/http.utils';
 import Form from '@/components/shared/forms/Form';
 import Submit from '@/components/shared/buttons/SubmitButton';
 import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
+import { AdminCreateUserSchema, Props } from '@/schemas/admin/createUser.schema';
 
-const RegisterForm = () => {
+const AdminCreateUserForm = () => {
   const [error, setError] = useState('');
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = resolver<Props>(RegisterSchema);
+  } = resolver<Props>(AdminCreateUserSchema);
 
   const formValues = async (values: Props) => {
-    const response = await post<Response>('auth/register', values);
+    const response = await post<Response>('admin/user', values);
 
     if (!response.ok) {
       return setError(response.parsedBody.error);
     }
 
-    router.push('/login');
+    router.push('/admin');
   };
 
   const nameError = errors.name?.message;
@@ -48,9 +48,10 @@ const RegisterForm = () => {
         error={passwordConfError}
         register={register('passwordConf')}
       />
+      <input type="checkbox" />
       <Submit>Register</Submit>
     </Form>
   );
 };
 
-export default RegisterForm;
+export default AdminCreateUserForm;

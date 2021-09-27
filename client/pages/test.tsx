@@ -1,42 +1,39 @@
-import { NextPage } from 'next';
+import { useState } from 'react';
+import { LoginSchema, Props } from '@/schemas/Login.schema';
+import { resolver } from '@/utils/resolver.utils';
+import Form from '@/components/shared/templates/Form';
+import Submit from '@/components/shared/buttons/SubmitButton';
+import Text from '@/components/shared/inputs/Text/Index';
+import Password from '@/components/shared/inputs/Password/Index';
 
-const Test: NextPage<{ data: string }> = ({ data }) => {
-  console.log(data);
+const Test = () => {
+  const res = resolver<Props>(LoginSchema);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  return <div>{data}</div>;
-};
+  const formValues = async () => {
+    console.log({ email, password });
+  };
 
-import { get } from '@/utils/http.utils';
-import { Response } from '@/interfaces/AuthResponse.interface';
-export const getServerSideProps = async (context) => {
-  const { req } = context;
-
-  const { access_token, refresh_token } = req.cookies;
-
-  const response = await get<Response>('auth/user', {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    authorization: access_token,
-    'x-refresh': refresh_token,
-  });
-
-  if (!response.ok) {
-    return {
-      props: {
-        data: `${access_token} ${refresh_token}`,
-      },
-    };
-  }
-
-  if (response.ok) {
-    const { _id, name, email } = response.parsedBody.success;
-
-    return {
-      props: {
-        data: `${_id} ${name}`,
-      },
-    };
-  }
+  return (
+    <Form onSubmit={res.handleSubmit(formValues)}>
+      <Text
+        id="email"
+        placeholder="Email"
+        error={res.formState.errors.email?.message}
+        onChange={(value) => setEmail(value)}
+        register={res.register('email')}
+      />
+      <Password
+        id="password"
+        placeholder="Password"
+        error={res.formState.errors.password?.message}
+        onChange={(value) => setPassword(value)}
+        register={res.register('password')}
+      />
+      <Submit>Login</Submit>
+    </Form>
+  );
 };
 
 export default Test;

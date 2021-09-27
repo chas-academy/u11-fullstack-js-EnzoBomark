@@ -12,8 +12,8 @@ const Toolbar = () => {
       <MarkButton format="italic" icon={Icon.Italic} />
       <MarkButton format="underline" icon={Icon.Underline} />
       <BlockButton format="list" icon={Icon.List} />
-      <BlockButton format="heading" icon={Icon.Heading} />
-      <BlockButton format="subheading" icon={Icon.Heading} />
+      <BlockButton format="heading" icon={Icon.HeadingOne} />
+      <BlockButton format="subheading" icon={Icon.HeadingTwo} />
       <ImageButton />
       <LinkButton />
     </S.Toolbar>

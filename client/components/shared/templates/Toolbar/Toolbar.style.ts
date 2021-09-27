@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
 const Toolbar = styled.div`
+  z-index: 1000;
+  position: sticky;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: center;

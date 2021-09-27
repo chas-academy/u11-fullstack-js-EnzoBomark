@@ -2,7 +2,7 @@ import { S } from './SubmitButton.style';
 
 interface Props {
   onClick?: (e) => void;
-  children: string;
+  children: string | string[];
 }
 
 const SubmitButton: React.FC<Props> = (props: Props) => {

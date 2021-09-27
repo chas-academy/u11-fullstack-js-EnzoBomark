@@ -1,5 +1,5 @@
 import { S } from './VerifiedInput.style';
-import React from 'react';
+import { useState } from 'react';
 
 interface Props {
   children?: any;
@@ -7,9 +7,11 @@ interface Props {
   error: string;
   register: any;
   type?: string;
+  defaultValue?: string;
 }
 
 const VerifiedInput: React.FC<Props> = (props: Props) => {
+  const [value, setValue] = useState(props.defaultValue || '');
   const id = props.format;
   const placeholder = id.charAt(0).toUpperCase() + id.substring(1);
   const error = props.error || '';
@@ -22,6 +24,8 @@ const VerifiedInput: React.FC<Props> = (props: Props) => {
         error={error}
         placeholder={placeholder}
         id={id}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         {...props.register}
       />
       {error && <S.Error>{error}</S.Error>}

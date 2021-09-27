@@ -1,4 +1,4 @@
-import { S } from './AdminCreateUser.style';
+import { S } from './AdminUpdateUser.style';
 import { useState } from 'react';
 import router from 'next/router';
 import { Response } from '@/interfaces/AuthResponse.interface';
@@ -8,8 +8,9 @@ import Form from '@/components/shared/forms/Form';
 import Submit from '@/components/shared/buttons/SubmitButton';
 import VerifiedInput from '@/components/shared/inputs/VerifiedInput';
 import { AdminCreateUserSchema, Props } from '@/schemas/admin/createUser.schema';
+import { User } from '@/interfaces/Users.interface';
 
-const AdminCreateUserForm = () => {
+const AdminUpdateUserForm: React.FC<{ user: User }> = (props: { user: User }) => {
   const [error, setError] = useState('');
   const {
     register,
@@ -49,9 +50,9 @@ const AdminCreateUserForm = () => {
         register={register('passwordConf')}
       />
       <input type="checkbox" />
-      <Submit>Create new User</Submit>
+      <Submit>Update {props.user.name}</Submit>
     </Form>
   );
 };
 
-export default AdminCreateUserForm;
+export default AdminUpdateUserForm;

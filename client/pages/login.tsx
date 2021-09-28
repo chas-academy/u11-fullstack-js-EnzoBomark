@@ -1,41 +1,39 @@
 import { S } from '@/styles/pages/Login.style';
 import { NextPage } from 'next';
-import Link from 'next/link';
 import { useState } from 'react';
-import router from 'next/router';
 import { LoginSchema, Props } from '@/schemas/Login.schema';
-import { Response } from '@/interfaces/AuthResponse.interface';
+import { AuthResponse } from '@/interfaces/AuthResponse.interface';
 import { resolver } from '@/utils/resolver.utils';
 import { post } from '@/utils/http.utils';
+import router from 'next/router';
+import Link from 'next/link';
 import Form from '@/components/shared/templates/Form';
-import Submit from '@/components/shared/buttons/SubmitButton';
 import Cookies from 'js-cookie';
 import Text from '@/components/shared/inputs/Text/Index';
 import Password from '@/components/shared/inputs/Password/Index';
+import { useFetch } from '@/hooks/useFetch.hooks';
+import { useMount } from '@/hooks/useMount';
 
 const Login: NextPage = () => {
-  const [error, setError] = useState('');
   const res = resolver<Props>(LoginSchema);
+  const [values, setValues] = useState<Props>();
+  const { fetch, isLoading, hasError, data } = useFetch<AuthResponse>(() =>
+    post('auth/login', values)
+  );
 
-  const formValues = async (values: Props) => {
-    const response = await post<Response>('auth/login', values);
+  useMount(async () => await fetch(), [values]);
 
-    if (!response.ok) {
-      return setError(response.parsedBody.error);
-    }
-
-    const { accessToken, refreshToken } = response.parsedBody.success;
-
-    Cookies.set('access_token', accessToken);
-    Cookies.set('refresh_token', refreshToken);
-
+  useMount(() => {
+    Cookies.set('access_token', data.success.accessToken);
+    Cookies.set('refresh_token', data.success.refreshToken);
     router.push('/');
-  };
+  }, [data]);
+
   return (
     <S.Login>
       <S.H1>Log In Now</S.H1>
       <S.H2>Please login to continue</S.H2>
-      <Form onSubmit={res.handleSubmit(formValues)} error={error}>
+      <Form onSubmit={res.handleSubmit((e) => setValues(e))} error={hasError}>
         <Text
           id="email"
           placeholder="Email"
@@ -53,7 +51,7 @@ const Login: NextPage = () => {
             <S.A>Forgot password?</S.A>
           </Link>
         </S.P>
-        <Submit>Login</Submit>
+        <S.Submit>Login</S.Submit>
       </Form>
       <S.P>
         Dont have an account?

@@ -1,36 +1,33 @@
 import { S } from '@/styles/pages/Register.style';
 import { NextPage } from 'next';
-import Link from 'next/link';
 import { useState } from 'react';
-import router from 'next/router';
 import { RegisterSchema, Props } from '@/schemas/Register.schema';
-import { Response } from '@/interfaces/AuthResponse.interface';
+import { AuthResponse } from '@/interfaces/AuthResponse.interface';
 import { resolver } from '@/utils/resolver.utils';
 import { post } from '@/utils/http.utils';
+import Link from 'next/link';
+import router from 'next/router';
 import Form from '@/components/shared/templates/Form';
 import Text from '@/components/shared/inputs/Text/Index';
-import Submit from '@/components/shared/buttons/SubmitButton';
 import Password from '@/components/shared/inputs/Password/Index';
+import { useFetch } from '@/hooks/useFetch.hooks';
+import { useMount } from '@/hooks/useMount';
 
 const Register: NextPage = () => {
   const res = resolver<Props>(RegisterSchema);
-  const [error, setError] = useState('');
+  const [values, setValues] = useState<Props>();
+  const { fetch, isLoading, hasError, data } = useFetch<AuthResponse>(() =>
+    post('auth/register', values)
+  );
 
-  const formValues = async (values: Props) => {
-    const response = await post<Response>('auth/register', values);
-
-    if (!response.ok) {
-      return setError(response.parsedBody.error);
-    }
-
-    router.push('/login');
-  };
+  useMount(async () => await fetch(), [values]);
+  useMount(() => router.push('/login'), [data]);
 
   return (
     <S.Register>
       <S.H1>Sign Up Now</S.H1>
       <S.H2>Please fill in the details and create an account</S.H2>
-      <Form onSubmit={res.handleSubmit(formValues)} error={error}>
+      <Form onSubmit={res.handleSubmit((e) => setValues(e))} error={hasError}>
         <Text
           id="name"
           placeholder="Name"
@@ -55,7 +52,7 @@ const Register: NextPage = () => {
           error={res.formState.errors.passwordConf?.message}
           register={res.register('passwordConf')}
         />
-        <Submit>Register</Submit>
+        <S.Submit>Register</S.Submit>
       </Form>
       <S.P>
         Already have an account?

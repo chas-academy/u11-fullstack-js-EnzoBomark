@@ -4,31 +4,32 @@ import { useState } from 'react';
 import { ResetPasswordSchema, Props } from '@/schemas/ResetPassword.schema';
 import { FormResponse } from '@/interfaces/FormResponse.interface';
 import { resolver } from '@/utils/resolver.utils';
-import { post } from '@/utils/http.utils';
+import { put } from '@/utils/http.utils';
 import Form from '@/components/shared/templates/Form';
-import Submit from '@/components/shared/buttons/SubmitButton';
 import Password from '@/components/shared/inputs/Password/Index';
+import { useFetch } from '@/hooks/useFetch.hooks';
+import { useMount } from '@/hooks/useMount';
+import router from 'next/router';
 
 const ResetPassword: NextPage = () => {
   const res = resolver<Props>(ResetPasswordSchema);
-  const [success, setSuccess] = useState('');
-  const [error, setError] = useState('');
+  const [values, setValues] = useState<Props>();
+  const { fetch, isLoading, hasError, data } = useFetch<FormResponse>(() =>
+    put(`auth/reset-password/${router.query.resetToken}`, values)
+  );
 
-  const formValues = async (values: Props) => {
-    const response = await post<FormResponse>('auth/reset-password', values);
+  useMount(async () => await fetch(), [values]);
 
-    if (!response.ok) {
-      return setError(response.parsedBody.error);
-    }
-
-    return setSuccess(response.parsedBody.success);
-  };
   return (
     <S.ResetPassword>
       <S.H1>Reset Password</S.H1>
       <S.H2>Please fill in the details and reset your password</S.H2>
 
-      <Form onSubmit={res.handleSubmit(formValues)} error={error} success={success}>
+      <Form
+        onSubmit={res.handleSubmit((e) => setValues(e))}
+        error={hasError}
+        success={data?.success}
+      >
         <Password
           id="password"
           placeholder="Password"
@@ -41,7 +42,7 @@ const ResetPassword: NextPage = () => {
           error={res.formState.errors.passwordConf?.message}
           register={res.register('passwordConf')}
         />
-        <Submit>Login</Submit>
+        <S.Submit>Login</S.Submit>
       </Form>
     </S.ResetPassword>
   );

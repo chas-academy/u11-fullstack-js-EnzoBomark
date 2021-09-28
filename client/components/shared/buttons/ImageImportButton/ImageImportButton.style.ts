@@ -1,4 +1,3 @@
-import { RichButton } from '@/styles/Button.style';
 import { mainTheme } from '@/styles/Themes';
 import styled from 'styled-components';
 

@@ -6,37 +6,35 @@ import { FormResponse } from '@/interfaces/FormResponse.interface';
 import { resolver } from '@/utils/resolver.utils';
 import { post } from '@/utils/http.utils';
 import Form from '@/components/shared/templates/Form';
-import Submit from '@/components/shared/buttons/SubmitButton';
 import Text from '@/components/shared/inputs/Text/Index';
+import { useFetch } from '@/hooks/useFetch.hooks';
+import { useMount } from '@/hooks/useMount';
 
 const ForgotPassword: NextPage = () => {
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-
   const res = resolver<Props>(ForgotPasswordSchema);
+  const [values, setValues] = useState<Props>();
+  const { fetch, isLoading, hasError, data } = useFetch<FormResponse>(() =>
+    post('auth/forgot-password', values)
+  );
 
-  const formValues = async (values) => {
-    const response = await post<FormResponse>('auth/forgot-password', values);
-
-    if (!response.ok) {
-      return setError(response.parsedBody.error);
-    }
-
-    return setSuccess(response.parsedBody.success);
-  };
+  useMount(async () => await fetch(), [values]);
 
   return (
     <S.ForgotPassword>
       <S.H1>Forgot Email</S.H1>
       <S.H2>Please fill in the details and confirm the mail</S.H2>
-      <Form onSubmit={res.handleSubmit(formValues)} error={error} success={success}>
+      <Form
+        onSubmit={res.handleSubmit((e) => setValues(e))}
+        error={hasError}
+        success={data?.success}
+      >
         <Text
           id="email"
           placeholder="Email"
           error={res.formState.errors.email?.message}
           register={res.register('email')}
         />
-        <Submit>Login</Submit>
+        <S.Submit>Login</S.Submit>
       </Form>
     </S.ForgotPassword>
   );

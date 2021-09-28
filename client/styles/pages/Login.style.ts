@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { mainTheme } from '@/styles/Themes';
+import { button } from '../Button.style';
 
 const Login = styled.div`
   display: flex;
@@ -32,10 +33,15 @@ const A = styled.a`
   cursor: pointer;
 `;
 
+const Submit = styled(button)`
+  margin-top: 6.25rem;
+`;
+
 export const S = {
   Login,
   H1,
   H2,
   P,
   A,
+  Submit,
 };

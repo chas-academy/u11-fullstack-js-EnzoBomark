@@ -1,4 +1,4 @@
-import { Input } from '@/styles/Input.style';
+import { input } from '@/styles/Input.style';
 import styled from 'styled-components';
 
 const Search = styled.div`
@@ -10,7 +10,7 @@ const Search = styled.div`
   align-items: center;
 `;
 
-const Searchbar = styled(Input)`
+const Searchbar = styled(input)`
   width: 90%;
   max-width: 90rem;
 `;

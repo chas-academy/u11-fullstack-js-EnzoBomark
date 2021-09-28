@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { mainTheme } from '@/styles/Themes';
+import { button } from '../Button.style';
 
 const ForgotPassword = styled.div`
   display: flex;
@@ -19,8 +20,13 @@ const H2 = styled.div`
   font-size: ${mainTheme['font-sm']};
 `;
 
+const Submit = styled(button)`
+  margin-top: 6.25rem;
+`;
+
 export const S = {
   ForgotPassword,
   H1,
   H2,
+  Submit,
 };

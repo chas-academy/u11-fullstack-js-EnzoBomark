@@ -5,7 +5,7 @@ import { post } from '@/utils/http.utils';
 import PageHeader from '@/components/shared/templates/PageHeader';
 import ArticlePreview from '@/components/article/ArticlePreview';
 import { IPaginatedArticles } from '@/interfaces/Article.interface';
-import { ArticlesResponse } from '@/interfaces/AuthResponse.interface';
+import { ArticlesResponse } from '@/interfaces/Article.interface';
 import { useArticleSearch } from '@/hooks/useArticleSearch.hooks';
 import { useObserver } from '@/hooks/useObserver.hooks';
 
@@ -22,10 +22,6 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
     setPageNumber(1);
   };
 
-  const error = hasError && <div>{hasError}</div>;
-  const loading = isLoading && <div>Loading...</div>;
-  const noMatch = !articles.length && !isLoading && <div>No match</div>;
-
   return (
     <S.Search>
       <S.Searchbar placeholder="e.g. Rain gear..." value={query} onChange={handleSearch} />
@@ -40,9 +36,9 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
         );
       })}
 
-      {error}
-      {loading}
-      {noMatch}
+      {hasError && <div>{hasError}</div>}
+      {isLoading && <div>Loading...</div>}
+      {!articles.length && !isLoading && <div>No match</div>}
     </S.Search>
   );
 };

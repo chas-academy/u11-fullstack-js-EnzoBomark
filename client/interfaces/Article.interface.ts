@@ -16,3 +16,8 @@ export interface IPaginatedArticles {
   data: IArticle[];
   objectsFound: number;
 }
+
+export interface ArticlesResponse {
+  error?: string;
+  success?: IPaginatedArticles;
+}

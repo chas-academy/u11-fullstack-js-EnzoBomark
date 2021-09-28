@@ -1,33 +1,31 @@
 import { useEffect, useState } from 'react';
-import { useAsyncDebounce } from './useAsyncDebounce.hooks';
-import { ArticlesResponse } from '@/interfaces/AuthResponse.interface';
+import { useFetchDebounce } from './useFetchDebounce.hooks';
+import { ArticlesResponse } from '@/interfaces/Article.interface';
 import { post } from '@/utils/http.utils';
 import { IPaginatedArticles } from '@/interfaces/Article.interface';
-import { useDidMountEffect } from './useDidMountEffect.hooks';
+import { useMount } from './useMount';
 
 export const useArticleSearch = (
   query: string,
-  pageNumber: number,
+  page: number,
   ssrLoadedData: IPaginatedArticles
 ) => {
   const [articles, setArticles] = useState(ssrLoadedData.data);
-  const [hasMore, setHasMore] = useState(ssrLoadedData.objectsFound > 1);
 
-  const { isLoading, hasError, data } = useAsyncDebounce<ArticlesResponse>(
-    async () => await post('search', { query: query, page: pageNumber, model: 'article' }),
-    [query, pageNumber],
+  const { isLoading, hasError, data } = useFetchDebounce<ArticlesResponse>(
+    () => post('search', { query, page, model: 'article' }),
+    [query, page],
     500
   );
 
-  useDidMountEffect(() => {
+  useMount(() => {
     setArticles([]);
   }, [query]);
 
-  useDidMountEffect(() => {
+  useMount(() => {
     setArticles((prevData) => {
       return [...new Set([...prevData, ...data.success.data])];
     });
-    setHasMore(data.success.objectsFound > 1);
   }, [data]);
 
   return { isLoading, hasError, articles };

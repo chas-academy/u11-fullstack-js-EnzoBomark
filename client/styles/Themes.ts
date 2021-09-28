@@ -12,6 +12,8 @@ export const mainTheme = {
   'font-lg': '20px',
   'font-xl': '25px',
   'border-sm': 'solid 1px #ffffff1f',
+  'border-md': 'solid 2px #ffffff1f',
+  'border-lg': 'solid 3px #ffffff1f',
   'border-hover': 'solid 1px #bdbdbd',
   'border-error': '1px solid #e93e36',
   'rounded-sm': '5px',

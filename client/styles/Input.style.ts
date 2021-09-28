@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { mainTheme } from './Themes';
 
-export const Label = styled.label`
+export const input_label = styled.label`
   border: 0;
   clip: rect(0 0 0 0);
   height: 0.0625rem;
@@ -12,7 +12,7 @@ export const Label = styled.label`
   width: 0.0625rem;
 `;
 
-export const Input = styled.input`
+export const input = styled.input`
   position: relative;
   display: flex;
   background: ${(props) => props.theme['color-dark-gray']};
@@ -38,7 +38,7 @@ export const Input = styled.input`
   }
 `;
 
-export const Error = styled.span`
+export const input_error = styled.span`
   color: ${(props) => props.theme['color-error']};
   margin-top: 1rem;
   text-align: center;

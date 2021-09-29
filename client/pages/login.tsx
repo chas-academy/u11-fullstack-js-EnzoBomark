@@ -1,18 +1,21 @@
-import { S } from '@/styles/pages/Login.style';
-import { NextPage } from 'next';
-import { useState } from 'react';
 import { LoginSchema, Props } from '@/schemas/Login.schema';
+
 import { AuthResponse } from '@/interfaces/AuthResponse.interface';
-import { resolver } from '@/utils/resolver.utils';
-import { post } from '@/utils/http.utils';
-import router from 'next/router';
-import Link from 'next/link';
-import Form from '@/components/shared/templates/Form';
 import Cookies from 'js-cookie';
-import Text from '@/components/shared/inputs/Text/Index';
+import Form from '@/components/shared/templates/Form';
+import Link from 'next/link';
+import { NextPage } from 'next';
 import Password from '@/components/shared/inputs/Password/Index';
+import { Public } from '@/guards/public.guard';
+import { S } from '@/styles/pages/Login.style';
+import Spinner from '@/components/shared/misc/Spinner';
+import Text from '@/components/shared/inputs/Text/Index';
+import { post } from '@/utils/http.utils';
+import { resolver } from '@/utils/resolver.utils';
+import router from 'next/router';
 import { useFetch } from '@/hooks/useFetch.hooks';
 import { useMount } from '@/hooks/useMount';
+import { useState } from 'react';
 
 const Login: NextPage = () => {
   const res = resolver<Props>(LoginSchema);
@@ -31,6 +34,8 @@ const Login: NextPage = () => {
 
   return (
     <S.Login>
+      <Spinner isLoading={isLoading} />
+
       <S.H1>Log In Now</S.H1>
       <S.H2>Please login to continue</S.H2>
       <Form onSubmit={res.handleSubmit((e) => setValues(e))} error={hasError}>
@@ -63,7 +68,6 @@ const Login: NextPage = () => {
   );
 };
 
-import { Public } from '@/guards/public.guard';
 export const getServerSideProps = Public();
 
 export default Login;

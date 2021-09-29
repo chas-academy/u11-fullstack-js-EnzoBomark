@@ -1,8 +1,11 @@
-import ArticleShowcase from '@/components/article/ArticleShowcase';
 import { NextPage } from 'next';
+
+import { S } from '@/styles/pages/Article.style';
+import ArticleShowcase from '@/components/article/ArticleShowcase';
+import { IArticle } from '@/interfaces/Article.interface';
 import { Response } from '@/interfaces/Response.interface';
 import { get } from '@/utils/http.utils';
-import { IArticle } from '@/interfaces/Article.interface';
+import { Public } from '@/guards/public.guard';
 
 const Article: NextPage<{ data: IArticle }> = ({ data }) => {
   return (
@@ -12,7 +15,6 @@ const Article: NextPage<{ data: IArticle }> = ({ data }) => {
   );
 };
 
-import { Public } from '@/guards/public.guard';
 export const getServerSideProps = Public(async (context) => {
   const response = await get<Response>(`article/${context.params.articleId}`);
 

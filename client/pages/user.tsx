@@ -1,5 +1,7 @@
-import { NextPage } from 'next';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { NextPage } from 'next';
+import { Private } from '@/guards/private.guard';
 import { RootState } from '@/store/index';
 import { removeUser } from 'slices/user.slice';
 import { useRouter } from 'next/router';
@@ -20,7 +22,6 @@ const User: NextPage = () => {
   );
 };
 
-import { Private } from '@/guards/private.guard';
 export const getServerSideProps = Private();
 
 export default User;

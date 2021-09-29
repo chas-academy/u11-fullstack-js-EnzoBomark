@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
-import { useSelector } from 'react-redux';
+import { Private } from '@/guards/private.guard';
 import { RootState } from '@/store/index';
+import { useSelector } from 'react-redux';
 
 const Saved: NextPage = () => {
   const user = useSelector((state: RootState) => state.user.user);
@@ -8,7 +9,6 @@ const Saved: NextPage = () => {
   return <div>Saved</div>;
 };
 
-import { Private } from '@/guards/private.guard';
 export const getServerSideProps = Private();
 
 export default Saved;

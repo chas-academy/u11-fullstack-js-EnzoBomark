@@ -1,17 +1,21 @@
-import { S } from '@/styles/pages/ResetPassword.style';
-import { NextPage } from 'next';
-import { useState } from 'react';
-import { ResetPasswordSchema, Props } from '@/schemas/ResetPassword.schema';
-import { FormResponse } from '@/interfaces/FormResponse.interface';
-import { resolver } from '@/utils/resolver.utils';
-import { put } from '@/utils/http.utils';
+import { Props, ResetPasswordSchema } from '@/schemas/ResetPassword.schema';
+
 import Form from '@/components/shared/templates/Form';
+import { FormResponse } from '@/interfaces/FormResponse.interface';
+import { NextPage } from 'next';
 import Password from '@/components/shared/inputs/Password/Index';
+import { Public } from '@/guards/public.guard';
+import { S } from '@/styles/pages/ResetPassword.style';
+import Spinner from '@/components/shared/misc/Spinner';
+import { put } from '@/utils/http.utils';
+import { resolver } from '@/utils/resolver.utils';
 import { useFetch } from '@/hooks/useFetch.hooks';
 import { useMount } from '@/hooks/useMount';
-import router from 'next/router';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const ResetPassword: NextPage = () => {
+  const router = useRouter();
   const res = resolver<Props>(ResetPasswordSchema);
   const [values, setValues] = useState<Props>();
   const { fetch, isLoading, hasError, data } = useFetch<FormResponse>(() =>
@@ -49,8 +53,6 @@ const ResetPassword: NextPage = () => {
   );
 };
 
-import { Public } from '@/guards/public.guard';
-import Spinner from '@/components/shared/misc/Spinner';
 export const getServerSideProps = Public();
 
 export default ResetPassword;

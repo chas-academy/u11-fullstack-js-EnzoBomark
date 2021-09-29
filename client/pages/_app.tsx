@@ -1,11 +1,11 @@
-import { AppProps } from 'next/app';
-import { ThemeProvider } from 'styled-components';
-import { mainTheme } from '@/styles/Themes';
-import GlobalStyle from '@/styles/Global.style';
-import Main from '@/components/layout/Main';
-import Head from 'next/head';
 import '@/styles/_font.css';
 
+import { AppProps } from 'next/app';
+import GlobalStyle from '@/styles/Global.style';
+import Head from 'next/head';
+import Main from '@/components/layout/Main';
+import { ThemeProvider } from 'styled-components';
+import { mainTheme } from '@/styles/Themes';
 import { wrapper } from '@/store/index';
 
 const METADATA = () => {

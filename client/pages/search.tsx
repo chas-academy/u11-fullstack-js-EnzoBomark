@@ -1,14 +1,15 @@
-import { S } from '@/styles/pages/Search.style';
-import { NextPage } from 'next';
-import { useState } from 'react';
-import { post } from '@/utils/http.utils';
-import PageHeader from '@/components/shared/templates/PageHeader';
 import ArticlePreview from '@/components/article/ArticlePreview';
-import { IPaginatedArticles } from '@/interfaces/Article.interface';
 import { ArticlesResponse } from '@/interfaces/Article.interface';
+import { IPaginatedArticles } from '@/interfaces/Article.interface';
+import { NextPage } from 'next';
+import PageHeader from '@/components/shared/templates/PageHeader';
+import { Public } from '@/guards/public.guard';
+import { S } from '@/styles/pages/Search.style';
+import Spinner from '@/components/shared/misc/Spinner';
+import { post } from '@/utils/http.utils';
 import { useArticleSearch } from '@/hooks/useArticleSearch.hooks';
 import { useObserver } from '@/hooks/useObserver.hooks';
-import Spinner from '@/components/shared/misc/Spinner';
+import { useState } from 'react';
 
 const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -44,7 +45,6 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
   );
 };
 
-import { Public } from '@/guards/public.guard';
 export const getServerSideProps = Public(async (context) => {
   const response = await post<ArticlesResponse>('search', {
     query: '',

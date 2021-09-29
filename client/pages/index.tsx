@@ -1,12 +1,14 @@
-import { S } from '@/styles/pages/Home.style';
+import { ArticlesResponse, IPaginatedArticles } from '@/interfaces/Article.interface';
+
+import ArticlePreview from '@/components/article/ArticlePreview';
 import { NextPage } from 'next';
 import PageHeader from '@/components/shared/templates/PageHeader';
-import ArticlePreview from '@/components/article/ArticlePreview';
-import { ArticlesResponse, IPaginatedArticles } from '@/interfaces/Article.interface';
+import { Public } from '@/guards/public.guard';
+import { S } from '@/styles/pages/Home.style';
+import Spinner from '@/components/shared/misc/Spinner';
 import { post } from '@/utils/http.utils';
 import { useArticleSearch } from '@/hooks/useArticleSearch.hooks';
 import { useObserver } from '@/hooks/useObserver.hooks';
-import Spinner from '@/components/shared/misc/Spinner';
 import { useState } from 'react';
 
 const Home: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
@@ -35,7 +37,6 @@ const Home: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
   );
 };
 
-import { Public } from '@/guards/public.guard';
 export const getServerSideProps = Public(async (context) => {
   const response = await post<ArticlesResponse>('search', {
     query: '',

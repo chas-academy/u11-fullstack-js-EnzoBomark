@@ -1,19 +1,22 @@
-import { S } from '@/styles/pages/UpdateUser.style';
-import { NextPage } from 'next';
-import { useState } from 'react';
-import { Response } from '@/interfaces/Response.interface';
 import { AdminUpdateUserSchema, Props } from '@/schemas/admin/UpdateUser.schema';
-import { resolver } from '@/utils/resolver.utils';
-import { put, get } from '@/utils/http.utils';
-import { useRouter } from 'next/router';
+import { get, put } from '@/utils/http.utils';
+
+import { Admin } from '@/guards/admin.guard';
+import Checkbox from '@/components/shared/inputs/Checkbox';
 import Form from '@/components/shared/templates/Form';
+import { IUser } from '@/interfaces/User.interface';
+import { NextPage } from 'next';
+import Redirect from '@/components/shared/links/Redirect';
+import { Response } from '@/interfaces/Response.interface';
+import { S } from '@/styles/pages/UpdateUser.style';
+import Spinner from '@/components/shared/misc/Spinner';
 import Text from '@/components/shared/inputs/Text/Index';
+import { resolver } from '@/utils/resolver.utils';
 import { useFetch } from '@/hooks/useFetch.hooks';
 import { useMount } from '@/hooks/useMount';
-import { IUser } from '@/interfaces/User.interface';
-import Checkbox from '@/components/shared/inputs/Checkbox';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useToggle } from '@/hooks/useToggle.hooks';
-import Redirect from '@/components/shared/links/Redirect';
 
 const AdminUpdateUser: NextPage<{ user: IUser }> = ({ user }) => {
   const router = useRouter();
@@ -62,8 +65,6 @@ const AdminUpdateUser: NextPage<{ user: IUser }> = ({ user }) => {
   );
 };
 
-import { Admin } from '@/guards/admin.guard';
-import Spinner from '@/components/shared/misc/Spinner';
 export const getServerSideProps = Admin(async (context) => {
   const { req, res } = context;
 

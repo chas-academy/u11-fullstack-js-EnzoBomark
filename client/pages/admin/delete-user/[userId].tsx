@@ -1,11 +1,13 @@
-import { S } from '@/styles/pages/DeleteUser.style';
+import { Admin } from '@/guards/admin.guard';
+import Form from '@/components/shared/templates/Form';
 import { NextPage } from 'next';
 import React from 'react';
 import { Response } from '@/interfaces/Response.interface';
+import { S } from '@/styles/pages/DeleteUser.style';
+import Spinner from '@/components/shared/misc/Spinner';
 import { destroy } from '@/utils/http.utils';
-import { useRouter } from 'next/router';
-import Form from '@/components/shared/templates/Form';
 import { useFetch } from '@/hooks/useFetch.hooks';
+import { useRouter } from 'next/router';
 
 const AdminEmailUser: NextPage = () => {
   const router = useRouter();
@@ -30,8 +32,6 @@ const AdminEmailUser: NextPage = () => {
   );
 };
 
-import { Admin } from '@/guards/admin.guard';
-import Spinner from '@/components/shared/misc/Spinner';
 export const getServerSideProps = Admin();
 
 export default AdminEmailUser;

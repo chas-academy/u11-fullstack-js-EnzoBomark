@@ -1,17 +1,20 @@
-import { S } from '@/styles/pages/Register.style';
-import { NextPage } from 'next';
-import { useState } from 'react';
-import { RegisterSchema, Props } from '@/schemas/Register.schema';
+import { Props, RegisterSchema } from '@/schemas/Register.schema';
+
 import { AuthResponse } from '@/interfaces/AuthResponse.interface';
-import { resolver } from '@/utils/resolver.utils';
-import { post } from '@/utils/http.utils';
-import Link from 'next/link';
-import router from 'next/router';
 import Form from '@/components/shared/templates/Form';
-import Text from '@/components/shared/inputs/Text/Index';
+import Link from 'next/link';
+import { NextPage } from 'next';
 import Password from '@/components/shared/inputs/Password/Index';
+import { Public } from '@/guards/public.guard';
+import { S } from '@/styles/pages/Register.style';
+import Spinner from '@/components/shared/misc/Spinner';
+import Text from '@/components/shared/inputs/Text/Index';
+import { post } from '@/utils/http.utils';
+import { resolver } from '@/utils/resolver.utils';
+import router from 'next/router';
 import { useFetch } from '@/hooks/useFetch.hooks';
 import { useMount } from '@/hooks/useMount';
+import { useState } from 'react';
 
 const Register: NextPage = () => {
   const res = resolver<Props>(RegisterSchema);
@@ -66,8 +69,6 @@ const Register: NextPage = () => {
   );
 };
 
-import { Public } from '@/guards/public.guard';
-import Spinner from '@/components/shared/misc/Spinner';
 export const getServerSideProps = Public();
 
 export default Register;

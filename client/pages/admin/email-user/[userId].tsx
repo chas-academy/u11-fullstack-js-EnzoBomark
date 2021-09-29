@@ -1,15 +1,18 @@
-import { S } from '@/styles/pages/EmailUser.style';
-import { NextPage } from 'next';
-import React, { useState } from 'react';
-import { Response } from '@/interfaces/Response.interface';
-import { post } from '@/utils/http.utils';
-import { useFetch } from '@/hooks/useFetch.hooks';
-import router from 'next/router';
+import { Admin } from '@/guards/admin.guard';
 import Form from '@/components/shared/templates/Form';
+import { NextPage } from 'next';
+import { Response } from '@/interfaces/Response.interface';
+import { S } from '@/styles/pages/EmailUser.style';
+import Spinner from '@/components/shared/misc/Spinner';
 import Text from '@/components/shared/inputs/Text/Index';
 import TextArea from '@/components/shared/inputs/TextArea';
+import { post } from '@/utils/http.utils';
+import { useFetch } from '@/hooks/useFetch.hooks';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const AdminEmailUser: NextPage = () => {
+  const router = useRouter();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
@@ -35,8 +38,6 @@ const AdminEmailUser: NextPage = () => {
   );
 };
 
-import { Admin } from '@/guards/admin.guard';
-import Spinner from '@/components/shared/misc/Spinner';
 export const getServerSideProps = Admin();
 
 export default AdminEmailUser;

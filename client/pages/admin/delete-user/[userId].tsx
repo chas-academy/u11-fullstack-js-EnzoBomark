@@ -3,11 +3,12 @@ import { NextPage } from 'next';
 import React, { useState } from 'react';
 import { Response } from '@/interfaces/Response.interface';
 import { destroy } from '@/utils/http.utils';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import Form from '@/components/shared/templates/Form';
 import { useFetch } from '@/hooks/useFetch.hooks';
 
 const AdminEmailUser: NextPage = () => {
+  const router = useRouter();
   const { fetch, isLoading, hasError, data } = useFetch<Response>(() =>
     destroy(`admin/user/${router.query.userId}`, {})
   );
@@ -15,6 +16,7 @@ const AdminEmailUser: NextPage = () => {
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await fetch();
+    router.push('/admin');
   };
 
   return (

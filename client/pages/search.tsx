@@ -48,7 +48,6 @@ export const getServerSideProps = auth(async (context) => {
   const response = await post<ArticlesResponse>('search', {
     query: '',
     page: 1,
-    model: 'article',
   });
 
   if (!response.ok) {

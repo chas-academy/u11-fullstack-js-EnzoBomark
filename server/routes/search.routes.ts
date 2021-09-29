@@ -7,6 +7,6 @@ export const Search = (app: Express) => {
   app.post(
     '/api/search',
     MW.validateRequest(SCHEMA.searchSchema),
-    CONT.getPaginatedDataHandler
+    CONT.getPaginatedArticlesHandler
   );
 };

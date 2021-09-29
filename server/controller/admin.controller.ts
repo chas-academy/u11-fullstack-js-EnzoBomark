@@ -33,18 +33,6 @@ export const adminUpdateUserHandler = async (req: Request, res: Response) => {
   return res.status(200).send({ success: 'Admin successfully updated this user' });
 };
 
-export const adminGetUsersHandler = async (req: Request, res: Response) => {
-  const users = await SERVICE.getUsers();
-
-  if (!users) {
-    return res.status(400).send({ error: 'No user found' });
-  }
-
-  return res.status(200).send({
-    success: users.map((user) => removePassword(user)),
-  });
-};
-
 export const adminGetUserHandler = async (req: Request, res: Response) => {
   const userId = get(req, 'params.userId');
 

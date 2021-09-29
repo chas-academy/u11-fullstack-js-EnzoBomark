@@ -7,3 +7,13 @@ export interface IUser {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface IPaginatedUsers {
+  data: IUser[];
+  objectsFound: number;
+}
+
+export interface UsersResponse {
+  error?: string;
+  success?: IPaginatedUsers;
+}

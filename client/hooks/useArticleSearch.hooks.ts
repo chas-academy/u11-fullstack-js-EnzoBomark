@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useFetchDebounce } from './useFetchDebounce.hooks';
-import { ArticlesResponse } from '@/interfaces/Article.interface';
+import { ArticlesResponse, IPaginatedArticles } from '@/interfaces/Article.interface';
 import { post } from '@/utils/http.utils';
-import { IPaginatedArticles } from '@/interfaces/Article.interface';
 import { useMount } from './useMount';
 
 export const useArticleSearch = (
@@ -13,7 +12,7 @@ export const useArticleSearch = (
   const [articles, setArticles] = useState(ssrLoadedData.data);
 
   const { isLoading, hasError, data } = useFetchDebounce<ArticlesResponse>(
-    () => post('search', { query, page, model: 'article' }),
+    () => post('search', { query, page }),
     [query, page],
     500
   );

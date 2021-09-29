@@ -19,10 +19,14 @@ export const Admin = (app: Express) => {
   );
 
   //Delete user
-  app.delete('/api/admin/user/:UserId', MW.requireAdmin, CONT.adminDeleteUserHandler);
+  app.delete('/api/admin/user/:userId', MW.requireAdmin, CONT.adminDeleteUserHandler);
 
   //Get users
-  app.get('/api/admin/users', MW.requireAdmin, CONT.adminGetUsersHandler);
+  app.post(
+    '/api/admin/users',
+    [MW.requireAdmin, MW.validateRequest(SCHEMA.searchSchema)],
+    CONT.getPaginatedUsersHandler
+  );
 
   //Get users
   app.get('/api/admin/user/:userId', MW.requireAdmin, CONT.adminGetUserHandler);

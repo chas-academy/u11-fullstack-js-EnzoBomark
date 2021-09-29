@@ -10,7 +10,6 @@ export const AdminCreateUserSchema = object({
   passwordConf: string()
     .required('Password confirmation is required')
     .oneOf([ref('password'), null], 'Passwords must match'),
-  role: string(),
 });
 
 export type Props = InferType<typeof AdminCreateUserSchema>;

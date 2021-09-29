@@ -1,7 +1,7 @@
 import ArticleShowcase from '@/components/article/ArticleShowcase';
 import { NextPage } from 'next';
 import { auth } from '@/guards/auth.guard';
-import { Response } from '@/interfaces/AuthResponse.interface';
+import { Response } from '@/interfaces/Response.interface';
 import { get } from '@/utils/http.utils';
 import { IArticle } from '@/interfaces/Article.interface';
 

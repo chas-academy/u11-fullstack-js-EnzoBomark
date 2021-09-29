@@ -7,22 +7,25 @@ export const Admin = (app: Express) => {
   //Create User
   app.post(
     '/api/admin/user',
-    [MW.requireAdmin, MW.validateRequest(SCHEMA.createUserSchema)],
+    [MW.requireAdmin, MW.validateRequest(SCHEMA.adminCreateUserSchema)],
     CONT.adminCreateUserHandler
   );
 
   //Update User
-  app.put('/api/admin/user/:userId', MW.requireAdmin, CONT.adminUpdateUserHandler);
+  app.put(
+    '/api/admin/user/:userId',
+    [MW.requireAdmin, MW.validateRequest(SCHEMA.adminUpdateUserSchema)],
+    CONT.adminUpdateUserHandler
+  );
 
   //Delete user
-  app.delete(
-    '/api/admin/user/:UserId',
-    [MW.requireAdmin, MW.validateRequest(SCHEMA.createUserSchema)],
-    CONT.adminDeleteUserHandler
-  );
+  app.delete('/api/admin/user/:UserId', MW.requireAdmin, CONT.adminDeleteUserHandler);
 
   //Get users
   app.get('/api/admin/users', MW.requireAdmin, CONT.adminGetUsersHandler);
+
+  //Get users
+  app.get('/api/admin/user/:userId', MW.requireAdmin, CONT.adminGetUserHandler);
 
   //Get Admin
   app.get('/api/admin/guard', MW.requireAdmin, CONT.getUserHandler);

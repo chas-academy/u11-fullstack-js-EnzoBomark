@@ -38,6 +38,33 @@ export const input = styled.input`
   }
 `;
 
+export const text_area = styled.textarea`
+  position: relative;
+  display: flex;
+  background: ${(props) => props.theme['color-dark-gray']};
+  color: #ffffff;
+  min-height: 3.75rem;
+  width: 100%;
+  max-width: 25rem;
+  border: ${mainTheme['border-sm']};
+  border-radius: ${mainTheme['rounded-sm']};
+  font-size: ${mainTheme['font-sm']};
+  cursor: text;
+  margin-top: 1.875rem;
+  padding: 1.25rem;
+  box-shadow: ${mainTheme['box-shadow']};
+  text-shadow: ${mainTheme['text-shadow']};
+  resize: vertical;
+
+  &:hover {
+    border: ${mainTheme['border-hover']};
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 export const input_error = styled.span`
   color: ${(props) => props.theme['color-error']};
   margin-top: 1rem;
@@ -45,3 +72,5 @@ export const input_error = styled.span`
   width: 70%;
   text-shadow: ${mainTheme['text-shadow']};
 `;
+
+export const checkbox = styled.div``;

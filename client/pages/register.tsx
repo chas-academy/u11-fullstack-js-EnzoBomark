@@ -64,4 +64,9 @@ const Register: NextPage = () => {
   );
 };
 
+import { auth } from '@/guards/auth.guard';
+export const getServerSideProps = auth(async (context) => {
+  return null;
+}, false);
+
 export default Register;

@@ -1,10 +1,10 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { Response } from '@/interfaces/AuthResponse.interface';
+import { Response } from '@/interfaces/Response.interface';
 import { get } from '@/utils/http.utils';
 import { wrapper } from '../store';
 import { addUser } from 'slices/user.slice';
 
-export const admin = (gssp: GetServerSideProps) => {
+export const admin = (gssp: GetServerSideProps = async (context) => null) => {
   //@ts-ignore
   return wrapper.getServerSideProps((store) => async (context) => {
     const { req } = context;

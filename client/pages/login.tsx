@@ -55,12 +55,17 @@ const Login: NextPage = () => {
       </Form>
       <S.P>
         Dont have an account?
-        <Link href="/Register">
+        <Link href="/register">
           <S.A>Register</S.A>
         </Link>
       </S.P>
     </S.Login>
   );
 };
+
+import { auth } from '@/guards/auth.guard';
+export const getServerSideProps = auth(async (context) => {
+  return null;
+}, false);
 
 export default Login;

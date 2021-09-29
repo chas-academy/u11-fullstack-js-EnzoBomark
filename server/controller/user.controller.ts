@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { omit, get } from 'lodash';
+import { get } from 'lodash';
 import crypto from 'crypto';
 import { SERVICE } from '../service';
 import { MODEL } from '../model';
 import { UTILS } from '../utils';
+import { removePassword } from '../utils/removePassword.utils';
 
 export const createUserHandler = async (req: Request, res: Response) => {
   try {
@@ -25,7 +26,7 @@ export const getUserHandler = async (req: Request, res: Response) => {
   }
 
   return res.status(200).send({
-    success: omit(user, ['password', 'resetPasswordToken', 'resetPasswordExpire']),
+    success: removePassword(user),
   });
 };
 

@@ -20,6 +20,7 @@ import { getPaginatedDataHandler } from './search.controller';
 import { adminCreateUserHandler } from './admin.controller';
 import { adminUpdateUserHandler } from './admin.controller';
 import { adminGetUsersHandler } from './admin.controller';
+import { adminGetUserHandler } from './admin.controller';
 import { adminDeleteUserHandler } from './admin.controller';
 import { adminEmailUserHandler } from './admin.controller';
 
@@ -46,6 +47,7 @@ export const CONT = {
   adminCreateUserHandler,
   adminUpdateUserHandler,
   adminGetUsersHandler,
+  adminGetUserHandler,
   adminDeleteUserHandler,
   adminEmailUserHandler,
 };

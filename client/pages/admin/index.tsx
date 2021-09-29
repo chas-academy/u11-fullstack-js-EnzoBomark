@@ -1,28 +1,20 @@
-import { get } from '@/utils/http.utils';
-import Link from 'next/link';
-import { Response } from '@/interfaces/AuthResponse.interface';
+import { S } from '@/styles/pages/Admin.style';
 import { NextPage } from 'next';
-import { User } from '@/interfaces/Users.interface';
+import Link from 'next/link';
+import { get } from '@/utils/http.utils';
+import { Response } from '@/interfaces/Response.interface';
+import { IUser } from '@/interfaces/User.interface';
+import UserListItem from '@/components/admin/UserListItem';
 
-const Admin: NextPage<{ data: { users: User[] } }> = ({ data }) => {
+const Admin: NextPage<{ data: { users: IUser[] } }> = ({ data }) => {
   return (
-    <>
+    <S.Admin>
       {data.users.map((item) => {
-        return (
-          <div key={item._id}>
-            <div>{item.role}</div>
-            <div>{item._id}</div>
-            <div>{item.name}</div>
-            <div>{item.email}</div>
-            <div>{item.password}</div>
-            <div>{item.createdAt}</div>
-            <div>{item.updatedAt}</div>
-          </div>
-        );
+        return <UserListItem key={item._id} data={item} />;
       })}
 
       <Link href="/admin/create-user">create user</Link>
-    </>
+    </S.Admin>
   );
 };
 

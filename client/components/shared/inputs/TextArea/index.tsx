@@ -1,4 +1,4 @@
-import { S } from './Text.style';
+import { S } from './TextArea.style';
 
 interface Props {
   id: string;
@@ -9,11 +9,11 @@ interface Props {
   register?: any;
 }
 
-const Text: React.FC<Props> = (props: Props) => {
+const TextArea: React.FC<Props> = (props: Props) => {
   return (
     <>
       <S.Label htmlFor={props.id}>{props.placeholder}</S.Label>
-      <S.Input
+      <S.TextArea
         type="text"
         id={props.id}
         placeholder={props.placeholder}
@@ -27,4 +27,4 @@ const Text: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default Text;
+export default TextArea;

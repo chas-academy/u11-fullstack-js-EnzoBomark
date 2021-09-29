@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+
 import { mainTheme } from '@/styles/Themes';
+
 import { button } from '../Button.style';
 
 const Login = styled.div`

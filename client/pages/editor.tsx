@@ -1,7 +1,7 @@
+import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 
 import ArticleEditor from '@/components/article/ArticleEditor';
-import { NextPage } from 'next';
 import { Private } from '@/guards/private.guard';
 import { S } from '@/styles/pages/Editor.style';
 import { getReadTime } from '@/utils/readTime.utils';

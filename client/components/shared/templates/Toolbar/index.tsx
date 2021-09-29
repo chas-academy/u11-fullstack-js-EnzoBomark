@@ -1,9 +1,10 @@
-import { S } from './Toolbar.style';
+import { Icon } from '@/assets/icons';
+
+import BlockButton from '../../buttons/BlockButton';
+import ImageButton from '../../buttons/ImageButton';
 import LinkButton from '../../buttons/LinkButton';
 import MarkButton from '../../buttons/MarkButton';
-import ImageButton from '../../buttons/ImageButton';
-import BlockButton from '../../buttons/BlockButton';
-import { Icon } from '@/assets/icons';
+import { S } from './Toolbar.style';
 
 const Toolbar = () => {
   return (

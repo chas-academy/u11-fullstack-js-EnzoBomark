@@ -1,11 +1,11 @@
 import { NextPage } from 'next';
 
-import { S } from '@/styles/pages/Article.style';
 import ArticleShowcase from '@/components/article/ArticleShowcase';
+import { Public } from '@/guards/public.guard';
 import { IArticle } from '@/interfaces/Article.interface';
 import { Response } from '@/interfaces/Response.interface';
+import { S } from '@/styles/pages/Article.style';
 import { get } from '@/utils/http.utils';
-import { Public } from '@/guards/public.guard';
 
 const Article: NextPage<{ data: IArticle }> = ({ data }) => {
   return (

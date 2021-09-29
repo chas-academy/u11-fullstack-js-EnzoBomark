@@ -1,6 +1,7 @@
 import { Express } from 'express';
-import { MW } from '../middleware/';
+
 import { CONT } from '../controller/';
+import { MW } from '../middleware/';
 import { SCHEMA } from '../schema/';
 
 export const Article = (app: Express) => {
@@ -25,9 +26,5 @@ export const Article = (app: Express) => {
   app.get('/api/articles', CONT.getAllArticlesHandler);
 
   //Delete article
-  app.delete(
-    '/api/article/:articleId',
-    MW.requireUser,
-    CONT.deleteArticleHandler
-  );
+  app.delete('/api/article/:articleId', MW.requireUser, CONT.deleteArticleHandler);
 };

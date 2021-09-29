@@ -1,4 +1,4 @@
-import { object, string, ref } from 'yup';
+import { object, ref, string } from 'yup';
 
 export const createUserSchema = object({
   body: object({

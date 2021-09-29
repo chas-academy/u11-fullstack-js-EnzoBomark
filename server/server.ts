@@ -1,10 +1,11 @@
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
-import connectToDataBase from './db/connect';
-import express from 'express';
-import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { ROUTES } from './routes';
+import cors from 'cors';
+import express from 'express';
+
+import connectToDataBase from './db/connect';
 import { MW } from './middleware';
+import { ROUTES } from './routes';
 
 const port = process.env.PORT;
 const origin = {

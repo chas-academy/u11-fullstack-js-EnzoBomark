@@ -1,7 +1,9 @@
-import { S } from './ArticlePreview.style';
 import { useRouter } from 'next/router';
-import { IArticle } from '@/interfaces/Article.interface';
 import React from 'react';
+
+import { IArticle } from '@/interfaces/Article.interface';
+
+import { S } from './ArticlePreview.style';
 
 interface Props {
   data: IArticle;

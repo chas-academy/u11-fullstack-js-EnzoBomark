@@ -1,6 +1,7 @@
-import { useState, useCallback } from 'react';
-import { Response } from '@/interfaces/Response.interface';
+import { useCallback, useState } from 'react';
+
 import { HttpResponse } from '@/interfaces/HttpResponse.interface';
+import { Response } from '@/interfaces/Response.interface';
 
 export const useFetch = <T extends Response>(request: () => Promise<HttpResponse<T>>) => {
   const [data, setData] = useState<T>(null);

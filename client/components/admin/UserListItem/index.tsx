@@ -1,7 +1,9 @@
-import { S } from './UserListItem.style';
-import { IUser } from '@/interfaces/User.interface';
-import React from 'react';
 import router from 'next/router';
+import React from 'react';
+
+import { IUser } from '@/interfaces/User.interface';
+
+import { S } from './UserListItem.style';
 
 interface Props {
   data: IUser;

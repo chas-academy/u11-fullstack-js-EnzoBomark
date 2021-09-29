@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { useFetchDebounce } from './useFetchDebounce.hooks';
+
 import { ArticlesResponse, IPaginatedArticles } from '@/interfaces/Article.interface';
 import { post } from '@/utils/http.utils';
+
+import { useFetchDebounce } from './useFetchDebounce.hooks';
 import { useMount } from './useMount';
 
 export const useArticleSearch = (

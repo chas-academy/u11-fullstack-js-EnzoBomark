@@ -1,8 +1,10 @@
 import { GetServerSideProps } from 'next';
+import { addUser } from 'slices/user.slice';
+
 import { Response } from '@/interfaces/Response.interface';
 import { get } from '@/utils/http.utils';
+
 import { wrapper } from '../store';
-import { addUser } from 'slices/user.slice';
 
 export const Admin = (gssp: GetServerSideProps = async (context) => null) => {
   //@ts-ignore

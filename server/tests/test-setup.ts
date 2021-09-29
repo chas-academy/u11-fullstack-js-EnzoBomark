@@ -1,9 +1,10 @@
+import express from 'express';
+import mongoose from 'mongoose';
+
+import { MW } from '../middleware';
+import { ROUTES } from '../routes';
 /* global beforeAll beforeEach afterEach afterAll */
 import { seedDatabase } from './seeder';
-import mongoose from 'mongoose';
-import express from 'express';
-import { ROUTES } from '../routes';
-import { MW } from '../middleware';
 
 export const app = express();
 
@@ -43,12 +44,7 @@ async function dropAllCollections() {
       if ((error as Error).message === 'ns not found') return;
       // This error occurs when you use it.todo. You can
       // safely ignore this error too
-      if (
-        (error as Error).message.includes(
-          'a background operation is currently running'
-        )
-      )
-        return;
+      if ((error as Error).message.includes('a background operation is currently running')) return;
       console.log((error as Error).message);
     }
   }

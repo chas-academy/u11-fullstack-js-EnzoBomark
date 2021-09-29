@@ -1,8 +1,10 @@
-import { S } from './Navbar.style';
-import NavLink from '@/components/shared/links/NavLink';
 import { useSelector } from 'react-redux';
+
+import NavLink from '@/components/shared/links/NavLink';
 import { RootState } from '@/store/index';
 import { toTitleCase } from '@/utils/toTitleCase.utils';
+
+import { S } from './Navbar.style';
 
 interface Props {
   openSidebar: () => void;

@@ -1,21 +1,21 @@
-import { AdminCreateUserSchema, Props } from '@/schemas/admin/CreateUser.schema';
-
-import { Admin } from '@/guards/admin.guard';
-import Checkbox from '@/components/shared/inputs/Checkbox';
-import Form from '@/components/shared/templates/Form';
 import { NextPage } from 'next';
-import Password from '@/components/shared/inputs/Password/Index';
-import { Response } from '@/interfaces/Response.interface';
-import { S } from '@/styles/pages/UpdateUser.style';
-import Spinner from '@/components/shared/misc/Spinner';
-import Text from '@/components/shared/inputs/Text/Index';
-import { post } from '@/utils/http.utils';
-import { resolver } from '@/utils/resolver.utils';
-import { useFetch } from '@/hooks/useFetch.hooks';
-import { useMount } from '@/hooks/useMount';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+
+import Checkbox from '@/components/shared/inputs/Checkbox';
+import Password from '@/components/shared/inputs/Password/Index';
+import Text from '@/components/shared/inputs/Text/Index';
+import Spinner from '@/components/shared/misc/Spinner';
+import Form from '@/components/shared/templates/Form';
+import { Admin } from '@/guards/admin.guard';
+import { useFetch } from '@/hooks/useFetch.hooks';
+import { useMount } from '@/hooks/useMount';
 import { useToggle } from '@/hooks/useToggle.hooks';
+import { Response } from '@/interfaces/Response.interface';
+import { AdminCreateUserSchema, Props } from '@/schemas/admin/CreateUser.schema';
+import { S } from '@/styles/pages/UpdateUser.style';
+import { post } from '@/utils/http.utils';
+import { resolver } from '@/utils/resolver.utils';
 
 const AdminCreateUser: NextPage = () => {
   const router = useRouter();

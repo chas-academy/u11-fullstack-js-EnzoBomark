@@ -1,5 +1,7 @@
-import { app } from '../test-setup';
 import supertest from 'supertest';
+
+import { app } from '../test-setup';
+
 const request = supertest(app);
 
 export const getToken = async () => {

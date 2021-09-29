@@ -1,4 +1,4 @@
-import { object, string, number, array } from 'yup';
+import { array, number, object, string } from 'yup';
 
 const payload = {
   body: object({

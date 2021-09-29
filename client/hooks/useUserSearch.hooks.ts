@@ -1,9 +1,11 @@
+import Cookies from 'js-cookie';
 import { useState } from 'react';
-import { useFetchDebounce } from './useFetchDebounce.hooks';
+
 import { IPaginatedUsers, UsersResponse } from '@/interfaces/User.interface';
 import { post } from '@/utils/http.utils';
+
+import { useFetchDebounce } from './useFetchDebounce.hooks';
 import { useMount } from './useMount';
-import Cookies from 'js-cookie';
 
 export const useUserSearch = (query: string, page: number, ssrLoadedData: IPaginatedUsers) => {
   const [users, setUsers] = useState(ssrLoadedData.data);

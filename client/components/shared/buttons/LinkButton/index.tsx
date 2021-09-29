@@ -1,8 +1,10 @@
-import { S } from './LinkButton.style';
-import { useSlateStatic } from 'slate-react';
-import { insertLink } from '@/utils/link.utils';
-import { Icon } from '@/assets/icons';
 import Image from 'next/image';
+import { useSlateStatic } from 'slate-react';
+
+import { Icon } from '@/assets/icons';
+import { insertLink } from '@/utils/link.utils';
+
+import { S } from './LinkButton.style';
 
 const LinkButton = () => {
   const editor = useSlateStatic();

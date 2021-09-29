@@ -1,10 +1,6 @@
-import {
-  DocumentDefinition,
-  FilterQuery,
-  QueryOptions,
-  UpdateQuery,
-} from 'mongoose';
-import { MODEL, ArticleDocument } from '../model';
+import { DocumentDefinition, FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
+
+import { ArticleDocument, MODEL } from '../model';
 
 export const createArticle = (input: DocumentDefinition<ArticleDocument>) => {
   return MODEL.Article.create(input);

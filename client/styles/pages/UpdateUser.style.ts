@@ -1,6 +1,8 @@
-import { button } from '../Button.style';
-import { mainTheme } from '@/styles/Themes';
 import styled from 'styled-components';
+
+import { mainTheme } from '@/styles/Themes';
+
+import { button } from '../Button.style';
 
 const UpdateUser = styled.div`
   display: flex;

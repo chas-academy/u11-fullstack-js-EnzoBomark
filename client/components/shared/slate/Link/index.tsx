@@ -1,4 +1,5 @@
-import { useSelected, useFocused, useSlateStatic } from 'slate-react';
+import { useFocused, useSelected, useSlateStatic } from 'slate-react';
+
 import { removeLink } from '@/utils/link.utils';
 
 const Link = ({ attributes, element, children }) => {

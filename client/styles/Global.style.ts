@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+
 import { ThemeType } from './Themes';
 
 declare module 'styled-components' {

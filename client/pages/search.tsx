@@ -1,15 +1,15 @@
-import ArticlePreview from '@/components/article/ArticlePreview';
-import { ArticlesResponse } from '@/interfaces/Article.interface';
-import { IPaginatedArticles } from '@/interfaces/Article.interface';
 import { NextPage } from 'next';
+import { useState } from 'react';
+
+import ArticlePreview from '@/components/article/ArticlePreview';
+import Spinner from '@/components/shared/misc/Spinner';
 import PageHeader from '@/components/shared/templates/PageHeader';
 import { Public } from '@/guards/public.guard';
-import { S } from '@/styles/pages/Search.style';
-import Spinner from '@/components/shared/misc/Spinner';
-import { post } from '@/utils/http.utils';
 import { useArticleSearch } from '@/hooks/useArticleSearch.hooks';
 import { useObserver } from '@/hooks/useObserver.hooks';
-import { useState } from 'react';
+import { ArticlesResponse, IPaginatedArticles } from '@/interfaces/Article.interface';
+import { S } from '@/styles/pages/Search.style';
+import { post } from '@/utils/http.utils';
 
 const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(1);

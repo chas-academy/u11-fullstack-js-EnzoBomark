@@ -1,6 +1,6 @@
-import { useSlate, ReactEditor } from 'slate-react';
-import { Transforms, Editor, Element } from 'slate';
+import { Editor, Element, Transforms } from 'slate';
 import { HistoryEditor } from 'slate-history';
+import { ReactEditor, useSlate } from 'slate-react';
 
 export const toggleBlock = (editor: ReactEditor & HistoryEditor, format: string) => {
   const isActive = isBlockActive(editor, format);

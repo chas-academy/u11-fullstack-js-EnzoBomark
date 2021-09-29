@@ -1,5 +1,6 @@
-import { mainTheme } from '@/styles/Themes';
 import styled from 'styled-components';
+
+import { mainTheme } from '@/styles/Themes';
 
 const Image = styled.img`
   width: 89vw;

@@ -1,7 +1,8 @@
 import { NextPage } from 'next';
+import { useSelector } from 'react-redux';
+
 import { Private } from '@/guards/private.guard';
 import { RootState } from '@/store/index';
-import { useSelector } from 'react-redux';
 
 const Saved: NextPage = () => {
   const user = useSelector((state: RootState) => state.user.user);

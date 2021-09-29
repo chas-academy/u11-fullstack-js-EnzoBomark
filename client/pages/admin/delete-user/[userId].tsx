@@ -1,13 +1,14 @@
-import { Admin } from '@/guards/admin.guard';
-import Form from '@/components/shared/templates/Form';
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import React from 'react';
+
+import Spinner from '@/components/shared/misc/Spinner';
+import Form from '@/components/shared/templates/Form';
+import { Admin } from '@/guards/admin.guard';
+import { useFetch } from '@/hooks/useFetch.hooks';
 import { Response } from '@/interfaces/Response.interface';
 import { S } from '@/styles/pages/DeleteUser.style';
-import Spinner from '@/components/shared/misc/Spinner';
 import { destroy } from '@/utils/http.utils';
-import { useFetch } from '@/hooks/useFetch.hooks';
-import { useRouter } from 'next/router';
 
 const AdminEmailUser: NextPage = () => {
   const router = useRouter();

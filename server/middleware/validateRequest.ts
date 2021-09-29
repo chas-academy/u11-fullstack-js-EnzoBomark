@@ -1,5 +1,6 @@
+import { NextFunction, Request, Response } from 'express';
 import { AnySchema } from 'yup';
-import { Request, Response, NextFunction } from 'express';
+
 import log from '../logger';
 
 export const validateRequest =

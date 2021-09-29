@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { get } from 'lodash';
+
 import { MODEL, UserDocument } from '../model';
 import { SERVICE } from '../service';
 import { removePassword } from '../utils/removePassword.utils';

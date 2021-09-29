@@ -1,4 +1,4 @@
-import { Editor, Transforms, Path, Range, Element } from 'slate';
+import { Editor, Element, Path, Range, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 
 import { createParagraphNode } from './paragraph.utils';

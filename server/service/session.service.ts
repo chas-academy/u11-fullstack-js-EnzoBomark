@@ -1,8 +1,9 @@
-import { FilterQuery, LeanDocument, UpdateQuery } from 'mongoose';
 import { get } from 'lodash';
-import { MODEL, UserDocument, SessionDocument } from '../model';
-import { UTILS } from '../utils';
+import { FilterQuery, LeanDocument, UpdateQuery } from 'mongoose';
+
+import { MODEL, SessionDocument, UserDocument } from '../model';
 import { SERVICE } from '../service';
+import { UTILS } from '../utils';
 
 export const createSession = async (userId: string, userAgent: string) => {
   const session = await MODEL.Session.create({ user: userId, userAgent });
@@ -14,12 +15,8 @@ export const createAccessToken = ({
   user,
   session,
 }: {
-  user:
-    | Omit<UserDocument, 'password'>
-    | LeanDocument<Omit<UserDocument, 'password'>>;
-  session:
-    | Omit<SessionDocument, 'password'>
-    | LeanDocument<Omit<SessionDocument, 'password'>>;
+  user: Omit<UserDocument, 'password'> | LeanDocument<Omit<UserDocument, 'password'>>;
+  session: Omit<SessionDocument, 'password'> | LeanDocument<Omit<SessionDocument, 'password'>>;
 }) => {
   //Build and return the new access token
   const accessToken = UTILS.sign(
@@ -32,11 +29,7 @@ export const createAccessToken = ({
   return accessToken;
 };
 
-export const reIssueAccessToken = async ({
-  refreshToken,
-}: {
-  refreshToken: string;
-}) => {
+export const reIssueAccessToken = async ({ refreshToken }: { refreshToken: string }) => {
   // Decode the refresh token
   const { decoded } = UTILS.decode(refreshToken);
 

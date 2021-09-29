@@ -1,4 +1,4 @@
-import { object, string, InferType } from 'yup';
+import { InferType, object, string } from 'yup';
 
 export const ForgotPasswordSchema = object({
   email: string().email('Email must be a valid email address').required('Email is required'),

@@ -1,6 +1,8 @@
-import { HYDRATE, createWrapper, MakeStore, Context } from 'next-redux-wrapper';
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { Context, createWrapper, HYDRATE, MakeStore } from 'next-redux-wrapper';
 import { AnyAction, combineReducers, Reducer } from 'redux';
+
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+
 import user from '../slices/user.slice';
 
 const combinedReducer = combineReducers({ user });

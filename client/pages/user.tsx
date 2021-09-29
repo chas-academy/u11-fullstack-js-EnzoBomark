@@ -1,10 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux';
-
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeUser } from 'slices/user.slice';
+
 import { Private } from '@/guards/private.guard';
 import { RootState } from '@/store/index';
-import { removeUser } from 'slices/user.slice';
-import { useRouter } from 'next/router';
 
 const User: NextPage = () => {
   const user = useSelector((state: RootState) => state.user.user);

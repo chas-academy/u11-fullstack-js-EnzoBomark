@@ -1,4 +1,5 @@
 import Compress from 'react-image-file-resizer';
+
 import { get } from '@/utils/http.utils';
 
 export const s3UploadWithCompression = async (

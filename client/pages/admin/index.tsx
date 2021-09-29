@@ -1,16 +1,16 @@
-import { IPaginatedUsers, UsersResponse } from '@/interfaces/User.interface';
-
-import { Admin } from '@/guards/admin.guard';
 import { NextPage } from 'next';
-import NoMatch from '@/components/shared/misc/NoMatch';
-import Redirect from '@/components/shared/links/Redirect';
-import { S } from '@/styles/pages/Admin.style';
-import Spinner from '@/components/shared/misc/Spinner';
-import UserListItem from '@/components/admin/UserListItem';
-import { post } from '@/utils/http.utils';
-import { useObserver } from '@/hooks/useObserver.hooks';
 import { useState } from 'react';
+
+import UserListItem from '@/components/admin/UserListItem';
+import Redirect from '@/components/shared/links/Redirect';
+import NoMatch from '@/components/shared/misc/NoMatch';
+import Spinner from '@/components/shared/misc/Spinner';
+import { Admin } from '@/guards/admin.guard';
+import { useObserver } from '@/hooks/useObserver.hooks';
 import { useUserSearch } from '@/hooks/useUserSearch.hooks';
+import { IPaginatedUsers, UsersResponse } from '@/interfaces/User.interface';
+import { S } from '@/styles/pages/Admin.style';
+import { post } from '@/utils/http.utils';
 
 const AdminPanel: NextPage<{ data: IPaginatedUsers }> = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(1);

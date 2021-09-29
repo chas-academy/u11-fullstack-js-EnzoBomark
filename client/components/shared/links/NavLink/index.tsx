@@ -1,6 +1,7 @@
-import { S } from './NavLink.style';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+import { S } from './NavLink.style';
 
 interface Props {
   children: string;

@@ -1,6 +1,8 @@
-import { S } from './ImageImportButton.style';
-import { s3UploadWithCompression } from '@/utils/s3.utils';
 import { useState } from 'react';
+
+import { s3UploadWithCompression } from '@/utils/s3.utils';
+
+import { S } from './ImageImportButton.style';
 
 interface Props {
   id: string;

@@ -1,15 +1,16 @@
-import { Admin } from '@/guards/admin.guard';
-import Form from '@/components/shared/templates/Form';
 import { NextPage } from 'next';
-import { Response } from '@/interfaces/Response.interface';
-import { S } from '@/styles/pages/EmailUser.style';
-import Spinner from '@/components/shared/misc/Spinner';
-import Text from '@/components/shared/inputs/Text/Index';
-import TextArea from '@/components/shared/inputs/TextArea';
-import { post } from '@/utils/http.utils';
-import { useFetch } from '@/hooks/useFetch.hooks';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+
+import Text from '@/components/shared/inputs/Text/Index';
+import TextArea from '@/components/shared/inputs/TextArea';
+import Spinner from '@/components/shared/misc/Spinner';
+import Form from '@/components/shared/templates/Form';
+import { Admin } from '@/guards/admin.guard';
+import { useFetch } from '@/hooks/useFetch.hooks';
+import { Response } from '@/interfaces/Response.interface';
+import { S } from '@/styles/pages/EmailUser.style';
+import { post } from '@/utils/http.utils';
 
 const AdminEmailUser: NextPage = () => {
   const router = useRouter();

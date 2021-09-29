@@ -1,10 +1,10 @@
-import { app } from '../test-setup';
 import supertest from 'supertest';
-import { getToken } from '../test-utils/getToken.utils';
-const request = supertest(app);
 
 import { MODEL } from '../../model';
-import { setupDB } from '../test-setup';
+import { app, setupDB } from '../test-setup';
+import { getToken } from '../test-utils/getToken.utils';
+
+const request = supertest(app);
 
 setupDB('endpoint-testing', true);
 

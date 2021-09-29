@@ -1,5 +1,6 @@
-import { S } from './Checkbox.style';
 import React from 'react';
+
+import { S } from './Checkbox.style';
 
 interface Props {
   value: boolean;

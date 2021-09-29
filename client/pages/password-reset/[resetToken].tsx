@@ -1,18 +1,18 @@
-import { Props, ResetPasswordSchema } from '@/schemas/ResetPassword.schema';
-
-import Form from '@/components/shared/templates/Form';
-import { FormResponse } from '@/interfaces/FormResponse.interface';
 import { NextPage } from 'next';
-import Password from '@/components/shared/inputs/Password/Index';
-import { Public } from '@/guards/public.guard';
-import { S } from '@/styles/pages/ResetPassword.style';
-import Spinner from '@/components/shared/misc/Spinner';
-import { put } from '@/utils/http.utils';
-import { resolver } from '@/utils/resolver.utils';
-import { useFetch } from '@/hooks/useFetch.hooks';
-import { useMount } from '@/hooks/useMount';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+
+import Password from '@/components/shared/inputs/Password/Index';
+import Spinner from '@/components/shared/misc/Spinner';
+import Form from '@/components/shared/templates/Form';
+import { Public } from '@/guards/public.guard';
+import { useFetch } from '@/hooks/useFetch.hooks';
+import { useMount } from '@/hooks/useMount';
+import { FormResponse } from '@/interfaces/FormResponse.interface';
+import { Props, ResetPasswordSchema } from '@/schemas/ResetPassword.schema';
+import { S } from '@/styles/pages/ResetPassword.style';
+import { put } from '@/utils/http.utils';
+import { resolver } from '@/utils/resolver.utils';
 
 const ResetPassword: NextPage = () => {
   const router = useRouter();

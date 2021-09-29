@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { get } from 'lodash';
+
 import { SERVICE } from '../service';
 
 export const createArticleHandler = async (req: Request, res: Response) => {
@@ -7,11 +8,11 @@ export const createArticleHandler = async (req: Request, res: Response) => {
   const author = get(req, 'user.name');
   const body = get(req, 'body');
 
-    const article = await SERVICE.createArticle({
-      ...body,
-      user: userId,
-      author: author,
-    });
+  const article = await SERVICE.createArticle({
+    ...body,
+    user: userId,
+    author: author,
+  });
 
   return res.status(201).send({ success: get(article, '_id') });
 };
@@ -31,13 +32,9 @@ export const updateArticleHandler = async (req: Request, res: Response) => {
     return res.status(401).send({ error: 'Unauthorized' });
   }
 
-  const updatedArticle = await SERVICE.findAndUpdateArticle(
-    { _id: articleId },
-    update,
-    {
-      new: true,
-    }
-  );
+  const updatedArticle = await SERVICE.findAndUpdateArticle({ _id: articleId }, update, {
+    new: true,
+  });
 
   return res.status(200).send({ success: get(updatedArticle, '_id') });
 };
@@ -70,9 +67,7 @@ export const deleteArticleHandler = async (req: Request, res: Response) => {
 
   await SERVICE.deleteArticle({ _id: articleId });
 
-  return res
-    .status(200)
-    .send({ success: `${articleId} was successfully deleted` });
+  return res.status(200).send({ success: `${articleId} was successfully deleted` });
 };
 
 export const getAllArticlesHandler = async (req: Request, res: Response) => {

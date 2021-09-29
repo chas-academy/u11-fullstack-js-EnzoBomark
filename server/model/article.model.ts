@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 import { UserDocument } from './user.model';
 
 export interface ArticleDocument extends mongoose.Document {

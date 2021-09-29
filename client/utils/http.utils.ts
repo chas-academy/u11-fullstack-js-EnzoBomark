@@ -1,5 +1,6 @@
-import { HttpResponse } from '@/interfaces/HttpResponse.interface';
 import Cookies from 'js-cookie';
+
+import { HttpResponse } from '@/interfaces/HttpResponse.interface';
 
 const API_BASE = process.env.BASE_API;
 

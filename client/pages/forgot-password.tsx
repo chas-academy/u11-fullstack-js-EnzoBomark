@@ -1,17 +1,17 @@
-import { ForgotPasswordSchema, Props } from '@/schemas/ForgotPassword.schema';
-
-import Form from '@/components/shared/templates/Form';
-import { FormResponse } from '@/interfaces/FormResponse.interface';
 import { NextPage } from 'next';
-import { Public } from '@/guards/public.guard';
-import { S } from '@/styles/pages/ForgotPassword.style';
-import Spinner from '@/components/shared/misc/Spinner';
+import { useState } from 'react';
+
 import Text from '@/components/shared/inputs/Text/Index';
-import { post } from '@/utils/http.utils';
-import { resolver } from '@/utils/resolver.utils';
+import Spinner from '@/components/shared/misc/Spinner';
+import Form from '@/components/shared/templates/Form';
+import { Public } from '@/guards/public.guard';
 import { useFetch } from '@/hooks/useFetch.hooks';
 import { useMount } from '@/hooks/useMount';
-import { useState } from 'react';
+import { FormResponse } from '@/interfaces/FormResponse.interface';
+import { ForgotPasswordSchema, Props } from '@/schemas/ForgotPassword.schema';
+import { S } from '@/styles/pages/ForgotPassword.style';
+import { post } from '@/utils/http.utils';
+import { resolver } from '@/utils/resolver.utils';
 
 const ForgotPassword: NextPage = () => {
   const res = resolver<Props>(ForgotPasswordSchema);

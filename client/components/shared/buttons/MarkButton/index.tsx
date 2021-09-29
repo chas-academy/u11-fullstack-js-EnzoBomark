@@ -1,8 +1,10 @@
-import { S } from './MarkButton.style';
-import { toggleMark, isMarkActive } from '@/utils/mark.utils';
-import { useSlate } from 'slate-react';
-import { MouseEvent } from 'react';
 import Image from 'next/image';
+import { MouseEvent } from 'react';
+import { useSlate } from 'slate-react';
+
+import { isMarkActive, toggleMark } from '@/utils/mark.utils';
+
+import { S } from './MarkButton.style';
 
 const BlockButton = ({ format, icon }: { format: string; icon: string }) => {
   const editor = useSlate();

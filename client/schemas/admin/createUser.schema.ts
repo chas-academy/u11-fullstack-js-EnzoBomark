@@ -1,4 +1,4 @@
-import { object, string, InferType, ref } from 'yup';
+import { InferType, object, ref, string } from 'yup';
 
 export const AdminCreateUserSchema = object({
   name: string().required('Name is required'),

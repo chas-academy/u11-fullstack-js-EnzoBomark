@@ -1,8 +1,10 @@
-import { S } from './ImageButton.style';
-import { useSlateStatic } from 'slate-react';
-import { insertImage } from '@/utils/image.utils';
-import { Icon } from '@/assets/icons';
 import Image from 'next/image';
+import { useSlateStatic } from 'slate-react';
+
+import { Icon } from '@/assets/icons';
+import { insertImage } from '@/utils/image.utils';
+
+import { S } from './ImageButton.style';
 
 const ImageButton = () => {
   const editor = useSlateStatic();

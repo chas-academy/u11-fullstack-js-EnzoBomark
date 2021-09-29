@@ -1,10 +1,12 @@
-import { S } from './ArticleShowcase.style';
-import { useState, useMemo, useCallback } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { createEditor, Descendant } from 'slate';
-import { Slate, Editable } from 'slate-react';
+import { Editable, Slate } from 'slate-react';
+
 import { Element } from '@/components/shared/misc/Element';
 import { Leaf } from '@/components/shared/misc/Leaf';
 import { IArticle } from '@/interfaces/Article.interface';
+
+import { S } from './ArticleShowcase.style';
 
 const TextEditor: React.FC<{ data: IArticle }> = (props: { data: IArticle }) => {
   const editor = useMemo(() => createEditor(), []);

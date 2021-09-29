@@ -1,4 +1,4 @@
-import { object, string, InferType, ref } from 'yup';
+import { InferType, object, ref, string } from 'yup';
 
 export const ResetPasswordSchema = object({
   password: string()

@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '@/store/index';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type UserState = {
   user: { id: string; name: string; email: string };

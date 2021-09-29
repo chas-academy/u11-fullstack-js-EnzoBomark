@@ -1,8 +1,8 @@
-import Paragraph from '@/components/shared/slate/Paragraph';
 import Image from '@/components/shared/slate//Image';
 import Link from '@/components/shared/slate//Link';
 import List from '@/components/shared/slate//List';
 import Heading from '@/components/shared/slate/Heading';
+import Paragraph from '@/components/shared/slate/Paragraph';
 import Subheading from '@/components/shared/slate/Subheading';
 
 export const Element = (props) => {

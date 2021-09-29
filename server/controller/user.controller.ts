@@ -1,8 +1,9 @@
+import crypto from 'crypto';
 import { NextFunction, Request, Response } from 'express';
 import { get } from 'lodash';
-import crypto from 'crypto';
-import { SERVICE } from '../service';
+
 import { MODEL } from '../model';
+import { SERVICE } from '../service';
 import { UTILS } from '../utils';
 import { removePassword } from '../utils/removePassword.utils';
 

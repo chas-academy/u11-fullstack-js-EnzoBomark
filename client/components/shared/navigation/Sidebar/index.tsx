@@ -1,8 +1,10 @@
-import { S } from './Sidebar.style';
 import { useSelector } from 'react-redux';
+
 import NavLink from '@/components/shared/links/NavLink';
 import { RootState } from '@/store/index';
 import { toTitleCase } from '@/utils/toTitleCase.utils';
+
+import { S } from './Sidebar.style';
 
 interface Props {
   isOpen: boolean;

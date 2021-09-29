@@ -12,7 +12,7 @@ import { useFetch } from '@/hooks/useFetch.hooks';
 import { useMount } from '@/hooks/useMount';
 import Checkbox from '@/components/shared/inputs/Checkbox';
 import { useToggle } from '@/hooks/useToggle.hooks';
-import Redirect from '@/components/shared/links/Redirect';
+import Password from '@/components/shared/inputs/Password/Index';
 
 const AdminCreateUser: NextPage = () => {
   const router = useRouter();
@@ -68,8 +68,7 @@ const AdminCreateUser: NextPage = () => {
   );
 };
 
-import { admin } from '@/guards/admin.guard';
-import Password from '@/components/shared/inputs/Password/Index';
-export const getServerSideProps = admin();
+import { Admin } from '@/guards/admin.guard';
+export const getServerSideProps = Admin();
 
 export default AdminCreateUser;

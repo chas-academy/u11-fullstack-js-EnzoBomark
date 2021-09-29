@@ -29,7 +29,7 @@ const AdminEmailUser: NextPage = () => {
   );
 };
 
-import { admin } from '@/guards/admin.guard';
-export const getServerSideProps = admin();
+import { Admin } from '@/guards/admin.guard';
+export const getServerSideProps = Admin();
 
 export default AdminEmailUser;

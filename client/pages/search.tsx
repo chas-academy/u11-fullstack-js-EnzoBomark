@@ -43,8 +43,8 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
   );
 };
 
-import { auth } from '@/guards/auth.guard';
-export const getServerSideProps = auth(async (context) => {
+import { Public } from '@/guards/public.guard';
+export const getServerSideProps = Public(async (context) => {
   const response = await post<ArticlesResponse>('search', {
     query: '',
     page: 1,
@@ -55,6 +55,6 @@ export const getServerSideProps = auth(async (context) => {
   }
 
   return { props: { data: response.parsedBody.success } };
-}, false);
+});
 
 export default Search;

@@ -1,6 +1,5 @@
 import ArticleShowcase from '@/components/article/ArticleShowcase';
 import { NextPage } from 'next';
-import { auth } from '@/guards/auth.guard';
 import { Response } from '@/interfaces/Response.interface';
 import { get } from '@/utils/http.utils';
 import { IArticle } from '@/interfaces/Article.interface';
@@ -13,7 +12,8 @@ const Article: NextPage<{ data: IArticle }> = ({ data }) => {
   );
 };
 
-export const getServerSideProps = auth(async (context) => {
+import { Public } from '@/guards/public.guard';
+export const getServerSideProps = Public(async (context) => {
   const response = await get<Response>(`article/${context.params.articleId}`);
 
   if (!response.ok) {
@@ -21,6 +21,6 @@ export const getServerSideProps = auth(async (context) => {
   }
 
   return { props: { data: response.parsedBody.success } };
-}, false);
+});
 
 export default Article;

@@ -1,10 +1,10 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { GetServerSideProps } from 'next';
 import { Response } from '@/interfaces/Response.interface';
 import { get } from '@/utils/http.utils';
 import { wrapper } from '../store';
 import { addUser } from 'slices/user.slice';
 
-export const auth = (gssp: GetServerSideProps, secure = false) => {
+export const Private = (gssp: GetServerSideProps = async (context) => null) => {
   //@ts-ignore
   return wrapper.getServerSideProps((store) => async (context) => {
     const { req } = context;
@@ -16,7 +16,7 @@ export const auth = (gssp: GetServerSideProps, secure = false) => {
       'x-refresh': refresh_token,
     });
 
-    if (!response.ok && secure) {
+    if (!response.ok) {
       return {
         redirect: {
           destination: '/login',

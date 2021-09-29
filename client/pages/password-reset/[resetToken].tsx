@@ -48,9 +48,7 @@ const ResetPassword: NextPage = () => {
   );
 };
 
-import { auth } from '@/guards/auth.guard';
-export const getServerSideProps = auth(async (context) => {
-  return null;
-}, false);
+import { Public } from '@/guards/public.guard';
+export const getServerSideProps = Public();
 
 export default ResetPassword;

@@ -20,9 +20,7 @@ const User: NextPage = () => {
   );
 };
 
-import { auth } from '@/guards/auth.guard';
-export const getServerSideProps = auth(async (context) => {
-  return null;
-}, true);
+import { Private } from '@/guards/private.guard';
+export const getServerSideProps = Private();
 
 export default User;

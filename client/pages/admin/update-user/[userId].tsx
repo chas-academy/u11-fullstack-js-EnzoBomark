@@ -13,6 +13,7 @@ import { useMount } from '@/hooks/useMount';
 import { IUser } from '@/interfaces/User.interface';
 import Checkbox from '@/components/shared/inputs/Checkbox';
 import { useToggle } from '@/hooks/useToggle.hooks';
+import Redirect from '@/components/shared/links/Redirect';
 
 const AdminUpdateUser: NextPage<{ user: IUser }> = ({ user }) => {
   const router = useRouter();
@@ -60,9 +61,8 @@ const AdminUpdateUser: NextPage<{ user: IUser }> = ({ user }) => {
   );
 };
 
-import { admin } from '@/guards/admin.guard';
-import Redirect from '@/components/shared/links/Redirect';
-export const getServerSideProps = admin(async (context) => {
+import { Admin } from '@/guards/admin.guard';
+export const getServerSideProps = Admin(async (context) => {
   const { req, res } = context;
 
   const { access_token, refresh_token } = req.cookies;

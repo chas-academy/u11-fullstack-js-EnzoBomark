@@ -8,9 +8,7 @@ const Saved: NextPage = () => {
   return <div>Saved</div>;
 };
 
-import { auth } from '@/guards/auth.guard';
+import { Private } from '@/guards/private.guard';
+export const getServerSideProps = Private();
 
-export const getServerSideProps = auth(async (context) => {
-  return null;
-}, true);
 export default Saved;

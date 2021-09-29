@@ -3,7 +3,8 @@ import { NextPage } from 'next';
 import PageHeader from '@/components/shared/templates/PageHeader';
 import ArticleFilter from '@/components/article/ArticleFilter';
 import ArticlePreview from '@/components/article/ArticlePreview';
-import { IArticle } from '@/interfaces/Article.interface';
+import { ArticlesResponse, IArticle } from '@/interfaces/Article.interface';
+import { get } from '@/utils/http.utils';
 
 const Home: NextPage<{ data: [IArticle] }> = ({ data }) => {
   return (
@@ -19,18 +20,15 @@ const Home: NextPage<{ data: [IArticle] }> = ({ data }) => {
   );
 };
 
-import { auth } from '@/guards/auth.guard';
-import { Response } from '@/interfaces/AuthResponse.interface';
-import { get } from '@/utils/http.utils';
-
-export const getServerSideProps = auth(async (context) => {
-  const response = await get<Response>('articles');
+import { Public } from '@/guards/public.guard';
+export const getServerSideProps = Public(async (context) => {
+  const response = await get<ArticlesResponse>('articles');
 
   if (!response.ok) {
     return { props: { data: null } };
   }
 
   return { props: { data: response.parsedBody.success } };
-}, false);
+});
 
 export default Home;

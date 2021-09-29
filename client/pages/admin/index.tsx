@@ -6,8 +6,10 @@ import { IPaginatedUsers, UsersResponse } from '@/interfaces/User.interface';
 import UserListItem from '@/components/admin/UserListItem';
 import Redirect from '@/components/shared/links/Redirect';
 import { useObserver } from '@/hooks/useObserver.hooks';
+import { useUserSearch } from '@/hooks/useUserSearch.hooks';
+import Spinner from '@/components/shared/misc/Spinner';
 
-const Admin: NextPage<{ data: IPaginatedUsers }> = ({ data }) => {
+const AdminPanel: NextPage<{ data: IPaginatedUsers }> = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [query, setQuery] = useState('');
 
@@ -42,10 +44,8 @@ const Admin: NextPage<{ data: IPaginatedUsers }> = ({ data }) => {
   );
 };
 
-import { admin } from '@/guards/admin.guard';
-import { useUserSearch } from '@/hooks/useUserSearch.hooks';
-import Spinner from '@/components/shared/misc/Spinner';
-export const getServerSideProps = admin(async (context) => {
+import { Admin } from '@/guards/admin.guard';
+export const getServerSideProps = Admin(async (context) => {
   const { req, res } = context;
 
   const { access_token, refresh_token } = req.cookies;
@@ -68,4 +68,4 @@ export const getServerSideProps = admin(async (context) => {
   return { props: { data: response.parsedBody.success } };
 });
 
-export default Admin;
+export default AdminPanel;

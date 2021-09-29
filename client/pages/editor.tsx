@@ -2,6 +2,7 @@ import { S } from '@/styles/pages/Editor.style';
 import ArticleEditor from '@/components/article/ArticleEditor';
 import { NextPage } from 'next';
 import { useState, useEffect } from 'react';
+import { getReadTime } from '@/utils/readTime.utils';
 
 const initialValue = [
   {
@@ -40,11 +41,7 @@ const Editor: NextPage = () => {
   );
 };
 
-import { auth } from '@/guards/auth.guard';
-import { getReadTime } from '@/utils/readTime.utils';
-import { Descendant } from 'slate';
-export const getServerSideProps = auth(async (context) => {
-  return null;
-}, true);
+import { Private } from '@/guards/private.guard';
+export const getServerSideProps = Private();
 
 export default Editor;

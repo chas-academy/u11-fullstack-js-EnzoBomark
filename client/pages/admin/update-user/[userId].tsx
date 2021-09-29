@@ -25,7 +25,6 @@ const AdminUpdateUser: NextPage<{ user: IUser }> = ({ user }) => {
   );
 
   useMount(async () => await fetch(), [values]);
-  // useMount(() => router.push('/admin'), [data]);
 
   return (
     <S.UpdateUser>

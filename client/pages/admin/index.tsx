@@ -1,6 +1,5 @@
 import { S } from '@/styles/pages/Admin.style';
 import { NextPage } from 'next';
-import Link from 'next/link';
 import { get } from '@/utils/http.utils';
 import { Response } from '@/interfaces/Response.interface';
 import { IUser } from '@/interfaces/User.interface';
@@ -13,12 +12,13 @@ const Admin: NextPage<{ data: { users: IUser[] } }> = ({ data }) => {
         return <UserListItem key={item._id} data={item} />;
       })}
 
-      <Link href="/admin/create-user">create user</Link>
+      <Redirect href="/admin/create-user">Create User</Redirect>
     </S.Admin>
   );
 };
 
 import { admin } from '@/guards/admin.guard';
+import Redirect from '@/components/shared/links/Redirect';
 export const getServerSideProps = admin(async (context) => {
   const { req, res } = context;
 

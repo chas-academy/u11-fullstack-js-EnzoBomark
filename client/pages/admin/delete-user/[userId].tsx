@@ -1,6 +1,6 @@
 import { S } from '@/styles/pages/DeleteUser.style';
 import { NextPage } from 'next';
-import React, { useState } from 'react';
+import React from 'react';
 import { Response } from '@/interfaces/Response.interface';
 import { destroy } from '@/utils/http.utils';
 import { useRouter } from 'next/router';
@@ -21,6 +21,7 @@ const AdminEmailUser: NextPage = () => {
 
   return (
     <S.DeleteUser>
+      <Spinner isLoading={isLoading} />
       <S.H1>Delete {router.query.userId}</S.H1>
       <Form onSubmit={submitHandler} error={hasError} success={data?.success}>
         <S.Submit>Confirm</S.Submit>
@@ -30,6 +31,7 @@ const AdminEmailUser: NextPage = () => {
 };
 
 import { Admin } from '@/guards/admin.guard';
+import Spinner from '@/components/shared/misc/Spinner';
 export const getServerSideProps = Admin();
 
 export default AdminEmailUser;

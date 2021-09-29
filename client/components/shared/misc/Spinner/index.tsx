@@ -1,9 +1,12 @@
 import { S } from './Spinner.style';
-import React from 'react';
 
-const Spinner: React.FC = () => {
+interface Props {
+  isLoading: boolean;
+}
+
+const Spinner: React.FC<Props> = (props: Props) => {
   return (
-    <S.Progress>
+    <S.Progress isLoading={props.isLoading}>
       <S.Bar />
     </S.Progress>
   );

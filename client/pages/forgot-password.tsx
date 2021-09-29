@@ -21,6 +21,7 @@ const ForgotPassword: NextPage = () => {
 
   return (
     <S.ForgotPassword>
+      <Spinner isLoading={isLoading} />
       <S.H1>Forgot Email</S.H1>
       <S.H2>Please fill in the details and confirm the mail</S.H2>
       <Form
@@ -41,5 +42,7 @@ const ForgotPassword: NextPage = () => {
 };
 
 import { Public } from '@/guards/public.guard';
+import Spinner from '@/components/shared/misc/Spinner';
 export const getServerSideProps = Public();
+
 export default ForgotPassword;

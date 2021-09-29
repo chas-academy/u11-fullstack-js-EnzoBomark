@@ -8,6 +8,7 @@ import { IPaginatedArticles } from '@/interfaces/Article.interface';
 import { ArticlesResponse } from '@/interfaces/Article.interface';
 import { useArticleSearch } from '@/hooks/useArticleSearch.hooks';
 import { useObserver } from '@/hooks/useObserver.hooks';
+import Spinner from '@/components/shared/misc/Spinner';
 
 const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -24,6 +25,7 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
 
   return (
     <S.Search>
+      <Spinner isLoading={isLoading} />
       <S.Searchbar placeholder="e.g. Rain gear..." value={query} onChange={handleSearch} />
 
       <PageHeader title="Search" />
@@ -37,7 +39,6 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
       })}
 
       {hasError && <div>{hasError}</div>}
-      {isLoading && <div>Loading...</div>}
       {!articles.length && !isLoading && <div>No match</div>}
     </S.Search>
   );

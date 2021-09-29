@@ -22,6 +22,7 @@ const ResetPassword: NextPage = () => {
 
   return (
     <S.ResetPassword>
+      <Spinner isLoading={isLoading} />
       <S.H1>Reset Password</S.H1>
       <S.H2>Please fill in the details and reset your password</S.H2>
 
@@ -49,6 +50,7 @@ const ResetPassword: NextPage = () => {
 };
 
 import { Public } from '@/guards/public.guard';
+import Spinner from '@/components/shared/misc/Spinner';
 export const getServerSideProps = Public();
 
 export default ResetPassword;

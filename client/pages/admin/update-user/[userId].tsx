@@ -29,6 +29,7 @@ const AdminUpdateUser: NextPage<{ user: IUser }> = ({ user }) => {
 
   return (
     <S.UpdateUser>
+      <Spinner isLoading={isLoading} />
       <S.H1>Admin Update User</S.H1>
       <Form
         onSubmit={res.handleSubmit((e) => setValues(e))}
@@ -62,6 +63,7 @@ const AdminUpdateUser: NextPage<{ user: IUser }> = ({ user }) => {
 };
 
 import { Admin } from '@/guards/admin.guard';
+import Spinner from '@/components/shared/misc/Spinner';
 export const getServerSideProps = Admin(async (context) => {
   const { req, res } = context;
 

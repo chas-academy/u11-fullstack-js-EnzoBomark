@@ -29,6 +29,7 @@ const AdminCreateUser: NextPage = () => {
 
   return (
     <S.UpdateUser>
+      <Spinner isLoading={isLoading} />
       <S.H1>Admin Create User</S.H1>
       <Form
         onSubmit={res.handleSubmit((e) => setValues(e))}
@@ -69,6 +70,7 @@ const AdminCreateUser: NextPage = () => {
 };
 
 import { Admin } from '@/guards/admin.guard';
+import Spinner from '@/components/shared/misc/Spinner';
 export const getServerSideProps = Admin();
 
 export default AdminCreateUser;

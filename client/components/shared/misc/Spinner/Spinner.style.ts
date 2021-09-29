@@ -27,15 +27,16 @@ const fill = keyframes`
     }
 `;
 
-const Progress = styled.div`
-  max-width: 18.75rem;
+const Progress = styled.div<{ isLoading: boolean }>`
   width: 100%;
   height: 0.125rem;
   background: lighten(#202020, 6%);
   position: relative;
   border-radius: 2px;
   overflow: hidden;
-  margin-top: 15px;
+
+  transition: all 1s;
+  opacity: ${(props) => (props.isLoading ? '100%' : '0%')};
 `;
 
 const Bar = styled.div`

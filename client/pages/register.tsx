@@ -25,6 +25,8 @@ const Register: NextPage = () => {
 
   return (
     <S.Register>
+      <Spinner isLoading={isLoading} />
+
       <S.H1>Sign Up Now</S.H1>
       <S.H2>Please fill in the details and create an account</S.H2>
       <Form onSubmit={res.handleSubmit((e) => setValues(e))} error={hasError}>
@@ -64,9 +66,8 @@ const Register: NextPage = () => {
   );
 };
 
-import { auth } from '@/guards/auth.guard';
-export const getServerSideProps = auth(async (context) => {
-  return null;
-}, false);
+import { Public } from '@/guards/public.guard';
+import Spinner from '@/components/shared/misc/Spinner';
+export const getServerSideProps = Public();
 
 export default Register;

@@ -24,6 +24,7 @@ const AdminEmailUser: NextPage = () => {
 
   return (
     <S.EmailUser>
+      <Spinner isLoading={isLoading} />
       <S.H1>Compose Email</S.H1>
       <Form onSubmit={submitHandler} error={hasError} success={data?.success}>
         <Text id="title" placeholder="Title" onChange={(e) => setTitle(e)} />
@@ -35,6 +36,7 @@ const AdminEmailUser: NextPage = () => {
 };
 
 import { Admin } from '@/guards/admin.guard';
+import Spinner from '@/components/shared/misc/Spinner';
 export const getServerSideProps = Admin();
 
 export default AdminEmailUser;

@@ -8,6 +8,7 @@ import Redirect from '@/components/shared/links/Redirect';
 import { useObserver } from '@/hooks/useObserver.hooks';
 import { useUserSearch } from '@/hooks/useUserSearch.hooks';
 import Spinner from '@/components/shared/misc/Spinner';
+import NoMatch from '@/components/shared/misc/NoMatch';
 
 const AdminPanel: NextPage<{ data: IPaginatedUsers }> = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -24,6 +25,7 @@ const AdminPanel: NextPage<{ data: IPaginatedUsers }> = ({ data }) => {
 
   return (
     <S.Admin>
+      <Spinner isLoading={isLoading} />
       <S.Searchbar placeholder="Search users" value={query} onChange={handleSearch} />
 
       {users.map((item, index, { length }) => {
@@ -34,12 +36,11 @@ const AdminPanel: NextPage<{ data: IPaginatedUsers }> = ({ data }) => {
         );
       })}
 
-      {!users.length && !isLoading && <div>No match</div>}
+      {!users.length && !isLoading && <NoMatch />}
 
       <Redirect href="/admin/create-user">Create User</Redirect>
 
       {hasError && <div>{hasError}</div>}
-      {isLoading && <Spinner />}
     </S.Admin>
   );
 };

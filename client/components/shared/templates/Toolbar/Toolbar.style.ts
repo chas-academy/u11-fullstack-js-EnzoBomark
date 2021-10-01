@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Toolbar = styled.div`
-  z-index: 1000;
+  z-index: 900;
   position: sticky;
   top: 0;
   display: flex;

@@ -19,6 +19,7 @@ export const mainTheme = {
   'rounded-sm': '5px',
   'rounded-md': '10px',
   'rounded-lg': '15px',
+  'rounded-full': '9999px',
   'box-shadow': '0px 6px 15px -2px rgba(0, 0, 0, 0.2)',
   'text-shadow': '0px 2px 5px rgba(0, 0, 0, 0.3)',
 };

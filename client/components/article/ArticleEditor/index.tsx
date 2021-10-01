@@ -1,7 +1,7 @@
 import isHotkey from 'is-hotkey';
 import pipe from 'lodash/fp/pipe';
-import { useCallback, useMemo, useState } from 'react';
-import { BaseEditor, createEditor, Descendant } from 'slate';
+import React, { useCallback, useMemo, useState } from 'react';
+import { BaseEditor, createEditor, Descendant, Editor } from 'slate';
 import { HistoryEditor, withHistory } from 'slate-history';
 import { Editable, ReactEditor, Slate, withReact } from 'slate-react';
 
@@ -44,6 +44,7 @@ const initialValue = [
 
 interface Props {
   onChange: (e) => void;
+  image: string;
 }
 
 const ArticleEditor: React.FC<Props> = (props) => {
@@ -64,6 +65,8 @@ const ArticleEditor: React.FC<Props> = (props) => {
       >
         <Toolbar />
 
+        {props.image && <S.Image src={`${process.env.BASE_S3}${props.image}`} alt="Header Image" />}
+
         <S.TextField>
           <Editable
             id="body"
@@ -75,12 +78,11 @@ const ArticleEditor: React.FC<Props> = (props) => {
             title="Editor"
             placeholder="Write your Title..."
             onKeyDown={(event) => {
-              for (const hotkey in HOTKEYS) {
-                if (isHotkey(hotkey, event as any)) {
-                  event.preventDefault();
-                  toggleMark(editor, HOTKEYS[hotkey]);
-                }
-              }
+              Object.keys(HOTKEYS).map(
+                (hotkey) => isHotkey(hotkey, event as any) && toggleMark(editor, HOTKEYS[hotkey])
+              );
+              if (event.key === '#') Editor.addMark(editor, 'hashtag', true);
+              if (event.key === ' ' || event.key === 'Enter') Editor.removeMark(editor, 'hashtag');
             }}
           />
         </S.TextField>

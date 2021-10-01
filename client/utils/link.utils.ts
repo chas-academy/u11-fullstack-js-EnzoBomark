@@ -35,7 +35,7 @@ export const insertLink = (editor, url) => {
         select: true,
       });
     } else if (selection.isCollapsed) {
-      // Insert the new link in our last known locatio
+      // Insert the new link in our last known location
       Transforms.insertNodes(editor, link, { select: true });
     } else {
       // Wrap the currently selected range of text into a Link

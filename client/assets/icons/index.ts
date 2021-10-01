@@ -6,6 +6,7 @@ import Image from './image.svg';
 import Italic from './italic.svg';
 import Link from './link-2.svg';
 import List from './list.svg';
+import Save from './save.svg';
 import Underline from './underline.svg';
 
 export const Icon = {
@@ -18,4 +19,5 @@ export const Icon = {
   Image,
   Link,
   ExternalLink,
+  Save,
 };

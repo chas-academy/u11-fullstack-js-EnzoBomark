@@ -31,7 +31,9 @@ const Progress = styled.div<{ isLoading: boolean }>`
   width: 100%;
   height: 0.125rem;
   background: lighten(#202020, 6%);
-  position: relative;
+  position: absolute;
+  top: 49px;
+  z-index: 999;
   border-radius: 2px;
   overflow: hidden;
 

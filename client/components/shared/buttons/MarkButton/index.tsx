@@ -11,6 +11,7 @@ const BlockButton = ({ format, icon }: { format: string; icon: string }) => {
 
   return (
     <S.MarkButton
+      type="button"
       active={isMarkActive(editor, format)}
       aria-label={format}
       title={format}

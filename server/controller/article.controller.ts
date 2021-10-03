@@ -5,13 +5,11 @@ import { SERVICE } from '../service';
 
 export const createArticleHandler = async (req: Request, res: Response) => {
   const userId = get(req, 'user._id');
-  const author = get(req, 'user.name');
   const body = get(req, 'body');
 
   const article = await SERVICE.createArticle({
     ...body,
     user: userId,
-    author: author,
   });
 
   return res.status(201).send({ success: get(article, '_id') });

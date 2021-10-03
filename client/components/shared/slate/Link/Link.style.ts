@@ -15,7 +15,8 @@ const Link = styled.div`
 
   ${Popup} {
     position: absolute;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     background-color: ${mainTheme['color-dark-gray']};
@@ -25,16 +26,6 @@ const Link = styled.div`
     border: ${mainTheme['border-sm']};
   }
 
-  ${Popup} a {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding-right: 10px;
-    color: lightskyblue;
-    text-decoration: underline;
-    border-right: 1px solid lightgrey;
-  }
-
   ${Popup} button {
     border: none;
     background: transparent;
@@ -42,7 +33,6 @@ const Link = styled.div`
   }
 
   ${Popup} button:hover {
-    color: rebeccapurple;
     cursor: pointer;
   }
 `;

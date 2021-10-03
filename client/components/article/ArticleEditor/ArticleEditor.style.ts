@@ -9,7 +9,7 @@ const ArticleEditor = styled.div`
 `;
 
 const TextField = styled.div`
-  width: 80vw;
+  width: 93vw;
   max-width: 60rem;
   padding: 1.875rem;
   margin-bottom: 600px;
@@ -39,10 +39,31 @@ const Image = styled.img`
   box-shadow: ${mainTheme['box-shadow']};
 `;
 
+const Submit = styled.button`
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: ${mainTheme['font-xs']};
+  font-weight: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: ${(props) => props.theme['color-dark-gray']};
+  border: ${(props) => props.theme['border-sm']};
+  color: ${(props) => props.theme['color-white']};
+  border-radius: ${mainTheme['rounded-lg']};
+  text-shadow: ${mainTheme['text-shadow']};
+  box-shadow: ${mainTheme['box-shadow']};
+  cursor: pointer;
+`;
+
 export const S = {
   ArticleEditor,
   TextField,
   Form,
   ModalContent,
   Image,
+  Submit,
 };

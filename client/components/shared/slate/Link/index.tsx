@@ -16,9 +16,6 @@ const Link = ({ attributes, element, children }) => {
       </a>
       {selected && focused && (
         <S.Popup contentEditable={false}>
-          <a href={element.href} rel="noreferrer" target="_blank">
-            {element.href}
-          </a>
           <button onClick={() => removeLink(editor)}>Remove</button>
         </S.Popup>
       )}

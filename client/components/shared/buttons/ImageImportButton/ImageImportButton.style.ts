@@ -4,7 +4,7 @@ import { mainTheme } from '@/styles/Themes';
 
 const ImageImportButton = styled.input``;
 
-const Label = styled.label`
+const Label = styled.label<{ active: string }>`
   position: fixed;
   bottom: 20px;
   right: 90px;
@@ -22,6 +22,7 @@ const Label = styled.label`
   text-shadow: ${mainTheme['text-shadow']};
   box-shadow: ${mainTheme['box-shadow']};
   cursor: pointer;
+  opacity: ${(props) => (props.active ? '100%' : '50%')};
 `;
 
 export const S = {

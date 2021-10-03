@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import { useState } from 'react';
 
 import ArticlePreview from '@/components/article/ArticlePreview';
+import NoMatch from '@/components/shared/misc/NoMatch';
 import Spinner from '@/components/shared/misc/Spinner';
 import PageHeader from '@/components/shared/templates/PageHeader';
 import { Public } from '@/guards/public.guard';
@@ -40,7 +41,7 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
       })}
 
       {hasError && <div>{hasError}</div>}
-      {!articles.length && !isLoading && <div>No match</div>}
+      {!articles.length && !isLoading && <NoMatch type="article" />}
     </S.Search>
   );
 };

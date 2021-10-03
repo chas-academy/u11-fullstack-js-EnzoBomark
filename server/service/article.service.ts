@@ -10,7 +10,7 @@ export const findArticle = (
   query: FilterQuery<ArticleDocument>,
   options: QueryOptions = { lean: true }
 ) => {
-  return MODEL.Article.findOne(query, {}, options);
+  return MODEL.Article.findOne(query, {}, options).populate('user', 'name');
 };
 
 export const findAndUpdateArticle = (

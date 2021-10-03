@@ -1,5 +1,6 @@
-import { mainTheme } from '@/styles/Themes';
 import styled from 'styled-components';
+
+import { mainTheme } from '@/styles/Themes';
 
 const ArticleShowcase = styled.div`
   display: flex;
@@ -11,6 +12,7 @@ const TextField = styled.div`
   width: 93vw;
   max-width: 60rem;
   padding: 10px;
+  margin-bottom: 1.875rem;
 `;
 
 const Title = styled.h1`

@@ -22,14 +22,15 @@ const ArticlePreview = React.forwardRef((props: Props, ref?: any) => {
       <S.Text>
         <S.Title>{props.data.title}</S.Title>
         <S.Span>
-          <S.Data>{props.data.author}</S.Data>
-          <S.Data>{props.data.date}</S.Data>
+          <S.Data>{props.data.user.name}</S.Data>
+          <S.Data>{props.data.updatedAt.substring(0, 10)}</S.Data>
           <S.Data>{props.data.readTime} Min</S.Data>
         </S.Span>
         <S.About>{props.data.about}</S.About>
         <S.Span>
           {props.data.tags.map((item, index) => {
-            return <S.Tags key={index}>#{item}</S.Tags>;
+            if (item === 'false') return;
+            return <S.Tags key={index}>{item}</S.Tags>;
           })}
         </S.Span>
       </S.Text>

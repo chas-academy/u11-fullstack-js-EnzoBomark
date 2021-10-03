@@ -1,5 +1,6 @@
-import { input } from '@/styles/Input.style';
 import styled from 'styled-components';
+
+import { input } from '@/styles/Input.style';
 
 const Search = styled.div`
   margin: 0 auto;

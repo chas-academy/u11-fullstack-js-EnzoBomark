@@ -5,11 +5,15 @@ export interface IArticle {
   title: string;
   image: string;
   tags: string[];
-  date: string;
   body: Descendant[];
   about: string;
-  author?: string;
   readTime: number;
+  user?: {
+    name: string;
+    _id: string;
+  };
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IPaginatedArticles {

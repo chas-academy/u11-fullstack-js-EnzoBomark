@@ -38,7 +38,7 @@ const AdminPanel: NextPage<{ data: IPaginatedUsers }> = ({ data }) => {
         );
       })}
 
-      {!users.length && !isLoading && <NoMatch />}
+      {!users.length && !isLoading && <NoMatch type="user" />}
 
       <Redirect href="/admin/create-user">Create User</Redirect>
 

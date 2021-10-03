@@ -18,8 +18,8 @@ const TextEditor: React.FC<{ data: IArticle }> = (props: { data: IArticle }) => 
     <S.ArticleShowcase>
       <S.Title>{props.data.title}</S.Title>
       <S.Info>
-        <S.P>{props.data.author}</S.P>
-        <S.P>{props.data.date}</S.P>
+        <S.P>{props.data.user.name}</S.P>
+        <S.P>{props.data.updatedAt.substring(0, 10)}</S.P>
         <S.P>{props.data.readTime} min</S.P>
       </S.Info>
 

@@ -4,7 +4,6 @@ import { UserDocument } from './user.model';
 
 export interface ArticleDocument extends mongoose.Document {
   user: UserDocument['_id'];
-  author: UserDocument['name'];
   title: string;
   tags: string[];
   image: string;
@@ -18,9 +17,8 @@ export interface ArticleDocument extends mongoose.Document {
 const ArticleSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    author: { type: String, ref: 'User' },
     title: { type: String, default: true },
-    tags: { type: [String], default: true },
+    tags: { type: [String], default: false },
     image: { type: String, default: true },
     body: { type: Object, default: true },
     about: { type: String, default: true },

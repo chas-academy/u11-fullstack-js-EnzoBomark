@@ -69,11 +69,17 @@ export const deleteArticleHandler = async (req: Request, res: Response) => {
 };
 
 export const getAllArticlesHandler = async (req: Request, res: Response) => {
-  const articles = await SERVICE.getArticles();
+  // const articles = await SERVICE.getArticles();
+  // if (!articles) {
+  //   return res.status(400).send({ error: 'No article found' });
+  // }
+  // return res.status(200).send({ success: articles });
+};
 
-  if (!articles) {
-    return res.status(400).send({ error: 'No article found' });
-  }
-
-  return res.status(200).send({ success: articles });
+export const getUserArticles = async (req: Request, res: Response) => {
+  // const articles = await SERVICE.getArticles();
+  // if (!articles) {
+  //   return res.status(400).send({ error: 'No article found' });
+  // }
+  // return res.status(200).send({ success: articles });
 };

@@ -1,14 +1,14 @@
 import Cookies from 'js-cookie';
 import { useState } from 'react';
 
-import { IPaginatedUsers, UsersResponse } from '@/interfaces/User.interface';
+import { IUser, UsersResponse } from '@/interfaces/User.interface';
 import { post } from '@/utils/http.utils';
 
 import { useFetchDebounce } from './useFetchDebounce.hooks';
 import { useMount } from './useMount';
 
-export const useUserSearch = (query: string, page: number, ssrLoadedData: IPaginatedUsers) => {
-  const [users, setUsers] = useState(ssrLoadedData.data);
+export const useUserSearch = (query: string, page: number, ssrLoadedData: IUser[]) => {
+  const [users, setUsers] = useState(ssrLoadedData);
 
   const { isLoading, hasError, data } = useFetchDebounce<UsersResponse>(
     () =>
@@ -30,7 +30,7 @@ export const useUserSearch = (query: string, page: number, ssrLoadedData: IPagin
 
   useMount(() => {
     setUsers((prevData) => {
-      return [...new Set([...prevData, ...data.success.data])];
+      return [...new Set([...prevData, ...data.success])];
     });
   }, [data]);
 

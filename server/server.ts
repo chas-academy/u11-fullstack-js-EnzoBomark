@@ -21,12 +21,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(MW.deserializeUser);
 
-const server = app.listen(port, () => {
-  connectToDataBase();
-  ROUTES.Auth(app);
-  ROUTES.Article(app);
-  ROUTES.S3(app);
-  ROUTES.Search(app);
-  ROUTES.User(app);
-  ROUTES.Admin(app);
-});
+ROUTES.Auth(app);
+ROUTES.Article(app);
+ROUTES.S3(app);
+ROUTES.User(app);
+ROUTES.Admin(app);
+
+app.listen(port, () => connectToDataBase());

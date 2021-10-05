@@ -33,7 +33,6 @@ export const getUserHandler = async (req: Request, res: Response) => {
 
 export const updateUserHandler = async (req: Request, res: Response) => {
   const userId = get(req, 'user._id');
-  const update = req.body;
 
   const user = await SERVICE.findUser({ _id: userId });
 
@@ -41,9 +40,12 @@ export const updateUserHandler = async (req: Request, res: Response) => {
     return res.status(400).send({ error: 'No user found' });
   }
 
+  if (String(user._id) !== String(userId)) {
+    return res.status(401).send({ error: 'Unauthorized' });
+  }
+
   if (!user.name === req.body.name) user.name = req.body.name;
   if (!user.email === req.body.email) user.email = req.body.email;
-  if (!user.password === req.body.password) user.password = req.body.password;
 
   await user.save();
 

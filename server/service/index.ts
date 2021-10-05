@@ -1,7 +1,6 @@
 import {
     createArticle, deleteArticle, findAndUpdateArticle, findArticle, getArticles
 } from './article.service';
-import { paginate } from './paginate.service';
 import { generateUploadUrl } from './s3.service';
 import {
     createAccessToken, createSession, findSessions, reIssueAccessToken, updateSession
@@ -23,7 +22,6 @@ export const SERVICE = {
   findAndUpdateArticle,
   deleteArticle,
   generateUploadUrl,
-  paginate,
   getArticles,
   getUsers,
 };

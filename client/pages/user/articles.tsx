@@ -2,35 +2,26 @@ import { NextPage } from 'next';
 import { useState } from 'react';
 
 import ArticlePreview from '@/components/article/ArticlePreview';
-import NoMatch from '@/components/shared/misc/NoMatch';
 import Spinner from '@/components/shared/misc/Spinner';
 import PageHeader from '@/components/shared/templates/PageHeader';
-import { Public } from '@/guards/public.guard';
+import { Private } from '@/guards/private.guard';
 import { useArticleSearch } from '@/hooks/useArticleSearch.hooks';
 import { useObserver } from '@/hooks/useObserver.hooks';
 import { ArticlesResponse, IArticle } from '@/interfaces/Article.interface';
-import { S } from '@/styles/pages/Search.style';
+import { S } from '@/styles/pages/Home.style';
 import { post } from '@/utils/http.utils';
 
-const Search: NextPage<{ data: IArticle[] }> = ({ data }) => {
+const Articles: NextPage<{ data: IArticle[] }> = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(1);
-  const [query, setQuery] = useState('');
 
-  const { isLoading, hasError, articles } = useArticleSearch(query, pageNumber, data);
+  const { isLoading, hasError, articles } = useArticleSearch('', pageNumber, data);
 
   const { lastElemRef } = useObserver(() => setPageNumber((prevPageNumber) => ++prevPageNumber));
 
-  const handleSearch = (e) => {
-    setQuery(e.target.value);
-    setPageNumber(1);
-  };
-
   return (
-    <S.Search>
+    <S.Home>
       <Spinner isLoading={isLoading} />
-      <S.Searchbar placeholder="e.g. Rain gear..." value={query} onChange={handleSearch} />
-
-      <PageHeader title="Search" />
+      <PageHeader title="My Articles" />
 
       {articles.map((item, index, { length }) => {
         return ++index !== length ? (
@@ -41,13 +32,13 @@ const Search: NextPage<{ data: IArticle[] }> = ({ data }) => {
       })}
 
       {hasError && <div>{hasError}</div>}
-      {!articles.length && !isLoading && <NoMatch type="article" />}
-    </S.Search>
+      {!articles.length && !isLoading && <div>No match</div>}
+    </S.Home>
   );
 };
 
-export const getServerSideProps = Public(async (context) => {
-  const response = await post<ArticlesResponse>('article/search', {
+export const getServerSideProps = Private(async (context) => {
+  const response = await post<ArticlesResponse>('search', {
     query: '',
     page: 1,
   });
@@ -59,4 +50,4 @@ export const getServerSideProps = Public(async (context) => {
   return { props: { data: response.parsedBody.success } };
 });
 
-export default Search;
+export default Articles;

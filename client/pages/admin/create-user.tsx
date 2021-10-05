@@ -13,7 +13,7 @@ import { useMount } from '@/hooks/useMount';
 import { useToggle } from '@/hooks/useToggle.hooks';
 import { Response } from '@/interfaces/Response.interface';
 import { AdminCreateUserSchema, Props } from '@/schemas/admin/CreateUser.schema';
-import { S } from '@/styles/pages/UpdateUser.style';
+import { S } from '@/styles/pages/admin/CreateUser.style';
 import { post } from '@/utils/http.utils';
 import { resolver } from '@/utils/resolver.utils';
 

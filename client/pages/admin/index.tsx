@@ -8,11 +8,11 @@ import Spinner from '@/components/shared/misc/Spinner';
 import { Admin } from '@/guards/admin.guard';
 import { useObserver } from '@/hooks/useObserver.hooks';
 import { useUserSearch } from '@/hooks/useUserSearch.hooks';
-import { IPaginatedUsers, UsersResponse } from '@/interfaces/User.interface';
-import { S } from '@/styles/pages/Admin.style';
+import { IUser, UsersResponse } from '@/interfaces/User.interface';
+import { S } from '@/styles/pages/admin/Admin.style';
 import { post } from '@/utils/http.utils';
 
-const AdminPanel: NextPage<{ data: IPaginatedUsers }> = ({ data }) => {
+const AdminPanel: NextPage<{ data: IUser[] }> = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [query, setQuery] = useState('');
 

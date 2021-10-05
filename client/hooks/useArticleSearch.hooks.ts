@@ -1,20 +1,16 @@
 import { useState } from 'react';
 
-import { ArticlesResponse, IPaginatedArticles } from '@/interfaces/Article.interface';
+import { ArticlesResponse, IArticle } from '@/interfaces/Article.interface';
 import { post } from '@/utils/http.utils';
 
 import { useFetchDebounce } from './useFetchDebounce.hooks';
 import { useMount } from './useMount';
 
-export const useArticleSearch = (
-  query: string,
-  page: number,
-  ssrLoadedData: IPaginatedArticles
-) => {
-  const [articles, setArticles] = useState(ssrLoadedData.data);
+export const useArticleSearch = (query: string, page: number, ssrLoadedData: IArticle[]) => {
+  const [articles, setArticles] = useState(ssrLoadedData);
 
   const { isLoading, hasError, data } = useFetchDebounce<ArticlesResponse>(
-    () => post('search', { query, page }),
+    () => post('article/search', { query, page }),
     [query, page],
     500
   );
@@ -25,7 +21,7 @@ export const useArticleSearch = (
 
   useMount(() => {
     setArticles((prevData) => {
-      return [...new Set([...prevData, ...data.success.data])];
+      return [...new Set([...prevData, ...data.success])];
     });
   }, [data]);
 

@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
-import { mainTheme } from '@/styles/Themes';
+import { button } from '../../Button.style';
+import { mainTheme } from '../../Themes';
 
-import { button } from '../Button.style';
-
-const Login = styled.div`
+const Delete = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,28 +22,13 @@ const H2 = styled.div`
   font-size: ${mainTheme['font-sm']};
 `;
 
-const P = styled.p`
-  color: ${(props) => props.theme['color-dark-white']};
-  margin-top: 1rem;
-  font-size: ${mainTheme['font-sm']};
-`;
-
-const A = styled.a`
-  color: ${(props) => props.theme['color-white']};
-  margin-left: 0.5rem;
-  font-size: ${mainTheme['font-sm']};
-  cursor: pointer;
-`;
-
 const Submit = styled(button)`
   margin-top: 6.25rem;
 `;
 
 export const S = {
-  Login,
+  Delete,
   H1,
   H2,
-  P,
-  A,
   Submit,
 };

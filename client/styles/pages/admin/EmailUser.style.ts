@@ -2,12 +2,13 @@ import styled from 'styled-components';
 
 import { mainTheme } from '@/styles/Themes';
 
-import { button } from '../Button.style';
+import { button } from '../../Button.style';
 
-const UpdateUser = styled.div`
+const EmailUser = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 6.25rem;
 `;
 
 const H1 = styled.div`
@@ -21,7 +22,7 @@ const Submit = styled(button)`
 `;
 
 export const S = {
-  UpdateUser,
+  EmailUser,
   H1,
   Submit,
 };

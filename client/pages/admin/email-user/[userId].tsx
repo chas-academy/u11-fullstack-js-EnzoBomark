@@ -9,7 +9,7 @@ import Form from '@/components/shared/templates/Form';
 import { Admin } from '@/guards/admin.guard';
 import { useFetch } from '@/hooks/useFetch.hooks';
 import { Response } from '@/interfaces/Response.interface';
-import { S } from '@/styles/pages/EmailUser.style';
+import { S } from '@/styles/pages/admin/EmailUser.style';
 import { post } from '@/utils/http.utils';
 
 const AdminEmailUser: NextPage = () => {

@@ -7,11 +7,11 @@ import PageHeader from '@/components/shared/templates/PageHeader';
 import { Public } from '@/guards/public.guard';
 import { useArticleSearch } from '@/hooks/useArticleSearch.hooks';
 import { useObserver } from '@/hooks/useObserver.hooks';
-import { ArticlesResponse, IPaginatedArticles } from '@/interfaces/Article.interface';
+import { ArticlesResponse, IArticle } from '@/interfaces/Article.interface';
 import { S } from '@/styles/pages/Home.style';
 import { post } from '@/utils/http.utils';
 
-const Home: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
+const Home: NextPage<{ data: IArticle[] }> = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(1);
 
   const { isLoading, hasError, articles } = useArticleSearch('', pageNumber, data);
@@ -38,7 +38,7 @@ const Home: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
 };
 
 export const getServerSideProps = Public(async (context) => {
-  const response = await post<ArticlesResponse>('search', {
+  const response = await post<ArticlesResponse>('article/search', {
     query: '',
     page: 1,
   });

@@ -26,7 +26,7 @@ export const Admin = (app: Express) => {
   app.post(
     '/api/admin/users',
     [MW.requireAdmin, MW.validateRequest(SCHEMA.searchSchema)],
-    CONT.getPaginatedUsersHandler
+    CONT.getUsersHandler
   );
 
   //Get users

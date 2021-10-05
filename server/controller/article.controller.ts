@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { get } from 'lodash';
 
+import { MODEL } from '../model';
 import { SERVICE } from '../service';
 
 export const createArticleHandler = async (req: Request, res: Response) => {
@@ -68,18 +69,47 @@ export const deleteArticleHandler = async (req: Request, res: Response) => {
   return res.status(200).send({ success: `${articleId} was successfully deleted` });
 };
 
-export const getAllArticlesHandler = async (req: Request, res: Response) => {
-  // const articles = await SERVICE.getArticles();
-  // if (!articles) {
-  //   return res.status(400).send({ error: 'No article found' });
-  // }
-  // return res.status(200).send({ success: articles });
-};
+export const getArticlesHandler = async (req: Request, res: Response) => {
+  const { query, page } = get(req, 'body');
 
-export const getUserArticles = async (req: Request, res: Response) => {
-  // const articles = await SERVICE.getArticles();
-  // if (!articles) {
-  //   return res.status(400).send({ error: 'No article found' });
-  // }
-  // return res.status(200).send({ success: articles });
+  // populate user field
+  const lookup = { from: 'users', localField: 'user', foreignField: '_id', as: 'user' };
+
+  // unwind nested array
+  const unwind = 'user';
+
+  // convert ObjectId to string
+  const addFields = { 'user._id': { $toString: '$user._id' } };
+
+  // regex match atleast one field
+  const regex = {
+    $or: [
+      { 'user._id': { $regex: new RegExp(query, 'i') } },
+      { 'user.name': { $regex: new RegExp(query, 'i') } },
+      { title: { $regex: new RegExp(query, 'i') } },
+      { tags: { $in: [new RegExp(query, 'i')] } },
+    ],
+  };
+
+  // remove user password
+  const project = { 'user.password': 0 };
+
+  // skip with 25 index
+  const skip = (page - 1) * 25;
+
+  // return max 25 objects
+  const limit = 25;
+
+  const articles = await MODEL.Article.aggregate()
+    .lookup(lookup)
+    .unwind(unwind)
+    .addFields(addFields)
+    .match(regex)
+    .project(project)
+    .skip(skip)
+    .limit(limit);
+
+  if (!articles) return res.status(500).send({ error: "We couldn't load your content" });
+
+  return res.status(200).send({ success: articles });
 };

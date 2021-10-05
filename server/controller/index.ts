@@ -3,11 +3,11 @@ import {
     adminUpdateUserHandler
 } from './admin.controller';
 import {
-    createArticleHandler, deleteArticleHandler, getAllArticlesHandler, getArticleHandler,
+    createArticleHandler, deleteArticleHandler, getArticleHandler, getArticlesHandler,
     updateArticleHandler
 } from './article.controller';
 import { createSecureS3UrlHandler } from './s3.controller';
-import { getPaginatedArticlesHandler, getPaginatedUsersHandler } from './search.controller';
+import { getUsersHandler } from './search.controller';
 import {
     createUserSessionHandler, getUserSessionHandler, invalidateUserSessionHandler
 } from './session.controller';
@@ -34,10 +34,9 @@ export const CONT = {
   updateArticleHandler,
   getArticleHandler,
   deleteArticleHandler,
-  getAllArticlesHandler,
+  getArticlesHandler,
   createSecureS3UrlHandler,
-  getPaginatedUsersHandler,
-  getPaginatedArticlesHandler,
+  getUsersHandler,
   adminCreateUserHandler,
   adminUpdateUserHandler,
   adminGetUserHandler,

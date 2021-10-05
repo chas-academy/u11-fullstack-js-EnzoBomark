@@ -22,7 +22,7 @@ const ArticlePreview = React.forwardRef((props: Props, ref?: any) => {
       <S.Text>
         <S.Title>{props.data.title}</S.Title>
         <S.Span>
-          <S.Data>{props.data.user[0].name}</S.Data>
+          <S.Data>{props.data.user.name}</S.Data>
           <S.Data>{props.data.updatedAt.substring(0, 10)}</S.Data>
           <S.Data>{props.data.readTime} Min</S.Data>
         </S.Span>

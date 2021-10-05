@@ -8,12 +8,10 @@ export interface IArticle {
   body: Descendant[];
   about: string;
   readTime: number;
-  user?: [
-    {
-      name: string;
-      _id: string;
-    }
-  ];
+  user: {
+    name: string;
+    _id: string;
+  };
   createdAt: string;
   updatedAt: string;
 }

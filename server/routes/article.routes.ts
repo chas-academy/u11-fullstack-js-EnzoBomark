@@ -16,11 +16,7 @@ export const Article = (app: Express) => {
   app.post('/api/user/save/:articleId', MW.requireUser, CONT.addSavedArticleHandler);
 
   //Search articles
-  app.post(
-    '/api/article/search',
-    MW.validateRequest(SCHEMA.searchSchema),
-    CONT.getPaginatedArticlesHandler
-  );
+  app.post('/api/article/search', MW.validateRequest(SCHEMA.searchSchema), CONT.getArticlesHandler);
 
   //Update article
   app.put(

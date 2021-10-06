@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import ArticlePreview from '@/components/article/ArticlePreview';
 import Spinner from '@/components/shared/misc/Spinner';
@@ -8,13 +9,15 @@ import { Private } from '@/guards/private.guard';
 import { useArticleSearch } from '@/hooks/useArticleSearch.hooks';
 import { useObserver } from '@/hooks/useObserver.hooks';
 import { ArticlesResponse, IArticle } from '@/interfaces/Article.interface';
+import { RootState, wrapper } from '@/store/index';
 import { S } from '@/styles/pages/Home.style';
 import { post } from '@/utils/http.utils';
 
 const Articles: NextPage<{ data: IArticle[] }> = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(1);
+  const user = useSelector((state: RootState) => state.user.user);
 
-  const { isLoading, hasError, articles } = useArticleSearch('', pageNumber, data);
+  const { isLoading, hasError, articles } = useArticleSearch(user.id, pageNumber, data);
 
   const { lastElemRef } = useObserver(() => setPageNumber((prevPageNumber) => ++prevPageNumber));
 
@@ -25,9 +28,9 @@ const Articles: NextPage<{ data: IArticle[] }> = ({ data }) => {
 
       {articles.map((item, index, { length }) => {
         return ++index !== length ? (
-          <ArticlePreview data={item} key={item._id} />
+          <ArticlePreview data={item} key={item._id} update={true} />
         ) : (
-          <ArticlePreview ref={lastElemRef} key={item._id} data={item} />
+          <ArticlePreview ref={lastElemRef} key={item._id} data={item} update={true} />
         );
       })}
 
@@ -37,17 +40,21 @@ const Articles: NextPage<{ data: IArticle[] }> = ({ data }) => {
   );
 };
 
-export const getServerSideProps = Private(async (context) => {
-  const response = await post<ArticlesResponse>('search', {
-    query: '',
-    page: 1,
-  });
+export const getServerSideProps = Private(
+  wrapper.getServerSideProps((store) => async (context) => {
+    const state = store.getState();
 
-  if (!response.ok) {
-    return { props: { data: 'error' } };
-  }
+    const response = await post<ArticlesResponse>('article/search', {
+      query: state.user.user.id,
+      page: 1,
+    });
 
-  return { props: { data: response.parsedBody.success } };
-});
+    if (!response.ok) {
+      return { props: { data: 'error' } };
+    }
+
+    return { props: { data: response.parsedBody.success } };
+  })
+);
 
 export default Articles;

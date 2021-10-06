@@ -29,7 +29,7 @@ const makeStore = (context: Context) => {
   return configureStore({ reducer });
 };
 
-export const wrapper = createWrapper(makeStore);
+export const wrapper: any = createWrapper(makeStore);
 
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,

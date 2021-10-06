@@ -7,7 +7,6 @@ import { get } from '@/utils/http.utils';
 import { wrapper } from '../store';
 
 export const Public = (gssp: GetServerSideProps = async (context) => null) => {
-  //@ts-ignore
   return wrapper.getServerSideProps((store) => async (context) => {
     const { req } = context;
 

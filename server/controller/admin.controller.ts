@@ -84,3 +84,28 @@ export const adminEmailUserHandler = async (req: Request, res: Response) => {
     res.status(500).send('Email could not be sent');
   }
 };
+
+export const getUsersHandler = async (req: Request, res: Response) => {
+  const { query, page } = get(req, 'body');
+
+  // regex match atleast one field
+  const regexp = RegExp(query, 'gi');
+  const regex = {
+    $or: [{ name: { $regex: regexp } }, { email: { $regex: regexp } }],
+  };
+
+  // remove user password
+  const project = { 'user.password': 0 };
+
+  // skip with 25 index
+  const skip = (page - 1) * 25;
+
+  // return max 25 objects
+  const limit = 25;
+
+  const users = await MODEL.User.aggregate().match(regex).project(project).skip(skip).limit(limit);
+
+  if (!users) return res.status(500).send({ error: "We couldn't load your content" });
+
+  return res.status(200).send({ success: users });
+};

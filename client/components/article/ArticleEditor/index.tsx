@@ -1,7 +1,6 @@
 import isHotkey from 'is-hotkey';
 import pipe from 'lodash/fp/pipe';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import React, { useCallback, useMemo, useState } from 'react';
 import { BaseEditor, createEditor, Descendant, Editor } from 'slate';
 import { HistoryEditor, withHistory } from 'slate-history';
@@ -14,15 +13,7 @@ import { Leaf } from '@/components/shared/misc/Leaf';
 import Spinner from '@/components/shared/misc/Spinner';
 import Form from '@/components/shared/templates/Form';
 import Toolbar from '@/components/shared/templates/Toolbar';
-import { useFetch } from '@/hooks/useFetch.hooks';
-import { useMount } from '@/hooks/useMount';
-import { Response } from '@/interfaces/Response.interface';
-import { getDecendent } from '@/utils/descendantText.utils';
-import { post } from '@/utils/http.utils';
 import { toggleMark } from '@/utils/mark.utils';
-import { getReadTime } from '@/utils/readTime.utils';
-import { s3 } from '@/utils/s3.utils';
-import { getTags } from '@/utils/tags.utils';
 
 import { S } from './ArticleEditor.style';
 import withImages from './plugins/withImages';
@@ -43,30 +34,19 @@ const createEditorWithPlugins = pipe(
   withKeyCommands
 );
 
-const initialValue = [
-  {
-    type: 'paragraph',
-    children: [{ text: '' }],
-  },
-];
+interface Props {
+  error: string;
+  onSubmit: (e) => void;
+  onChange: (e) => void;
+  imageImport: (e) => void;
+  image: string;
+  value: Descendant[];
+}
 
-const ArticleEditor: React.FC = () => {
-  const router = useRouter();
+const ArticleEditor: React.FC<Props> = (props: Props) => {
   const editor = useMemo(() => createEditorWithPlugins(createEditor()), []);
-  const [value, setValue] = useState<Descendant[]>(initialValue);
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
-
-  const [tags, setTags] = useState<string[]>();
-  const [title, setTitle] = useState<string>();
-  const [about, setAbout] = useState<string>();
-  const [image, setImage] = useState<string>();
-  const [body, setBody] = useState<Descendant[]>();
-  const [readTime, setReadTime] = useState<number>();
-
-  const { fetch, isLoading, hasError, data } = useFetch<Response>(() =>
-    post('article', { title, about, body, tags, image, readTime })
-  );
 
   const onKeyDownHandler = (e) => {
     if (isHotkey('mod+b', e)) toggleMark(editor, 'bold');
@@ -77,27 +57,16 @@ const ArticleEditor: React.FC = () => {
     if (e.key === 'Enter') Editor.removeMark(editor, 'hashtag');
   };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    setTitle(getDecendent(value).shift().join(' '));
-    setAbout(getDecendent(value).slice(1).join(' '));
-    setReadTime(getReadTime(value));
-    setTags(getTags(value));
-    setBody(value.slice(1));
-    await fetch();
+  const imageImport = (e) => {
+    props.imageImport(e);
   };
-
-  useMount(() => {
-    router.push('/');
-  }, [data]);
 
   return (
     <S.ArticleEditor>
-      <Spinner isLoading={isLoading} />
-      <Slate editor={editor} value={value} onChange={(e) => setValue(e)}>
+      <Slate editor={editor} value={props.value} onChange={(e) => props.onChange(e)}>
         <Toolbar />
 
-        <Form onSubmit={submitHandler} error={hasError}>
+        <Form onSubmit={(e) => props.onSubmit(e)} error={props.error}>
           <S.TextField>
             <Editable
               id="body"
@@ -110,7 +79,7 @@ const ArticleEditor: React.FC = () => {
               onKeyDown={onKeyDownHandler}
             />
           </S.TextField>
-          <ImageImportButton onChange={async (e) => setImage(await s3(e))} active={image} />
+          <ImageImportButton onChange={(e) => props.imageImport(e)} active={props.image} />
           <S.Submit>
             <Image src={Icon.Save} />
           </S.Submit>

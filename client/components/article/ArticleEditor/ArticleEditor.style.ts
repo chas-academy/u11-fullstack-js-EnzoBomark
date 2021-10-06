@@ -12,7 +12,6 @@ const TextField = styled.div`
   width: 93vw;
   max-width: 60rem;
   padding: 1.875rem;
-  margin-bottom: 600px;
 `;
 
 const Form = styled.form`
@@ -40,9 +39,9 @@ const Image = styled.img`
 `;
 
 const Submit = styled.button`
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+  position: absolute;
+  bottom: 14.375rem;
+  right: 1.25rem;
   font-size: ${mainTheme['font-xs']};
   font-weight: 100;
   display: flex;

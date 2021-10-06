@@ -27,7 +27,7 @@ export const updateArticleHandler = async (req: Request, res: Response) => {
     return res.status(400).send({ error: 'No article found' });
   }
 
-  if (String(article.user) !== userId) {
+  if (String(article.user._id) !== userId) {
     return res.status(401).send({ error: 'Unauthorized' });
   }
 
@@ -82,12 +82,13 @@ export const getArticlesHandler = async (req: Request, res: Response) => {
   const addFields = { 'user._id': { $toString: '$user._id' } };
 
   // regex match atleast one field
+  const regexp = RegExp(query, 'gi');
   const regex = {
     $or: [
-      { 'user._id': { $regex: new RegExp(query, 'i') } },
-      { 'user.name': { $regex: new RegExp(query, 'i') } },
-      { title: { $regex: new RegExp(query, 'i') } },
-      { tags: { $in: [new RegExp(query, 'i')] } },
+      { 'user._id': { $regex: regexp } },
+      { 'user.name': { $regex: regexp } },
+      { title: { $regex: regexp } },
+      { tags: { $in: [regexp] } },
     ],
   };
 

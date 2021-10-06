@@ -5,8 +5,8 @@ import { mainTheme } from '@/styles/Themes';
 const ImageImportButton = styled.input``;
 
 const Label = styled.label<{ active: string }>`
-  position: fixed;
-  bottom: 20px;
+  position: absolute;
+  bottom: 14.375rem;
   right: 90px;
   font-size: ${mainTheme['font-xs']};
   font-weight: 100;

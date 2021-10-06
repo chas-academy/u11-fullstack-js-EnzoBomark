@@ -7,13 +7,15 @@ import { S } from './ArticlePreview.style';
 
 interface Props {
   data: IArticle;
+  update?: boolean;
 }
 
 const ArticlePreview = React.forwardRef((props: Props, ref?: any) => {
   const router = useRouter();
 
   const clickHandler = () => {
-    router.push(`/article/${props.data._id}`);
+    if (props.update) router.push(`/article/update/${props.data._id}`);
+    if (!props.update) router.push(`/article/${props.data._id}`);
   };
 
   return (

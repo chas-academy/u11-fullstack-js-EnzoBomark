@@ -31,8 +31,8 @@ const Sidebar: React.FC<Props> = (props: Props) => {
 
           {user && (
             <>
-              <NavLink href="/editor">Editor</NavLink>
-              <NavLink href="/saved">Saved</NavLink>
+              <NavLink href="/article/editor">Editor</NavLink>
+              <NavLink href="/user/saved">Saved</NavLink>
               <NavLink href="/user">{toTitleCase(user.name)}</NavLink>
             </>
           )}

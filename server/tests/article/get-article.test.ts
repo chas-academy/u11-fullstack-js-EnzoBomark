@@ -1,9 +1,7 @@
 import supertest from 'supertest';
 
-import { MODEL } from '../../model';
+import { getArticle } from '../helpers/getArticle.utils';
 import { app, setupDB } from '../test-setup';
-import { getArticle } from '../test-utils/getArticle.utils';
-import { getToken } from '../test-utils/getToken.utils';
 
 const request = supertest(app);
 

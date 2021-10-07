@@ -1,6 +1,5 @@
 import supertest from 'supertest';
 
-import { MODEL } from '../../model';
 import { app, setupDB } from '../test-setup';
 
 const request = supertest(app);

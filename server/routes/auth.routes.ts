@@ -31,7 +31,7 @@ export const Auth = (app: Express) => {
   //Update user creds
   app.put(
     '/api/auth/update-creds',
-    [MW.requireUser, MW.validateRequest(SCHEMA.createUserSchema)],
+    [MW.requireUser, MW.validateRequest(SCHEMA.updateUserSchema)],
     CONT.updateUserHandler
   );
 

@@ -20,7 +20,7 @@ export const http = async <T>(request: RequestInfo): Promise<HttpResponse<T>> =>
 export const get = async <T>(
   path: string,
   extraHeaders: { [key: string]: string } = {
-    authorization: Cookies.get('access_token'),
+    authorization: `Bearer ${Cookies.get('access_token')}`,
     'x-refresh': Cookies.get('refresh_token'),
   },
   args: RequestInit = {
@@ -40,7 +40,7 @@ export const post = async <T>(
   path: string,
   body: any,
   extraHeaders: { [key: string]: string } = {
-    authorization: Cookies.get('access_token'),
+    authorization: `Bearer ${Cookies.get('access_token')}`,
     'x-refresh': Cookies.get('refresh_token'),
   },
   args: RequestInit = {
@@ -61,7 +61,7 @@ export const put = async <T>(
   path: string,
   body: any,
   extraHeaders: { [key: string]: string } = {
-    authorization: Cookies.get('access_token'),
+    authorization: `Bearer ${Cookies.get('access_token')}`,
     'x-refresh': Cookies.get('refresh_token'),
   },
   args: RequestInit = {
@@ -82,7 +82,7 @@ export const destroy = async <T>(
   path: string,
   body: any,
   extraHeaders: { [key: string]: string } = {
-    authorization: Cookies.get('access_token'),
+    authorization: `Bearer ${Cookies.get('access_token')}`,
     'x-refresh': Cookies.get('refresh_token'),
   },
   args: RequestInit = {

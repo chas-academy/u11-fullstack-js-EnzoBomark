@@ -12,6 +12,13 @@ export const createUserSchema = object({
   }),
 });
 
+export const updateUserSchema = object({
+  body: object({
+    name: string().required('Name is required'),
+    email: string().email('Must be a valid email').required('Email is required'),
+  }),
+});
+
 export const createUserSessionSchema = object({
   body: object({
     password: string()

@@ -60,7 +60,7 @@ export const deleteArticleHandler = async (req: Request, res: Response) => {
     return res.status(400).send({ error: 'No article found' });
   }
 
-  if (String(article.user) !== String(userId)) {
+  if (String(article.user._id) !== String(userId)) {
     return res.status(401).send({ error: 'Unauthorized' });
   }
 

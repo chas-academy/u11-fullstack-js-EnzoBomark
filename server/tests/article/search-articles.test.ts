@@ -8,17 +8,14 @@ const request = supertest(app);
 
 setupDB('endpoint-testing', true);
 
-describe('POST /api/search', () => {
+describe('POST /api/article/search', () => {
   describe('given a query', () => {
     test('should respond with a status 200 code and success message', async () => {
-      const res = await request
-        .post(`/api/search?model=article&page=1&limit=2`)
-        .send({ query: '' });
+      const res = await request.post(`/api/article/search`).send({ query: '', page: 1 });
 
       // Ensures response status
       expect(res.statusCode).toBe(200);
       expect(res.body.success).toBeDefined();
-      console.log(res.body.success);
     });
   });
 });

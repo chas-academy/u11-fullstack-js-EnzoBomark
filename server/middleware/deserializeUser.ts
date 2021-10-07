@@ -6,8 +6,7 @@ import { UTILS } from '../utils';
 
 export const deserializeUser = async (req: Request, res: Response, next: NextFunction) => {
   const refreshToken = get(req, 'headers.x-refresh');
-
-  const accessToken = get(req, 'headers.authorization');
+  const accessToken = get(req, 'headers.authorization', '').replace(/^Bearer\s/, '');
 
   if (!accessToken) return next();
 

@@ -13,6 +13,7 @@ export const getArticle = async () => {
       image: 'fakeimagelink',
       tags: ['test'],
       body: [{ type: 'paragraph', text: 'test' }],
+      readTime: 2,
     })
     .auth(await getToken(), { type: 'bearer' });
 

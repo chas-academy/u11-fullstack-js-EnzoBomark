@@ -1,3 +1,5 @@
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 
@@ -6,18 +8,21 @@ import { ROUTES } from '../routes';
 /* global beforeAll beforeEach afterEach afterAll */
 import { seedDatabase } from './seeder';
 
+if (process.env.NODE_ENV !== 'production') dotenv.config();
+
 export const app = express();
 
+app.use(cookieParser());
 app.use(MW.deserializeUser);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const server = app.listen(5000, () => {
+const server = app.listen(0, () => {
   ROUTES.Auth(app);
   ROUTES.Article(app);
   ROUTES.S3(app);
-  ROUTES.Search(app);
   ROUTES.User(app);
+  ROUTES.Admin(app);
 });
 
 mongoose.set('useNewUrlParser', true);

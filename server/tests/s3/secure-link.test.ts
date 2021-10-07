@@ -14,6 +14,6 @@ describe('GET /api/secure/s3', () => {
 
     // Ensures response status
     expect(res.statusCode).toBe(200);
-    expect(res.body.url).toBeDefined();
+    expect(res.body.success).toBeDefined();
   });
 });

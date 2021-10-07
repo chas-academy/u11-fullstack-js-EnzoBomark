@@ -1,23 +1,22 @@
-import { app } from '../test-setup';
 import supertest from 'supertest';
-import { getToken } from '../test-utils/getToken.utils';
-const request = supertest(app);
 
 import { MODEL } from '../../model';
-import { setupDB } from '../test-setup';
+import { app, setupDB } from '../test-setup';
+import { getToken } from '../test-utils/getToken.utils';
+
+const request = supertest(app);
 
 setupDB('endpoint-testing', true);
 
-describe('PUT /api/auth/updatecreds', () => {
+describe('PUT /api/auth/update-creds', () => {
   describe('given a username, email and password', () => {
     it('should respond with a status 200 code', async () => {
       const res = await request
-        .put('/api/auth/updatecreds')
+        .put('/api/auth/update-creds')
         .auth(await getToken(), { type: 'bearer' })
         .send({
           name: 'R2-D2',
           email: 'testing@gmail.com',
-          password: 'test123456',
         });
 
       // Ensures response status
@@ -27,10 +26,9 @@ describe('PUT /api/auth/updatecreds', () => {
 
   describe('No token provided', () => {
     it('should respond with a status code of 403', async () => {
-      const res = await request.put('/api/auth/updatecreds').send({
+      const res = await request.put('/api/auth/update-creds').send({
         name: 'R2-D2',
         email: 'testing@gmail.com',
-        password: 'test123456',
       });
 
       expect(res.statusCode).toBe(403);

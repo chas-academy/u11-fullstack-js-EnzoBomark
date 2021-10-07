@@ -1,11 +1,4 @@
-import { IPaginatedArticles } from './Article.interface';
-
-export interface Response {
+export interface AuthResponse {
   error?: string;
-  success?: any;
-}
-
-export interface ArticlesResponse {
-  error?: string;
-  success?: IPaginatedArticles;
+  success?: { accessToken: string; refreshToken: string };
 }

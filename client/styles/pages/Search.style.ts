@@ -1,5 +1,6 @@
-import { Input } from '@/styles/Input.style';
 import styled from 'styled-components';
+
+import { input } from '@/styles/Input.style';
 
 const Search = styled.div`
   margin: 0 auto;
@@ -8,9 +9,10 @@ const Search = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 6.25rem;
 `;
 
-const Searchbar = styled(Input)`
+const Searchbar = styled(input)`
   width: 90%;
   max-width: 90rem;
 `;

@@ -1,22 +1,22 @@
 import { Request, Response } from 'express';
 import { get } from 'lodash';
+
 import { MODEL } from '../model';
-import { SERVICE } from '../service';
-import { toTitleCase } from '../utils/toTitleCase.utils';
 
-export const getPaginatedDataHandler = async (req: Request, res: Response) => {
-  const { query, page, model } = get(req, 'body');
+export const getUsersHandler = async (req: Request, res: Response) => {
+  const { query, page } = get(req, 'body');
 
-  const response = await SERVICE.paginate(
-    get(MODEL, `${toTitleCase(model)}`),
-    page,
-    query
-  );
+  const regexQuery = new RegExp(query, 'i');
+  const regex = [{ name: { $regex: regexQuery } }, { email: { $regex: regexQuery } }];
+  const omit = { password: 0 };
 
-  if (!response) {
-    return res.status(404).send({ error: 'bad query' });
-  }
+  const users = await MODEL.User.aggregate()
+    .match({ $or: regex })
+    .skip((page - 1) * 25)
+    .project(omit)
+    .limit(25);
 
-  // Send articles back
-  return res.status(200).send({ success: response });
+  if (!users) return res.status(404).send({ error: 'bad query' });
+
+  return res.status(200).send({ success: users });
 };

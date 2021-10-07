@@ -6,7 +6,7 @@ const Main: React.FC = (props) => {
   return (
     <S.Main>
       <Header />
-      <main>{props.children}</main>
+      <S.Wrapper>{props.children}</S.Wrapper>
       <Footer />
     </S.Main>
   );

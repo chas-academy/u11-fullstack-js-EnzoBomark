@@ -1,6 +1,6 @@
-import { useSlate, ReactEditor } from 'slate-react';
-import { Transforms, Editor } from 'slate';
+import { Editor, Transforms } from 'slate';
 import { HistoryEditor } from 'slate-history';
+import { ReactEditor, useSlate } from 'slate-react';
 
 export const toggleMark = (editor: ReactEditor & HistoryEditor, format: string) => {
   const isActive = isMarkActive(editor, format);

@@ -1,26 +1,28 @@
-import { RichButton } from '@/styles/Button.style';
-import { mainTheme } from '@/styles/Themes';
 import styled from 'styled-components';
+
+import { mainTheme } from '@/styles/Themes';
 
 const ImageImportButton = styled.input``;
 
 const Label = styled.label<{ active: string }>`
-  font-size: ${mainTheme['font-sm']};
+  position: absolute;
+  bottom: 14.375rem;
+  right: 90px;
+  font-size: ${mainTheme['font-xs']};
   font-weight: 100;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 3.75rem;
-  max-width: 25rem;
+  width: 50px;
+  height: 50px;
   background-color: ${(props) => props.theme['color-dark-gray']};
-  opacity: ${(props) => (props.active.length ? '100%' : '50%')};
   border: ${(props) => props.theme['border-sm']};
   color: ${(props) => props.theme['color-white']};
-  border-radius: ${mainTheme['rounded-md']};
+  border-radius: ${mainTheme['rounded-lg']};
   text-shadow: ${mainTheme['text-shadow']};
   box-shadow: ${mainTheme['box-shadow']};
   cursor: pointer;
+  opacity: ${(props) => (props.active ? '100%' : '50%')};
 `;
 
 export const S = {

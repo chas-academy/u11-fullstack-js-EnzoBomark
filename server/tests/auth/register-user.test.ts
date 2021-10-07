@@ -1,9 +1,9 @@
-import { app } from '../test-setup';
 import supertest from 'supertest';
-const request = supertest(app);
 
 import { MODEL } from '../../model';
-import { setupDB } from '../test-setup';
+import { app, setupDB } from '../test-setup';
+
+const request = supertest(app);
 
 setupDB('endpoint-testing', true);
 

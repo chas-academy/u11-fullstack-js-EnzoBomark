@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 import { UserDocument } from './';
 
 export interface SessionDocument extends mongoose.Document {
@@ -18,7 +19,4 @@ const SessionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const Session = mongoose.model<SessionDocument>(
-  'Session',
-  SessionSchema
-);
+export const Session = mongoose.model<SessionDocument>('Session', SessionSchema);

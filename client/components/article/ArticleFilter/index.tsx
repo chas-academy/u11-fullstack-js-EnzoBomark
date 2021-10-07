@@ -1,6 +1,7 @@
-import { S } from './ArticleFilter.style';
 import Modal from '@/components/shared/templates/Modal';
 import { useToggle } from '@/hooks/useToggle.hooks';
+
+import { S } from './ArticleFilter.style';
 
 const ArticleFilter: React.FC = () => {
   const [isOpen, setIsOpen] = useToggle(false);

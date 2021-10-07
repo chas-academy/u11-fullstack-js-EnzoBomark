@@ -1,27 +1,29 @@
-import { S } from './ArticleShowcase.style';
-import { useState, useMemo, useCallback } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { createEditor, Descendant } from 'slate';
-import { Slate, Editable } from 'slate-react';
+import { Editable, Slate } from 'slate-react';
+
 import { Element } from '@/components/shared/misc/Element';
 import { Leaf } from '@/components/shared/misc/Leaf';
 import { IArticle } from '@/interfaces/Article.interface';
 
-const TextEditor: React.FC<{ data: IArticle }> = (props: { data: IArticle }) => {
+import { S } from './ArticleShowcase.style';
+
+const TextEditor: React.FC<{ data: IArticle }> = ({ data }) => {
   const editor = useMemo(() => createEditor(), []);
-  const [value, setValue] = useState<Descendant[]>(props.data.body);
+  const [value, setValue] = useState<Descendant[]>(data.body.slice(1));
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
   return (
     <S.ArticleShowcase>
-      <S.Title>{props.data.title}</S.Title>
+      <S.Title>{data.title}</S.Title>
       <S.Info>
-        <S.P>{props.data.author}</S.P>
-        <S.P>{props.data.date}</S.P>
-        <S.P>{props.data.readTime} min</S.P>
+        <S.P>{data.user.name}</S.P>
+        <S.P>{data.updatedAt.substring(0, 10)}</S.P>
+        <S.P>{data.readTime} min</S.P>
       </S.Info>
 
-      <S.Image src={`${process.env.BASE_S3}${props.data.image}`} alt="Header Image" />
+      <S.Image src={`${process.env.BASE_S3}${data.image}`} alt="Header Image" />
 
       <Slate editor={editor} value={value} onChange={(value) => setValue(value)}>
         <S.TextField>

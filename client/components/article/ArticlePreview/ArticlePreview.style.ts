@@ -11,7 +11,7 @@ const ArticlePreview = styled.div`
 const Image = styled.img`
   height: 100px;
   width: 30%;
-  max-width: 300px;
+  max-width: 180px;
   min-width: 100px;
   object-fit: cover;
   border-radius: ${mainTheme['rounded-md']};

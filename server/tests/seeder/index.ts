@@ -1,7 +1,8 @@
 import fs from 'fs';
-import util from 'util';
-import path from 'path';
 import mongoose from 'mongoose';
+import path from 'path';
+import util from 'util';
+
 import { toTitleCase } from '../../utils/toTitleCase.utils';
 
 const readDir = util.promisify(fs.readdir);
@@ -19,8 +20,6 @@ export const seedDatabase = async (runSaveMiddleware = false) => {
     if (!model) throw new Error(`Cannot find Model '${modelName}'`);
     const fileContents = require(path.join(__dirname, file));
 
-    runSaveMiddleware
-      ? await model.create(fileContents)
-      : await model.insertMany(fileContents);
+    runSaveMiddleware ? await model.create(fileContents) : await model.insertMany(fileContents);
   }
 };

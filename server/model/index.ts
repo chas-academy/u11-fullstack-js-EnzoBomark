@@ -1,9 +1,6 @@
-import { Session } from './session.model';
-import { SessionDocument } from './session.model';
-import { User } from './user.model';
-import { UserDocument } from './user.model';
-import { Article } from './article.model';
-import { ArticleDocument } from './article.model';
+import { Article, ArticleDocument } from './article.model';
+import { Session, SessionDocument } from './session.model';
+import { User, UserDocument } from './user.model';
 
 export const MODEL = {
   Session,

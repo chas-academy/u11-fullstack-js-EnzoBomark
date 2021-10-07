@@ -1,14 +1,17 @@
-import { S } from './BlockButton.style';
-import { toggleBlock, isBlockActive } from '@/utils/block.utils';
-import { useSlate } from 'slate-react';
-import { MouseEvent } from 'react';
 import Image from 'next/image';
+import { MouseEvent } from 'react';
+import { useSlate } from 'slate-react';
+
+import { isBlockActive, toggleBlock } from '@/utils/block.utils';
+
+import { S } from './BlockButton.style';
 
 const BlockButton = ({ format, icon }: { format: string; icon: string }) => {
   const editor = useSlate();
 
   return (
     <S.BlockButton
+      type="button"
       active={isBlockActive(editor, format)}
       aria-label={format}
       title={format}

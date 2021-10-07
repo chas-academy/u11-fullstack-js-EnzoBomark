@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+
 import { mainTheme } from './Themes';
 
-export const Button = styled.button`
+export const button = styled.button`
   background: ${(props) => props.theme['color-dark-gray']};
   color: ${(props) => props.theme['color-white']};
   width: 100%;
@@ -14,7 +15,7 @@ export const Button = styled.button`
   cursor: pointer;
 `;
 
-export const RichButton = styled.button`
+export const rich_button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;

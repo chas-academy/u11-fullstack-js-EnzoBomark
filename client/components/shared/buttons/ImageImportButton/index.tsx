@@ -1,32 +1,25 @@
+import Image from 'next/image';
+
+import { Icon } from '@/assets/icons';
+
 import { S } from './ImageImportButton.style';
-import { s3UploadWithCompression } from '@/utils/s3.utils';
-import { useState } from 'react';
 
 interface Props {
-  id: string;
-  getState: any;
+  onChange: (e) => void;
+  active: string;
 }
 
 const ImageImportButton: React.FC<Props> = (props: Props) => {
-  const [isActive, setIsActive] = useState('');
-
-  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedImage = event.target.files[0];
-    const imageKey = await s3UploadWithCompression(selectedImage);
-    setIsActive(imageKey);
-    props.getState(imageKey);
-  };
-
   return (
-    <S.Label htmlFor={props.id} active={isActive}>
+    <S.Label htmlFor="image-import" active={props.active}>
       <S.ImageImportButton
         type="file"
-        id={props.id}
+        id="image-import"
         accept="image/*"
         hidden
-        onChange={handleChange}
+        onChange={(e) => props.onChange(e.target.files[0])}
       />
-      Image
+      <Image src={Icon.Image} />
     </S.Label>
   );
 };

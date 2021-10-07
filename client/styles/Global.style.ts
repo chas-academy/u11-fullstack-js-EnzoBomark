@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import { mainTheme, ThemeType } from './Themes';
+
+import { ThemeType } from './Themes';
 
 declare module 'styled-components' {
   export interface DefaultTheme extends ThemeType {} // extends the global DefaultTheme with our ThemeType.

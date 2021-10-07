@@ -1,9 +1,11 @@
-import { NextFunction, Request, Response } from 'express';
-import { omit, get } from 'lodash';
 import crypto from 'crypto';
-import { SERVICE } from '../service';
+import { NextFunction, Request, Response } from 'express';
+import { get } from 'lodash';
+
 import { MODEL } from '../model';
+import { SERVICE } from '../service';
 import { UTILS } from '../utils';
+import { removePassword } from '../utils/removePassword.utils';
 
 export const createUserHandler = async (req: Request, res: Response) => {
   try {
@@ -20,22 +22,17 @@ export const getUserHandler = async (req: Request, res: Response) => {
 
   const user = await SERVICE.findUser({ _id: userId });
 
-    if (!user) {
-      return res.status(404).send({ error: 'No user found' });
-    }
+  if (!user) {
+    return res.status(404).send({ error: 'No user found' });
+  }
 
-    return res.status(200).send({
-      success: omit(user, [
-        'password',
-        'resetPasswordToken',
-        'resetPasswordExpire',
-      ]),
-    });
+  return res.status(200).send({
+    success: removePassword(user),
+  });
 };
 
 export const updateUserHandler = async (req: Request, res: Response) => {
   const userId = get(req, 'user._id');
-  const update = req.body;
 
   const user = await SERVICE.findUser({ _id: userId });
 
@@ -43,19 +40,19 @@ export const updateUserHandler = async (req: Request, res: Response) => {
     return res.status(400).send({ error: 'No user found' });
   }
 
+  if (String(user._id) !== String(userId)) {
+    return res.status(401).send({ error: 'Unauthorized' });
+  }
+
   if (!user.name === req.body.name) user.name = req.body.name;
   if (!user.email === req.body.email) user.email = req.body.email;
-  if (!user.password === req.body.password) user.password = req.body.password;
 
   await user.save();
 
   return res.status(200).send({ success: 'User successfully updated' });
 };
 
-export const forgotUserPasswordHandler = async (
-  req: Request,
-  res: Response
-) => {
+export const forgotUserPasswordHandler = async (req: Request, res: Response) => {
   // Send Email to email provided but first check if user exists
   const { email } = req.body;
 
@@ -71,7 +68,7 @@ export const forgotUserPasswordHandler = async (
   await user.save();
 
   // Reset url provided in the reset email
-  const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+  const resetUrl = `http://localhost:3000/password-reset/${resetToken}`;
 
   // HTML message in the mail
   const message = `
@@ -111,7 +108,7 @@ export const resetUserPasswordHandler = async (req: Request, res: Response) => {
   });
 
   if (!user) {
-    return res.status(400).send('Invalid token');
+    return res.status(400).send({ error: 'Invalid token' });
   }
 
   user.password = req.body.password;
@@ -140,9 +137,7 @@ export const deleteUserHandler = async (req: Request, res: Response) => {
 
   await SERVICE.deleteUser({ _id: userId });
 
-  return res
-    .status(200)
-    .send({ success: `${userId} was successfully deleted` });
+  return res.status(200).send({ success: `${userId} was successfully deleted` });
 };
 
 export const addSavedArticleHandler = async (req: Request, res: Response) => {
@@ -160,9 +155,7 @@ export const addSavedArticleHandler = async (req: Request, res: Response) => {
 
   //add logic
 
-  return res
-    .status(200)
-    .send({ success: `${userId} was successfully deleted` });
+  return res.status(200).send({ success: `${userId} was successfully deleted` });
 };
 
 export const getSavedArticlesHandler = async (req: Request, res: Response) => {
@@ -180,15 +173,10 @@ export const getSavedArticlesHandler = async (req: Request, res: Response) => {
 
   //add logic
 
-  return res
-    .status(200)
-    .send({ success: `${userId} was successfully deleted` });
+  return res.status(200).send({ success: `${userId} was successfully deleted` });
 };
 
-export const deleteSavedArticleHandler = async (
-  req: Request,
-  res: Response
-) => {
+export const deleteSavedArticleHandler = async (req: Request, res: Response) => {
   const userId = get(req, 'user._id');
 
   const user = await SERVICE.findUser({ _id: userId });
@@ -203,7 +191,5 @@ export const deleteSavedArticleHandler = async (
 
   //add logic
 
-  return res
-    .status(200)
-    .send({ success: `${userId} was successfully deleted` });
+  return res.status(200).send({ success: `${userId} was successfully deleted` });
 };

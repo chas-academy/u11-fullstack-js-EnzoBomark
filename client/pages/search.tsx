@@ -1,15 +1,18 @@
-import { S } from '@/styles/pages/Search.style';
 import { NextPage } from 'next';
 import { useState } from 'react';
-import { post } from '@/utils/http.utils';
-import PageHeader from '@/components/shared/templates/PageHeader';
+
 import ArticlePreview from '@/components/article/ArticlePreview';
-import { IPaginatedArticles } from '@/interfaces/Article.interface';
-import { ArticlesResponse } from '@/interfaces/AuthResponse.interface';
+import NoMatch from '@/components/shared/misc/NoMatch';
+import Spinner from '@/components/shared/misc/Spinner';
+import PageHeader from '@/components/shared/templates/PageHeader';
+import { Public } from '@/guards/public.guard';
 import { useArticleSearch } from '@/hooks/useArticleSearch.hooks';
 import { useObserver } from '@/hooks/useObserver.hooks';
+import { ArticlesResponse, IArticle } from '@/interfaces/Article.interface';
+import { S } from '@/styles/pages/Search.style';
+import { post } from '@/utils/http.utils';
 
-const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
+const Search: NextPage<{ data: IArticle[] }> = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [query, setQuery] = useState('');
 
@@ -22,12 +25,9 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
     setPageNumber(1);
   };
 
-  const error = hasError && <div>{hasError}</div>;
-  const loading = isLoading && <div>Loading...</div>;
-  const noMatch = !articles.length && !isLoading && <div>No match</div>;
-
   return (
     <S.Search>
+      <Spinner isLoading={isLoading} />
       <S.Searchbar placeholder="e.g. Rain gear..." value={query} onChange={handleSearch} />
 
       <PageHeader title="Search" />
@@ -40,19 +40,16 @@ const Search: NextPage<{ data: IPaginatedArticles }> = ({ data }) => {
         );
       })}
 
-      {error}
-      {loading}
-      {noMatch}
+      {hasError && <div>{hasError}</div>}
+      {!articles.length && !isLoading && <NoMatch type="article" />}
     </S.Search>
   );
 };
 
-import { auth } from '@/guards/auth.guard';
-export const getServerSideProps = auth(async (context) => {
-  const response = await post<ArticlesResponse>('search', {
+export const getServerSideProps = Public(async (context) => {
+  const response = await post<ArticlesResponse>('article/search', {
     query: '',
     page: 1,
-    model: 'article',
   });
 
   if (!response.ok) {
@@ -60,6 +57,6 @@ export const getServerSideProps = auth(async (context) => {
   }
 
   return { props: { data: response.parsedBody.success } };
-}, false);
+});
 
 export default Search;

@@ -1,3 +1,4 @@
+import { Cookies } from 'js-cookie';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
@@ -18,6 +19,8 @@ const Delete: NextPage = () => {
 
   const logoutHandler = async () => {
     await fetch();
+    Cookies.remove('access_token');
+    Cookies.remove('refresh_token');
     dispatch(removeUser());
     router.push('/');
   };

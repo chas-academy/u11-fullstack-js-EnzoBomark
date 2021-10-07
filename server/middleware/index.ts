@@ -1,7 +1,7 @@
 import { deserializeUser } from './deserializeUser';
+import { requireAdmin } from './requireAdmin';
 import { requireUser } from './requireUser';
 import { validateRequest } from './validateRequest';
-import { requireAdmin } from './requireAdmin';
 
 export const MW = {
   deserializeUser,

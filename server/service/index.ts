@@ -1,20 +1,11 @@
-import { createSession } from './session.service';
-import { createAccessToken } from './session.service';
-import { reIssueAccessToken } from './session.service';
-import { updateSession } from './session.service';
-import { findSessions } from './session.service';
-import { createUser } from './user.service';
-import { findUser } from './user.service';
-import { deleteUser } from './user.service';
-import { getUsers } from './user.service';
-import { validatePassword } from './user.service';
-import { createArticle } from './article.service';
-import { findArticle } from './article.service';
-import { findAndUpdateArticle } from './article.service';
-import { deleteArticle } from './article.service';
-import { getArticles } from './article.service';
+import {
+    createArticle, deleteArticle, findAndUpdateArticle, findArticle, getArticles
+} from './article.service';
 import { generateUploadUrl } from './s3.service';
-import { paginate } from './paginate.service';
+import {
+    createAccessToken, createSession, findSessions, reIssueAccessToken, updateSession
+} from './session.service';
+import { createUser, deleteUser, findUser, getUsers, validatePassword } from './user.service';
 
 export const SERVICE = {
   createSession,
@@ -31,7 +22,6 @@ export const SERVICE = {
   findAndUpdateArticle,
   deleteArticle,
   generateUploadUrl,
-  paginate,
   getArticles,
   getUsers,
 };

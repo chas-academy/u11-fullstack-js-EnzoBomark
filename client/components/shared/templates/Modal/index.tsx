@@ -1,5 +1,6 @@
-import { S } from './Modal.style';
 import ReactDom from 'react-dom';
+
+import { S } from './Modal.style';
 
 interface Props {
   children: any;

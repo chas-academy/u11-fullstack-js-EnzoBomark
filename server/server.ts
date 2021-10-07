@@ -1,14 +1,17 @@
-import connectToDataBase from './db/connect';
-import express from 'express';
-import config from 'config';
-import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { ROUTES } from './routes';
-import { MW } from './middleware';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import express from 'express';
 
-const port = config.get('PORT') as number;
+import connectToDataBase from './db/connect';
+import { MW } from './middleware';
+import { ROUTES } from './routes';
+
+if (process.env.NODE_ENV !== 'production') dotenv.config();
+
+const port = process.env.PORT;
 const origin = {
-  origin: config.get('CLIENT_URL') as string,
+  origin: process.env.CLIENT_URL as string,
   credentials: true,
 };
 
@@ -20,15 +23,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(MW.deserializeUser);
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('../client/build'));
-}
+ROUTES.Auth(app);
+ROUTES.Article(app);
+ROUTES.S3(app);
+ROUTES.User(app);
+ROUTES.Admin(app);
 
-const server = app.listen(port, () => {
-  connectToDataBase();
-  ROUTES.Auth(app);
-  ROUTES.Article(app);
-  ROUTES.S3(app);
-  ROUTES.Search(app);
-  ROUTES.User(app);
-});
+app.listen(port, () => connectToDataBase());

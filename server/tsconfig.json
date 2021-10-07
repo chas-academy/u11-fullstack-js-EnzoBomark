@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "skipLibCheck": true,
     "target": "es5",
     "module": "commonjs",
     "lib": ["es2015"],
@@ -10,6 +11,6 @@
     "sourceMap": true,
     "types": ["mocha", "jest", "node"]
   },
-  "include": ["./**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts", ".env.local"]
 }

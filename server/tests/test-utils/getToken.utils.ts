@@ -1,5 +1,7 @@
-import { app } from '../test-setup';
 import supertest from 'supertest';
+
+import { app } from '../test-setup';
+
 const request = supertest(app);
 
 export const getToken = async () => {
@@ -7,5 +9,6 @@ export const getToken = async () => {
     email: 'testing1@gmail.com',
     password: 'test12345',
   });
-  return res.body.accessToken;
+
+  return res.body.success.accessToken;
 };

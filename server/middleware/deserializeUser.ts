@@ -1,18 +1,12 @@
+import { NextFunction, Request, Response } from 'express';
 import { get } from 'lodash';
-import { Request, Response, NextFunction } from 'express';
-import { UTILS } from '../utils';
+
 import { SERVICE } from '../service';
+import { UTILS } from '../utils';
 
-export const deserializeUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const refreshToken =
-    get(req, 'cookies.refresh_token') ?? get(req, 'headers.x-refresh');
-
-  const accessToken =
-    get(req, 'cookies.access_token') ?? get(req, 'headers.authorization');
+export const deserializeUser = async (req: Request, res: Response, next: NextFunction) => {
+  const refreshToken = get(req, 'headers.x-refresh');
+  const accessToken = get(req, 'headers.authorization', '').replace(/^Bearer\s/, '');
 
   if (!accessToken) return next();
 

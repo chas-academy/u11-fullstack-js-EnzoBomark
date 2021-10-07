@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { mainTheme } from '@/styles/Themes';
 
 const Navbar = styled.header`

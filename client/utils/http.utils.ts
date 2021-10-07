@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 import { HttpResponse } from '@/interfaces/HttpResponse.interface';
 
 const API_BASE = process.env.BASE_API;
@@ -17,14 +19,18 @@ export const http = async <T>(request: RequestInfo): Promise<HttpResponse<T>> =>
 
 export const get = async <T>(
   path: string,
-  headers: { [key: string]: string } = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+  extraHeaders: { [key: string]: string } = {
+    authorization: `Bearer ${Cookies.get('access_token')}`,
+    'x-refresh': Cookies.get('refresh_token'),
   },
   args: RequestInit = {
     method: 'GET',
     credentials: 'include',
-    headers: headers,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      ...extraHeaders,
+    },
   }
 ): Promise<HttpResponse<T>> => {
   return await http<T>(new Request(`${API_BASE}${path}`, args));
@@ -33,14 +39,18 @@ export const get = async <T>(
 export const post = async <T>(
   path: string,
   body: any,
-  headers: { [key: string]: string } = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+  extraHeaders: { [key: string]: string } = {
+    authorization: `Bearer ${Cookies.get('access_token')}`,
+    'x-refresh': Cookies.get('refresh_token'),
   },
   args: RequestInit = {
     credentials: 'include',
     method: 'POST',
-    headers: headers,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      ...extraHeaders,
+    },
     body: JSON.stringify(body),
   }
 ): Promise<HttpResponse<T>> => {
@@ -50,14 +60,18 @@ export const post = async <T>(
 export const put = async <T>(
   path: string,
   body: any,
-  headers: { [key: string]: string } = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+  extraHeaders: { [key: string]: string } = {
+    authorization: `Bearer ${Cookies.get('access_token')}`,
+    'x-refresh': Cookies.get('refresh_token'),
   },
   args: RequestInit = {
     credentials: 'include',
     method: 'PUT',
-    headers: headers,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      ...extraHeaders,
+    },
     body: JSON.stringify(body),
   }
 ): Promise<HttpResponse<T>> => {
@@ -66,15 +80,19 @@ export const put = async <T>(
 
 export const destroy = async <T>(
   path: string,
-  body?: any,
-  headers: { [key: string]: string } = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+  body: any,
+  extraHeaders: { [key: string]: string } = {
+    authorization: `Bearer ${Cookies.get('access_token')}`,
+    'x-refresh': Cookies.get('refresh_token'),
   },
   args: RequestInit = {
     credentials: 'include',
     method: 'DELETE',
-    headers: headers,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      ...extraHeaders,
+    },
     body: JSON.stringify(body),
   }
 ): Promise<HttpResponse<T>> => {

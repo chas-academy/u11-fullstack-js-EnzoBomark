@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
-import config from 'config';
+
 import log from '../logger';
 
 const connectToDataBase = async () => {
-  const mongodbUri = config.get('MONGO_URI') as string;
+  const mongodbUri = process.env.MONGO_URI as string;
 
   await mongoose.connect(mongodbUri, {
     useNewUrlParser: true,

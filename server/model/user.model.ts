@@ -1,8 +1,6 @@
-import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import config from 'config';
-import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
+import mongoose from 'mongoose';
 
 export interface UserDocument extends mongoose.Document {
   email: string;
@@ -38,8 +36,10 @@ UserSchema.pre('save', async function (next: mongoose.HookNextFunction) {
     return next();
   }
 
-  // Get salt facor
-  const salt = await bcrypt.genSalt(config.get('SALT_WORK_FACTOR'));
+  const saltWorkFactor = parseInt(process.env.SALT_WORK_FACTOR as string);
+
+  // Get salt factor
+  const salt = await bcrypt.genSalt(saltWorkFactor);
 
   // Hash password with salt factor
   const hash = await bcrypt.hashSync(user.password, salt);
@@ -50,14 +50,10 @@ UserSchema.pre('save', async function (next: mongoose.HookNextFunction) {
   return next();
 });
 
-UserSchema.methods.comparePassword = async function (
-  candidatePassword: string
-) {
+UserSchema.methods.comparePassword = async function (candidatePassword: string) {
   const user = this as UserDocument;
 
-  return bcrypt
-    .compare(candidatePassword, user.password)
-    .catch((error) => false);
+  return bcrypt.compare(candidatePassword, user.password).catch((error) => false);
 };
 
 UserSchema.methods.getResetPasswordToken = function () {
@@ -65,10 +61,7 @@ UserSchema.methods.getResetPasswordToken = function () {
 
   const user = this as UserDocument;
 
-  user.resetPasswordToken = crypto
-    .createHash('sha256')
-    .update(resetToken)
-    .digest('hex');
+  user.resetPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex');
 
   user.resetPasswordExpire = Date.now() + 10 * (60 * 1000);
 

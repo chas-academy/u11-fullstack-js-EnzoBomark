@@ -1,10 +1,6 @@
-import {
-  DocumentDefinition,
-  FilterQuery,
-  QueryOptions,
-  UpdateQuery,
-} from 'mongoose';
-import { MODEL, ArticleDocument } from '../model';
+import { DocumentDefinition, FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
+
+import { ArticleDocument, MODEL } from '../model';
 
 export const createArticle = (input: DocumentDefinition<ArticleDocument>) => {
   return MODEL.Article.create(input);
@@ -14,7 +10,7 @@ export const findArticle = (
   query: FilterQuery<ArticleDocument>,
   options: QueryOptions = { lean: true }
 ) => {
-  return MODEL.Article.findOne(query, {}, options);
+  return MODEL.Article.findOne(query, {}, options).populate('user', 'name');
 };
 
 export const findAndUpdateArticle = (
@@ -29,6 +25,6 @@ export const deleteArticle = (query: FilterQuery<ArticleDocument>) => {
   return MODEL.Article.deleteOne(query);
 };
 
-export const getArticles = () => {
-  return MODEL.Article.find();
+export const getArticles = (query: FilterQuery<ArticleDocument>) => {
+  return MODEL.Article.find(query);
 };

@@ -1,10 +1,6 @@
-import {
-  DocumentDefinition,
-  FilterQuery,
-  UpdateQuery,
-  QueryOptions,
-} from 'mongoose';
 import { omit } from 'lodash';
+import { DocumentDefinition, FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
+
 import { MODEL, UserDocument } from '../model';
 
 export const createUser = async (input: DocumentDefinition<UserDocument>) => {

@@ -1,22 +1,28 @@
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
+import express from 'express';
+import mongoose from 'mongoose';
+
+import { MW } from '../middleware';
+import { ROUTES } from '../routes';
 /* global beforeAll beforeEach afterEach afterAll */
 import { seedDatabase } from './seeder';
-import mongoose from 'mongoose';
-import express from 'express';
-import { ROUTES } from '../routes';
-import { MW } from '../middleware';
+
+if (process.env.NODE_ENV !== 'production') dotenv.config();
 
 export const app = express();
 
+app.use(cookieParser());
 app.use(MW.deserializeUser);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const server = app.listen(5000, () => {
+const server = app.listen(0, () => {
   ROUTES.Auth(app);
   ROUTES.Article(app);
   ROUTES.S3(app);
-  ROUTES.Search(app);
   ROUTES.User(app);
+  ROUTES.Admin(app);
 });
 
 mongoose.set('useNewUrlParser', true);
@@ -43,12 +49,7 @@ async function dropAllCollections() {
       if ((error as Error).message === 'ns not found') return;
       // This error occurs when you use it.todo. You can
       // safely ignore this error too
-      if (
-        (error as Error).message.includes(
-          'a background operation is currently running'
-        )
-      )
-        return;
+      if ((error as Error).message.includes('a background operation is currently running')) return;
       console.log((error as Error).message);
     }
   }

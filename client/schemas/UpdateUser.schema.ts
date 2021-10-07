@@ -1,0 +1,8 @@
+import { InferType, object, ref, string } from 'yup';
+
+export const UpdateUserSchema = object({
+  name: string().required('Name is required'),
+  email: string().email('Email must be a valid email address').required('Email is required'),
+});
+
+export type Props = InferType<typeof UpdateUserSchema>;

@@ -1,6 +1,7 @@
 import { Express } from 'express';
-import { MW } from '../middleware/';
+
 import { CONT } from '../controller/';
+import { MW } from '../middleware/';
 import { SCHEMA } from '../schema/';
 
 export const Auth = (app: Express) => {
@@ -19,7 +20,7 @@ export const Auth = (app: Express) => {
   );
 
   //Forgot password (send email to user)
-  app.post('/api/auth/forgotpassword', CONT.forgotUserPasswordHandler);
+  app.post('/api/auth/forgot-password', CONT.forgotUserPasswordHandler);
 
   //Get the user session (get user sessions to inform about possible invalid devices)
   app.get('/api/auth/sessions', MW.requireUser, CONT.getUserSessionHandler);
@@ -29,24 +30,20 @@ export const Auth = (app: Express) => {
 
   //Update user creds
   app.put(
-    '/api/auth/updatecreds',
-    [MW.requireUser, MW.validateRequest(SCHEMA.createUserSchema)],
+    '/api/auth/update-creds',
+    [MW.requireUser, MW.validateRequest(SCHEMA.updateUserSchema)],
     CONT.updateUserHandler
   );
 
   //Reset password (update password on user)
   app.put(
-    '/api/auth/resetpassword/:resetToken',
+    '/api/auth/reset-password/:resetToken',
     MW.validateRequest(SCHEMA.resetPasswordSchema),
     CONT.resetUserPasswordHandler
   );
 
   //Logout (Destroy user session)
-  app.delete(
-    '/api/auth/logout',
-    MW.requireUser,
-    CONT.invalidateUserSessionHandler
-  );
+  app.delete('/api/auth/logout', MW.requireUser, CONT.invalidateUserSessionHandler);
 
   //Delete user (remove user from the db)
   app.delete('/api/auth/delete', MW.requireUser, CONT.deleteUserHandler);

@@ -1,36 +1,30 @@
-import { S } from './ArticleEditor.style';
-import { useState, useMemo, useCallback } from 'react';
-import { createEditor, Descendant } from 'slate';
-import { Slate, Editable, withReact } from 'slate-react';
-import { withHistory } from 'slate-history';
-import { useToggle } from '@/hooks/useToggle.hooks';
-
-import pipe from 'lodash/fp/pipe';
 import isHotkey from 'is-hotkey';
+import pipe from 'lodash/fp/pipe';
+import Image from 'next/image';
+import React, { useCallback, useMemo, useState } from 'react';
+import { BaseEditor, createEditor, Descendant, Editor } from 'slate';
+import { HistoryEditor, withHistory } from 'slate-history';
+import { Editable, ReactEditor, Slate, withReact } from 'slate-react';
 
-import { FormResponse } from '@/interfaces/FormResponse.interface';
+import { Icon } from '@/assets/icons';
+import ImageImportButton from '@/components/shared/buttons/ImageImportButton';
+import { Element } from '@/components/shared/misc/Element';
+import { Leaf } from '@/components/shared/misc/Leaf';
+import Spinner from '@/components/shared/misc/Spinner';
+import Form from '@/components/shared/templates/Form';
+import Toolbar from '@/components/shared/templates/Toolbar';
+import { toggleMark } from '@/utils/mark.utils';
 
+import { S } from './ArticleEditor.style';
 import withImages from './plugins/withImages';
 import withKeyCommands from './plugins/withKeyCommands';
 import withLinks from './plugins/withLinks';
 
-// import { createParagraphNode } from '@/utils/slate/paragraph.utils';
-// import { createImageNode } from '@/utils/slate/image.utils';
-// import { createLinkNode } from '@/utils/slate/link.utils';
-import { getReadTime } from '@/utils/readTime.utils';
-import { toggleMark } from '@/utils/mark.utils';
-import { post } from '@/utils/http.utils';
-
-import Toolbar from '@/components/shared/templates/Toolbar';
-import ImageImport from '@/components/shared/buttons/ImageImportButton';
-import Post from '@/components/shared/buttons/PostButton';
-import UnverifiedInput from '@/components/shared/inputs/UnverifiedInput';
-import Modal from '@/components/shared/templates/Modal';
-import SubmitButton from '@/components/shared/buttons/SubmitButton';
-import AboutInput from '@/components/shared/inputs/AboutInput';
-import TagsInput from '@/components/shared/inputs/TagsInput';
-import { Element } from '@/components/shared/misc/Element';
-import { Leaf } from '@/components/shared/misc/Leaf';
+declare module 'slate' {
+  interface CustomTypes {
+    Editor: BaseEditor & ReactEditor & HistoryEditor;
+  }
+}
 
 const createEditorWithPlugins = pipe(
   withReact,
@@ -40,122 +34,56 @@ const createEditorWithPlugins = pipe(
   withKeyCommands
 );
 
-const HOTKEYS = {
-  'mod+b': 'bold',
-  'mod+i': 'italic',
-  'mod+u': 'underline',
-};
-
-const initialValue = [
-  {
-    type: 'paragraph',
-    children: [{ text: '' }],
-  },
-];
-
-interface Article {
-  title: string;
+interface Props {
+  error: string;
+  onSubmit: (e) => void;
+  onChange: (e) => void;
+  imageImport: (e) => void;
   image: string;
-  body: Descendant[];
-  tags: string[];
-  about: string;
-  readTime: number;
+  value: Descendant[];
 }
 
-const ArticleEditor: React.FC = () => {
-  const [isOpen, setIsOpen] = useToggle(false);
+const ArticleEditor: React.FC<Props> = (props: Props) => {
   const editor = useMemo(() => createEditorWithPlugins(createEditor()), []);
-  const [value, setValue] = useState<Descendant[]>(initialValue);
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
-  const [article, setArticle] = useState<Article>({
-    title: undefined,
-    image: undefined,
-    body: undefined,
-    tags: undefined,
-    about: undefined,
-    readTime: undefined,
-  });
-
-  const addNewArticle = async (event: React.FormEvent) => {
-    event.preventDefault();
-    if (article.body === undefined) alert('No body');
-    if (article.title === undefined) alert('No title');
-    if (article.image === undefined) alert('No image');
-    if (article.about === undefined) alert('No about');
-    if (article.tags === undefined) alert('No tags');
-
-    const isVerified =
-      article.body !== undefined &&
-      article.title !== undefined &&
-      article.image !== undefined &&
-      article.tags !== undefined &&
-      article.about !== undefined;
-
-    if (isVerified) {
-      article.readTime = getReadTime(article.body);
-      const response = await post<FormResponse>('article', article);
-
-      if (!response.ok) {
-        // return console.log(response.parsedBody?.error);
-      }
-
-      // console.log(response.parsedBody?.success);
-    }
+  const onKeyDownHandler = (e) => {
+    if (isHotkey('mod+b', e)) toggleMark(editor, 'bold');
+    if (isHotkey('mod+i', e)) toggleMark(editor, 'italic');
+    if (isHotkey('mod+u', e)) toggleMark(editor, 'underline');
+    if (e.key === '#') Editor.addMark(editor, 'hashtag', true);
+    if (e.key === ' ') Editor.removeMark(editor, 'hashtag');
+    if (e.key === 'Enter') Editor.removeMark(editor, 'hashtag');
   };
 
-  const getTitle = (e) => setArticle({ ...article, title: e });
-  const getImageKey = (e) => setArticle({ ...article, image: e });
-  const getBody = (e) => setArticle({ ...article, body: e });
-  const getTags = (e) => setArticle({ ...article, tags: e });
-  const getAbout = (e) => setArticle({ ...article, about: e });
+  const imageImport = (e) => {
+    props.imageImport(e);
+  };
 
   return (
     <S.ArticleEditor>
-      <Slate
-        editor={editor}
-        value={value}
-        onChange={(value) => {
-          setValue(value);
-          getBody(value);
-        }}
-      >
+      <Slate editor={editor} value={props.value} onChange={(e) => props.onChange(e)}>
         <Toolbar />
 
-        <S.Form onSubmit={addNewArticle}>
-          <UnverifiedInput placeholder="Title" getState={getTitle} />
-          <Modal open={isOpen} close={() => setIsOpen(false)}>
-            <S.ModalContent>
-              <ImageImport id="image" getState={getImageKey} />
-              <AboutInput getState={getAbout} />
-              <TagsInput getState={getTags} />
-              <SubmitButton onClick={addNewArticle}>Confirm</SubmitButton>
-            </S.ModalContent>
-          </Modal>
-          <Post open={() => setIsOpen(true)} />
-        </S.Form>
-
-        <S.TextField>
-          <Editable
-            id="body"
-            renderElement={renderElement}
-            renderLeaf={renderLeaf}
-            autoCapitalize="false"
-            autoCorrect="false"
-            spellCheck="false"
-            title="Editor"
-            placeholder="Write here..."
-            onKeyDown={(event) => {
-              for (const hotkey in HOTKEYS) {
-                if (isHotkey(hotkey, event as any)) {
-                  event.preventDefault();
-                  toggleMark(editor, HOTKEYS[hotkey]);
-                }
-              }
-            }}
-          />
-        </S.TextField>
+        <Form onSubmit={(e) => props.onSubmit(e)} error={props.error}>
+          <S.TextField>
+            <Editable
+              id="body"
+              renderElement={renderElement}
+              renderLeaf={renderLeaf}
+              autoCapitalize="false"
+              autoCorrect="false"
+              spellCheck="false"
+              placeholder="Try write something..."
+              onKeyDown={onKeyDownHandler}
+            />
+          </S.TextField>
+          <ImageImportButton onChange={(e) => props.imageImport(e)} active={props.image} />
+          <S.Submit>
+            <Image src={Icon.Save} />
+          </S.Submit>
+        </Form>
       </Slate>
     </S.ArticleEditor>
   );

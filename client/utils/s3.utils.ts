@@ -1,7 +1,8 @@
 import Compress from 'react-image-file-resizer';
+
 import { get } from '@/utils/http.utils';
 
-export const s3UploadWithCompression = async (
+export const s3 = async (
   image: File,
   width = 3840,
   height = 2160,

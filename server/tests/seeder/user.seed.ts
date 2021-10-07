@@ -3,6 +3,7 @@ module.exports = [
     name: 'Leia Organa',
     email: 'testing1@gmail.com',
     password: 'test12345',
+    role: 'admin',
   },
   {
     name: 'Obi-Wan Kenobi',

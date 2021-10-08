@@ -1,8 +1,10 @@
-import { mainTheme } from '@/styles/Themes';
 import styled from 'styled-components';
+
+import { mainTheme } from '@/styles/Themes';
 
 const ArticlePreview = styled.div`
   width: 90vw;
+  max-width: 88rem;
   display: flex;
   cursor: pointer;
   margin-top: 1.25rem;
@@ -20,7 +22,6 @@ const Image = styled.img`
 
 const Text = styled.div`
   height: 100px;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -44,9 +45,9 @@ const About = styled.p`
   -webkit-box-orient: vertical;
   font-size: ${mainTheme['font-sm']};
   opacity: 70%;
-  max-height: 35px;
+  max-height: 2.1875rem;
   width: 100%;
-  max-width: 60rem;
+  max-width: 80rem;
 `;
 
 const Data = styled.p`

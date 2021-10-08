@@ -1,7 +1,17 @@
 import styled from 'styled-components';
 
 const Article = styled.div`
-  margin-bottom: 6.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-export const S = { Article };
+const InteractionBar = styled.div`
+  display: flex;
+  width: 90vw;
+  gap: 10px;
+  max-width: 60rem;
+  margin-bottom: 2.5rem;
+`;
+
+export const S = { Article, InteractionBar };

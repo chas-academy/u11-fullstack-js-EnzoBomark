@@ -1,20 +1,68 @@
-import { Request, Response } from 'express';
+import {
+    Request,
+    Response
+} from 'express';
 import { get } from 'lodash';
 
 import { MODEL } from '../model';
+import { Article } from '../routes/article.routes';
 import { SERVICE } from '../service';
 
 //GET
 export const getArticleHandler = async (req: Request, res: Response) => {
   const articleId = get(req, 'params.articleId');
 
-  const article = await SERVICE.findArticle({ _id: articleId });
+  // populate user field
+  const populateUser = {
+    from: 'users',
+    localField: 'user',
+    foreignField: '_id',
+    as: 'user',
+  };
 
-  if (!article) {
+  // populate likes field
+  const populateLikes = {
+    from: 'articlelikes',
+    localField: '_id',
+    foreignField: 'article',
+    as: 'likeUsers',
+  };
+
+  // unwind nested array
+  const unwind = 'user';
+
+  // convert ObjectId to string
+  const convertUserIdToString = { 'user._id': { $toString: '$user._id' } };
+
+  const convertArtcileIdToString = { _id: { $toString: '$_id' } };
+
+  const countNumberOfLikes = { likes: { $size: '$likeUsers' } };
+
+  const converLikeUsersToIds = { likeUsers: '$likeUsers.user' };
+
+  const match = { _id: articleId };
+
+  // remove user password
+  const project = {
+    'user.password': 0,
+  };
+
+  const article = await MODEL.Article.aggregate()
+    .lookup(populateUser)
+    .lookup(populateLikes)
+    .unwind(unwind)
+    .addFields(convertUserIdToString)
+    .addFields(convertArtcileIdToString)
+    .addFields(countNumberOfLikes)
+    .addFields(converLikeUsersToIds)
+    .match(match)
+    .project(project);
+
+  if (!article.length) {
     return res.status(400).send({ error: 'No article found' });
   }
 
-  return res.status(200).send({ success: article });
+  return res.status(200).send({ success: article.shift() });
 };
 
 export const getArticlesHandler = async (req: Request, res: Response) => {
@@ -42,6 +90,7 @@ export const getArticlesHandler = async (req: Request, res: Response) => {
   // convert ObjectId to string
   const convertUserIdToString = { 'user._id': { $toString: '$user._id' } };
 
+  // convert Array to string
   const countNumberOfLikes = { likes: { $size: '$likes' } };
 
   // regex match atleast one field
@@ -95,8 +144,8 @@ export const createArticleHandler = async (req: Request, res: Response) => {
 };
 
 export const likeArticleHandler = async (req: Request, res: Response) => {
-  const userId: string = get(req, 'user._id');
-  const articleId: string = get(req, 'params.articleId');
+  const userId = get(req, 'user._id');
+  const articleId = get(req, 'params.articleId');
 
   const userArticleLikes = await SERVICE.findUserArticleLikes({
     article: articleId,
@@ -109,7 +158,7 @@ export const likeArticleHandler = async (req: Request, res: Response) => {
   }
 
   if (!userArticleLikes) {
-    const test = await SERVICE.createUserArticleLike({
+    await SERVICE.createUserArticleLike({
       user: userId,
       article: articleId,
     });

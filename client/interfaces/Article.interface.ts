@@ -12,6 +12,8 @@ export interface IArticle {
     name: string;
     _id: string;
   };
+  likes: number;
+  likeUsers: string[];
   createdAt: string;
   updatedAt: string;
 }

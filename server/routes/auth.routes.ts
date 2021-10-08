@@ -43,7 +43,11 @@ export const Auth = (app: Express) => {
   );
 
   //Logout (Destroy user session)
-  app.delete('/api/auth/logout', MW.requireUser, CONT.invalidateUserSessionHandler);
+  app.delete(
+    '/api/auth/logout',
+    MW.requireUser,
+    CONT.invalidateUserSessionHandler
+  );
 
   //Delete user (remove user from the db)
   app.delete('/api/auth/delete', MW.requireUser, CONT.deleteUserHandler);

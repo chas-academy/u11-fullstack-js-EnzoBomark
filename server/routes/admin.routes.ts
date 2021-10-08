@@ -20,13 +20,17 @@ export const Admin = (app: Express) => {
   );
 
   //Delete user
-  app.delete('/api/admin/user/:userId', MW.requireAdmin, CONT.adminDeleteUserHandler);
+  app.delete(
+    '/api/admin/user/:userId',
+    MW.requireAdmin,
+    CONT.adminDeleteUserHandler
+  );
 
   //Get users
   app.post(
     '/api/admin/users',
     [MW.requireAdmin, MW.validateRequest(SCHEMA.searchSchema)],
-    CONT.getUsersHandler
+    CONT.adminGetUsersHandler
   );
 
   //Get users
@@ -36,5 +40,9 @@ export const Admin = (app: Express) => {
   app.get('/api/admin/guard', MW.requireAdmin, CONT.getUserHandler);
 
   //Email user
-  app.post('/api/admin/user/:userId/email', MW.requireAdmin, CONT.adminEmailUserHandler);
+  app.post(
+    '/api/admin/user/:userId/email',
+    MW.requireAdmin,
+    CONT.adminEmailUserHandler
+  );
 };

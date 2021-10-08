@@ -5,6 +5,12 @@ import { MW } from '../middleware/';
 import { SCHEMA } from '../schema/';
 
 export const Article = (app: Express) => {
+  //Get article
+  app.get('/api/article/:articleId', CONT.getArticleHandler);
+
+  //Get user saved articles
+  app.get('/api/user/save', MW.requireUser, CONT.getSavedArticlesHandler);
+
   //Create article
   app.post(
     '/api/article',
@@ -13,10 +19,25 @@ export const Article = (app: Express) => {
   );
 
   //Add article to saved
-  app.post('/api/user/save/:articleId', MW.requireUser, CONT.addSavedArticleHandler);
+  app.post(
+    '/api/user/save/:articleId',
+    MW.requireUser,
+    CONT.addSavedArticleHandler
+  );
 
   //Search articles
-  app.post('/api/article/search', MW.validateRequest(SCHEMA.searchSchema), CONT.getArticlesHandler);
+  app.post(
+    '/api/article/search',
+    MW.validateRequest(SCHEMA.searchSchema),
+    CONT.getArticlesHandler
+  );
+
+  //Like article
+  app.post(
+    '/api/article/like/:articleId',
+    MW.requireUser,
+    CONT.likeArticleHandler
+  );
 
   //Update article
   app.put(
@@ -25,17 +46,17 @@ export const Article = (app: Express) => {
     CONT.updateArticleHandler
   );
 
-  //Get article
-  app.get('/api/article/:articleId', CONT.getArticleHandler);
-
-  //Get user saved articles
-  app.get('/api/user/save', MW.requireUser, CONT.getSavedArticlesHandler);
-
-  // app.get('/api/user/articles', MW.requireUser, CONT.getUserArticles);
-
   //Delete article
-  app.delete('/api/article/:articleId', MW.requireUser, CONT.deleteArticleHandler);
+  app.delete(
+    '/api/article/:articleId',
+    MW.requireUser,
+    CONT.deleteArticleHandler
+  );
 
   //Remove article from saved
-  app.delete('/api/user/save/:articleId', MW.requireUser, CONT.deleteSavedArticleHandler);
+  app.delete(
+    '/api/user/save/:articleId',
+    MW.requireUser,
+    CONT.deleteSavedArticleHandler
+  );
 };

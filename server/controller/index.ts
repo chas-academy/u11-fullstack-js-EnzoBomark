@@ -1,19 +1,34 @@
 import {
-    adminCreateUserHandler, adminDeleteUserHandler, adminEmailUserHandler, adminGetUserHandler,
+    adminCreateUserHandler,
+    adminDeleteUserHandler,
+    adminEmailUserHandler,
+    adminGetUserHandler,
+    adminGetUsersHandler,
     adminUpdateUserHandler
 } from './admin.controller';
 import {
-    createArticleHandler, deleteArticleHandler, getArticleHandler, getArticlesHandler,
+    createArticleHandler,
+    deleteArticleHandler,
+    getArticleHandler,
+    getArticlesHandler,
+    likeArticleHandler,
     updateArticleHandler
 } from './article.controller';
 import { createSecureS3UrlHandler } from './s3.controller';
-import { getUsersHandler } from './search.controller';
 import {
-    createUserSessionHandler, getUserSessionHandler, invalidateUserSessionHandler
+    createUserSessionHandler,
+    getUserSessionHandler,
+    invalidateUserSessionHandler
 } from './session.controller';
 import {
-    addSavedArticleHandler, createUserHandler, deleteSavedArticleHandler, deleteUserHandler,
-    forgotUserPasswordHandler, getSavedArticlesHandler, getUserHandler, resetUserPasswordHandler,
+    addSavedArticleHandler,
+    createUserHandler,
+    deleteSavedArticleHandler,
+    deleteUserHandler,
+    forgotUserPasswordHandler,
+    getSavedArticlesHandler,
+    getUserHandler,
+    resetUserPasswordHandler,
     updateUserHandler
 } from './user.controller';
 
@@ -30,16 +45,17 @@ export const CONT = {
   addSavedArticleHandler,
   getSavedArticlesHandler,
   deleteSavedArticleHandler,
+  likeArticleHandler,
   createArticleHandler,
   updateArticleHandler,
   getArticleHandler,
   deleteArticleHandler,
   getArticlesHandler,
   createSecureS3UrlHandler,
-  getUsersHandler,
   adminCreateUserHandler,
   adminUpdateUserHandler,
   adminGetUserHandler,
   adminDeleteUserHandler,
   adminEmailUserHandler,
+  adminGetUsersHandler,
 };

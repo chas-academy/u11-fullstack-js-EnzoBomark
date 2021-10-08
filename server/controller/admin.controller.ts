@@ -1,4 +1,7 @@
-import { Request, Response } from 'express';
+import {
+    Request,
+    Response
+} from 'express';
 import { get } from 'lodash';
 
 import { MODEL } from '../model';
@@ -31,7 +34,9 @@ export const adminUpdateUserHandler = async (req: Request, res: Response) => {
 
   await user.save();
 
-  return res.status(200).send({ success: 'Admin successfully updated this user' });
+  return res
+    .status(200)
+    .send({ success: 'Admin successfully updated this user' });
 };
 
 export const adminGetUserHandler = async (req: Request, res: Response) => {
@@ -59,7 +64,9 @@ export const adminDeleteUserHandler = async (req: Request, res: Response) => {
 
   await SERVICE.deleteUser({ _id: user });
 
-  return res.status(200).send({ success: `${userId} was successfully deleted` });
+  return res
+    .status(200)
+    .send({ success: `${userId} was successfully deleted` });
 };
 
 export const adminEmailUserHandler = async (req: Request, res: Response) => {
@@ -85,7 +92,7 @@ export const adminEmailUserHandler = async (req: Request, res: Response) => {
   }
 };
 
-export const getUsersHandler = async (req: Request, res: Response) => {
+export const adminGetUsersHandler = async (req: Request, res: Response) => {
   const { query, page } = get(req, 'body');
 
   // regex match atleast one field
@@ -103,9 +110,14 @@ export const getUsersHandler = async (req: Request, res: Response) => {
   // return max 25 objects
   const limit = 25;
 
-  const users = await MODEL.User.aggregate().match(regex).project(project).skip(skip).limit(limit);
+  const users = await MODEL.User.aggregate()
+    .match(regex)
+    .project(project)
+    .skip(skip)
+    .limit(limit);
 
-  if (!users) return res.status(500).send({ error: "We couldn't load your content" });
+  if (!users)
+    return res.status(500).send({ error: "We couldn't load your content" });
 
   return res.status(200).send({ success: users });
 };

@@ -13,6 +13,8 @@ import { S } from '@/styles/pages/Search.style';
 import { post } from '@/utils/http.utils';
 
 const Search: NextPage<{ data: IArticle[] }> = ({ data }) => {
+  console.log(data);
+
   const [pageNumber, setPageNumber] = useState(1);
   const [query, setQuery] = useState('');
 

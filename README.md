@@ -56,7 +56,7 @@ U11-FULLSTACK-JS-ENZOBOMARK
 
 ## About The Project
 
-...
+The Peak is a mountaineering, hiking and climbing community site to inspire, share information about landmarks, climbing spots and gear reviews. 
 
 ### Built With
 
@@ -101,8 +101,23 @@ U11-FULLSTACK-JS-ENZOBOMARK
 ## Requirements specification u11
 
 <!-- Add some user stories -->
+### Non-functional requirements
+* The application must provide a RESTful API
+* The application must work in all modern browsers
+* The application must be responsive
 
-\_For more examples, please refer to the [Requirements](https://docs.google.com/document/d/18ohx7WOUoyz-AiarJBFRcs___fK5TmOZZSPyCmi_4rs/edit?usp=sharing)\_
+### Functional requirements
+* A user must be able to register an account
+* A user must be able to login to their account
+* A user must be able to search in the application
+* An administrative user must be able to log in to a basic dashboard and create/update/delete users
+
+### Bonus requirements
+* An administrative user should be able to set permissions based on user roles
+* An administrative user should be able to create/read/update/delete user roles
+* An administrative user should be able to send out emails from the admin dashboard
+
+For more examples, please refer to the [Requirements](https://docs.google.com/document/d/18ohx7WOUoyz-AiarJBFRcs___fK5TmOZZSPyCmi_4rs/edit?usp=sharing)
 
 <!-- ROADMAP -->
 

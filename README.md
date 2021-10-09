@@ -71,6 +71,7 @@ The goal of this assignment was to create a website that uses the knowledge and 
 
 ### Prerequisites
 
+- node v16.10.0
 - npm
   ```sh
   npm install npm@latest -g

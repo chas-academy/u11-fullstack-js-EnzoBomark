@@ -1,8 +1,10 @@
 import { Editor, Element, Transforms } from 'slate';
 import { HistoryEditor } from 'slate-history';
-import { ReactEditor, useSlate } from 'slate-react';
+import { ReactEditor } from 'slate-react';
 
-export const toggleBlock = (editor: ReactEditor & HistoryEditor, format: string) => {
+import toggleMark from './mark.utils';
+
+const toggleBlock = (editor: ReactEditor & HistoryEditor, format: string) => {
   const isActive = isBlockActive(editor, format);
   const isList = 'list'.includes(format);
 
@@ -30,3 +32,5 @@ export const isBlockActive = (editor: ReactEditor & HistoryEditor, format: strin
 
   return !!match;
 };
+
+export default toggleMark;

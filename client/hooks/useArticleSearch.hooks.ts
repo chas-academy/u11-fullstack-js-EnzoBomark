@@ -1,15 +1,12 @@
 import { useState } from 'react';
 
-import {
-    ArticlesResponse,
-    IArticle
-} from '@/interfaces/Article.interface';
+import { ArticlesResponse, IArticle } from '@/interfaces/Article.interface';
 import { post } from '@/utils/http.utils';
 
-import { useFetchDebounce } from './useFetchDebounce.hooks';
-import { useMount } from './useMount';
+import useFetchDebounce from './useFetchDebounce.hooks';
+import useMount from './useMount';
 
-export const useArticleSearch = (
+const useArticleSearch = (
   query: string,
   page: number,
   ssrLoadedData: IArticle[],
@@ -35,3 +32,5 @@ export const useArticleSearch = (
 
   return { isLoading, hasError, articles };
 };
+
+export default useArticleSearch;

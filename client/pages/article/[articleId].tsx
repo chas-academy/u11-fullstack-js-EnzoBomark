@@ -1,32 +1,16 @@
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import {
-    useEffect,
-    useState
-} from 'react';
-import { useSelector } from 'react-redux';
 
 import ArticleShowcase from '@/components/article/ArticleShowcase';
 import LikeButton from '@/components/shared/buttons/LikeButton';
 import SaveButton from '@/components/shared/buttons/SaveButton';
-import { Public } from '@/guards/public.guard';
-import { useFetch } from '@/hooks/useFetch.hooks';
+import Public from '@/guards/public.guard';
 import { IArticle } from '@/interfaces/Article.interface';
 import { Response } from '@/interfaces/Response.interface';
-import {
-    RootState,
-    wrapper
-} from '@/store/index';
-import { S } from '@/styles/pages/Article.style';
-import {
-    get,
-    post
-} from '@/utils/http.utils';
+import { wrapper } from '@/store/index';
+import { S } from '@/styles/pages/Article/Article.style';
+import { post } from '@/utils/http.utils';
 
 const Article: NextPage<{ res: IArticle }> = ({ res }) => {
-  useEffect(() => {
-    console.log(res);
-  }, []);
   return (
     <S.Article>
       <ArticleShowcase data={res} />
@@ -41,8 +25,6 @@ const Article: NextPage<{ res: IArticle }> = ({ res }) => {
 export const getServerSideProps = Public(
   wrapper.getServerSideProps((store) => async (context) => {
     const state = store.getState();
-
-    console.log(state);
 
     const response = await post<Response>(`article/${context.params.articleId}`, {
       user: state.user.user?.id,

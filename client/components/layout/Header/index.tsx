@@ -1,6 +1,6 @@
 import Navbar from '@/components/shared/navigation/Navbar';
 import Sidebar from '@/components/shared/navigation/Sidebar';
-import { useToggle } from '@/hooks/useToggle.hooks';
+import useToggle from '@/hooks/useToggle.hooks';
 
 import { S } from './Header.style';
 

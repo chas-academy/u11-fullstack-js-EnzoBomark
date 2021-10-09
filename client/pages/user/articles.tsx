@@ -5,17 +5,10 @@ import ArticlePreview from '@/components/article/ArticlePreview';
 import NoMatch from '@/components/shared/misc/NoMatch';
 import Spinner from '@/components/shared/misc/Spinner';
 import PageHeader from '@/components/shared/templates/PageHeader';
-import { Private } from '@/guards/private.guard';
-import { useArticleSearch } from '@/hooks/useArticleSearch.hooks';
-import { useObserver } from '@/hooks/useObserver.hooks';
-import {
-    ArticlesResponse,
-    IArticle
-} from '@/interfaces/Article.interface';
-import {
-    RootState,
-    wrapper
-} from '@/store/index';
+import Private from '@/guards/private.guard';
+import useArticleSearch from '@/hooks/useArticleSearch.hooks';
+import useObserver from '@/hooks/useObserver.hooks';
+import { ArticlesResponse, IArticle } from '@/interfaces/Article.interface';
 import { S } from '@/styles/pages/Home.style';
 import { post } from '@/utils/http.utils';
 

@@ -6,7 +6,7 @@ import { get } from '@/utils/http.utils';
 
 import { wrapper } from '../store';
 
-export const Public = (gssp: GetServerSideProps = async (context) => null) => {
+const Public = (gssp: GetServerSideProps = async (context) => null) => {
   return wrapper.getServerSideProps((store) => async (context) => {
     const { req } = context;
 
@@ -26,3 +26,5 @@ export const Public = (gssp: GetServerSideProps = async (context) => null) => {
     return await gssp(context);
   });
 };
+
+export default Public;

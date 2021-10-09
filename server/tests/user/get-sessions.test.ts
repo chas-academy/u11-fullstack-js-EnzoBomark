@@ -7,11 +7,11 @@ const request = supertest(app);
 
 setupDB('endpoint-testing', true);
 
-describe('Delete /api/auth/delete', () => {
-  describe('given a accessToken', () => {
+describe('GET /api/user/sessions', () => {
+  describe('given an accessToken', () => {
     it('should respond with a 200', async () => {
       const res = await request
-        .delete(`/api/auth/delete`)
+        .get('/api/user/sessions')
         .auth(await getToken(), { type: 'bearer' });
 
       // Ensures response status

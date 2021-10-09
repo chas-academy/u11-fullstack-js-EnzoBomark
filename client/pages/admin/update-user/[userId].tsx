@@ -7,16 +7,16 @@ import Text from '@/components/shared/inputs/Text/Index';
 import Redirect from '@/components/shared/links/Redirect';
 import Spinner from '@/components/shared/misc/Spinner';
 import Form from '@/components/shared/templates/Form';
-import { Admin } from '@/guards/admin.guard';
-import { useFetch } from '@/hooks/useFetch.hooks';
-import { useMount } from '@/hooks/useMount';
-import { useToggle } from '@/hooks/useToggle.hooks';
+import Admin from '@/guards/admin.guard';
+import useFetch from '@/hooks/useFetch.hooks';
+import useMount from '@/hooks/useMount';
+import useToggle from '@/hooks/useToggle.hooks';
 import { Response } from '@/interfaces/Response.interface';
 import { IUser } from '@/interfaces/User.interface';
 import { AdminUpdateUserSchema, Props } from '@/schemas/AdminUpdateUser.schema';
 import { S } from '@/styles/pages/admin/UpdateUser.style';
 import { get, put } from '@/utils/http.utils';
-import { resolver } from '@/utils/resolver.utils';
+import resolver from '@/utils/resolver.utils';
 
 const AdminUpdateUser: NextPage<{ user: IUser }> = ({ user }) => {
   const router = useRouter();

@@ -1,7 +1,4 @@
-import {
-    Request,
-    Response
-} from 'express';
+import { Request, Response } from 'express';
 import { get } from 'lodash';
 
 import { MODEL } from '../model';

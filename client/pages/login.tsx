@@ -8,17 +8,14 @@ import Password from '@/components/shared/inputs/Password/Index';
 import Text from '@/components/shared/inputs/Text/Index';
 import Spinner from '@/components/shared/misc/Spinner';
 import Form from '@/components/shared/templates/Form';
-import { Public } from '@/guards/public.guard';
-import { useFetch } from '@/hooks/useFetch.hooks';
-import { useMount } from '@/hooks/useMount';
+import Public from '@/guards/public.guard';
+import useFetch from '@/hooks/useFetch.hooks';
+import useMount from '@/hooks/useMount';
 import { AuthResponse } from '@/interfaces/AuthResponse.interface';
-import {
-    LoginSchema,
-    Props
-} from '@/schemas/Login.schema';
+import { LoginSchema, Props } from '@/schemas/Login.schema';
 import { S } from '@/styles/pages/Login.style';
 import { post } from '@/utils/http.utils';
-import { resolver } from '@/utils/resolver.utils';
+import resolver from '@/utils/resolver.utils';
 
 const Login: NextPage = () => {
   const res = resolver<Props>(LoginSchema);

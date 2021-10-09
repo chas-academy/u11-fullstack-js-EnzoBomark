@@ -1,7 +1,4 @@
-import {
-    Request,
-    Response
-} from 'express';
+import { Request, Response } from 'express';
 import { get } from 'lodash';
 
 import { MODEL } from '../model';
@@ -11,8 +8,6 @@ import { SERVICE } from '../service';
 export const getArticleHandler = async (req: Request, res: Response) => {
   const userId = get(req, 'body.user');
   const articleId = get(req, 'params.articleId');
-
-  console.log(userId);
 
   // populate user field
   const populateUser = {
@@ -216,8 +211,6 @@ export const getUserArticlesHandler = async (req: Request, res: Response) => {
   if (!articles) {
     return res.status(500).send({ error: "We couldn't load your content" });
   }
-
-  console.log(articles);
 
   return res.status(200).send({ success: articles });
 };

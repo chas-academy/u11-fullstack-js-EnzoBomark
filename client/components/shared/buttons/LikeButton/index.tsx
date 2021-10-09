@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { useFetch } from '@/hooks/useFetch.hooks';
-import { useToggle } from '@/hooks/useToggle.hooks';
+import useFetch from '@/hooks/useFetch.hooks';
+import useToggle from '@/hooks/useToggle.hooks';
 import { Response } from '@/interfaces/Response.interface';
 import { RootState } from '@/store/index';
 import { post } from '@/utils/http.utils';

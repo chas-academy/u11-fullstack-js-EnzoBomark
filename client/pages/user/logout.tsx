@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { removeUser } from 'slices/user.slice';
 
 import Spinner from '@/components/shared/misc/Spinner';
-import { Private } from '@/guards/private.guard';
-import { useFetch } from '@/hooks/useFetch.hooks';
+import Private from '@/guards/private.guard';
+import useFetch from '@/hooks/useFetch.hooks';
 import { Response } from '@/interfaces/Response.interface';
 import { S } from '@/styles/pages/user/Logout.style';
 import { destroy } from '@/utils/http.utils';

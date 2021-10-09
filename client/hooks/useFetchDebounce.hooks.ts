@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { HttpResponse } from '@/interfaces/HttpResponse.interface';
 import { Response } from '@/interfaces/Response.interface';
 
-import { useDebounce } from './useDebounce.hooks';
-import { useMount } from './useMount';
+import useDebounce from './useDebounce.hooks';
+import useMount from './useMount';
 
-export const useFetchDebounce = <T extends Response>(
+const useFetchDebounce = <T extends Response>(
   request: () => Promise<HttpResponse<T>>,
   args: any[],
   debounceTime: number = 0
@@ -41,3 +41,5 @@ export const useFetchDebounce = <T extends Response>(
 
   return { isLoading, hasError, data };
 };
+
+export default useFetchDebounce;

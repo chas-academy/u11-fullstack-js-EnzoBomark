@@ -1,9 +1,5 @@
 import crypto from 'crypto';
-import {
-    NextFunction,
-    Request,
-    Response
-} from 'express';
+import { Request, Response } from 'express';
 import { get } from 'lodash';
 
 import { MODEL } from '../model';

@@ -14,7 +14,10 @@ export const createUserSessionHandler = async (req: Request, res: Response) => {
   }
 
   // Create a session
-  const session = await SERVICE.createSession(user._id, req.get('user-agent') || '');
+  const session = await SERVICE.createSession(
+    user._id,
+    req.get('user-agent') || ''
+  );
 
   // Create access token
   const accessToken = SERVICE.createAccessToken({
@@ -31,7 +34,10 @@ export const createUserSessionHandler = async (req: Request, res: Response) => {
   return res.status(200).send({ success: { accessToken, refreshToken } });
 };
 
-export const invalidateUserSessionHandler = async (req: Request, res: Response) => {
+export const invalidateUserSessionHandler = async (
+  req: Request,
+  res: Response
+) => {
   const sessionId = get(req, 'user.session');
 
   // Unvalidate current session

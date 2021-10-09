@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
-export const useObserver = (inView: () => void) => {
+const useObserver = (inView: () => void) => {
   const observer = useRef<IntersectionObserver>();
 
   const lastElemRef = useCallback((node) => {
@@ -15,3 +15,5 @@ export const useObserver = (inView: () => void) => {
 
   return { lastElemRef };
 };
+
+export default useObserver;

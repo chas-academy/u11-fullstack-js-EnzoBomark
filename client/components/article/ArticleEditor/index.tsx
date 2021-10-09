@@ -1,7 +1,7 @@
 import isHotkey from 'is-hotkey';
 import pipe from 'lodash/fp/pipe';
 import Image from 'next/image';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { BaseEditor, createEditor, Descendant, Editor } from 'slate';
 import { HistoryEditor, withHistory } from 'slate-history';
 import { Editable, ReactEditor, Slate, withReact } from 'slate-react';
@@ -13,7 +13,7 @@ import { Leaf } from '@/components/shared/misc/Leaf';
 import Spinner from '@/components/shared/misc/Spinner';
 import Form from '@/components/shared/templates/Form';
 import Toolbar from '@/components/shared/templates/Toolbar';
-import { toggleMark } from '@/utils/mark.utils';
+import toggleMark from '@/utils/mark.utils';
 
 import { S } from './ArticleEditor.style';
 import withImages from './plugins/withImages';

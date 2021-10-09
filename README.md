@@ -56,7 +56,7 @@ U11-FULLSTACK-JS-ENZOBOMARK
 
 ## About The Project
 
-The Peak is a mountaineering, hiking and climbing community site to inspire, share information about landmarks, climbing spots and gear reviews. 
+The goal of this assignment was to create a website that uses the knowledge and skills required to go from an idea and concept phase to a complete application. The submission should demonstrate understanding of, application, and use of a RESTful API in node with JWT-based authentication with the MongoDB document database.
 
 ### Built With
 

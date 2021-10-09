@@ -1,4 +1,4 @@
-import { Cookies } from 'js-cookie';
+import Cookies from 'js-cookie';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';

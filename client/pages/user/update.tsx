@@ -10,7 +10,10 @@ import { Private } from '@/guards/private.guard';
 import { useFetch } from '@/hooks/useFetch.hooks';
 import { useMount } from '@/hooks/useMount';
 import { Response } from '@/interfaces/Response.interface';
-import { Props, UpdateUserSchema } from '@/schemas/UpdateUser.schema';
+import {
+    Props,
+    UpdateUserSchema
+} from '@/schemas/UpdateUser.schema';
 import { RootState } from '@/store/index';
 import { S } from '@/styles/pages/user/Update.style';
 import { put } from '@/utils/http.utils';
@@ -22,7 +25,7 @@ const UpdateUser: NextPage = () => {
   const [values, setValues] = useState<Props>();
 
   const { fetch, isLoading, hasError, data } = useFetch<Response>(() =>
-    put(`auth/update-creds`, values)
+    put(`user/update-creds`, values)
   );
 
   useMount(async () => await fetch(), [values]);

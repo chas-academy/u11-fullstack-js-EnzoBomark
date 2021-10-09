@@ -11,16 +11,15 @@ import { post } from '@/utils/http.utils';
 import { S } from './SaveButton.style';
 
 interface Props {
-  likes: number;
-  userLikes: string[];
+  isSaved: boolean;
 }
 
 const SaveButton: React.FC<Props> = (props: Props) => {
   const router = useRouter();
   const user = useSelector((state: RootState) => state.user.user);
-  const [isLiked, setIsLiked] = useToggle(props.userLikes.includes(user?.id));
+  const [isLiked, setIsLiked] = useToggle(props.isSaved);
 
-  const { fetch } = useFetch<Response>(() => post(`article/like/${router.query.articleId}`));
+  const { fetch } = useFetch<Response>(() => post(`user/save/${router.query.articleId}`));
 
   const LikeHandler = async () => {
     await fetch();
@@ -29,7 +28,7 @@ const SaveButton: React.FC<Props> = (props: Props) => {
 
   return (
     <S.SaveButton>
-      {user && <S.Button onClick={LikeHandler}>{isLiked ? <p>Save</p> : <p>Saved</p>}</S.Button>}
+      {user && <S.Button onClick={LikeHandler}>{isLiked ? <p>Saved</p> : <p>Save</p>}</S.Button>}
     </S.SaveButton>
   );
 };

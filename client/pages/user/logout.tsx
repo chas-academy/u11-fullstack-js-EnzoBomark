@@ -15,7 +15,7 @@ const Logout: NextPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { fetch, isLoading, hasError, data } = useFetch<Response>(() => destroy(`auth/logout`, {}));
+  const { fetch, isLoading, hasError, data } = useFetch<Response>(() => destroy(`user/logout`, {}));
 
   const logoutHandler = async () => {
     await fetch();

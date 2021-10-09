@@ -11,7 +11,10 @@ import { Public } from '@/guards/public.guard';
 import { useFetch } from '@/hooks/useFetch.hooks';
 import { useMount } from '@/hooks/useMount';
 import { AuthResponse } from '@/interfaces/AuthResponse.interface';
-import { Props, RegisterSchema } from '@/schemas/Register.schema';
+import {
+    Props,
+    RegisterSchema
+} from '@/schemas/Register.schema';
 import { S } from '@/styles/pages/Register.style';
 import { post } from '@/utils/http.utils';
 import { resolver } from '@/utils/resolver.utils';
@@ -20,7 +23,7 @@ const Register: NextPage = () => {
   const res = resolver<Props>(RegisterSchema);
   const [values, setValues] = useState<Props>();
   const { fetch, isLoading, hasError, data } = useFetch<AuthResponse>(() =>
-    post('auth/register', values)
+    post('user/register', values)
   );
 
   useMount(async () => await fetch(), [values]);

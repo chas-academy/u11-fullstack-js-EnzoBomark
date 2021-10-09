@@ -12,14 +12,14 @@ import { S } from './LikeButton.style';
 
 interface Props {
   likes: number;
-  userLikes: string[];
+  isLiked: boolean;
 }
 
 const LikeButton: React.FC<Props> = (props: Props) => {
   const router = useRouter();
   const user = useSelector((state: RootState) => state.user.user);
   const [likes, setLikes] = useState(props.likes);
-  const [isLiked, setIsLiked] = useToggle(props.userLikes.includes(user?.id));
+  const [isLiked, setIsLiked] = useToggle(props.isLiked);
 
   const { fetch } = useFetch<Response>(() => post(`article/like/${router.query.articleId}`));
 
@@ -33,7 +33,7 @@ const LikeButton: React.FC<Props> = (props: Props) => {
     <S.LikeButton>
       {user && <S.Button onClick={LikeHandler}>{isLiked ? <p>Unlike</p> : <p>Like</p>}</S.Button>}
       <p>{likes}</p>
-      <p>Likes</p>
+      {likes === 1 ? <p>Like</p> : <p>Likes</p>}
     </S.LikeButton>
   );
 };

@@ -12,7 +12,11 @@ import { IArticle } from '@/interfaces/Article.interface';
 import { Response } from '@/interfaces/Response.interface';
 import { S } from '@/styles/pages/Editor.style';
 import { getDecendent } from '@/utils/descendantText.utils';
-import { get, put } from '@/utils/http.utils';
+import {
+    get,
+    post,
+    put
+} from '@/utils/http.utils';
 import { getReadTime } from '@/utils/readTime.utils';
 import { s3 } from '@/utils/s3.utils';
 import { getTags } from '@/utils/tags.utils';
@@ -61,7 +65,7 @@ const Update: NextPage<{ response: IArticle }> = ({ response }) => {
 };
 
 export const getServerSideProps = Private(async (context) => {
-  const response = await get<Response>(`article/${context.params.articleId}`);
+  const response = await post<Response>(`article/${context.params.articleId}`);
 
   if (!response.ok) {
     return { props: { response: null } };

@@ -13,7 +13,8 @@ export interface IArticle {
     _id: string;
   };
   likes: number;
-  likeUsers: string[];
+  isLiked: boolean;
+  isSaved: boolean;
   createdAt: string;
   updatedAt: string;
 }

@@ -1,23 +1,28 @@
 import { NextPage } from 'next';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 
 import ArticlePreview from '@/components/article/ArticlePreview';
+import NoMatch from '@/components/shared/misc/NoMatch';
 import Spinner from '@/components/shared/misc/Spinner';
 import PageHeader from '@/components/shared/templates/PageHeader';
 import { Private } from '@/guards/private.guard';
 import { useArticleSearch } from '@/hooks/useArticleSearch.hooks';
 import { useObserver } from '@/hooks/useObserver.hooks';
-import { ArticlesResponse, IArticle } from '@/interfaces/Article.interface';
-import { RootState, wrapper } from '@/store/index';
+import {
+    ArticlesResponse,
+    IArticle
+} from '@/interfaces/Article.interface';
+import {
+    RootState,
+    wrapper
+} from '@/store/index';
 import { S } from '@/styles/pages/Home.style';
 import { post } from '@/utils/http.utils';
 
 const Articles: NextPage<{ data: IArticle[] }> = ({ data }) => {
   const [pageNumber, setPageNumber] = useState(1);
-  const user = useSelector((state: RootState) => state.user.user);
 
-  const { isLoading, hasError, articles } = useArticleSearch(user.id, pageNumber, data);
+  const { isLoading, hasError, articles } = useArticleSearch('', pageNumber, data, 'user/articles');
 
   const { lastElemRef } = useObserver(() => setPageNumber((prevPageNumber) => ++prevPageNumber));
 
@@ -35,26 +40,33 @@ const Articles: NextPage<{ data: IArticle[] }> = ({ data }) => {
       })}
 
       {hasError && <div>{hasError}</div>}
-      {!articles.length && !isLoading && <div>No match</div>}
+      {!articles.length && !isLoading && <NoMatch type="article" />}
     </S.Home>
   );
 };
 
-export const getServerSideProps = Private(
-  wrapper.getServerSideProps((store) => async (context) => {
-    const state = store.getState();
+export const getServerSideProps = Private(async (context) => {
+  const { req, res } = context;
 
-    const response = await post<ArticlesResponse>('article/search', {
-      query: state.user.user.id,
+  const { access_token, refresh_token } = req.cookies;
+
+  const response = await post<ArticlesResponse>(
+    'user/articles',
+    {
+      query: '',
       page: 1,
-    });
-
-    if (!response.ok) {
-      return { props: { data: 'error' } };
+    },
+    {
+      authorization: access_token,
+      'x-refresh': refresh_token,
     }
+  );
 
-    return { props: { data: response.parsedBody.success } };
-  })
-);
+  if (!response.ok) {
+    return { props: { data: 'error' } };
+  }
+
+  return { props: { data: response.parsedBody.success } };
+});
 
 export default Articles;

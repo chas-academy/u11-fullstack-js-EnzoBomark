@@ -17,8 +17,11 @@ import {
 } from './session.service';
 import {
     createUser,
+    createUserSavedArticle,
     deleteUser,
+    deleteUserSavedArticle,
     findUser,
+    findUserSavedArticle,
     getUsers,
     validatePassword
 } from './user.service';
@@ -42,4 +45,7 @@ export const SERVICE = {
   deleteUserArticleLike,
   generateUploadUrl,
   getUsers,
+  findUserSavedArticle,
+  deleteUserSavedArticle,
+  createUserSavedArticle,
 };

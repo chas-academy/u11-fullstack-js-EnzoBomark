@@ -11,6 +11,8 @@ import {
     deleteArticleHandler,
     getArticleHandler,
     getArticlesHandler,
+    getSavedHandler,
+    getUserArticlesHandler,
     likeArticleHandler,
     updateArticleHandler
 } from './article.controller';
@@ -23,10 +25,8 @@ import {
 import {
     addSavedArticleHandler,
     createUserHandler,
-    deleteSavedArticleHandler,
     deleteUserHandler,
     forgotUserPasswordHandler,
-    getSavedArticlesHandler,
     getUserHandler,
     resetUserPasswordHandler,
     updateUserHandler
@@ -43,8 +43,6 @@ export const CONT = {
   resetUserPasswordHandler,
   deleteUserHandler,
   addSavedArticleHandler,
-  getSavedArticlesHandler,
-  deleteSavedArticleHandler,
   likeArticleHandler,
   createArticleHandler,
   updateArticleHandler,
@@ -58,4 +56,6 @@ export const CONT = {
   adminDeleteUserHandler,
   adminEmailUserHandler,
   adminGetUsersHandler,
+  getSavedHandler,
+  getUserArticlesHandler,
 };

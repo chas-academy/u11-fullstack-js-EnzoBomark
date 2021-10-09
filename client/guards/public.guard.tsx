@@ -12,7 +12,7 @@ export const Public = (gssp: GetServerSideProps = async (context) => null) => {
 
     const { access_token, refresh_token } = req.cookies;
 
-    const response = await get<Response>('auth/user', {
+    const response = await get<Response>('user/creds', {
       authorization: access_token,
       'x-refresh': refresh_token,
     });

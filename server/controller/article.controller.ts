@@ -5,12 +5,14 @@ import {
 import { get } from 'lodash';
 
 import { MODEL } from '../model';
-import { Article } from '../routes/article.routes';
 import { SERVICE } from '../service';
 
 //GET
 export const getArticleHandler = async (req: Request, res: Response) => {
+  const userId = get(req, 'body.user');
   const articleId = get(req, 'params.articleId');
+
+  console.log(userId);
 
   // populate user field
   const populateUser = {
@@ -25,7 +27,15 @@ export const getArticleHandler = async (req: Request, res: Response) => {
     from: 'articlelikes',
     localField: '_id',
     foreignField: 'article',
-    as: 'likeUsers',
+    as: 'isLiked',
+  };
+
+  // populate likes field
+  const populateSaved = {
+    from: 'usersavedarticles',
+    localField: '_id',
+    foreignField: 'article',
+    as: 'isSaved',
   };
 
   // unwind nested array
@@ -34,11 +44,17 @@ export const getArticleHandler = async (req: Request, res: Response) => {
   // convert ObjectId to string
   const convertUserIdToString = { 'user._id': { $toString: '$user._id' } };
 
-  const convertArtcileIdToString = { _id: { $toString: '$_id' } };
+  const convertArticleIdToString = { _id: { $toString: '$_id' } };
 
-  const countNumberOfLikes = { likes: { $size: '$likeUsers' } };
+  const countNumberOfLikes = { likes: { $size: '$isLiked' } };
 
-  const converLikeUsersToIds = { likeUsers: '$likeUsers.user' };
+  const convertIsLikedToBoolean = {
+    isLiked: { $in: [{ $toObjectId: userId }, '$isLiked.user'] },
+  };
+
+  const convertIsSavedToBoolean = {
+    isSaved: { $in: [{ $toObjectId: userId }, '$isSaved.user'] },
+  };
 
   const match = { _id: articleId };
 
@@ -50,11 +66,13 @@ export const getArticleHandler = async (req: Request, res: Response) => {
   const article = await MODEL.Article.aggregate()
     .lookup(populateUser)
     .lookup(populateLikes)
+    .lookup(populateSaved)
     .unwind(unwind)
     .addFields(convertUserIdToString)
-    .addFields(convertArtcileIdToString)
+    .addFields(convertArticleIdToString)
     .addFields(countNumberOfLikes)
-    .addFields(converLikeUsersToIds)
+    .addFields(convertIsLikedToBoolean)
+    .addFields(convertIsSavedToBoolean)
     .match(match)
     .project(project);
 
@@ -97,7 +115,6 @@ export const getArticlesHandler = async (req: Request, res: Response) => {
   const regexp = RegExp(query, 'gi');
   const regex = {
     $or: [
-      { 'user._id': { $regex: regexp } },
       { 'user.name': { $regex: regexp } },
       { title: { $regex: regexp } },
       { tags: { $in: [regexp] } },
@@ -124,8 +141,166 @@ export const getArticlesHandler = async (req: Request, res: Response) => {
     .skip(skip)
     .limit(limit);
 
-  if (!articles)
+  if (!articles) {
     return res.status(500).send({ error: "We couldn't load your content" });
+  }
+
+  return res.status(200).send({ success: articles });
+};
+
+export const getUserArticlesHandler = async (req: Request, res: Response) => {
+  const userId = get(req, 'user._id');
+  const { query, page } = get(req, 'body');
+
+  // populate user field
+  const populateUser = {
+    from: 'users',
+    localField: 'user',
+    foreignField: '_id',
+    as: 'user',
+  };
+
+  // populate likes field
+  const populateLikes = {
+    from: 'articlelikes',
+    localField: '_id',
+    foreignField: 'article',
+    as: 'likes',
+  };
+
+  // unwind nested array
+  const unwind = 'user';
+
+  const convertArticleIdToString = { _id: { $toString: '$_id' } };
+
+  // convert ObjectId to string
+  const convertUserIdToString = { 'user._id': { $toString: '$user._id' } };
+
+  // convert Array to string
+  const countNumberOfLikes = { likes: { $size: '$likes' } };
+
+  const match = { 'user._id': userId };
+
+  // regex match atleast one field
+  const regexp = RegExp(query, 'gi');
+  const regex = {
+    $or: [
+      { 'user.name': { $regex: regexp } },
+      { title: { $regex: regexp } },
+      { tags: { $in: [regexp] } },
+    ],
+  };
+
+  // remove user password
+  const project = { 'user.password': 0 };
+
+  // skip with 25 index
+  const skip = (page - 1) * 25;
+
+  // return max 25 objects
+  const limit = 25;
+
+  const articles = await MODEL.Article.aggregate()
+    .lookup(populateUser)
+    .lookup(populateLikes)
+    .unwind(unwind)
+    .addFields(convertArticleIdToString)
+    .addFields(convertUserIdToString)
+    .addFields(countNumberOfLikes)
+    .match(match)
+    .match(regex)
+    .project(project)
+    .skip(skip)
+    .limit(limit);
+
+  if (!articles) {
+    return res.status(500).send({ error: "We couldn't load your content" });
+  }
+
+  console.log(articles);
+
+  return res.status(200).send({ success: articles });
+};
+
+export const getSavedHandler = async (req: Request, res: Response) => {
+  const userId = get(req, 'user._id');
+  const { query, page } = get(req, 'body');
+
+  // populate user field
+  const populateUser = {
+    from: 'users',
+    localField: 'user',
+    foreignField: '_id',
+    as: 'user',
+  };
+
+  // populate likes field
+  const populateLikes = {
+    from: 'articlelikes',
+    localField: '_id',
+    foreignField: 'article',
+    as: 'likes',
+  };
+
+  // populate likes field
+  const populateSaved = {
+    from: 'usersavedarticles',
+    localField: '_id',
+    foreignField: 'article',
+    as: 'isSaved',
+  };
+
+  // unwind nested array
+  const unwind = 'user';
+
+  // convert ObjectId to string
+  const convertUserIdToString = { 'user._id': { $toString: '$user._id' } };
+
+  // convert Array to string
+  const countNumberOfLikes = { likes: { $size: '$likes' } };
+
+  const convertIsSavedToBoolean = {
+    isSaved: { $in: [{ $toObjectId: userId }, '$isSaved.user'] },
+  };
+
+  const match = { isSaved: true };
+
+  // regex match atleast one field
+  const regexp = RegExp(query, 'gi');
+  const regex = {
+    $or: [
+      { 'user.name': { $regex: regexp } },
+      { title: { $regex: regexp } },
+      { tags: { $in: [regexp] } },
+    ],
+  };
+
+  // remove user password
+  const project = { 'user.password': 0 };
+
+  // skip with 25 index
+  const skip = (page - 1) * 25;
+
+  // return max 25 objects
+  const limit = 25;
+
+  const articles = await MODEL.Article.aggregate()
+    .lookup(populateUser)
+    .lookup(populateLikes)
+    .lookup(populateSaved)
+    .unwind(unwind)
+    .addFields(convertUserIdToString)
+    .addFields(countNumberOfLikes)
+    .addFields(convertIsSavedToBoolean)
+    .match(match)
+    .match(regex)
+    .project(project)
+    .skip(skip)
+    .limit(limit);
+
+  if (!articles) {
+    return res.status(500).send({ error: "We couldn't load your content" });
+  }
 
   return res.status(200).send({ success: articles });
 };
@@ -154,7 +329,7 @@ export const likeArticleHandler = async (req: Request, res: Response) => {
 
   if (userArticleLikes) {
     await SERVICE.deleteUserArticleLike({ article: articleId, user: userId });
-    return res.status(201).send({ success: 'You unliked this post' });
+    return res.status(204).send({ success: 'You unliked this post' });
   }
 
   if (!userArticleLikes) {
@@ -162,7 +337,7 @@ export const likeArticleHandler = async (req: Request, res: Response) => {
       user: userId,
       article: articleId,
     });
-    return res.status(201).send({ success: 'You liked this post' });
+    return res.status(200).send({ success: 'You liked this post' });
   }
 };
 

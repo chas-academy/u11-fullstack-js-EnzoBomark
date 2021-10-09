@@ -2,12 +2,16 @@ import { NextPage } from 'next';
 import { useState } from 'react';
 
 import ArticlePreview from '@/components/article/ArticlePreview';
+import NoMatch from '@/components/shared/misc/NoMatch';
 import Spinner from '@/components/shared/misc/Spinner';
 import PageHeader from '@/components/shared/templates/PageHeader';
 import { Public } from '@/guards/public.guard';
 import { useArticleSearch } from '@/hooks/useArticleSearch.hooks';
 import { useObserver } from '@/hooks/useObserver.hooks';
-import { ArticlesResponse, IArticle } from '@/interfaces/Article.interface';
+import {
+    ArticlesResponse,
+    IArticle
+} from '@/interfaces/Article.interface';
 import { S } from '@/styles/pages/Home.style';
 import { post } from '@/utils/http.utils';
 
@@ -32,7 +36,7 @@ const Home: NextPage<{ data: IArticle[] }> = ({ data }) => {
       })}
 
       {hasError && <div>{hasError}</div>}
-      {!articles.length && !isLoading && <div>No match</div>}
+      {!articles.length && !isLoading && <NoMatch type="article" />}
     </S.Home>
   );
 };

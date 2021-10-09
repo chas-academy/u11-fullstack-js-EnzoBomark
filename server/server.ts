@@ -22,10 +22,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(MW.deserializeUser);
 
-ROUTES.Auth(app);
+ROUTES.User(app);
 ROUTES.Article(app);
 ROUTES.S3(app);
-ROUTES.User(app);
 ROUTES.Admin(app);
 
 app.listen(port, () => connectToDataBase());

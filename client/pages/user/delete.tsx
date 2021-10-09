@@ -15,7 +15,7 @@ const Delete: NextPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { fetch, isLoading, hasError, data } = useFetch<Response>(() => destroy(`auth/delete`, {}));
+  const { fetch, isLoading, hasError, data } = useFetch<Response>(() => destroy(`user/delete`, {}));
 
   const logoutHandler = async () => {
     await fetch();

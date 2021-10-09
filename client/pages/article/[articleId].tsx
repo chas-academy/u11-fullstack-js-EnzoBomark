@@ -13,7 +13,10 @@ import { Public } from '@/guards/public.guard';
 import { useFetch } from '@/hooks/useFetch.hooks';
 import { IArticle } from '@/interfaces/Article.interface';
 import { Response } from '@/interfaces/Response.interface';
-import { RootState } from '@/store/index';
+import {
+    RootState,
+    wrapper
+} from '@/store/index';
 import { S } from '@/styles/pages/Article.style';
 import {
     get,
@@ -28,21 +31,29 @@ const Article: NextPage<{ res: IArticle }> = ({ res }) => {
     <S.Article>
       <ArticleShowcase data={res} />
       <S.InteractionBar>
-        <SaveButton likes={res.likes} userLikes={res.likeUsers} />
-        <LikeButton likes={res.likes} userLikes={res.likeUsers} />
+        <SaveButton isSaved={res.isSaved} />
+        <LikeButton likes={res.likes} isLiked={res.isLiked} />
       </S.InteractionBar>
     </S.Article>
   );
 };
 
-export const getServerSideProps = Public(async (context) => {
-  const response = await get<Response>(`article/${context.params.articleId}`);
+export const getServerSideProps = Public(
+  wrapper.getServerSideProps((store) => async (context) => {
+    const state = store.getState();
 
-  if (!response.ok) {
-    return { props: { res: null } };
-  }
+    console.log(state);
 
-  return { props: { res: response.parsedBody.success } };
-});
+    const response = await post<Response>(`article/${context.params.articleId}`, {
+      user: state.user.user?.id,
+    });
+
+    if (!response.ok) {
+      return { props: { res: null } };
+    }
+
+    return { props: { res: response.parsedBody.success } };
+  })
+);
 
 export default Article;

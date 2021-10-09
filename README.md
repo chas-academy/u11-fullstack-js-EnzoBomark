@@ -18,11 +18,11 @@ U11-FULLSTACK-JS-ENZOBOMARK
     Peak is a mountaineering, hiking and climbing community site to inspire, share information about landmarks, climbing spots and gear reviews. 
     <br />
     <br />
-    <a href="">View Demo</a>
+    <a href="https://the-peek.vercel.app/" target="_blank">View Demo</a>
     ·
-    <a href="https://github.com/chas-academy/u11-fullstack-js-EnzoBomark/issues">Report Bug</a>
+    <a href="https://github.com/chas-academy/u11-fullstack-js-EnzoBomark/issues" target="_blank">Report Bug</a>
     ·
-    <a href="https://github.com/chas-academy/u11-fullstack-js-EnzoBomark/issues">Request Feature</a>
+    <a href="https://github.com/chas-academy/u11-fullstack-js-EnzoBomark/issues" target="_blank">Request Feature</a>
   </p>
 </p>
 

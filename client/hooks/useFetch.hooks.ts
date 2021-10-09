@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { HttpResponse } from '@/interfaces/HttpResponse.interface';
 import { Response } from '@/interfaces/Response.interface';
 
-export const useFetch = <T extends Response>(request: () => Promise<HttpResponse<T>>) => {
+const useFetch = <T extends Response>(request: () => Promise<HttpResponse<T>>) => {
   const [data, setData] = useState<T>(null);
   const [isLoading, setIsLoading] = useState<boolean>(null);
   const [hasError, setHasError] = useState<string>(null);
@@ -21,3 +21,5 @@ export const useFetch = <T extends Response>(request: () => Promise<HttpResponse
 
   return { fetch, isLoading, hasError, data };
 };
+
+export default useFetch;

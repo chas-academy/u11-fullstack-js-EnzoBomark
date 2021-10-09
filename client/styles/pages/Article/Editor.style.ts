@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const Article = styled.div`
+const Editor = styled.div`
   margin-bottom: 6.25rem;
 `;
 
-export const S = { Article };
+export const S = { Editor };

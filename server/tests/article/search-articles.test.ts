@@ -1,8 +1,6 @@
 import supertest from 'supertest';
 
-import { MODEL } from '../../model';
 import { app, setupDB } from '../test-setup';
-import { getToken } from '../test-utils/getToken.utils';
 
 const request = supertest(app);
 

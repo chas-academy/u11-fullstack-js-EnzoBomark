@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export const useMount = (fn: () => void, arg: any) => {
+const useMount = (fn: () => void, arg: any) => {
   const didMount = useRef(false);
 
   useEffect(() => {
@@ -8,3 +8,5 @@ export const useMount = (fn: () => void, arg: any) => {
     else didMount.current = true;
   }, arg);
 };
+
+export default useMount;

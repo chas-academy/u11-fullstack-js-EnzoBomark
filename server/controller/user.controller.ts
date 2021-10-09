@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { get } from 'lodash';
 
 import { MODEL } from '../model';
@@ -52,7 +52,10 @@ export const updateUserHandler = async (req: Request, res: Response) => {
   return res.status(200).send({ success: 'User successfully updated' });
 };
 
-export const forgotUserPasswordHandler = async (req: Request, res: Response) => {
+export const forgotUserPasswordHandler = async (
+  req: Request,
+  res: Response
+) => {
   // Send Email to email provided but first check if user exists
   const { email } = req.body;
 
@@ -137,59 +140,30 @@ export const deleteUserHandler = async (req: Request, res: Response) => {
 
   await SERVICE.deleteUser({ _id: userId });
 
-  return res.status(200).send({ success: `${userId} was successfully deleted` });
+  return res
+    .status(200)
+    .send({ success: `${userId} was successfully deleted` });
 };
 
 export const addSavedArticleHandler = async (req: Request, res: Response) => {
   const userId = get(req, 'user._id');
+  const articleId = get(req, 'params.articleId');
 
-  const user = await SERVICE.findUser({ _id: userId });
+  const userArticleLikes = await SERVICE.findUserSavedArticle({
+    user: userId,
+    article: articleId,
+  });
 
-  if (!user) {
-    return res.status(400).send({ error: 'No user found' });
+  if (userArticleLikes) {
+    await SERVICE.deleteUserSavedArticle({ user: userId, article: articleId });
+    return res.status(204).send({ success: 'You unsaved this post' });
   }
 
-  if (String(user._id) !== String(userId)) {
-    return res.status(401).send({ error: 'Unauthorized' });
+  if (!userArticleLikes) {
+    await SERVICE.createUserSavedArticle({
+      user: userId,
+      article: articleId,
+    });
+    return res.status(200).send({ success: 'You saved this post' });
   }
-
-  //add logic
-
-  return res.status(200).send({ success: `${userId} was successfully deleted` });
-};
-
-export const getSavedArticlesHandler = async (req: Request, res: Response) => {
-  const userId = get(req, 'user._id');
-
-  const user = await SERVICE.findUser({ _id: userId });
-
-  if (!user) {
-    return res.status(400).send({ error: 'No user found' });
-  }
-
-  if (String(user._id) !== String(userId)) {
-    return res.status(401).send({ error: 'Unauthorized' });
-  }
-
-  //add logic
-
-  return res.status(200).send({ success: `${userId} was successfully deleted` });
-};
-
-export const deleteSavedArticleHandler = async (req: Request, res: Response) => {
-  const userId = get(req, 'user._id');
-
-  const user = await SERVICE.findUser({ _id: userId });
-
-  if (!user) {
-    return res.status(400).send({ error: 'No user found' });
-  }
-
-  if (String(user._id) !== String(userId)) {
-    return res.status(401).send({ error: 'Unauthorized' });
-  }
-
-  //add logic
-
-  return res.status(200).send({ success: `${userId} was successfully deleted` });
 };

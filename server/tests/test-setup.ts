@@ -18,7 +18,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const server = app.listen(0, () => {
-  ROUTES.Auth(app);
   ROUTES.Article(app);
   ROUTES.S3(app);
   ROUTES.User(app);
@@ -49,7 +48,12 @@ async function dropAllCollections() {
       if ((error as Error).message === 'ns not found') return;
       // This error occurs when you use it.todo. You can
       // safely ignore this error too
-      if ((error as Error).message.includes('a background operation is currently running')) return;
+      if (
+        (error as Error).message.includes(
+          'a background operation is currently running'
+        )
+      )
+        return;
       console.log((error as Error).message);
     }
   }

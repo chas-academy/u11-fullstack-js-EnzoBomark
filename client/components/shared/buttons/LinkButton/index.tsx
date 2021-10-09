@@ -6,7 +6,7 @@ import { insertLink } from '@/utils/link.utils';
 
 import { S } from './LinkButton.style';
 
-const LinkButton = () => {
+const LinkButton: React.FC = () => {
   const editor = useSlateStatic();
 
   const insertLinkHandler = () => {

@@ -12,6 +12,9 @@ export interface IArticle {
     name: string;
     _id: string;
   };
+  likes: number;
+  isLiked: boolean;
+  isSaved: boolean;
   createdAt: string;
   updatedAt: string;
 }

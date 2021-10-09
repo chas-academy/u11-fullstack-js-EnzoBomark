@@ -1,18 +1,18 @@
 import supertest from 'supertest';
 
-import { MODEL } from '../../model';
+import { getArticle } from '../helpers/getArticle.utils';
 import { app, setupDB } from '../test-setup';
-import { getArticle } from '../test-utils/getArticle.utils';
-import { getToken } from '../test-utils/getToken.utils';
 
 const request = supertest(app);
 
 setupDB('endpoint-testing', true);
 
-describe('GET /api/article:articleId', () => {
+describe('Post /api/article:articleId', () => {
   describe('given a articleId', () => {
     test('should respond with a 200 and success message', async () => {
-      const res = await request.get(`/api/article/${await getArticle()}`);
+      const res = await request
+        .post(`/api/article/${await getArticle()}`)
+        .send({ user: null });
 
       // Ensures response status
       expect(res.statusCode).toBe(200);

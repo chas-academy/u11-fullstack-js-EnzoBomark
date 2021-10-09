@@ -8,7 +8,7 @@ export const createImageNode = (alt, src) => ({
   children: [{ text: '' }],
 });
 
-export const insertImage = (editor, url) => {
+const insertImage = (editor, url) => {
   if (!url) return;
 
   const { selection } = editor;
@@ -36,3 +36,5 @@ export const insertImage = (editor, url) => {
     Transforms.insertNodes(editor, image, { select: true });
   }
 };
+
+export default insertImage;

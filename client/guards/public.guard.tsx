@@ -6,13 +6,13 @@ import { get } from '@/utils/http.utils';
 
 import { wrapper } from '../store';
 
-export const Public = (gssp: GetServerSideProps = async (context) => null) => {
+const Public = (gssp: GetServerSideProps = async (context) => null) => {
   return wrapper.getServerSideProps((store) => async (context) => {
     const { req } = context;
 
     const { access_token, refresh_token } = req.cookies;
 
-    const response = await get<Response>('auth/user', {
+    const response = await get<Response>('user/creds', {
       authorization: access_token,
       'x-refresh': refresh_token,
     });
@@ -26,3 +26,5 @@ export const Public = (gssp: GetServerSideProps = async (context) => null) => {
     return await gssp(context);
   });
 };
+
+export default Public;

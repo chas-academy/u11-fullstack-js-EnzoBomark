@@ -6,15 +6,15 @@ import { useSelector } from 'react-redux';
 import Text from '@/components/shared/inputs/Text/Index';
 import Spinner from '@/components/shared/misc/Spinner';
 import Form from '@/components/shared/templates/Form';
-import { Private } from '@/guards/private.guard';
-import { useFetch } from '@/hooks/useFetch.hooks';
-import { useMount } from '@/hooks/useMount';
+import Private from '@/guards/private.guard';
+import useFetch from '@/hooks/useFetch.hooks';
+import useMount from '@/hooks/useMount';
 import { Response } from '@/interfaces/Response.interface';
 import { Props, UpdateUserSchema } from '@/schemas/UpdateUser.schema';
 import { RootState } from '@/store/index';
 import { S } from '@/styles/pages/user/Update.style';
 import { put } from '@/utils/http.utils';
-import { resolver } from '@/utils/resolver.utils';
+import resolver from '@/utils/resolver.utils';
 
 const UpdateUser: NextPage = () => {
   const user = useSelector((state: RootState) => state.user.user);
@@ -22,7 +22,7 @@ const UpdateUser: NextPage = () => {
   const [values, setValues] = useState<Props>();
 
   const { fetch, isLoading, hasError, data } = useFetch<Response>(() =>
-    put(`auth/update-creds`, values)
+    put(`user/update-creds`, values)
   );
 
   useMount(async () => await fetch(), [values]);

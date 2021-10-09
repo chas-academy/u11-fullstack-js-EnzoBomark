@@ -7,10 +7,10 @@ const request = supertest(app);
 
 setupDB('endpoint-testing', true);
 
-describe('POST /api/auth/register', () => {
+describe('POST /api/user/register', () => {
   describe('given a username, email and password', () => {
     it('Should save user to database', async () => {
-      const res = await request.post('/api/auth/register').send({
+      const res = await request.post('/api/user/register').send({
         name: 'Obi-Wan Kenobi',
         email: 'testing@gmail.com',
         password: 'test12345',
@@ -28,7 +28,7 @@ describe('POST /api/auth/register', () => {
 
   describe('Bad creds', () => {
     it('should respond with a status code of 400', async () => {
-      const res = await request.post('/api/auth/register');
+      const res = await request.post('/api/user/register');
       expect(res.statusCode).toBe(400);
 
       // Searches the user in the database

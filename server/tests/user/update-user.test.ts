@@ -1,18 +1,17 @@
 import supertest from 'supertest';
 
-import { MODEL } from '../../model';
+import { getToken } from '../helpers/getToken.utils';
 import { app, setupDB } from '../test-setup';
-import { getToken } from '../test-utils/getToken.utils';
 
 const request = supertest(app);
 
 setupDB('endpoint-testing', true);
 
-describe('PUT /api/auth/update-creds', () => {
+describe('PUT /api/user/update-creds', () => {
   describe('given a username, email and password', () => {
     it('should respond with a status 200 code', async () => {
       const res = await request
-        .put('/api/auth/update-creds')
+        .put('/api/user/update-creds')
         .auth(await getToken(), { type: 'bearer' })
         .send({
           name: 'R2-D2',
@@ -26,7 +25,7 @@ describe('PUT /api/auth/update-creds', () => {
 
   describe('No token provided', () => {
     it('should respond with a status code of 403', async () => {
-      const res = await request.put('/api/auth/update-creds').send({
+      const res = await request.put('/api/user/update-creds').send({
         name: 'R2-D2',
         email: 'testing@gmail.com',
       });

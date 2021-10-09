@@ -1,5 +1,5 @@
 import Modal from '@/components/shared/templates/Modal';
-import { useToggle } from '@/hooks/useToggle.hooks';
+import useToggle from '@/hooks/useToggle.hooks';
 
 import { S } from './ArticleFilter.style';
 

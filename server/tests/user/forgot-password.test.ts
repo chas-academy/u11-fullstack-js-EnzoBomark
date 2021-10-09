@@ -1,16 +1,15 @@
 import supertest from 'supertest';
 
-import { MODEL } from '../../model';
 import { app, setupDB } from '../test-setup';
 
 const request = supertest(app);
 
 setupDB('endpoint-testing', true);
 
-describe('POST /api/auth/forgot-password', () => {
+describe('POST /api/user/forgot-password', () => {
   describe('given an email', () => {
     it('should respond with a 200', async () => {
-      const res = await request.post('/api/auth/forgot-password').send({
+      const res = await request.post('/api/user/forgot-password').send({
         email: 'testing1@gmail.com',
       });
 
@@ -21,7 +20,7 @@ describe('POST /api/auth/forgot-password', () => {
 
   describe('Non existing email', () => {
     it('should respond with a status code of 400', async () => {
-      const res = await request.post('/api/auth/forgot-password').send({
+      const res = await request.post('/api/user/forgot-password').send({
         email: 'testingmail.com',
       });
 

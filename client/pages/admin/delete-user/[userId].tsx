@@ -4,8 +4,8 @@ import React from 'react';
 
 import Spinner from '@/components/shared/misc/Spinner';
 import Form from '@/components/shared/templates/Form';
-import { Admin } from '@/guards/admin.guard';
-import { useFetch } from '@/hooks/useFetch.hooks';
+import Admin from '@/guards/admin.guard';
+import useFetch from '@/hooks/useFetch.hooks';
 import { Response } from '@/interfaces/Response.interface';
 import { S } from '@/styles/pages/admin/DeleteUser.style';
 import { destroy } from '@/utils/http.utils';

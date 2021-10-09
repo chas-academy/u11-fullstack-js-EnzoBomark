@@ -5,17 +5,17 @@ import { Descendant } from 'slate';
 
 import ArticleEditor from '@/components/article/ArticleEditor';
 import Spinner from '@/components/shared/misc/Spinner';
-import { Private } from '@/guards/private.guard';
-import { useFetch } from '@/hooks/useFetch.hooks';
-import { useMount } from '@/hooks/useMount';
+import Private from '@/guards/private.guard';
+import useFetch from '@/hooks/useFetch.hooks';
+import useMount from '@/hooks/useMount';
 import { IArticle } from '@/interfaces/Article.interface';
 import { Response } from '@/interfaces/Response.interface';
-import { S } from '@/styles/pages/Editor.style';
-import { getDecendent } from '@/utils/descendantText.utils';
-import { get, put } from '@/utils/http.utils';
-import { getReadTime } from '@/utils/readTime.utils';
-import { s3 } from '@/utils/s3.utils';
-import { getTags } from '@/utils/tags.utils';
+import { S } from '@/styles/pages/Article/Editor.style';
+import getDecendent from '@/utils/descendantText.utils';
+import { post, put } from '@/utils/http.utils';
+import getReadTime from '@/utils/readTime.utils';
+import s3 from '@/utils/s3.utils';
+import getTags from '@/utils/tags.utils';
 
 const Update: NextPage<{ response: IArticle }> = ({ response }) => {
   const router = useRouter();
@@ -61,7 +61,7 @@ const Update: NextPage<{ response: IArticle }> = ({ response }) => {
 };
 
 export const getServerSideProps = Private(async (context) => {
-  const response = await get<Response>(`article/${context.params.articleId}`);
+  const response = await post<Response>(`article/${context.params.articleId}`);
 
   if (!response.ok) {
     return { props: { response: null } };

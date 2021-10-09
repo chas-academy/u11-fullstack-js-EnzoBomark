@@ -1,18 +1,17 @@
 import supertest from 'supertest';
 
-import { MODEL } from '../../model';
+import { getToken } from '../helpers/getToken.utils';
 import { app, setupDB } from '../test-setup';
-import { getToken } from '../test-utils/getToken.utils';
 
 const request = supertest(app);
 
 setupDB('endpoint-testing', true);
 
-describe('Delete /api/auth/logout', () => {
-  describe('given a accessToken', () => {
+describe('GET /api/user/sessions', () => {
+  describe('given an accessToken', () => {
     it('should respond with a 200', async () => {
       const res = await request
-        .delete(`/api/auth/logout`)
+        .get('/api/user/sessions')
         .auth(await getToken(), { type: 'bearer' });
 
       // Ensures response status

@@ -5,21 +5,21 @@ import { useState } from 'react';
 import Password from '@/components/shared/inputs/Password/Index';
 import Spinner from '@/components/shared/misc/Spinner';
 import Form from '@/components/shared/templates/Form';
-import { Public } from '@/guards/public.guard';
-import { useFetch } from '@/hooks/useFetch.hooks';
-import { useMount } from '@/hooks/useMount';
+import Public from '@/guards/public.guard';
+import useFetch from '@/hooks/useFetch.hooks';
+import useMount from '@/hooks/useMount';
 import { FormResponse } from '@/interfaces/FormResponse.interface';
 import { Props, ResetPasswordSchema } from '@/schemas/ResetPassword.schema';
 import { S } from '@/styles/pages/ResetPassword.style';
 import { put } from '@/utils/http.utils';
-import { resolver } from '@/utils/resolver.utils';
+import resolver from '@/utils/resolver.utils';
 
 const ResetPassword: NextPage = () => {
   const router = useRouter();
   const res = resolver<Props>(ResetPasswordSchema);
   const [values, setValues] = useState<Props>();
   const { fetch, isLoading, hasError, data } = useFetch<FormResponse>(() =>
-    put(`auth/reset-password/${router.query.resetToken}`, values)
+    put(`user/reset-password/${router.query.resetToken}`, values)
   );
 
   useMount(async () => await fetch(), [values]);

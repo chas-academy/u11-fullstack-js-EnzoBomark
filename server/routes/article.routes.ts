@@ -12,11 +12,22 @@ export const Article = (app: Express) => {
     CONT.createArticleHandler
   );
 
-  //Add article to saved
-  app.post('/api/user/save/:articleId', MW.requireUser, CONT.addSavedArticleHandler);
-
   //Search articles
-  app.post('/api/article/search', MW.validateRequest(SCHEMA.searchSchema), CONT.getArticlesHandler);
+  app.post(
+    '/api/article/search',
+    MW.validateRequest(SCHEMA.searchSchema),
+    CONT.getArticlesHandler
+  );
+
+  //post article
+  app.post('/api/article/:articleId', CONT.getArticleHandler);
+
+  //Like article
+  app.post(
+    '/api/article/like/:articleId',
+    MW.requireUser,
+    CONT.likeArticleHandler
+  );
 
   //Update article
   app.put(
@@ -25,17 +36,10 @@ export const Article = (app: Express) => {
     CONT.updateArticleHandler
   );
 
-  //Get article
-  app.get('/api/article/:articleId', CONT.getArticleHandler);
-
-  //Get user saved articles
-  app.get('/api/user/save', MW.requireUser, CONT.getSavedArticlesHandler);
-
-  // app.get('/api/user/articles', MW.requireUser, CONT.getUserArticles);
-
   //Delete article
-  app.delete('/api/article/:articleId', MW.requireUser, CONT.deleteArticleHandler);
-
-  //Remove article from saved
-  app.delete('/api/user/save/:articleId', MW.requireUser, CONT.deleteSavedArticleHandler);
+  app.delete(
+    '/api/article/:articleId',
+    MW.requireUser,
+    CONT.deleteArticleHandler
+  );
 };

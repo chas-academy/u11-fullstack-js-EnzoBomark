@@ -1,9 +1,9 @@
 import { Editor, Element, Path, Range, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 
-import { createParagraphNode } from './paragraph.utils';
+import createParagraphNode from './paragraph.utils';
 
-export const createLinkNode = (href, text) => ({
+const createLinkNode = (href, text) => ({
   type: 'link',
   href,
   children: [{ text }],
@@ -57,3 +57,5 @@ export const removeLink = (editor, opts = {}) => {
     match: (n) => !Editor.isEditor(n) && Element.isElement(n) && n.type === 'link',
   });
 };
+
+export default createLinkNode;

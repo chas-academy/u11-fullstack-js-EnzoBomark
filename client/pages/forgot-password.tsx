@@ -4,20 +4,20 @@ import { useState } from 'react';
 import Text from '@/components/shared/inputs/Text/Index';
 import Spinner from '@/components/shared/misc/Spinner';
 import Form from '@/components/shared/templates/Form';
-import { Public } from '@/guards/public.guard';
-import { useFetch } from '@/hooks/useFetch.hooks';
-import { useMount } from '@/hooks/useMount';
+import Public from '@/guards/public.guard';
+import useFetch from '@/hooks/useFetch.hooks';
+import useMount from '@/hooks/useMount';
 import { FormResponse } from '@/interfaces/FormResponse.interface';
 import { ForgotPasswordSchema, Props } from '@/schemas/ForgotPassword.schema';
 import { S } from '@/styles/pages/ForgotPassword.style';
 import { post } from '@/utils/http.utils';
-import { resolver } from '@/utils/resolver.utils';
+import resolver from '@/utils/resolver.utils';
 
 const ForgotPassword: NextPage = () => {
   const res = resolver<Props>(ForgotPasswordSchema);
   const [values, setValues] = useState<Props>();
   const { fetch, isLoading, hasError, data } = useFetch<FormResponse>(() =>
-    post('auth/forgot-password', values)
+    post('user/forgot-password', values)
   );
 
   useMount(async () => await fetch(), [values]);

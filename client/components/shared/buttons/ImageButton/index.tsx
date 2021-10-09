@@ -2,11 +2,11 @@ import Image from 'next/image';
 import { useSlateStatic } from 'slate-react';
 
 import { Icon } from '@/assets/icons';
-import { insertImage } from '@/utils/image.utils';
+import insertImage from '@/utils/image.utils';
 
 import { S } from './ImageButton.style';
 
-const ImageButton = () => {
+const ImageButton: React.FC = () => {
   const editor = useSlateStatic();
 
   const insertImageHander = () => {

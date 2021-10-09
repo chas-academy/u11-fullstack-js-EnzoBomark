@@ -1,5 +1,5 @@
 import S3 from 'aws-sdk/clients/s3';
-import crypto, { randomBytes } from 'crypto';
+import { randomBytes } from 'crypto';
 
 const bucketName = process.env.AWS_BUCKET_NAME as string;
 const region = process.env.AWS_BUCKET_REGION as string;

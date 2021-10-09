@@ -7,15 +7,16 @@ const request = supertest(app);
 
 setupDB('endpoint-testing', true);
 
-describe('Delete /api/auth/logout', () => {
+describe('GET /api/user/user', () => {
   describe('given a accessToken', () => {
-    it('should respond with a 200', async () => {
+    it('should respond with a user', async () => {
       const res = await request
-        .delete(`/api/auth/logout`)
+        .get('/api/user/creds')
         .auth(await getToken(), { type: 'bearer' });
 
       // Ensures response status
       expect(res.statusCode).toBe(200);
+      expect(res.body.success).toBeDefined();
     });
   });
 });

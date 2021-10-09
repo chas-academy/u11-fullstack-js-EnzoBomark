@@ -7,15 +7,15 @@ import Password from '@/components/shared/inputs/Password/Index';
 import Text from '@/components/shared/inputs/Text/Index';
 import Spinner from '@/components/shared/misc/Spinner';
 import Form from '@/components/shared/templates/Form';
-import { Admin } from '@/guards/admin.guard';
-import { useFetch } from '@/hooks/useFetch.hooks';
-import { useMount } from '@/hooks/useMount';
-import { useToggle } from '@/hooks/useToggle.hooks';
+import Admin from '@/guards/admin.guard';
+import useFetch from '@/hooks/useFetch.hooks';
+import useMount from '@/hooks/useMount';
+import useToggle from '@/hooks/useToggle.hooks';
 import { Response } from '@/interfaces/Response.interface';
 import { AdminCreateUserSchema, Props } from '@/schemas/AdminCreateUser.schema';
 import { S } from '@/styles/pages/admin/CreateUser.style';
 import { post } from '@/utils/http.utils';
-import { resolver } from '@/utils/resolver.utils';
+import resolver from '@/utils/resolver.utils';
 
 const AdminCreateUser: NextPage = () => {
   const router = useRouter();

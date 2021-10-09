@@ -1,7 +1,16 @@
 import { omit } from 'lodash';
-import { DocumentDefinition, FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
+import {
+    DocumentDefinition,
+    FilterQuery,
+    QueryOptions,
+    UpdateQuery
+} from 'mongoose';
 
-import { MODEL, UserDocument } from '../model';
+import {
+    MODEL,
+    UserDocument,
+    UserSavedArticleDocument
+} from '../model';
 
 export const createUser = async (input: DocumentDefinition<UserDocument>) => {
   try {
@@ -43,4 +52,23 @@ export const validatePassword = async ({
   }
 
   return omit(user.toJSON(), 'password');
+};
+
+export const deleteUserSavedArticle = (
+  query: FilterQuery<UserSavedArticleDocument>
+) => {
+  return MODEL.UserSavedArticle.deleteOne(query);
+};
+
+export const findUserSavedArticle = (
+  query: FilterQuery<UserSavedArticleDocument>,
+  options: QueryOptions = { lean: true }
+) => {
+  return MODEL.UserSavedArticle.findOne(query, {}, options);
+};
+
+export const createUserSavedArticle = (
+  input: DocumentDefinition<UserSavedArticleDocument>
+) => {
+  return MODEL.UserSavedArticle.create(input);
 };

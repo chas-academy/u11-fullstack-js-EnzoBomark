@@ -2,25 +2,30 @@ import Image from 'next/image';
 import { MouseEvent } from 'react';
 import { useSlate } from 'slate-react';
 
-import { isMarkActive, toggleMark } from '@/utils/mark.utils';
+import toggleMark, { isMarkActive } from '@/utils/mark.utils';
 
 import { S } from './MarkButton.style';
 
-const BlockButton = ({ format, icon }: { format: string; icon: string }) => {
+interface Props {
+  format: string;
+  icon: string;
+}
+
+const BlockButton: React.FC<Props> = (props: Props) => {
   const editor = useSlate();
 
   return (
     <S.MarkButton
       type="button"
-      active={isMarkActive(editor, format)}
-      aria-label={format}
-      title={format}
+      active={isMarkActive(editor, props.format)}
+      aria-label={props.format}
+      title={props.format}
       onMouseDown={(event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        toggleMark(editor, format);
+        toggleMark(editor, props.format);
       }}
     >
-      <Image src={icon} />
+      <Image src={props.icon} />
     </S.MarkButton>
   );
 };

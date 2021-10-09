@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { IUser, UsersResponse } from '@/interfaces/User.interface';
 import { post } from '@/utils/http.utils';
 
-import { useFetchDebounce } from './useFetchDebounce.hooks';
-import { useMount } from './useMount';
+import useFetchDebounce from './useFetchDebounce.hooks';
+import useMount from './useMount';
 
-export const useUserSearch = (query: string, page: number, ssrLoadedData: IUser[]) => {
+const useUserSearch = (query: string, page: number, ssrLoadedData: IUser[]) => {
   const [users, setUsers] = useState(ssrLoadedData);
 
   const { isLoading, hasError, data } = useFetchDebounce<UsersResponse>(
@@ -36,3 +36,5 @@ export const useUserSearch = (query: string, page: number, ssrLoadedData: IUser[
 
   return { isLoading, hasError, users };
 };
+
+export default useUserSearch;

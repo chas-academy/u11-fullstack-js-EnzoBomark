@@ -1,8 +1,6 @@
-import React from 'react';
-
 import { S } from './Breakline.style';
 
-const Breakline = () => {
+const Breakline: React.FC = () => {
   return <S.Breakline />;
 };
 

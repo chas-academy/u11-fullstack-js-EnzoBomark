@@ -1,5 +1,4 @@
 import { S } from './Form.style';
-import React from 'react';
 
 interface Props {
   children: any;

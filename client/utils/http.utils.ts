@@ -38,7 +38,7 @@ export const get = async <T>(
 
 export const post = async <T>(
   path: string,
-  body: any,
+  body: any = {},
   extraHeaders: { [key: string]: string } = {
     authorization: `Bearer ${Cookies.get('access_token')}`,
     'x-refresh': Cookies.get('refresh_token'),

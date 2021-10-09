@@ -2,25 +2,29 @@ import Image from 'next/image';
 import { MouseEvent } from 'react';
 import { useSlate } from 'slate-react';
 
-import { isBlockActive, toggleBlock } from '@/utils/block.utils';
+import toggleBlock, { isBlockActive } from '@/utils/block.utils';
 
 import { S } from './BlockButton.style';
 
-const BlockButton = ({ format, icon }: { format: string; icon: string }) => {
+interface Props {
+  format: string;
+  icon: string;
+}
+const BlockButton: React.FC<Props> = (props: Props) => {
   const editor = useSlate();
 
   return (
     <S.BlockButton
       type="button"
-      active={isBlockActive(editor, format)}
-      aria-label={format}
-      title={format}
+      active={isBlockActive(editor, props.format)}
+      aria-label={props.format}
+      title={props.format}
       onMouseDown={(event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        toggleBlock(editor, format);
+        toggleBlock(editor, props.format);
       }}
     >
-      <Image src={icon} />
+      <Image src={props.icon} />
     </S.BlockButton>
   );
 };

@@ -1,11 +1,30 @@
 import {
-    createArticle, deleteArticle, findAndUpdateArticle, findArticle, getArticles
+    createArticle,
+    createUserArticleLike,
+    deleteArticle,
+    deleteUserArticleLike,
+    findAndUpdateArticle,
+    findArticle,
+    findUserArticleLikes
 } from './article.service';
 import { generateUploadUrl } from './s3.service';
 import {
-    createAccessToken, createSession, findSessions, reIssueAccessToken, updateSession
+    createAccessToken,
+    createSession,
+    findSessions,
+    reIssueAccessToken,
+    updateSession
 } from './session.service';
-import { createUser, deleteUser, findUser, getUsers, validatePassword } from './user.service';
+import {
+    createUser,
+    createUserSavedArticle,
+    deleteUser,
+    deleteUserSavedArticle,
+    findUser,
+    findUserSavedArticle,
+    getUsers,
+    validatePassword
+} from './user.service';
 
 export const SERVICE = {
   createSession,
@@ -18,10 +37,15 @@ export const SERVICE = {
   deleteUser,
   validatePassword,
   createArticle,
+  createUserArticleLike,
   findArticle,
+  findUserArticleLikes,
   findAndUpdateArticle,
   deleteArticle,
+  deleteUserArticleLike,
   generateUploadUrl,
-  getArticles,
   getUsers,
+  findUserSavedArticle,
+  deleteUserSavedArticle,
+  createUserSavedArticle,
 };

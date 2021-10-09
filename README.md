@@ -69,8 +69,6 @@ U11-FULLSTACK-JS-ENZOBOMARK
 
 ## Getting Started
 
-.
-
 ### Prerequisites
 
 - npm
@@ -82,15 +80,20 @@ U11-FULLSTACK-JS-ENZOBOMARK
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/chas-academy/u11-fullstack-js-EnzoBomark
    ```
-2. Install NPM packages
+2. Install NPM packages (In the client and server folders)
    ```sh
    npm install
    ```
-3. Enter your API in `config.js`
+3. Rename .env.example to .env and fill out the fields (In the client and server folders)
    ```JS
-   const API_KEY = 'ENTER YOUR API';
+   API_KEY=ENTER YOUR API
+   ...
+   ```
+4. Run 
+   ```sh
+   cd server && npm run server, cd client && npm run dev
    ```
 
 <!-- Users -->
